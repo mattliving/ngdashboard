@@ -1,0 +1,475 @@
+[
+  {
+    "path": "webdevelopment",
+    "topic": ["html", "css", "javascript", "frontend"],
+    "level": "intermediate",
+    "title": "A Baseline for Front-End Developers",
+    "mediaType": ["article"],
+    "description": "",
+    "link": "http://rmurphey.com/blog/2012/04/12/a-baseline-for-front-end-developers/",
+    "authors": [{
+      "name": "Rebecca Murphey"
+    }],
+    "cost": 0
+  },
+  {
+    "path": "webdevelopment",
+    "topic": ["html", "css", "javascript", "frontend"],
+    "level": "beginner",
+    "title": "Beginner HTML5, JavaScript, jQuery, Backbone, and CSS3 Resources",
+    "mediaType": ["reference"],
+    "description": "",
+    "link": "http://www.elijahmanor.com/2013/01/beginner-html5-javascript-jquery.html?utm_source=javascriptweekly&utm_medium=email",
+    "authors": [{
+      "name": "Elijah Manor"
+    }],
+    "cost": 0
+  },
+  {
+    "path": "webdevelopment",
+    "topic": ["html", "css", "javascript", "frontend"],
+    "level": "beginner",
+    "title": "So you want to be a front-end engineer?",
+    "mediaType": ["article"],
+    "description": "",
+    "link": "http://bitly.com/bundles/dmosher/1",
+    "authors": [{
+      "name": "",
+      "twitter": "@dmosher"
+    }],
+    "cost": 0
+  },
+  {
+    "path": "webdevelopment",
+    "topic": ["jquery", "backbone", "frontend"],
+    "level": "intermediate",
+    "title": "Step by step from jQuery to Backbone",
+    "mediaType": ["tutorial"],
+    "description": "",
+    "link": "https://github.com/kjbekkelund/writings/blob/master/published/understanding-backbone.md",
+    "authors": [{
+      "name": "Kim Joar Bekkelund",
+      "github": "kjbekkelund"
+    }],
+    "cost": 0
+  },
+  {
+    "path": "webdevelopment",
+    "topic": ["backbone", "frontend"],
+    "level": "advanced",
+    "title": "Backbone.js Tutorial Series on DailyJS",
+    "mediaType": ["tutorial"],
+    "description": "This new Backbone.js tutorial series will walk you through building a single page web application that has a customised Backbone.sync implementation.",
+    "link": "http://dailyjs.com/2012/11/29/backbone-tutorial-1/",
+    "authors": [{
+      "name": "Alex Young"
+    }],
+    "cost": 0
+  },
+  {
+    "path": "webdevelopment",
+    "topic": ["jquery", "frontend"],
+    "level": "beginner",
+    "title": "30 Days to Learn jQuery",
+    "mediaType": ["tutorial"],
+    "description": "You know you need to learn jQuery. Everyone else has, and you’re falling behind! No worries; it’s a brand new year, and what better way to celebrate it than by learning a new skill? Give me thirty minutes every day for the next month, and I’ll transform you into a jQuery pro!",
+    "link": "https://tutsplus.com/course/30-days-to-learn-jquery/?utm_source=javascriptweekly&utm_medium=email",
+    "authors": [{
+      "name": "Jeffrey Way"
+    }],
+    "cost": 0
+  },
+  {
+    "path": "webdevelopment",
+    "topic": ["javascript", "frontend"],
+    "level": "advanced",
+    "title": "Superhero.js",
+    "mediaType": ["reference"],
+    "description": "Creating, testing and maintaining a large JavaScript code base is not easy — especially since great resources on how to do this are hard to find. This page is a collection of the best articles, videos and presentations we've found on the topic.",
+    "link": "http://superherojs.com/",
+    "authors": [{
+      "name": "",
+      "twitter": "@superhero_js"
+    }],
+    "cost": 0
+  },
+  {
+    "path": "webdevelopment",
+    "topic": ["backbone", "frontend"],
+    "level": "advanced",
+    "title": "Backbone.js",
+    "mediaType": ["reference"],
+    "description": "Backbone.js gives structure to web applications by providing models with key-value binding and custom events, collections with a rich API of enumerable functions, views with declarative event handling, and connects it all to your existing API over a RESTful JSON interface.",
+    "link": "http://documentcloud.github.io/backbone/",
+    "authors": [{
+      "name": "documentcloud",
+      "twitter": "@documentcloud"
+    }],
+    "cost": 0
+  },
+  {
+    "path": "webdevelopment",
+    "topic": ["html", "frontend"],
+    "level": "beginner",
+    "title": "HTML5 Boilerplate",
+    "mediaType": ["tool"],
+    "description": "HTML5 Boilerplate helps you build fast, robust, and adaptable web apps or sites. Kick-start your project with the combined knowledge and effort of 100s of developers, all in one little package.",
+    "link": "http://html5boilerplate.com/",
+    "authors": [{
+      "name": ""
+    }],
+    "cost": 0
+  },
+  {
+    "path": "webdevelopment",
+    "topic": ["html", "frontend"],
+    "level": "beginner",
+    "title": "HTML5 Please",
+    "mediaType": ["tool"],
+    "description": "Look up HTML5, CSS3, etc features, know if they are ready for use, and if so find out how you should use them – with polyfills, fallbacks or as they are.",
+    "link": "http://html5please.com/",
+    "authors": [{
+      "name": ""
+    }],
+    "cost": 0
+  },
+  {
+    "path": "webdevelopment",
+    "topic": ["html", "frontend"],
+    "level": "all",
+    "title": "HTML5 Rocks",
+    "mediaType": ["reference"],
+    "description": "A comprehensive collection of the best HTML5 resources, articles, tutorials and more.",
+    "link": "http://www.html5rocks.com/",
+    "authors": [{
+      "name": ""
+    }],
+    "cost": 0
+  },
+  {
+    "path": "webdevelopment",
+    "topic": ["css", "frontend"],
+    "level": "all",
+    "title": "CSS3 Please",
+    "mediaType": ["tool"],
+    "description": "CSS3, Please! The Cross-Browser CSS3 Rule Generator.",
+    "link": "http://css3please.com/",
+    "authors": [{
+      "name": ""
+    }],
+    "cost": 0
+  },
+  {
+    "path": "webdevelopment",
+    "topic": ["tooling", "frontend"],
+    "level": "intermediate",
+    "title": "Tooling & the Webapp Development Stack",
+    "mediaType": ["tool", "talk", "video"],
+    "description": "Paul Irish talks about tooling for web development.",
+    "link": "http://paulirish.com/2012/talk-tooling-the-webapp-development-stack/",
+    "authors": [{
+      "name": "Paul Irish",
+      "twitter": "@paul_irish"
+    }],
+    "cost": 0
+  },
+  {
+    "path": "webdevelopment",
+    "topic": ["backbone", "frontend"],
+    "level": "intermediate",
+    "title": "Developing Backbone.js Applications",
+    "mediaType": ["reference"],
+    "description": "Building Better JavaScript Applications",
+    "link": "http://addyosmani.github.io/backbone-fundamentals/",
+    "authors": [{
+      "name": "Addy Osmani",
+      "twitter": "@addyosmani"
+    }],
+    "cost": 0
+  },
+  {
+    "path": "webdevelopment",
+    "topic": ["tooling", "frontend"],
+    "level": "advanced",
+    "title": "TodoMVC",
+    "mediaType": ["reference"],
+    "description": "Helping you select an MV* framework",
+    "link": "http://todomvc.com/",
+    "authors": [
+      {
+        "name": "Addy Osmani",
+        "twitter": "@addyosmani"
+      },
+      {
+        "name": "Sindre Sorhus"
+      }
+    ],
+    "cost": 0
+  },
+  {
+    "path": "webdevelopment",
+    "topic": ["javascript", "tooling", "frontend"],
+    "level": "intermediate",
+    "title": "Digesting JavaScript MVC – Pattern Abuse Or Evolution?",
+    "mediaType": ["article", "blog"],
+    "description": "In my talk from London Ajax, we'll explore the current state of MVC in the JavaScript community, how Smalltalk-80's MVC differed and whether modern frameworks abuse (or evolve) the MVC pattern.",
+    "link": "http://addyosmani.com/blog/digesting-javascript-mvc-pattern-abuse-or-evolution/",
+    "authors": [{
+      "name": "Addy Osmani",
+      "twitter": "@addyosmani"
+    }],
+    "cost": 0
+  },
+  {
+    "path": "webdevelopment",
+    "topic": ["jquery", "backbone", "frontend"],
+    "level": "intermediate",
+    "title": "Getting to Know Backbone.js",
+    "mediaType": ["tutorial"],
+    "description": "In this series, we’re going to learn how to build a fully functional contacts manager using Backbone.js, Underscore.js, and jQuery. This is perfect for someone who has just finished learning the basics of JavaScript and jQuery and is looking to take their front end chops to the next level!",
+    "link": "http://net.tutsplus.com/sessions/build-a-contacts-manager-using-backbone-js/",
+    "authors": [{
+      "name": "Dan Wellman"
+    }],
+    "cost": 0
+  },
+  {
+    "path": "webdevelopment",
+    "topic": ["backbone", "frontend"],
+    "level": "advanced",
+    "title": "Revisiting The Backbone Event Aggregator: Lessons Learned",
+    "mediaType": ["article"],
+    "description": "",
+    "link": "http://lostechies.com/derickbailey/2012/04/03/revisiting-the-backbone-event-aggregator-lessons-learned/",
+    "authors": [{
+      "name": "Derick Bailey"
+    }],
+    "cost": 0
+  },
+  {
+    "path": "webdevelopment",
+    "topic": ["backbone", "frontend"],
+    "level": "intermediate",
+    "title": "Backbone.js: Getting The Model For A Clicked Element",
+    "mediaType": ["article"],
+    "description": "",
+    "link": "http://lostechies.com/derickbailey/2011/10/11/backbone-js-getting-the-model-for-a-clicked-element/",
+    "authors": [{
+      "name": "Derick Bailey"
+    }],
+    "cost": 0
+  },
+  {
+    "path": "webdevelopment",
+    "topic": ["backbone", "frontend"],
+    "level": "advanced",
+    "title": "Backbone.js: Hacker's Guide",
+    "mediaType": ["article"],
+    "description": "A Walkthrough of the Backbone.js Source Code",
+    "link": "http://dailyjs.com/2012/07/19/mvstar-2/",
+    "authors": [{
+      "name": "Alex Young"
+    }],
+    "cost": 0
+  },
+  {
+    "path": "webdevelopment",
+    "topic": ["backbone", "frontend"],
+    "level": "intermediate",
+    "title": "Backbone.js Tips : Lessons from the trenches",
+    "mediaType": ["article"],
+    "description": "",
+    "link": "https://supportbee.com/devblog/2011/07/29/backbone-js-tips-lessons-from-the-trenches/",
+    "authors": [{
+      "name": "Prateek Dayal",
+      "twitter": "@prateekdayal"
+    }],
+    "cost": 0
+  },
+  {
+    "path": "webdevelopment",
+    "topic": ["javascript", "tooling", "frontend"],
+    "level": "intermediate",
+    "title": "Short Musings On JavaScript MV* Tech Stacks",
+    "mediaType": ["article"],
+    "description": "",
+    "link": "http://addyosmani.com/blog/short-musings-on-javascript-mv-tech-stacks/",
+    "authors": [{
+      "name": "Addy Osmani",
+      "twitter": "@addyosmani"
+    }],
+    "cost": 0
+  },
+  {
+    "path": "webdevelopment",
+    "topic": ["haml", "tooling", "frontend"],
+    "level": "intermediate",
+    "title": "Haml Reference",
+    "mediaType": ["reference"],
+    "description": "Beautiful, DRY, well-indented, clear markup: templating haiku.",
+    "link": "http://haml.info/",
+    "authors": [{
+      "name": ""
+    }],
+    "cost": 0
+  },
+  {
+    "path": "webdevelopment",
+    "topic": ["less", "tooling", "frontend"],
+    "level": "intermediate",
+    "title": "Less Reference",
+    "mediaType": ["reference"],
+    "description": "LESS extends CSS with dynamic behavior such as variables, mixins, operations and functions.",
+    "link": "http://lesscss.org/",
+    "authors": [{
+      "name": ""
+    }],
+    "cost": 0
+  },
+  {
+    "path": "webdevelopment",
+    "topic": ["sass", "tooling", "frontend"],
+    "level": "intermediate",
+    "title": "Sass Reference",
+    "mediaType": ["reference"],
+    "description": "Sass is an extension of CSS3, adding nested rules, variables, mixins, selector inheritance, and more.",
+    "link": "http://sass-lang.com/",
+    "authors": [{
+      "name": ""
+    }],
+    "cost": 0
+  },
+  {
+    "path": "webdevelopment",
+    "topic": ["sass", "tooling", "frontend"],
+    "level": "intermediate",
+    "title": "Getting Started with Sass",
+    "mediaType": ["tutorial"],
+    "description": "Sass is an extension of CSS3, adding nested rules, variables, mixins, selector inheritance, and more.",
+    "link": "http://www.sitepoint.com/getting-started-with-sass/",
+    "authors": [{
+      "name": "Darren Wood"
+    }],
+    "cost": 0
+  },
+  {
+    "path": "webdevelopment",
+    "topic": ["css", "frontend"],
+    "level": "advanced",
+    "title": "Decoupling HTML From CSS",
+    "mediaType": ["article"],
+    "description": "",
+    "link": "http://coding.smashingmagazine.com/2012/04/20/decoupling-html-from-css/",
+    "authors": [{
+      "name": "Jonathan Snook",
+      "twitter": "@snookca"
+    }],
+    "cost": 0
+  },
+  {
+    "path": "webdevelopment",
+    "topic": ["html", "css", "tooling", "frontend"],
+    "level": "advanced",
+    "title": "Goodbye, Zen Coding. Hello, Emmet!",
+    "mediaType": ["article"],
+    "description": "Emmet, previously known as Zen Coding, is the most productive and time-saving text-editor plugin you will ever see. By instantly expanding simple abbreviations into complex code snippets, Emmet can turn you into a more productive developer.",
+    "link": "http://coding.smashingmagazine.com/2013/03/26/goodbye-zen-coding-hello-emmet/",
+    "authors": [{
+      "name": "Zeno Rocha",
+      "twitter": "@zenorocha"
+    }],
+    "cost": 0
+  },
+  {
+    "path": "webdevelopment",
+    "topic": ["html", "css", "tooling", "frontend"],
+    "level": "intermediate",
+    "title": "Customizing Bootstrap",
+    "mediaType": ["article"],
+    "description": "Twitter’s Bootstrap has taken off like a rocket since its release a year ago. The popular CSS framework supplies a responsive grid system, pre-styled components and JavaScript plugins to a parade of websites.",
+    "link": "http://coding.smashingmagazine.com/2013/03/12/customizing-bootstrap/",
+    "authors": [{
+      "name": "Thomas Park",
+      "twitter": "@thomashpark"
+    }],
+    "cost": 0
+  },
+  {
+    "path": "webdevelopment",
+    "topic": ["jquery", "frontend"],
+    "level": "beginner",
+    "title": "jQuery Reference",
+    "mediaType": ["reference"],
+    "description": "jQuery is a fast, small, and feature-rich JavaScript library. It makes things like HTML document traversal and manipulation, event handling, animation, and Ajax much simpler with an easy-to-use API that works across a multitude of browsers.",
+    "link": "http://jquery.com/",
+    "authors": [{
+      "name": ""
+    }],
+    "cost": 0
+  },
+  {
+    "path": "webdevelopment",
+    "topic": ["javascript", "frontend"],
+    "level": "all",
+    "title": "Douglas Crockford's Site: The Creator of JavaScript",
+    "mediaType": ["reference"],
+    "description": "A collection of resources, tutorials and talks from the creator of JavaScript himself.",
+    "link": "http://javascript.crockford.com/",
+    "authors": [{
+      "name": "Douglas Crockford"
+    }],
+    "cost": 0
+  },
+  {
+    "path": "webdevelopment",
+    "topic": ["javascript", "frontend"],
+    "level": "all",
+    "title": "Eloquent JavaScript: A Modern Introduction to Programming",
+    "mediaType": ["book", "reference"],
+    "description": "Eloquent JavaScript is a book providing an introduction to the JavaScript programming language and programming in general.",
+    "link": "http://eloquentjavascript.net/",
+    "authors": [{
+      "name": "Douglas Crockford"
+    }],
+    "cost": 0
+  },
+  {
+    "path": "webdevelopment",
+    "topic": ["javascript", "frontend"],
+    "level": "all",
+    "title": "JavaScript The Right Way",
+    "mediaType": ["reference"],
+    "description": "JS: The Right Way is an easy-to-read, quick reference for JS best practices, accepted coding standards, and links around the Web.",
+    "link": "http://jstherightway.com/",
+    "authors": [{
+      "name": "William Oliveira"
+    }],
+    "cost": 0
+  },
+  {
+    "path": "webdevelopment",
+    "topic": ["html", "css", "frontend"],
+    "level": "beginner",
+    "title": "HTML5 & CSS3 Fundamentals: Development for Absolute Beginners",
+    "mediaType": ["tutorial"],
+    "description": "Want to learn a different language? Over the course of 21 episodes, our friend Bob Tabor from www.LearnVisualStudio.net will teach you the fundamentals of HTML5 & CSS3 programming. Tune in to learn concepts about web pages, CSS3 styles and HTML5 features.",
+    "link": "http://channel9.msdn.com/Series/HTML5-CSS3-Fundamentals-Development-for-Absolute-Beginners",
+    "authors": [{
+      "name": "Bob Tabor"
+    }],
+    "cost": 0
+  },
+  {
+    "path": "webdevelopment",
+    "topic": ["javascript", "frontend"],
+    "level": "intermediate",
+    "title": "A re-introduction to JavaScript (JS Tutorial)",
+    "mediaType": ["tutorial"],
+    "description": "Why a re-introduction? Because JavaScript has a reasonable claim to being the world's most misunderstood programming language.",
+    "link": "https://developer.mozilla.org/en-US/docs/JavaScript/A_re-introduction_to_JavaScript",
+    "authors": [{
+      "name": "Mozilla Developer Network"
+    }],
+    "cost": 0
+  }
+]

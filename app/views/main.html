@@ -1,9 +1,20 @@
-<div class="hero-unit">
-  <h1>'Allo, 'Allo!</h1>
-  <p>You now have</p>
-  <ul>
-      <li ng-repeat="thing in awesomeThings">{{thing}}</li>
-  </ul>
-  <p>installed.</p>
-  <h3>Enjoy coding! - Yeoman</h3>
+<div class="row">
+    <div class="span6">
+        <h1>Add a new resource</h1>
+        <form ng-submit="addResource()">
+            <input type="url" ng-model="input.url" required placeholder="URL">
+            <select ng-model="input.level" required>
+                <option ng-selected="beginner">Beginner</option>
+                <option ng-selected="intermediate">Intermediate</option>
+                <option ng-selected="expert">Expert</option>
+            </select>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    <div class="span6">
+        <h1>List of URLs</h1>
+        <ul class="unstyled">
+            <li ng-repeat="resource in resources" class="{{resource.level}}">{{resource.link}}</li>
+        </ul>
+    </div>
 </div>
