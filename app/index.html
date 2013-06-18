@@ -13,6 +13,7 @@
     <!-- build:css styles/main.css -->
     <link rel="stylesheet" href="styles/bootstrap.css">
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="components/select2/select2.css">
     <!-- endbuild -->
   </head>
   <body ng-app="resourceFoundryApp">
@@ -28,10 +29,13 @@
     <!-- Add your site or application content here -->
     <div class="container" ng-view></div>
 
-    <script src="components/angular-unstable/angular.js"></script>
+    <script src="components/jquery/jquery.js"></script>
+    <script scr="components/select2/select2.js"></script>
+    <script src="components/angular/angular.js"></script>
+    <script src="components/angular-ui-select2/src/select2.js"></script>
+    <script src="components/angular-sanitize/angular-sanitize.js"></script>
     <script src="components/angular-resource/angular-resource.js"></script>
     <script src="components/angular-cookies/angular-cookies.js"></script>
-    <script src="components/angular-sanitize/angular-sanitize.js"></script>
 
     <!-- build:js scripts/scripts.js -->
     <script src="scripts/app.js"></script>

@@ -2,19 +2,25 @@
     <div class="span6">
         <h1>Add a new resource</h1>
         <form ng-submit="addResource()">
+            <input type="text" ng-model="input.title" required placeholder="Title">
             <input type="url" ng-model="input.url" required placeholder="URL">
-            <select ng-model="input.level" required>
-                <option ng-selected="beginner">Beginner</option>
-                <option ng-selected="intermediate">Intermediate</option>
-                <option ng-selected="expert">Expert</option>
+            <select ng-model="input.level" ng-required="true" ui-select2 data-placeholder="Select a level">
+                <option ng-repeat="level in levels" value="{{level}}">{{level | capitalise}}</option>
             </select>
+            <select ng-model="input.path">
+                <option value=""></option>
+                <option ng-repeat="path in paths" value="{{path.key}}">{{path.name}}</option>
+            </select>
+
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
     <div class="span6">
         <h1>List of URLs</h1>
         <ul class="unstyled">
-            <li ng-repeat="resource in resources" class="{{resource.level}}">{{resource.link}}</li>
+            <li ng-repeat="resource in resources" class="{{resource.level}}">
+                <a href="{{resource.link}}">{{resource.title}}</a>
+            </li>
         </ul>
     </div>
 </div>
