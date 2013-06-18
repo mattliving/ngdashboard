@@ -4,14 +4,21 @@
         <form ng-submit="addResource()">
             <input type="text" ng-model="input.title" required placeholder="Title">
             <input type="url" ng-model="input.url" required placeholder="URL">
-            <select ng-model="input.level" ng-required="true" ui-select2 data-placeholder="Select a level">
+            <!-- Difficulty level selection -->
+            <select ui-select2 ng-model="input.level" ng-required="true"  data-placeholder="Select a level">
+                <option value=""></option>
                 <option ng-repeat="level in levels" value="{{level}}">{{level | capitalise}}</option>
             </select>
-            <select ng-model="input.path">
+            <!-- Path selection -->
+            <select ui-select2 ng-model="input.path" ng-required="true" data-placeholder="Select a path">
                 <option value=""></option>
                 <option ng-repeat="path in paths" value="{{path.key}}">{{path.name}}</option>
             </select>
-
+            <!-- Topic selection -->
+            <input ui-select2="{tags: topics}" type="hidden" ng-model="input.topics" ng-required="true" data-placeholder="Select topics">
+            <!-- Media type -->
+            <input ui-select2="{tags: mediaTypes}" type="hidden" ng-model="input.types" data-placeholder="Select media types">
+            <br>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>

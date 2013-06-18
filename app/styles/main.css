@@ -1,12 +1,12 @@
 /* Will be compiled down to a single stylesheet with your sass files */
-a.beginner {
+li.beginner a {
     color: green;
 }
 
-a.intermediate {
+li.intermediate a {
     color: yellow;
 }
 
-a.expert {
+li.expert a {
     color: red;
 }
