@@ -10,3 +10,7 @@ li.intermediate a {
 li.expert a {
     color: red;
 }
+
+li.all a {
+    color: blue;
+}
