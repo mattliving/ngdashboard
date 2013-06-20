@@ -1,9 +1,21 @@
-"use strict"
+'use strict'
 
 angular.module('resourceFoundryApp').filter 'capitalise', ->
   (input) -> input.charAt(0).toUpperCase() + input.slice(1)
 
-angular.module('resourceFoundryApp').controller 'MainCtrl', ($scope) ->
+angular.module('resourceFoundryApp').controller 'MainCtrl', ($scope, $http) ->
+
+  $http(method: 'GET', url: '/data.json')
+    .success (data, status, config) ->
+      $scope.authors = _.uniq _.flatten(_.pluck data, "authors"), JSON.stringify
+      $scope.mediaTypes = _.uniq _.flatten _.pluck(data, "mediaType")
+      $scope.topics = _.uniq _.flatten _.pluck(data, "topic")
+      $scope.authorSelectOptions.data = $scope.authors
+      $scope.topicOptions = tags: $scope.topics
+      window.$scope = $scope
+    .error -> console.log 'error :('
+
+  $scope.$watch 'input.levelsTest', (newVal, oldVal, scope) -> console.log newVal, oldVal, scope
 
   $scope.paths = [
     key: "webdevelopment"
@@ -22,15 +34,8 @@ angular.module('resourceFoundryApp').controller 'MainCtrl', ($scope) ->
   # multiple can be selected, new types not currently allowed...
   $scope.mediaTypes = ["article", "reference", "tutorial", "tool", "talk", "video"]
 
-  $scope.authors = [
-    name: "Addy Osmani"
-  ,
-    name: "Rebecca Black"
-  ]
-
   $scope.authorSelectOptions =
     multiple: false
-    data: $scope.authors
     createSearchChoice: (term, data) ->
       console.log term, data
       if term not in data

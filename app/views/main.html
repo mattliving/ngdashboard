@@ -1,5 +1,6 @@
 <div class="row">
     <div class="span6">
+        <tag-input ng-model="input.levelsTest" tags="topics"></tag-input>
         <h1>Add a new resource</h1>
         <form ng-submit="addResource()">
             <input type="text" ng-model="input.title" required placeholder="Title">
@@ -27,6 +28,8 @@
             <div class="author-wrapper">
                 <!-- Name -->
                 <input type="hidden" ui-select2="authorSelectOptions" ng-required="true" data-placeholder="Author Name" ng-model="input.author.name">
+                Author list:
+                <div ng-repeat="author in authors">{{author.name}} <p class="small muted">{{author | json}}</p></div>
                 <br>
             </div>
 
@@ -44,8 +47,8 @@
                 <p class="muted small">{{resource.link}}</p>
                 Path: <p>{{resource.path}}</p>
                 Level: <p>{{resource.level}}</p>
-                Topics: <p><span style="margin-right:4px" class="label label-success" ng-repeat="topic in resource.topics">{{topic}}</span></p>
-                Media Types: <p><span style="margin-right:4px" ng-repeat="type in resource.mediaTypes" class="label label-success">{{type}}</span></p>
+                Topics: <p><span tag="topic" ng-repeat="topic in resource.topics"></span></p>
+                Media Types: <p><span tag="type" ng-repeat="type in resource.mediaTypes"></span></p>
             </li>
         </ul>
     </div>
