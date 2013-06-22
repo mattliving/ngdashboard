@@ -24,3 +24,8 @@ li.all a {
     margin: 0 2px;
     color: white;
 }
+
+.highlight {
+    background-color: blue;
+    color: white;
+}

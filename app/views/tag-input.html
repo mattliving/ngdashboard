@@ -1,0 +1,9 @@
+<form class="tag-input" ng-submit="addTag()">
+  <span tag="tag" ng-repeat="tag in tagList" remove="removeTag(name)" deletable></span>
+  <br>
+  <input type="text" class="tag" ng-model="tagInput">
+  <div class="suggest" ng-show="tagInput.length">
+    <div class="suggestion" ng-repeat="tag in tagSuggest | filter:tagInput | without:tagInput | limitTo:5">{{tag}}</div>
+    <div class="suggestion">{{tagInput}}</div>
+  </div>
+</form>
