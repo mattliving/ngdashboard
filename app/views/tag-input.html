@@ -1,9 +1,9 @@
 <form class="tag-input" ng-submit="addTag()">
-  <span tag="tag" ng-repeat="tag in tagList" remove="removeTag(name)" deletable></span>
+  <tag ng-repeat="tag in tagList" key="{{tag.key}}" remove="removeTag($key)" deletable>{{tag.value}}</tag>
   <br>
   <input type="text" class="tag" ng-model="tagInput">
   <div class="suggest" ng-show="tagInput.length">
-    <div class="suggestion" ng-repeat="tag in tagSuggest | filter:tagInput | without:tagInput | limitTo:5">{{tag}}</div>
-    <div class="suggestion">{{tagInput}}</div>
+    <div class="suggestion" name="{{tag.value}}" ng-class="{highlight: $index == hIndex}" ng-repeat="tag in suggestions | filter:tagInput | limitTo:5">{{tag.value}}</div>
+    <div class="suggestion" ng-class="{highlight: hIndex == (suggestions | filter:tagInput | limitTo:5).length}" name="{{tagInput}}">{{tagInput}}</div>
   </div>
 </form>

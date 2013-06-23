@@ -1,6 +1,6 @@
 "use strict"
 
-angular.module('resourceFoundryApp', ['ui.select2', 'resourceFoundryDirectives'])
+angular.module('resourceFoundryApp', ['ui.select2', 'resourceFoundryDirectives', 'resourceFoundryServices'])
   .config ($routeProvider) ->
     $routeProvider
       .when '/',

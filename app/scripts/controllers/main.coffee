@@ -1,47 +1,54 @@
 'use strict'
 
-angular.module('resourceFoundryApp').filter 'capitalise', ->
-  (input) -> input.charAt(0).toUpperCase() + input.slice(1)
-
-angular.module('resourceFoundryApp').controller 'MainCtrl', ($scope, $http) ->
+angular.module('resourceFoundryApp').controller 'MainCtrl', ($scope, $http, keygen) ->
 
   $http(method: 'GET', url: '/data.json')
     .success (data, status, config) ->
-      $scope.authors = _.uniq _.flatten(_.pluck data, "authors"), JSON.stringify
-      $scope.mediaTypes = _.uniq _.flatten _.pluck(data, "mediaType")
-      $scope.topics = _.uniq _.flatten _.pluck(data, "topic")
-      $scope.authorSelectOptions.data = $scope.authors
-      $scope.topicOptions = tags: $scope.topics
-      window.$scope = $scope
-    .error -> console.log 'error :('
-
-  $scope.$watch 'input.levelsTest', (newVal, oldVal, scope) -> console.log newVal, oldVal, scope
+  #     $scope.authors = _.uniq _.flatten(_.pluck data, "authors"), JSON.stringify
+  #     $scope.mediaTypes = _.uniq _.flatten _.pluck(data, "mediaType")
+      $scope.topics = _.map(_.uniq(_.flatten _.pluck(data, "topic")), (el) -> key: el, value: el)
+  #   .error -> console.log 'error :('
 
   $scope.paths = [
     key: "webdevelopment"
-    name: "Web Development"
+    value: "Web Development"
   ,
     key: "marketing"
-    name: "Marketing"
+    value: "Marketing"
   ]
 
   # used as classes for css
-  $scope.levels = ["beginner", "intermediate", "expert", "all"]
+  $scope.levels = [
+    key: "beginner"
+    value: "Beginner"
+  ,
+    key: "intermediate"
+    value: "Intermediate"
+  ,
+    key: "expert"
+    value: "Expert"
+  ,
+    key: "all"
+    value: "All"
+  ]
 
   # to be fetched from server, one resource can have multiple of them
-  $scope.topics = ["html", "css", "javascript", "frontend"]
+  $scope.topics = [
+    key: "html"
+    value: "HTML"
+  ,
+    key: "css"
+    value: "CSS"
+  ,
+    key: "javascript"
+    value: "JavaScript"
+  ,
+    key: "frontend"
+    value: "Front End"
+  ]
 
   # multiple can be selected, new types not currently allowed...
   $scope.mediaTypes = ["article", "reference", "tutorial", "tool", "talk", "video"]
-
-  $scope.authorSelectOptions =
-    multiple: false
-    createSearchChoice: (term, data) ->
-      console.log term, data
-      if term not in data
-        return id: term, text: term
-      else
-        return null
 
   # temporary bootstrapped data
   $scope.resources = [
@@ -49,12 +56,17 @@ angular.module('resourceFoundryApp').controller 'MainCtrl', ($scope, $http) ->
     title:"Google"
     link:"http://www.apple.com"
     level:"all"
-    topics:[
-      "html",
-      "css",
-      "javascript"
+    topics: [
+      key: "html"
+      value: "HTML"
+    ,
+      key: "css"
+      value: "CSS"
+    ,
+      key: "javascript"
+      value: "JavaScript"
     ]
-    mediaTypes:[
+    mediaTypes: [
       "reference",
       "tutorial",
       "tool"

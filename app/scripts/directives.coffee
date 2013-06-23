@@ -1,68 +1,80 @@
-angular.module 'resourceFoundryDirectives', []
+angular.module 'resourceFoundryDirectives', ['resourceFoundryServices']
 
-angular.module('resourceFoundryDirectives').directive 'tag', ->
-  restrict: 'A'
-  replace: true
+angular.module('resourceFoundryDirectives').directive 'tag', ($timeout) ->
+  restrict: 'EA'
+  transclude: true
   scope:
+    key: '@'
     remove: "&"
-    tag: "="
   template: """
     <span class="tag label label-info">
-      <span class="name">{{tag}}</span>
-      <a class="delete" href="" ng-show="deletable" ng-click="remove({name: tag})">x</a>
+      <span class="name" ng-transclude></span>
+      <a class="delete" href="" ng-show="deletable" ng-click="remove({$key: key})">x</a>
     </span>
     """
-  link: (scope, elem, attrs) ->
-    if attrs.deletable? then scope.deletable = true
+  link: ($s, $e, attrs) ->
+    if attrs.deletable? then $s.deletable = true
+    $timeout ->
+      $s.value = $e.find('.name').text()
+      $s.key = attrs.key
 
-# helper filter doesn't need to be in a separate location
-angular.module('resourceFoundryDirectives').filter 'without', -> (input, item) -> _.without input, item
-
-angular.module('resourceFoundryDirectives').directive 'tagInput', ->
+angular.module('resourceFoundryDirectives').directive 'tagInput', (keygen) ->
   restrict: 'E'
   scope:
-    tagSuggest: '=tags'
+    suggestions: '=tags'
+    tagList: '=ngModel'
   templateUrl: "views/tag-input.html"
-  link: (scope, elem, attrs) ->
+  link: ($s, $e, attrs) ->
 
-    scope.tagList = []
+    $s.tagList ?= []
+
+    # convert a list of strings to the correct format
+    _.map $s.tagList, (el) -> if angular.isString el then return key: keygen(el), value: el
 
     # highlight the tag that will be chosen when the enter key is pressed
-    highlightNum = 0
-    do highlight = ->
-      suggestions = elem.find('.suggestion')
-      if suggestions.length > 0
-        if highlightNum >= suggestions.length
-          highlightNum = suggestions.length - 1
-        else if highlightNum < 0
-          highlightNum = 0
+    $s.hIndex = 0
+    highlight = (inc) ->
+      newHIndex = $s.hIndex + inc
+      suggestions = $e.find('.suggestion').length
+      if newHIndex < suggestions and newHIndex >= 0
+        $s.hIndex = newHIndex
+      else if newHIndex < 0
+        $s.hIndex = 0
+      else
+        $s.hIndex = suggestions - 1
 
-        suggestions.removeClass 'highlight'
-        suggestions.get(highlightNum).className += ' highlight'
+    $s.$watch 'tagInput', -> highlight 0
 
-    scope.$watch 'tagInput', highlight
-
-    elem.find('input').on 'keydown', (e) ->
+    $e.find('input').on 'keydown', (e) ->
       if e.keyCode in [40, 38]
         e.preventDefault()
 
-      switch e.keyCode
-        when 40
-          highlightNum++
-          highlight()
-        when 38
-          highlightNum--
-          highlight()
-        when 13
-          # keydown is called before the submission, so changing the input
-          # means the form will be submitted with the new value of tagInput
-          scope.tagInput = elem.find('.suggestion').get(highlightNum).innerText
+      $s.$apply ->
+        switch e.keyCode
+          when 40
+            highlight 1
+          when 38
+            highlight -1
+          when 13
+            # keydown is called before the submission, so changing the input
+            # means the form will be submitted with the new value of tagInput
+            if $e.find('.highlight').length > 0
+              $s.tagInput = $e.find('.highlight').text()
+            else
+              $s.tagInput = $e.find('.suggestion').get($s.hIndex).innerText
 
-    scope.addTag = ->
-      if scope.tagInput and scope.tagInput not in scope.tagList
-        scope.tagList.push scope.tagInput
-        scope.tagInput = ""
+    $s.addTag = ->
+      tag = $s.tagInput
+      key = keygen tag
 
-    scope.removeTag = (name) ->
-      scope.tagList = _.without scope.tagList, name
+      if key and key not in _.pluck $s.tagList, "key"
+        if key in _.pluck $s.suggestions, "key"
+          $s.tagList.push _.where($s.suggestions, key: key)[0]
+        else
+          $s.tagList.push key: key, value: tag
+        $s.tagInput = ""
+        $s.hIndex = 0
+
+    $s.removeTag = (name) ->
+      $s.tagList = _.filter $s.tagList, (el) -> el.key isnt name
 
