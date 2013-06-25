@@ -3,11 +3,11 @@
         <h1>Add a new resource</h1>
         <form ng-submit="addResource()">
             <input type="text" ng-model="input.title" required placeholder="Title">
-            <input type="url" ng-model="input.url" required placeholder="URL">
+            <input type="url" ng-model="input.link" required placeholder="URL">
             <!-- Difficulty level selection -->
             <select ui-select2 ng-model="input.level" ng-required="true"  data-placeholder="Select a level">
                 <option value=""></option>
-                <option ng-repeat="(key, level) in levels" value="{{key}}">{{level}}</option>
+                <option ng-repeat="level in levels" value="{{level.key}}">{{level.value}}</option>
             </select>
             <br>
             <!-- Path selection -->
@@ -17,22 +17,27 @@
             </select>
             <br>
             <!-- Topic selection -->
-            <tag-input ng-model="input.topics" tags="topics" placeholder="Select topics"></tag-input>
+            <tag-input ng-model="input.topics" tags="topics" placeholder="Select topics" create></tag-input>
             <br>
             <!-- Media type -->
-            <tag-input ng-model="input.mediaType" tags="mediaTypes" placeholder="Select media types"></tag-input>
+            <tag-input ng-model="input.mediaTypes" tags="mediaTypes" placeholder="Select media types"></tag-input>
             <br>
             <!-- Author data -->
-            Author data:
+            Author data (semi-optional):
             <div class="author-wrapper">
-                <!-- Name -->
-                <!-- <input type="hidden" ui-select2="authorSelectOptions" ng-required="true" data-placeholder="Author Name" ng-model="input.author.name"> -->
-                Author list:
-                <div ng-repeat="author in authors">{{author.name}} <p class="small muted">{{author | json}}</p></div>
+                <input type="text" ng-model="input.author.name" typeahead="author.name for author in authors | filter:{name:$viewValue}" placeholder="Name"><br>
+                <input type="text" ng-model="input.author.twitter" typeahead="author.twitter for author in authors | filter:{twitter:$viewValue}" placeholder="Twitter"><br>
+                <input type="text" ng-model="input.author.github" typeahead="author.github for author in authors | filter:{github: $viewValue}" placeholder="Github"><br>
                 <br>
             </div>
-
-            <textarea cols="10" rows="7" ng-model="input.description" placeholder="Enter a description (optional)"></textarea>
+            <!-- Cost data -->
+            <select ui-select2 ng-model="input.cost" data-placeholder="Select the cost">
+                <option value=""></option>
+                <option ng-repeat="cost in costs" value="{{cost.key}}">{{cost.value}}</option>
+            </select>
+            <br>
+            <!-- Description -->
+            <textarea style="width:100%" cols="10" rows="7" ng-model="input.description" placeholder="Enter a description (optional)"></textarea>
 
             <br>
             <button type="submit" class="btn btn-primary">Submit</button>
@@ -47,7 +52,16 @@
                 Path: <p>{{resource.path}}</p>
                 Level: <p>{{resource.level}}</p>
                 Topics: <p><tag key="{{topic.key}}" ng-repeat="topic in resource.topics">{{topic.value}}</tag></p>
-                Media Types: <p><tag key="{{type}}" ng-repeat="type in resource.mediaTypes">{{type}}</tag></p>
+                Media Types: <p><tag key="{{type.key}}" ng-repeat="type in resource.mediaTypes">{{type.value}}</tag></p>
+                Author data: <br>
+                <div ng-show="resource.author.name">Name: {{resource.author.name}}</div>
+                <div ng-show="resource.author.twitter">Twitter: {{resource.author.twitter}}</div>
+                <div ng-show="resource.author.github">Github: {{resource.author.github}}</div>
+                Cost: {{resource.cost}} <br>
+                <div ng-show="resource.description">
+                    Description:
+                    <p class="small description">{{resource.description}}</p>
+                </div>
             </li>
         </ul>
     </div>

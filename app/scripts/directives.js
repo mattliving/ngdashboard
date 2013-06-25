@@ -35,6 +35,7 @@ angular.module('resourceFoundryDirectives').directive('tagInput', function(keyge
     templateUrl: "views/tag-input.html",
     link: function($s, $e, attrs) {
       var highlight;
+      $s.canCreate = attrs.create != null;
       if ($s.tagList == null) {
         $s.tagList = [];
       }
@@ -84,14 +85,16 @@ angular.module('resourceFoundryDirectives').directive('tagInput', function(keyge
             $s.tagList.push(_.where($s.suggestions, {
               key: key
             })[0]);
-          } else {
+            $s.tagInput = "";
+            return $s.hIndex = 0;
+          } else if ($s.canCreate) {
             $s.tagList.push({
               key: key,
               value: tag
             });
+            $s.tagInput = "";
+            return $s.hIndex = 0;
           }
-          $s.tagInput = "";
-          return $s.hIndex = 0;
         }
       };
       return $s.removeTag = function(name) {

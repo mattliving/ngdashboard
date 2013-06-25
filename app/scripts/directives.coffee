@@ -26,7 +26,7 @@ angular.module('resourceFoundryDirectives').directive 'tagInput', (keygen) ->
     placeholder: '@'
   templateUrl: "views/tag-input.html"
   link: ($s, $e, attrs) ->
-
+    $s.canCreate = attrs.create?
     $s.tagList ?= []
 
     # highlight the tag that will be chosen when the enter key is pressed
@@ -69,10 +69,13 @@ angular.module('resourceFoundryDirectives').directive 'tagInput', (keygen) ->
       if key and key not in _.pluck $s.tagList, "key"
         if key in _.pluck $s.suggestions, "key"
           $s.tagList.push _.where($s.suggestions, key: key)[0]
-        else
+          $s.tagInput = ""
+          $s.hIndex = 0
+        else if $s.canCreate
           $s.tagList.push key: key, value: tag
-        $s.tagInput = ""
-        $s.hIndex = 0
+          $s.tagInput = ""
+          $s.hIndex = 0
+
 
     $s.removeTag = (name) ->
       $s.tagList = _.filter $s.tagList, (el) -> el.key isnt name

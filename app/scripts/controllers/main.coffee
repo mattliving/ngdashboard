@@ -5,7 +5,8 @@ angular.module('resourceFoundryApp').controller 'MainCtrl', ($scope, $http, keyg
   $http(method: 'GET', url: '/data.json')
     .success (data, status, config) ->
       $scope.authors = _.uniq _.flatten(_.pluck data, "authors"), JSON.stringify
-      # $scope.mediaTypes = _.uniq _.flatten _.pluck(data, "mediaType")
+      window.authors = $scope.authors
+      $scope.mediaTypes = _.map _.uniq(_.flatten _.pluck(data, "mediaType")), (el) -> key: el, value: el
       $scope.topics = _.map(_.uniq(_.flatten _.pluck(data, "topic")), (el) -> key: el, value: el)
     .error -> console.log 'error :('
 
@@ -32,48 +33,13 @@ angular.module('resourceFoundryApp').controller 'MainCtrl', ($scope, $http, keyg
     value: "All"
   ]
 
-  # to be fetched from server, one resource can have multiple of them
-  $scope.topics = [
-    key: "html"
-    value: "HTML"
-  ,
-    key: "css"
-    value: "CSS"
-  ,
-    key: "javascript"
-    value: "JavaScript"
-  ,
-    key: "frontend"
-    value: "Front End"
-  ]
-
-  # multiple can be selected, new types not currently allowed...
-  $scope.mediaTypes = [
-    key: "article"
-    value: "Article"
-  ,
-    key: "reference"
-    value: "Reference"
-  ,
-    key: "tutorial"
-    value: "Tutorial"
-  ,
-    key: "tool"
-    value: "Tool"
-  ,
-    key: "talk"
-    value: "Talk"
-  ,
-    key: "video"
-    value: "Video"
-  ]
-
   # temporary bootstrapped data
   $scope.resources = [
     path:"webdevelopment"
     title:"Google"
-    link:"http://www.apple.com"
+    link:"http://www.google.com"
     level:"all"
+    description: "Use this for EVERYTHING"
     topics: [
       key: "html"
       value: "HTML"
@@ -85,20 +51,53 @@ angular.module('resourceFoundryApp').controller 'MainCtrl', ($scope, $http, keyg
       value: "JavaScript"
     ]
     mediaTypes: [
-      "reference",
-      "tutorial",
-      "tool"
+      key: "reference"
+      value: "reference"
+    ,
+      key: "tutorial"
+      value: "tutorial"
+    ,
+      key: "tool"
+      value: "tool"
     ]
+    author:
+      name: "Google"
+    cost: "free"
+  ,
+    path:"webdevelopment"
+    title:"Angular UI Bootstrap"
+    link:"http://angular-ui.github.io/bootstrap/"
+    level:"beginner"
+    topics: [
+      key:"angular"
+      value:"angular"
+    ,
+      key:"javascript"
+      value:"javascript"
+    ]
+    mediaTypes:[
+      key: "tool"
+      value:"tool"
+    ]
+    cost:"free"
+    author:
+      name:"Angular UI Team"
+      twitter:"@angularui"
+      github:"angular-ui"
+  ]
+
+  $scope.costs = [
+    key: "free"
+    value: "Free"
+  ,
+    key: "paid"
+    value: "Paid"
+  ,
+    key: "freemium"
+    value: "Freemium"
   ]
 
   $scope.addResource = ->
-    $scope.resources.push
-      path: $scope.input.path
-      title: $scope.input.title
-      link: $scope.input.url
-      level: $scope.input.level
-      topics: _.pluck $scope.input.topics, "id"
-      mediaTypes: _.pluck $scope.input.types, "id"
-      description: $scope.input.description
-
+    console.log $scope.input
+    $scope.resources.push angular.copy $scope.input
     $scope.input = {}

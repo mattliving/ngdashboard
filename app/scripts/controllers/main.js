@@ -6,6 +6,13 @@ angular.module('resourceFoundryApp').controller('MainCtrl', function($scope, $ht
     url: '/data.json'
   }).success(function(data, status, config) {
     $scope.authors = _.uniq(_.flatten(_.pluck(data, "authors")), JSON.stringify);
+    window.authors = $scope.authors;
+    $scope.mediaTypes = _.map(_.uniq(_.flatten(_.pluck(data, "mediaType"))), function(el) {
+      return {
+        key: el,
+        value: el
+      };
+    });
     return $scope.topics = _.map(_.uniq(_.flatten(_.pluck(data, "topic"))), function(el) {
       return {
         key: el,
@@ -39,48 +46,13 @@ angular.module('resourceFoundryApp').controller('MainCtrl', function($scope, $ht
       value: "All"
     }
   ];
-  $scope.topics = [
-    {
-      key: "html",
-      value: "HTML"
-    }, {
-      key: "css",
-      value: "CSS"
-    }, {
-      key: "javascript",
-      value: "JavaScript"
-    }, {
-      key: "frontend",
-      value: "Front End"
-    }
-  ];
-  $scope.mediaTypes = [
-    {
-      key: "article",
-      value: "Article"
-    }, {
-      key: "reference",
-      value: "Reference"
-    }, {
-      key: "tutorial",
-      value: "Tutorial"
-    }, {
-      key: "tool",
-      value: "Tool"
-    }, {
-      key: "talk",
-      value: "Talk"
-    }, {
-      key: "video",
-      value: "Video"
-    }
-  ];
   $scope.resources = [
     {
       path: "webdevelopment",
       title: "Google",
-      link: "http://www.apple.com",
+      link: "http://www.google.com",
       level: "all",
+      description: "Use this for EVERYTHING",
       topics: [
         {
           key: "html",
@@ -93,19 +65,65 @@ angular.module('resourceFoundryApp').controller('MainCtrl', function($scope, $ht
           value: "JavaScript"
         }
       ],
-      mediaTypes: ["reference", "tutorial", "tool"]
+      mediaTypes: [
+        {
+          key: "reference",
+          value: "reference"
+        }, {
+          key: "tutorial",
+          value: "tutorial"
+        }, {
+          key: "tool",
+          value: "tool"
+        }
+      ],
+      author: {
+        name: "Google"
+      },
+      cost: "free"
+    }, {
+      path: "webdevelopment",
+      title: "Angular UI Bootstrap",
+      link: "http://angular-ui.github.io/bootstrap/",
+      level: "beginner",
+      topics: [
+        {
+          key: "angular",
+          value: "angular"
+        }, {
+          key: "javascript",
+          value: "javascript"
+        }
+      ],
+      mediaTypes: [
+        {
+          key: "tool",
+          value: "tool"
+        }
+      ],
+      cost: "free",
+      author: {
+        name: "Angular UI Team",
+        twitter: "@angularui",
+        github: "angular-ui"
+      }
+    }
+  ];
+  $scope.costs = [
+    {
+      key: "free",
+      value: "Free"
+    }, {
+      key: "paid",
+      value: "Paid"
+    }, {
+      key: "freemium",
+      value: "Freemium"
     }
   ];
   return $scope.addResource = function() {
-    $scope.resources.push({
-      path: $scope.input.path,
-      title: $scope.input.title,
-      link: $scope.input.url,
-      level: $scope.input.level,
-      topics: _.pluck($scope.input.topics, "id"),
-      mediaTypes: _.pluck($scope.input.types, "id"),
-      description: $scope.input.description
-    });
+    console.log($scope.input);
+    $scope.resources.push(angular.copy($scope.input));
     return $scope.input = {};
   };
 });
