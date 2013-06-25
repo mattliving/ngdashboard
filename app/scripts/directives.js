@@ -29,7 +29,8 @@ angular.module('resourceFoundryDirectives').directive('tagInput', function(keyge
     restrict: 'E',
     scope: {
       suggestions: '=tags',
-      tagList: '=ngModel'
+      tagList: '=ngModel',
+      placeholder: '@'
     },
     templateUrl: "views/tag-input.html",
     link: function($s, $e, attrs) {
@@ -37,14 +38,6 @@ angular.module('resourceFoundryDirectives').directive('tagInput', function(keyge
       if ($s.tagList == null) {
         $s.tagList = [];
       }
-      _.map($s.tagList, function(el) {
-        if (angular.isString(el)) {
-          return {
-            key: keygen(el),
-            value: el
-          };
-        }
-      });
       $s.hIndex = 0;
       highlight = function(inc) {
         var newHIndex, suggestions;
@@ -63,7 +56,7 @@ angular.module('resourceFoundryDirectives').directive('tagInput', function(keyge
       });
       $e.find('input').on('keydown', function(e) {
         var _ref;
-        if ((_ref = e.keyCode) === 40 || _ref === 38) {
+        if ((_ref = e.keyCode) === 40 || _ref === 38 || _ref === 13) {
           e.preventDefault();
         }
         return $s.$apply(function() {
@@ -74,10 +67,11 @@ angular.module('resourceFoundryDirectives').directive('tagInput', function(keyge
               return highlight(-1);
             case 13:
               if ($e.find('.highlight').length > 0) {
-                return $s.tagInput = $e.find('.highlight').text();
+                $s.tagInput = $e.find('.highlight').text();
               } else {
-                return $s.tagInput = $e.find('.suggestion').get($s.hIndex).innerText;
+                $s.tagInput = $e.find('.suggestion').get($s.hIndex).innerText;
               }
+              return $s.addTag();
           }
         });
       });

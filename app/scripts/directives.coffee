@@ -23,13 +23,11 @@ angular.module('resourceFoundryDirectives').directive 'tagInput', (keygen) ->
   scope:
     suggestions: '=tags'
     tagList: '=ngModel'
+    placeholder: '@'
   templateUrl: "views/tag-input.html"
   link: ($s, $e, attrs) ->
 
     $s.tagList ?= []
-
-    # convert a list of strings to the correct format
-    _.map $s.tagList, (el) -> if angular.isString el then return key: keygen(el), value: el
 
     # highlight the tag that will be chosen when the enter key is pressed
     $s.hIndex = 0
@@ -46,7 +44,7 @@ angular.module('resourceFoundryDirectives').directive 'tagInput', (keygen) ->
     $s.$watch 'tagInput', -> highlight 0
 
     $e.find('input').on 'keydown', (e) ->
-      if e.keyCode in [40, 38]
+      if e.keyCode in [40, 38, 13]
         e.preventDefault()
 
       $s.$apply ->
@@ -62,6 +60,7 @@ angular.module('resourceFoundryDirectives').directive 'tagInput', (keygen) ->
               $s.tagInput = $e.find('.highlight').text()
             else
               $s.tagInput = $e.find('.suggestion').get($s.hIndex).innerText
+            $s.addTag()
 
     $s.addTag = ->
       tag = $s.tagInput

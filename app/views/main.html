@@ -1,6 +1,5 @@
 <div class="row">
     <div class="span6">
-        <tag-input ng-model="input.levelsTest" tags="topics"></tag-input>
         <h1>Add a new resource</h1>
         <form ng-submit="addResource()">
             <input type="text" ng-model="input.title" required placeholder="Title">
@@ -18,8 +17,10 @@
             </select>
             <br>
             <!-- Topic selection -->
+            <tag-input ng-model="input.topics" tags="topics" placeholder="Select topics"></tag-input>
             <br>
             <!-- Media type -->
+            <tag-input ng-model="input.mediaType" tags="mediaTypes" placeholder="Select media types"></tag-input>
             <br>
             <!-- Author data -->
             Author data:

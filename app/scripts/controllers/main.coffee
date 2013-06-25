@@ -4,10 +4,10 @@ angular.module('resourceFoundryApp').controller 'MainCtrl', ($scope, $http, keyg
 
   $http(method: 'GET', url: '/data.json')
     .success (data, status, config) ->
-  #     $scope.authors = _.uniq _.flatten(_.pluck data, "authors"), JSON.stringify
-  #     $scope.mediaTypes = _.uniq _.flatten _.pluck(data, "mediaType")
+      $scope.authors = _.uniq _.flatten(_.pluck data, "authors"), JSON.stringify
+      # $scope.mediaTypes = _.uniq _.flatten _.pluck(data, "mediaType")
       $scope.topics = _.map(_.uniq(_.flatten _.pluck(data, "topic")), (el) -> key: el, value: el)
-  #   .error -> console.log 'error :('
+    .error -> console.log 'error :('
 
   $scope.paths = [
     key: "webdevelopment"
@@ -48,7 +48,25 @@ angular.module('resourceFoundryApp').controller 'MainCtrl', ($scope, $http, keyg
   ]
 
   # multiple can be selected, new types not currently allowed...
-  $scope.mediaTypes = ["article", "reference", "tutorial", "tool", "talk", "video"]
+  $scope.mediaTypes = [
+    key: "article"
+    value: "Article"
+  ,
+    key: "reference"
+    value: "Reference"
+  ,
+    key: "tutorial"
+    value: "Tutorial"
+  ,
+    key: "tool"
+    value: "Tool"
+  ,
+    key: "talk"
+    value: "Talk"
+  ,
+    key: "video"
+    value: "Video"
+  ]
 
   # temporary bootstrapped data
   $scope.resources = [

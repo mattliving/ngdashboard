@@ -5,12 +5,15 @@ angular.module('resourceFoundryApp').controller('MainCtrl', function($scope, $ht
     method: 'GET',
     url: '/data.json'
   }).success(function(data, status, config) {
+    $scope.authors = _.uniq(_.flatten(_.pluck(data, "authors")), JSON.stringify);
     return $scope.topics = _.map(_.uniq(_.flatten(_.pluck(data, "topic"))), function(el) {
       return {
         key: el,
         value: el
       };
     });
+  }).error(function() {
+    return console.log('error :(');
   });
   $scope.paths = [
     {
@@ -51,7 +54,27 @@ angular.module('resourceFoundryApp').controller('MainCtrl', function($scope, $ht
       value: "Front End"
     }
   ];
-  $scope.mediaTypes = ["article", "reference", "tutorial", "tool", "talk", "video"];
+  $scope.mediaTypes = [
+    {
+      key: "article",
+      value: "Article"
+    }, {
+      key: "reference",
+      value: "Reference"
+    }, {
+      key: "tutorial",
+      value: "Tutorial"
+    }, {
+      key: "tool",
+      value: "Tool"
+    }, {
+      key: "talk",
+      value: "Talk"
+    }, {
+      key: "video",
+      value: "Video"
+    }
+  ];
   $scope.resources = [
     {
       path: "webdevelopment",
