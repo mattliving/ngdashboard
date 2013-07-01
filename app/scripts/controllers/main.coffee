@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('resourceFoundryApp').controller 'MainCtrl', ($scope, $http, keygen) ->
+angular.module('resourceFoundryApp').controller 'MainCtrl', ($scope, $http) ->
 
   $http(method: 'GET', url: '/data.json')
     .success (data, status, config) ->
@@ -33,6 +33,17 @@ angular.module('resourceFoundryApp').controller 'MainCtrl', ($scope, $http, keyg
     value: "All"
   ]
 
+  $scope.costs = [
+    key: "free"
+    value: "Free"
+  ,
+    key: "paid"
+    value: "Paid"
+  ,
+    key: "freemium"
+    value: "Freemium"
+  ]
+
   # temporary bootstrapped data
   $scope.resources = [
     path:"webdevelopment"
@@ -52,13 +63,13 @@ angular.module('resourceFoundryApp').controller 'MainCtrl', ($scope, $http, keyg
     ]
     mediaTypes: [
       key: "reference"
-      value: "reference"
+      value: "Reference"
     ,
       key: "tutorial"
-      value: "tutorial"
+      value: "Tutorial"
     ,
       key: "tool"
-      value: "tool"
+      value: "Tool"
     ]
     author:
       name: "Google"
@@ -86,18 +97,6 @@ angular.module('resourceFoundryApp').controller 'MainCtrl', ($scope, $http, keyg
       github:"angular-ui"
   ]
 
-  $scope.costs = [
-    key: "free"
-    value: "Free"
-  ,
-    key: "paid"
-    value: "Paid"
-  ,
-    key: "freemium"
-    value: "Freemium"
-  ]
-
   $scope.addResource = ->
-    console.log $scope.input
     $scope.resources.push angular.copy $scope.input
     $scope.input = {}

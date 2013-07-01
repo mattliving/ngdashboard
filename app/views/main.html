@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="span6">
+    <div class="span12">
         <h1>Add a new resource</h1>
         <form ng-submit="addResource()">
             <input type="text" ng-model="input.title" required placeholder="Title">
@@ -43,7 +43,9 @@
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
-    <div class="span6">
+</div>
+<div class="row">
+    <div class="span12">
         <h1>List of URLs</h1>
         <ul class="unstyled">
             <li ng-repeat="resource in resources" class="{{resource.level}}">
