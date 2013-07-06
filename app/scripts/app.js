@@ -4,8 +4,10 @@ angular.module('resourceFoundryApp', ['ui.select2', 'resourceFoundryDirectives',
   $routeProvider.when('/', {
     templateUrl: 'views/main.html',
     controller: 'MainCtrl'
+  }).when('/list', {
+    templateUrl: 'views/list.html',
+    controller: 'MainCtrl'
   }).otherwise({
     redirectTo: '/'
   });
-  return $locationProvider.html5Mode(true);
 });

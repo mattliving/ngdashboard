@@ -1,7 +1,7 @@
 <tag ng-repeat="tag in tagList" key="{{tag.key}}" remove="removeTag($key)" deletable>{{tag.value}}</tag>
 <br>
 <input type="text" class="tag" ng-model="tagInput" placeholder="{{placeholder}}">
-<div class="suggest" ng-show="tagInput.length">
+<div class="suggest" ng-show="downKey || (tagInput.length > 0)">
 <div class="suggestion" name="{{tag.value}}" ng-class="{highlight: $index == hIndex}" ng-repeat="tag in suggestions | filter:tagInput | limitTo:5">{{tag.value}}</div>
 <div class="suggestion" ng-class="{highlight: hIndex == (suggestions | filter:tagInput | limitTo:5).length}" ng-show="canCreate" name="{{tagInput}}">{{tagInput}}</div>
 </div>

@@ -1,0 +1,24 @@
+<ul class="unstyled span{{12/paths.length}}" ng-repeat="path in paths">
+    <h2>{{path.value}}</h2>
+    <li ng-repeat="resource in resources | filter:{path: path.key}" class="{{resource.level}}" ng-init="collapsed=true">
+        <i ng-class="{'icon-collapse': !collapsed, 'icon-expand': collapsed}" ng-click="collapsed = !collapsed"></i>
+        <a href="{{resource.link}}">{{resource.title}}</a>
+        <div class="content" ng-hide="collapsed">
+            <p class="muted small">{{resource.link}}</p>
+            Path: <p>{{resource.path}}</p>
+            Level: <p>{{resource.level}}</p>
+            Topics: <p><tag key="{{topic.key}}" ng-repeat="topic in resource.topics">{{topic.value}}</tag></p>
+            Media Types: <p><tag key="{{type.key}}" ng-repeat="type in resource.mediaTypes">{{type.value}}</tag></p>
+            Author data: <br>
+            <div ng-show="resource.author.name">Name: {{resource.author.name}}</div>
+            <div ng-show="resource.author.twitter">Twitter: {{resource.author.twitter}}</div>
+            <div ng-show="resource.author.github">Github: {{resource.author.github}}</div>
+            Cost: {{resource.cost}} <br>
+            <div ng-show="resource.description">
+                Description:
+                <p class="small description">{{resource.description}}</p>
+            </div>
+        </div>
+        <hr ng-show="!$last">
+    </li>
+</ul>

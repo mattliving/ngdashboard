@@ -1,5 +1,6 @@
 angular.module 'resourceFoundryDirectives', ['resourceFoundryServices']
 
+
 angular.module('resourceFoundryDirectives').directive 'tag', ($timeout) ->
   restrict: 'EA'
   transclude: true
@@ -46,11 +47,14 @@ angular.module('resourceFoundryDirectives').directive 'tagInput', (keygen) ->
     $e.find('input').on 'keydown', (e) ->
       if e.keyCode in [40, 38, 13]
         e.preventDefault()
+      else
+       $s.downKey = false
 
       $s.$apply ->
         switch e.keyCode
           when 40
             highlight 1
+            $s.downKey = true
           when 38
             highlight -1
           when 13

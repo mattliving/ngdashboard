@@ -59,11 +59,14 @@ angular.module('resourceFoundryDirectives').directive('tagInput', function(keyge
         var _ref;
         if ((_ref = e.keyCode) === 40 || _ref === 38 || _ref === 13) {
           e.preventDefault();
+        } else {
+          $s.downKey = false;
         }
         return $s.$apply(function() {
           switch (e.keyCode) {
             case 40:
-              return highlight(1);
+              highlight(1);
+              return $s.downKey = true;
             case 38:
               return highlight(-1);
             case 13:

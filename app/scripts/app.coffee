@@ -6,7 +6,11 @@ angular.module('resourceFoundryApp', ['ui.select2', 'resourceFoundryDirectives',
       .when '/',
         templateUrl: 'views/main.html'
         controller: 'MainCtrl'
+      .when '/list',
+        templateUrl: 'views/list.html'
+        controller: 'MainCtrl'
       .otherwise
         redirectTo: '/'
 
-    $locationProvider.html5Mode true
+    # $locationProvider.html5Mode true
+    return

@@ -60,6 +60,7 @@ angular.module('resourceFoundryApp').controller('MainCtrl', function($scope, $ht
   ];
   $scope.resources = [
     {
+      id: 0,
       path: "webdevelopment",
       title: "Google",
       link: "http://www.google.com",
@@ -94,6 +95,7 @@ angular.module('resourceFoundryApp').controller('MainCtrl', function($scope, $ht
       },
       cost: "free"
     }, {
+      id: 1,
       path: "webdevelopment",
       title: "Angular UI Bootstrap",
       link: "http://angular-ui.github.io/bootstrap/",

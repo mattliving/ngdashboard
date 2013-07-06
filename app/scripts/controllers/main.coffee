@@ -46,6 +46,7 @@ angular.module('resourceFoundryApp').controller 'MainCtrl', ($scope, $http) ->
 
   # temporary bootstrapped data
   $scope.resources = [
+    id: 0
     path:"webdevelopment"
     title:"Google"
     link:"http://www.google.com"
@@ -75,6 +76,7 @@ angular.module('resourceFoundryApp').controller 'MainCtrl', ($scope, $http) ->
       name: "Google"
     cost: "free"
   ,
+    id: 1
     path:"webdevelopment"
     title:"Angular UI Bootstrap"
     link:"http://angular-ui.github.io/bootstrap/"

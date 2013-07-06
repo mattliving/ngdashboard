@@ -4,6 +4,7 @@
         <form ng-submit="addResource()">
             <input type="text" ng-model="input.title" required placeholder="Title">
             <input type="url" ng-model="input.link" required placeholder="URL">
+            <br>
             <!-- Difficulty level selection -->
             <select ui-select2 ng-model="input.level" ng-required="true"  data-placeholder="Select a level">
                 <option value=""></option>
@@ -45,26 +46,13 @@
     </div>
 </div>
 <div class="row">
-    <div class="span12">
-        <h1>List of URLs</h1>
-        <ul class="unstyled">
-            <li ng-repeat="resource in resources" class="{{resource.level}}">
-                <a href="{{resource.link}}">{{resource.title}}</a>
-                <p class="muted small">{{resource.link}}</p>
-                Path: <p>{{resource.path}}</p>
-                Level: <p>{{resource.level}}</p>
-                Topics: <p><tag key="{{topic.key}}" ng-repeat="topic in resource.topics">{{topic.value}}</tag></p>
-                Media Types: <p><tag key="{{type.key}}" ng-repeat="type in resource.mediaTypes">{{type.value}}</tag></p>
-                Author data: <br>
-                <div ng-show="resource.author.name">Name: {{resource.author.name}}</div>
-                <div ng-show="resource.author.twitter">Twitter: {{resource.author.twitter}}</div>
-                <div ng-show="resource.author.github">Github: {{resource.author.github}}</div>
-                Cost: {{resource.cost}} <br>
-                <div ng-show="resource.description">
-                    Description:
-                    <p class="small description">{{resource.description}}</p>
-                </div>
-            </li>
-        </ul>
-    </div>
+    <h1>List of URLs</h1>
+    <h2><a href="#/list">View full list ></a></h2>
+    <ul class="unstyled span{{12/paths.length}}" ng-repeat="path in paths">
+        <h3>{{path.value}}</h3>
+        <li ng-repeat="resource in resources | filter:{path: path.key}" class="{{resource.level}}">
+            <a href="{{resource.link}}">{{resource.title}}</a>
+            <p class="muted small">{{resource.link}}</p>
+        </li>
+    </ul>
 </div>
