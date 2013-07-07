@@ -1,5 +1,6 @@
-angular.module 'resourceFoundryDirectives', ['resourceFoundryServices']
+'use strict'
 
+angular.module 'resourceFoundryDirectives', ['resourceFoundryServices']
 
 angular.module('resourceFoundryDirectives').directive 'tag', ($timeout) ->
   restrict: 'EA'
@@ -22,7 +23,7 @@ angular.module('resourceFoundryDirectives').directive 'tag', ($timeout) ->
 angular.module('resourceFoundryDirectives').directive 'tagInput', (keygen) ->
   restrict: 'E'
   scope:
-    suggestions: '=tags'
+    tags: '=tags'
     tagList: '=ngModel'
     placeholder: '@'
   templateUrl: "views/tag-input.html"
@@ -42,8 +43,6 @@ angular.module('resourceFoundryDirectives').directive 'tagInput', (keygen) ->
       else
         $s.hIndex = suggestions - 1
 
-    $s.$watch 'tagInput', -> highlight 0
-
     $e.find('input').on 'keydown', (e) ->
       if e.keyCode in [40, 38, 13]
         e.preventDefault()
@@ -58,6 +57,7 @@ angular.module('resourceFoundryDirectives').directive 'tagInput', (keygen) ->
           when 38
             highlight -1
           when 13
+            highlight 0
             # keydown is called before the submission, so changing the input
             # means the form will be submitted with the new value of tagInput
             if $e.find('.highlight').length > 0
@@ -65,22 +65,32 @@ angular.module('resourceFoundryDirectives').directive 'tagInput', (keygen) ->
             else
               $s.tagInput = $e.find('.suggestion').get($s.hIndex).innerText
             $s.addTag()
+          else
+            highlight 0
+
+        if $s.tagList?
+          $s.sCount = 0
+          $s.suggestions = _.filter $s.tags, (val, key) ->
+            if $s.sCount < 5
+              if (key.indexOf($s.tagInput) >= 0 or val.indexOf($s.tagInput) >= 0) and key not in $s.tagList
+                $s.sCount++
+                true
+            else false
+        else
+          $s.sCount = 5
+          $s.suggestions = _.take $s.tags, 5
 
     $s.addTag = ->
       tag = $s.tagInput
       key = keygen tag
 
-      if key and key not in _.pluck $s.tagList, "key"
-        if key in _.pluck $s.suggestions, "key"
-          $s.tagList.push _.where($s.suggestions, key: key)[0]
+      if key and key not in $s.tagList
+        if $s.canCreate or key of $s.tags
+          $s.tagList.push key
           $s.tagInput = ""
           $s.hIndex = 0
-        else if $s.canCreate
-          $s.tagList.push key: key, value: tag
-          $s.tagInput = ""
-          $s.hIndex = 0
-
+          if key not of $s.tags
+            $s.tags[key] = tag
 
     $s.removeTag = (name) ->
-      $s.tagList = _.filter $s.tagList, (el) -> el.key isnt name
-
+      $s.tagList = _.filter $s.tagList, (el) -> el isnt name

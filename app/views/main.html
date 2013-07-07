@@ -14,7 +14,7 @@
             <!-- Path selection -->
             <select ui-select2 ng-model="input.path" ng-required="true" data-placeholder="Select a path">
                 <option value=""></option>
-                <option ng-repeat="path in paths" value="{{path.key}}">{{path.value}}</option>
+                <option ng-repeat="(key, path) in paths" value="{{key}}">{{path}}</option>
             </select>
             <br>
             <!-- Topic selection -->
@@ -34,11 +34,11 @@
             <!-- Cost data -->
             <select ui-select2 ng-model="input.cost" data-placeholder="Select the cost">
                 <option value=""></option>
-                <option ng-repeat="cost in costs" value="{{cost.key}}">{{cost.value}}</option>
+                <option ng-repeat="(key, cost) in costs" value="{{key}}">{{cost}}</option>
             </select>
             <br>
             <!-- Description -->
-            <textarea style="width:100%" cols="10" rows="7" ng-model="input.description" placeholder="Enter a description (optional)"></textarea>
+            <textarea cols="10" rows="7" ng-model="input.description" placeholder="Enter a description (optional)"></textarea>
 
             <br>
             <button type="submit" class="btn btn-primary">Submit</button>
@@ -48,11 +48,11 @@
 <div class="row">
     <h1>List of URLs</h1>
     <h2><a href="#/list">View full list ></a></h2>
-    <ul class="unstyled span{{12/paths.length}}" ng-repeat="path in paths">
-        <h3>{{path.value}}</h3>
-        <li ng-repeat="resource in resources | filter:{path: path.key}" class="{{resource.level}}">
+    <ul class="unstyled span6" ng-repeat="(key, path) in paths">
+        <h3>{{path}}</h3>
+        <li ng-repeat="resource in resources | filter:{path: key}">
+            <span class="dot dot-{{resource.level}}"></span>
             <a href="{{resource.link}}">{{resource.title}}</a>
-            <p class="muted small">{{resource.link}}</p>
         </li>
     </ul>
 </div>

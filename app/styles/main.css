@@ -1,17 +1,36 @@
-li.beginner a {
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.beginner {
     color: green;
 }
+.dot-beginner {
+    background-color: green;
+}
 
-li.intermediate a {
+.intermediate {
     color: yellow;
 }
-
-li.expert a {
-    color: red;
+.dot-intermediate {
+    background-color: yellow;
 }
 
-li.all a {
+.expert {
+    color: red;
+}
+.dot-expert {
+    background-color: red;
+}
+
+.all {
     color: blue;
+}
+.dot-all {
+    background-color: blue;
 }
 
 /* tag css */
@@ -28,4 +47,10 @@ li.all a {
 .highlight {
     background-color: blue;
     color: white;
+}
+
+.line {
+    border-bottom: 1px solid #bebebe;
+    height: 1px;
+    margin: 4px 0;
 }

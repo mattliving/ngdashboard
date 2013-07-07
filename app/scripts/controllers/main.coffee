@@ -1,48 +1,22 @@
 'use strict'
 
-angular.module('resourceFoundryApp').controller 'MainCtrl', ($scope, $http) ->
+angular.module('resourceFoundryApp').controller 'MainCtrl', ($scope, $http, Resource, mediaTypes, topics, levels, costs, paths, map) ->
 
   $http(method: 'GET', url: '/data.json')
     .success (data, status, config) ->
       $scope.authors = _.uniq _.flatten(_.pluck data, "authors"), JSON.stringify
-      window.authors = $scope.authors
-      $scope.mediaTypes = _.map _.uniq(_.flatten _.pluck(data, "mediaType")), (el) -> key: el, value: el
-      $scope.topics = _.map(_.uniq(_.flatten _.pluck(data, "topic")), (el) -> key: el, value: el)
+      window.scope = $scope
+      # data format does not currently match
+      # $scope.resources = data
     .error -> console.log 'error :('
 
-  $scope.paths = [
-    key: "webdevelopment"
-    value: "Web Development"
-  ,
-    key: "marketing"
-    value: "Marketing"
-  ]
+  $scope.mediaTypes = mediaTypes
+  $scope.topics = topics
+  $scope.levels = levels
+  $scope.costs = costs
+  $scope.paths = paths
 
-  # used as classes for css
-  $scope.levels = [
-    key: "beginner"
-    value: "Beginner"
-  ,
-    key: "intermediate"
-    value: "Intermediate"
-  ,
-    key: "expert"
-    value: "Expert"
-  ,
-    key: "all"
-    value: "All"
-  ]
-
-  $scope.costs = [
-    key: "free"
-    value: "Free"
-  ,
-    key: "paid"
-    value: "Paid"
-  ,
-    key: "freemium"
-    value: "Freemium"
-  ]
+  $scope.valueFor = map
 
   # temporary bootstrapped data
   $scope.resources = [
@@ -53,24 +27,14 @@ angular.module('resourceFoundryApp').controller 'MainCtrl', ($scope, $http) ->
     level:"all"
     description: "Use this for EVERYTHING"
     topics: [
-      key: "html"
-      value: "HTML"
-    ,
-      key: "css"
-      value: "CSS"
-    ,
-      key: "javascript"
-      value: "JavaScript"
+      "html"
+      "css"
+      "javascript"
     ]
     mediaTypes: [
-      key: "reference"
-      value: "Reference"
-    ,
-      key: "tutorial"
-      value: "Tutorial"
-    ,
-      key: "tool"
-      value: "Tool"
+      "reference"
+      "tutorial"
+      "tool"
     ]
     author:
       name: "Google"
@@ -82,16 +46,10 @@ angular.module('resourceFoundryApp').controller 'MainCtrl', ($scope, $http) ->
     link:"http://angular-ui.github.io/bootstrap/"
     level:"beginner"
     topics: [
-      key:"angular"
-      value:"angular"
-    ,
-      key:"javascript"
-      value:"javascript"
+      "angular"
+      "javascript"
     ]
-    mediaTypes:[
-      key: "tool"
-      value:"tool"
-    ]
+    mediaTypes:["tool"]
     cost:"free"
     author:
       name:"Angular UI Team"
