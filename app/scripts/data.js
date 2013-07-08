@@ -23,13 +23,14 @@ angular.module("resourceFoundryData").value("topics", {
   tooling: "Tooling",
   haml: "HAML",
   less: "LESS",
-  sass: "SASS"
+  sass: "SASS",
+  angular: "AngularJS"
 });
 
 angular.module("resourceFoundryData").value("levels", {
   beginner: "Beginner",
   intermediate: "Intermediate",
-  expert: "Expert",
+  advanced: "Advanced",
   all: "All"
 });
 

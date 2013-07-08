@@ -25,11 +25,12 @@ angular.module("resourceFoundryData").value "topics",
   haml: "HAML"
   less: "LESS"
   sass: "SASS"
+  angular: "AngularJS"
 
 angular.module("resourceFoundryData").value "levels",
   beginner:"Beginner"
   intermediate:"Intermediate"
-  expert:"Expert"
+  advanced:"Advanced"
   all:"All"
 
 angular.module("resourceFoundryData").value "costs",

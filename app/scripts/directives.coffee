@@ -23,7 +23,7 @@ angular.module('resourceFoundryDirectives').directive 'tag', ($timeout) ->
 angular.module('resourceFoundryDirectives').directive 'tagInput', (keygen) ->
   restrict: 'E'
   scope:
-    tags: '=tags'
+    tags: '='
     tagList: '=ngModel'
     placeholder: '@'
   templateUrl: "views/tag-input.html"
@@ -93,4 +93,4 @@ angular.module('resourceFoundryDirectives').directive 'tagInput', (keygen) ->
             $s.tags[key] = tag
 
     $s.removeTag = (name) ->
-      $s.tagList = _.filter $s.tagList, (el) -> el isnt name
+      $s.tagList.remove name

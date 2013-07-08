@@ -29,7 +29,7 @@ angular.module('resourceFoundryDirectives').directive('tagInput', function(keyge
   return {
     restrict: 'E',
     scope: {
-      tags: '=tags',
+      tags: '=',
       tagList: '=ngModel',
       placeholder: '@'
     },
@@ -115,9 +115,7 @@ angular.module('resourceFoundryDirectives').directive('tagInput', function(keyge
         }
       };
       return $s.removeTag = function(name) {
-        return $s.tagList = _.filter($s.tagList, function(el) {
-          return el !== name;
-        });
+        return $s.tagList.remove(name);
       };
     }
   };

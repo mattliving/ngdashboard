@@ -5,31 +5,26 @@ angular.module('resourceFoundryServices', [])
 # simple key creation from values for now, may be more complex later
 angular.module('resourceFoundryServices').factory 'keygen', -> (string) -> string.toLowerCase().replace(" ", "")
 
-angular.module('resourceFoundryServices').service 'Resource',
-  class Resource
+angular.module('resourceFoundryServices').service 'Resources',
+  class Resources
 
-    contructor: (@$http, @$q) ->
-      @maps = @$q.defer()
+    constructor: (@$http, @$q, @$rootScope) ->
       @resources = @$q.defer()
-      @fetchAll()
+      @fetch()
 
-    fetchAll: ->
+    fetch: ->
       @$http(method: 'GET', url: '/data.json')
-        .success (data, status, config) ->
+        .success (data, status, config) =>
           @resources.resolve data
-          unless maps?
-            @maps.resolve
-              authors: _.uniq _.flatten(_.pluck data, "authors"), JSON.stringify
-              mediaTypes: _.map _.uniq (_.flatten _.pluck(data, "mediaType")), (el) -> key: el, value: el
-              topics: _.map _.uniq(_.flatten _.pluck(data, "topic")), (el) -> key: el, value: el
-        .error ->
+        .error =>
           console.log 'data error has occurred'
           @resources.reject 'error fetching data'
 
-    getMaps: -> @maps.promise
-    getResources: -> @resources.promise
+    get: ->
+      @resources.promise
 
-    addResource: (resource) ->
+    add: (resource) ->
       @resources.promise.then (resources) -> resources.push resource
-      # this will have a way to send the data to the server in future.
+      # this will have a way to send the data to the server in future,
+      # and potentially update the promise if need be.
 

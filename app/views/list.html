@@ -1,25 +1,22 @@
-<ul class="list-view unstyled span6" ng-repeat="(key, path) in paths">
-    <h2>{{path}}</h2>
-    <li ng-repeat="resource in resources | filter:{path: key}" ng-init="collapsed=true">
-        <i class="{{resource.level}}" ng-class="{'icon-collapse': !collapsed, 'icon-expand': collapsed}" ng-click="collapsed = !collapsed"></i>
-        <!-- <span class="dot {{resource.level}}"></span> -->
-        <a href="{{resource.link}}">{{resource.title}}</a>
-        <div class="content" ng-hide="collapsed">
-            <p class="muted small">{{resource.link}}</p>
-            Path: <p>{{resource.path}}</p>
-            Level: <p>{{resource.level}}</p>
-            Topics: <p><tag key="{{topic}}" ng-repeat="topic in resource.topics">{{valueFor('topic', topic)}}</tag></p>
-            Media Types: <p><tag key="{{type}}" ng-repeat="type in resource.mediaTypes">{{valueFor('mediaType', type)}}</tag></p>
-            Author data: <br>
-            <div ng-show="resource.author.name">Name: {{resource.author.name}}</div>
-            <div ng-show="resource.author.twitter">Twitter: {{resource.author.twitter}}</div>
-            <div ng-show="resource.author.github">Github: {{resource.author.github}}</div>
-            Cost: {{resource.cost}} <br>
-            <div ng-show="resource.description">
-                Description:
-                <p class="small description">{{resource.description}}</p>
-            </div>
+<h2>{{valueFor('path',path)}}</h2>
+<div ng-repeat="resource in resources | filter:{path: path}" ng-init="collapsed=true">
+    <i class="{{resource.level}}" ng-class="{'icon-collapse': !collapsed, 'icon-expand': collapsed}" ng-click="collapsed = !collapsed"></i>
+    <!-- <span class="dot {{resource.level}}"></span> -->
+    <a href="{{resource.link}}">{{resource.title}}</a>
+    <div class="content" ng-hide="collapsed">
+        <p class="muted small">{{resource.link}}</p>
+        Level: <p>{{valueFor('level', resource.level)}}</p>
+        Topics: <p><tag key="{{topic}}" ng-repeat="topic in resource.topic">{{valueFor('topic', topic)}}</tag></p>
+        Media Types: <p><tag key="{{type}}" ng-repeat="type in resource.mediaType">{{valueFor('mediaType', type)}}</tag></p>
+        Author data: <br>
+        <div ng-show="resource.authors.name">Name: {{resource.authors.name}}</div>
+        <div ng-show="resource.authors.twitter">Twitter: {{resource.authors.twitter}}</div>
+        <div ng-show="resource.authors.github">Github: {{resource.authors.github}}</div>
+        Cost: {{valueFor('cost', resource.cost)}} <br>
+        <div ng-show="resource.description">
+            Description:
+            <p class="small description">{{resource.description}}</p>
         </div>
-        <div class="line" ng-show="!$last"></div>
-    </li>
-</ul>
+    </div>
+    <div class="line" ng-show="!$last"></div>
+</div>

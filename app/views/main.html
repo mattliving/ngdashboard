@@ -8,7 +8,7 @@
             <!-- Difficulty level selection -->
             <select ui-select2 ng-model="input.level" ng-required="true"  data-placeholder="Select a level">
                 <option value=""></option>
-                <option ng-repeat="level in levels" value="{{level.key}}">{{level.value}}</option>
+                <option ng-repeat="(key, level) in levels" value="{{key}}">{{level}}</option>
             </select>
             <br>
             <!-- Path selection -->
@@ -18,17 +18,17 @@
             </select>
             <br>
             <!-- Topic selection -->
-            <tag-input ng-model="input.topics" tags="topics" placeholder="Select topics" create></tag-input>
+            <tag-input ng-model="input.topic" tags="topics" placeholder="Select topics" create></tag-input>
             <br>
             <!-- Media type -->
-            <tag-input ng-model="input.mediaTypes" tags="mediaTypes" placeholder="Select media types"></tag-input>
+            <tag-input ng-model="input.mediaType" tags="mediaTypes" placeholder="Select media types"></tag-input>
             <br>
             <!-- Author data -->
             Author data (semi-optional):
             <div class="author-wrapper">
-                <input type="text" ng-model="input.author.name" typeahead="author.name for author in authors | filter:{name:$viewValue}" placeholder="Name"><br>
-                <input type="text" ng-model="input.author.twitter" typeahead="author.twitter for author in authors | filter:{twitter:$viewValue}" placeholder="Twitter"><br>
-                <input type="text" ng-model="input.author.github" typeahead="author.github for author in authors | filter:{github: $viewValue}" placeholder="Github"><br>
+                <input type="text" ng-model="input.authors.name" typeahead="author.name for author in authors | filter:{name:$viewValue}" placeholder="Name"><br>
+                <input type="text" ng-model="input.authors.twitter" typeahead="author.twitter for author in authors | filter:{twitter:$viewValue}" placeholder="Twitter"><br>
+                <input type="text" ng-model="input.authors.github" typeahead="author.github for author in authors | filter:{github: $viewValue}" placeholder="Github"><br>
                 <br>
             </div>
             <!-- Cost data -->
@@ -47,12 +47,13 @@
 </div>
 <div class="row">
     <h1>List of URLs</h1>
-    <h2><a href="#/list">View full list ></a></h2>
-    <ul class="unstyled span6" ng-repeat="(key, path) in paths">
+    <ul class="unstyled span6" ng-repeat="(key, path) in paths" ng-init="limit = 10">
         <h3>{{path}}</h3>
-        <li ng-repeat="resource in resources | filter:{path: key}">
+        <a href="#/list/{{key}}">View all ></a>
+        <li ng-repeat="resource in resources | filter:{path: key} | limitTo: limit">
             <span class="dot dot-{{resource.level}}"></span>
             <a href="{{resource.link}}">{{resource.title}}</a>
         </li>
+        <li ng-show="(resources | filter:{path: key}).length > limit"><a href="#/list/{{key}}">and {{(resources | filter:{path: key}).length - limit}} more...</a></li>
     </ul>
 </div>
