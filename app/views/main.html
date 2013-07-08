@@ -3,27 +3,19 @@
         <h1>Add a new resource</h1>
         <form ng-submit="addResource()">
             <input type="text" ng-model="input.title" required placeholder="Title">
-            <input type="url" ng-model="input.link" required placeholder="URL">
+            <input type="text" ng-model="input.link" required placeholder="URL">
             <br>
             <!-- Difficulty level selection -->
             Level: <br>
             <div class="btn-group">
                 <button ng-repeat="(key, level) in levels" type="button" class="btn btn-primary" ng-model="input.level" btn-radio="'{{key}}'">{{level}}</button>
             </div>
-            <!-- <select ui-select2 ng-model="input.level" ng-required="true"  data-placeholder="Select a level">
-                <option value=""></option>
-                <option ng-repeat="(key, level) in levels" value="{{key}}">{{level}}</option>
-            </select> -->
             <br><br>
             <!-- Path selection -->
             Path: <br>
             <div class="btn-group">
                 <button ng-repeat="(key, path) in paths" type="button" class="btn btn-primary" ng-model="input.path" btn-radio="'{{key}}'">{{path}}</button>
             </div>
-            <!-- <select ui-select2 ng-model="input.path" ng-required="true" data-placeholder="Select a path">
-                <option value=""></option>
-                <option ng-repeat="(key, path) in paths" value="{{key}}">{{path}}</option>
-            </select> -->
             <br>
             <!-- Topic selection -->
             <tag-input ng-model="input.topic" tags="topics" placeholder="Select topics" create></tag-input>
@@ -34,12 +26,18 @@
             <!-- Author data -->
             <div class="author-wrapper">
                 Number of authors: <br>
-                <input type="number" ng-model="authorCount" min="1" max="10">
+                <input type="number" ng-model="authorCount" min="1" max="100">
                 <div class="clearfix"></div>
-                <div class="author" ng-repeat="author in input.authors">
-                    <input type="text" ng-repeat="attr in author" ng-model="attr.value" placeholder="{{attr.key}}"><br>
-                    <input type="text" ng-model="newAttr" placeholder="New attribute">
-                    <a href="" ng-click="addAuthorAttr(author, newAttr) &amp;&amp; (newAttr='')" class="btn"><i class="icon-plus"></i></a>
+                <div class="author-input" ng-repeat="author in input.authors">
+                    <div class="attr" ng-repeat="attr in author">
+                        <input type="text"  ng-model="attr.value" placeholder="{{attr.key}}">
+                        <a href="" ng-click="removeAuthorAttr(author, attr.key)" class="btn"><i class="icon-minus"></i></a>
+                    </div>
+                    <div class="new-attr">
+                        <input type="text" class="new-attr" ng-model="newAttr" placeholder="New attribute">
+                        <a href="" ng-click="addAuthorAttr(author, newAttr) &amp;&amp; (newAttr='')" class="btn"><i class="icon-plus"></i></a>
+                    </div>
+                    <div class="clearfix"></div>
                 </div>
                 <br>
             </div>

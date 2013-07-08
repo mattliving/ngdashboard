@@ -25,6 +25,12 @@ angular.module('resourceFoundryApp').controller 'MainCtrl', ($scope, Resources, 
         key: attr
         value: ""
 
+  $scope.removeAuthorAttr = (author, attr) ->
+    for val, i in author
+      if val.key is attr
+        author.splice i, 1
+        return
+
   $scope.$watch 'authorCount', (newVal) ->
     if newVal <= 0 then return
 
@@ -36,8 +42,9 @@ angular.module('resourceFoundryApp').controller 'MainCtrl', ($scope, Resources, 
           value: ""
         ]
     else if diff < 0
-      while diff++ < 0
-        $scope.input.authors.pop()
+      if diff is -1 then $scope.input.authors.pop()
+      else
+        $scope.input.authors.splice ($scope.input.authors.length - 1 + diff), diff*-1
 
   $scope.addResource = ->
     input = angular.copy $scope.input

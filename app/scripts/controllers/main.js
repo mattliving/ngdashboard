@@ -31,8 +31,18 @@ angular.module('resourceFoundryApp').controller('MainCtrl', function($scope, Res
       });
     }
   };
+  $scope.removeAuthorAttr = function(author, attr) {
+    var i, val, _i, _len;
+    for (i = _i = 0, _len = author.length; _i < _len; i = ++_i) {
+      val = author[i];
+      if (val.key === attr) {
+        author.splice(i, 1);
+        return;
+      }
+    }
+  };
   $scope.$watch('authorCount', function(newVal) {
-    var diff, _results, _results1;
+    var diff, _results;
     if (newVal <= 0) {
       return;
     }
@@ -49,11 +59,11 @@ angular.module('resourceFoundryApp').controller('MainCtrl', function($scope, Res
       }
       return _results;
     } else if (diff < 0) {
-      _results1 = [];
-      while (diff++ < 0) {
-        _results1.push($scope.input.authors.pop());
+      if (diff === -1) {
+        return $scope.input.authors.pop();
+      } else {
+        return $scope.input.authors.splice($scope.input.authors.length - 1 + diff, diff * -1);
       }
-      return _results1;
     }
   });
   return $scope.addResource = function() {

@@ -57,4 +57,20 @@
 
 .author-input {
     float: left;
+    margin-right: 10px;
+}
+
+.author-input input {
+    display: inline-block;
+    margin-right: 5px;
+    width: 165px;
+}
+
+.author-input .attr a.btn {
+    position: absolute;
+}
+
+.author-input .new-attr a.btn {
+    margin-left: -4px;
+    margin-top: -11px;
 }

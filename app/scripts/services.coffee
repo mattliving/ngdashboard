@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('resourceFoundryServices', [])
+angular.module 'resourceFoundryServices', []
 
 # simple key creation from values for now, may be more complex later
 angular.module('resourceFoundryServices').factory 'keygen', -> (string) -> string.toLowerCase().replace(" ", "")
@@ -27,4 +27,3 @@ angular.module('resourceFoundryServices').service 'Resources',
       @resources.promise.then (resources) -> resources.unshift resource
       # this will have a way to send the data to the server in future,
       # and potentially update the promise if need be.
-

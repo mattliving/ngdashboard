@@ -7,7 +7,7 @@ Array.prototype.remove = function(e) {
   }
 };
 
-angular.module('resourceFoundryApp', ['ui.select2', 'resourceFoundryDirectives', 'resourceFoundryServices', 'resourceFoundryData', 'ui.bootstrap']).config(function($routeProvider, $locationProvider) {
+angular.module('resourceFoundryApp', ['resourceFoundryDirectives', 'resourceFoundryServices', 'resourceFoundryData', 'ui.bootstrap']).config(function($routeProvider, $locationProvider) {
   $routeProvider.when('/', {
     templateUrl: 'views/main.html',
     controller: 'MainCtrl'
