@@ -49,11 +49,10 @@
     <h1>List of URLs</h1>
     <ul class="unstyled span6" ng-repeat="(key, path) in paths" ng-init="limit = 10">
         <h3>{{path}}</h3>
-        <a href="#/list/{{key}}">View all ></a>
+        <a href="#/list/{{key}}">View all {{(resources | filter:{path: key}).length}} ></a>
         <li ng-repeat="resource in resources | filter:{path: key} | limitTo: limit">
             <span class="dot dot-{{resource.level}}"></span>
             <a href="{{resource.link}}">{{resource.title}}</a>
         </li>
-        <li ng-show="(resources | filter:{path: key}).length > limit"><a href="#/list/{{key}}">and {{(resources | filter:{path: key}).length - limit}} more...</a></li>
     </ul>
 </div>
