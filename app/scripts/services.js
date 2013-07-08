@@ -38,7 +38,7 @@ angular.module('resourceFoundryServices').service('Resources', Resources = (func
 
   Resources.prototype.add = function(resource) {
     return this.resources.promise.then(function(resources) {
-      return resources.push(resource);
+      return resources.unshift(resource);
     });
   };
 

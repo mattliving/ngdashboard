@@ -11,49 +11,46 @@ angular.module('resourceFoundryApp').controller 'MainCtrl', ($scope, Resources, 
 
   Resources.get().then (resources) ->
     $scope.resources = resources
-    $scope.authors = _.uniq _.flatten(_.pluck resources, "authors"), JSON.stringify
+    $scope.authors = _(resources, "authors").pluck().flatten().uniq(JSON.stringify)
 
-  # temporary bootstrapped data
-  # $scope.resources = [
-  #   id: 0
-  #   path:"webdevelopment"
-  #   title:"Google"
-  #   link:"http://www.google.com"
-  #   level:"all"
-  #   description: "Use this for EVERYTHING"
-  #   topic: [
-  #     "html"
-  #     "css"
-  #     "javascript"
-  #   ]
-  #   mediaType: [
-  #     "reference"
-  #     "tutorial"
-  #     "tool"
-  #   ]
-  #   authors:
-  #     name: "Google"
-  #   cost: "free"
-  # ,
-  #   id: 1
-  #   path:"webdevelopment"
-  #   title:"Angular UI Bootstrap"
-  #   link:"http://angular-ui.github.io/bootstrap/"
-  #   level:"beginner"
-  #   topic: [
-  #     "angular"
-  #     "javascript"
-  #   ]
-  #   mediaType:["tool"]
-  #   cost:"free"
-  #   authors:
-  #     name:"Angular UI Team"
-  #     twitter:"@angularui"
-  #     github:"angular-ui"
-  # ]
+  $scope.authorCount = 1
+  $scope.input = {}
+  $scope.input.authors = [[
+    key: "name"
+    value :""
+  ]]
+  $scope.addAuthorAttr = (author, attr) ->
+    if attr and attr not in _.pluck author, "key"
+      author.push
+        key: attr
+        value: ""
+
+  $scope.$watch 'authorCount', (newVal) ->
+    if newVal <= 0 then return
+
+    diff = newVal - $scope.input.authors.length
+    if diff > 0
+      while diff-- > 0
+        $scope.input.authors.push [
+          key: "name"
+          value: ""
+        ]
+    else if diff < 0
+      while diff++ < 0
+        $scope.input.authors.pop()
 
   $scope.addResource = ->
-    Resources.add _.defaults angular.copy($scope.input),
+    input = angular.copy $scope.input
+    if not (input.level and input.path and input.cost)
+      alert "you must have a level, path and cost"
+      return
+
+    input.authors = input.authors.map (attrs) ->
+      author = {}
+      _.each attrs, (attr) -> author[attr.key] = attr.value
+      return author
+
+    Resources.add _.defaults input,
       topic: []
       mediaType: []
       description: ""
@@ -61,4 +58,6 @@ angular.module('resourceFoundryApp').controller 'MainCtrl', ($scope, Resources, 
         name: ""
       ]
       cost: "free"
-    $scope.input = {}
+    $scope.input = {
+      authors: []
+    }

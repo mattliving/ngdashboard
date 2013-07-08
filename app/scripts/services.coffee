@@ -24,7 +24,7 @@ angular.module('resourceFoundryServices').service 'Resources',
       @resources.promise
 
     add: (resource) ->
-      @resources.promise.then (resources) -> resources.push resource
+      @resources.promise.then (resources) -> resources.unshift resource
       # this will have a way to send the data to the server in future,
       # and potentially update the promise if need be.
 

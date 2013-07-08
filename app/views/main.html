@@ -6,16 +6,24 @@
             <input type="url" ng-model="input.link" required placeholder="URL">
             <br>
             <!-- Difficulty level selection -->
-            <select ui-select2 ng-model="input.level" ng-required="true"  data-placeholder="Select a level">
+            Level: <br>
+            <div class="btn-group">
+                <button ng-repeat="(key, level) in levels" type="button" class="btn btn-primary" ng-model="input.level" btn-radio="'{{key}}'">{{level}}</button>
+            </div>
+            <!-- <select ui-select2 ng-model="input.level" ng-required="true"  data-placeholder="Select a level">
                 <option value=""></option>
                 <option ng-repeat="(key, level) in levels" value="{{key}}">{{level}}</option>
-            </select>
-            <br>
+            </select> -->
+            <br><br>
             <!-- Path selection -->
-            <select ui-select2 ng-model="input.path" ng-required="true" data-placeholder="Select a path">
+            Path: <br>
+            <div class="btn-group">
+                <button ng-repeat="(key, path) in paths" type="button" class="btn btn-primary" ng-model="input.path" btn-radio="'{{key}}'">{{path}}</button>
+            </div>
+            <!-- <select ui-select2 ng-model="input.path" ng-required="true" data-placeholder="Select a path">
                 <option value=""></option>
                 <option ng-repeat="(key, path) in paths" value="{{key}}">{{path}}</option>
-            </select>
+            </select> -->
             <br>
             <!-- Topic selection -->
             <tag-input ng-model="input.topic" tags="topics" placeholder="Select topics" create></tag-input>
@@ -24,19 +32,24 @@
             <tag-input ng-model="input.mediaType" tags="mediaTypes" placeholder="Select media types"></tag-input>
             <br>
             <!-- Author data -->
-            Author data (semi-optional):
             <div class="author-wrapper">
-                <input type="text" ng-model="input.authors.name" typeahead="author.name for author in authors | filter:{name:$viewValue}" placeholder="Name"><br>
-                <input type="text" ng-model="input.authors.twitter" typeahead="author.twitter for author in authors | filter:{twitter:$viewValue}" placeholder="Twitter"><br>
-                <input type="text" ng-model="input.authors.github" typeahead="author.github for author in authors | filter:{github: $viewValue}" placeholder="Github"><br>
+                Number of authors: <br>
+                <input type="number" ng-model="authorCount" min="1" max="10">
+                <div class="clearfix"></div>
+                <div class="author" ng-repeat="author in input.authors">
+                    <input type="text" ng-repeat="attr in author" ng-model="attr.value" placeholder="{{attr.key}}"><br>
+                    <input type="text" ng-model="newAttr" placeholder="New attribute">
+                    <a href="" ng-click="addAuthorAttr(author, newAttr) &amp;&amp; (newAttr='')" class="btn"><i class="icon-plus"></i></a>
+                </div>
                 <br>
             </div>
             <!-- Cost data -->
-            <select ui-select2 ng-model="input.cost" data-placeholder="Select the cost">
-                <option value=""></option>
-                <option ng-repeat="(key, cost) in costs" value="{{key}}">{{cost}}</option>
-            </select>
-            <br>
+            <div class="clearfix"></div>
+            Cost: <br>
+            <div class="btn-group">
+                <button ng-repeat="(key, cost) in costs" type="button" class="btn btn-primary" ng-model="input.cost" btn-radio="'{{key}}'">{{cost}}</button>
+            </div>
+            <br><br>
             <!-- Description -->
             <textarea cols="10" rows="7" ng-model="input.description" placeholder="Enter a description (optional)"></textarea>
 

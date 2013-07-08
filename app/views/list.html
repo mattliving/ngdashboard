@@ -11,9 +11,9 @@
             Topics: <p><tag key="{{topic}}" ng-repeat="topic in resource.topic">{{valueFor('topic', topic)}}</tag></p>
             Media Types: <p><tag key="{{type}}" ng-repeat="type in resource.mediaType">{{valueFor('mediaType', type)}}</tag></p>
             Author data: <br>
-            <div ng-show="resource.authors.name">Name: {{resource.authors.name}}</div>
-            <div ng-show="resource.authors.twitter">Twitter: {{resource.authors.twitter}}</div>
-            <div ng-show="resource.authors.github">Github: {{resource.authors.github}}</div>
+            <span ng-repeat="author in resource.authors">
+                <p ng-repeat="(key, value) in author">{{key}}: {{value}}</p>
+            </span>
             Cost: {{valueFor('cost', resource.cost)}} <br>
             <div ng-show="resource.description">
                 Description:
