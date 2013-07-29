@@ -5,19 +5,23 @@
         <i class="{{resource.level}}" ng-class="{'icon-collapse': !collapsed, 'icon-expand': collapsed}" ng-click="collapsed = !collapsed"></i>
         <!-- <span class="dot {{resource.level}}"></span> -->
         <a href="{{resource.link}}">{{resource.title}}</a>
-        <div class="content" ng-hide="collapsed">
-            <p class="muted small">{{resource.link}}</p>
-            Level: <p>{{valueFor('level', resource.level)}}</p>
-            Topics: <p><tag key="{{topic}}" ng-repeat="topic in resource.topic">{{valueFor('topic', topic)}}</tag></p>
-            Media Types: <p><tag key="{{type}}" ng-repeat="type in resource.mediaType">{{valueFor('mediaType', type)}}</tag></p>
-            Author data: <br>
-            <span ng-repeat="author in resource.authors">
-                <p ng-repeat="(key, value) in author">{{key}}: {{value}}</p>
-            </span>
-            Cost: {{valueFor('cost', resource.cost)}} <br>
-            <div ng-show="resource.description">
+        <div class="content row" ng-hide="collapsed">
+            <div class="span4">
+                <a target="_blank" href="{{resource.link}}"><p class="muted small">{{resource.link}}</p></a>
+                Level: <p>{{valueFor('level', resource.level)}}</p>
+                Topics: <p><tag key="{{topic}}" ng-repeat="topic in resource.topic">{{valueFor('topic', topic)}}</tag></p>
+                Media Types: <p><tag key="{{type}}" ng-repeat="type in resource.mediaType">{{valueFor('mediaType', type)}}</tag></p>
+            </div>
+            <div class="span4">
+                Author data: <br>
+                <span ng-repeat="author in resource.authors">
+                    <p ng-repeat="(key, value) in author">{{key}}: {{value}}</p>
+                </span>
+            </div>
+            <div class="span4" ng-show="resource.description">
                 Description:
                 <p class="small description">{{resource.description}}</p>
+                Cost: {{valueFor('cost', resource.cost)}}<br>
             </div>
         </div>
         <div class="line" ng-show="!$last"></div>

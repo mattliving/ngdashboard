@@ -1,8 +1,8 @@
 <div class="row">
-    <div class="span12">
+    <div class="span6">
         <h1>Add a new resource</h1>
         <form ng-submit="addResource()">
-            <input type="text" ng-model="input.title" required placeholder="Title">
+            <input type="text" ng-model="input.title" required placeholder="Title"><br>
             <input type="text" ng-model="input.link" required placeholder="URL">
             <br>
             <!-- Difficulty level selection -->
@@ -55,15 +55,16 @@
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
-</div>
-<div class="row">
-    <h1>List of URLs</h1>
-    <ul class="unstyled span6" ng-repeat="(key, path) in paths" ng-init="limit = 10">
-        <h3>{{path}}</h3>
-        <a href="#/list/{{key}}">View all {{(resources | filter:{path: key}).length}} ></a>
-        <li ng-repeat="resource in resources | filter:{path: key} | limitTo: limit">
-            <span class="dot dot-{{resource.level}}"></span>
-            <a href="{{resource.link}}">{{resource.title}}</a>
-        </li>
-    </ul>
+    <div class="span6">
+        <h1>List of URLs</h1>
+        <ul class="unstyled" ng-repeat="(key, path) in paths" ng-init="limit = 10">
+            <h3>{{path}}</h3>
+            <a href="#/list/{{key}}">View all ></a>
+            <li ng-repeat="resource in resources | filter:{path: key} | limitTo: limit">
+                <span class="dot dot-{{resource.level}}"></span>
+                <a href="{{resource.link}}">{{resource.title}}</a>
+            </li>
+            <li ng-show="(resources | filter:{path: key}).length > limit">and {{(resources | filter:{path: key}).length - limit}} more...</li>
+        </ul>
+    </div>
 </div>

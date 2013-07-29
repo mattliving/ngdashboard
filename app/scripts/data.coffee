@@ -34,6 +34,7 @@ angular.module("resourceFoundryData").value "levels",
   all:"All"
 
 angular.module("resourceFoundryData").value "costs",
+  "0": "Free"
   free: "Free"
   paid: "Paid"
   freemium: "Freemium"
