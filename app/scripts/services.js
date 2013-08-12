@@ -17,16 +17,18 @@
       this.$q = $q;
       this.$rootScope = $rootScope;
       this.resources = this.$q.defer();
+      this.loaded = false;
       this.fetch();
     }
 
     Resources.prototype.fetch = function() {
       var _this = this;
-      return this.$http({
-        method: 'GET',
-        url: '/data.json'
-      }).success(function(data, status, config) {
-        return _this.resources.resolve(data);
+      if (this.loaded) {
+        this.resources = this.$q.defer();
+      }
+      return this.$http.get('/resources').success(function(data, status, config) {
+        _this.resources.resolve(data);
+        return _this.loaded = true;
       }).error(function() {
         console.log('data error has occurred');
         return _this.resources.reject('error fetching data');
@@ -38,9 +40,46 @@
     };
 
     Resources.prototype.add = function(resource) {
-      return this.resources.promise.then(function(resources) {
-        return resources.unshift(resource);
+      var response,
+        _this = this;
+      response = this.$q.defer();
+      this.$http.post('/resources', resource).success(function(data) {
+        response.resolve({
+          success: true
+        });
+        return _this.resources.promise.then(function(resources) {
+          resource._id = data._id;
+          return resources.unshift(resource);
+        });
+      }).error(function(data) {
+        data.success = false;
+        response.resolve(data);
+        return console.log('server error has occurred', data);
       });
+      return response.promise;
+    };
+
+    Resources.prototype["delete"] = function(resource) {
+      var response,
+        _this = this;
+      response = this.$q.defer();
+      this.$http({
+        method: "DELETE",
+        url: "/resources/" + resource._id
+      }).success(function(data) {
+        response.resolve({
+          success: true
+        });
+        return _this.resources.promise.then(function(resources) {
+          return resources.remove(resource);
+        });
+      }).error(function(data) {
+        return response.resolve({
+          success: false,
+          error: data
+        });
+      });
+      return response.promise;
     };
 
     return Resources;

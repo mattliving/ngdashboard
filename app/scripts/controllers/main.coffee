@@ -9,16 +9,40 @@ angular.module('resourceFoundryApp').controller 'MainCtrl', ($scope, Resources, 
 
   $scope.valueFor = map
 
-  Resources.get().then (resources) ->
-    $scope.resources = resources
-    $scope.authors = _(resources, "authors").pluck().flatten().uniq(JSON.stringify)
+  $scope.resources = Resources.get()
 
   $scope.authorCount = 1
-  $scope.input = {}
-  $scope.input.authors = [[
-    key: "name"
-    value :""
-  ]]
+  $scope.input =
+    authors: [[
+      key: "name"
+      value :""
+    ]]
+    cost: "free"
+
+  $scope.testData = ->
+    $scope.input =
+      path: "webdevelopment"
+      level: "all"
+      title: "Google"
+      link: "http://google.com"
+      topic: ["html"]
+      mediaType: ["tool"]
+      authors: [[
+          key: "name"
+          value: "Sergy Brin"
+        ,
+          key: "organisation"
+          value: "Google"
+        ],[
+          key: "name"
+          value: "Larry Page"
+        ,
+          key: "organisation"
+          value: "Google"
+      ]]
+      cost: "free"
+      description: "BEST SITE EVER USE IT FOR EVERYTHING"
+
   $scope.addAuthorAttr = (author, attr) ->
     if attr and attr not in _.pluck author, "key"
       author.push
@@ -57,7 +81,7 @@ angular.module('resourceFoundryApp').controller 'MainCtrl', ($scope, Resources, 
       _.each attrs, (attr) -> author[attr.key] = attr.value
       return author
 
-    Resources.add _.defaults input,
+    Resources.add(_.defaults input,
       topic: []
       mediaType: []
       description: ""
@@ -65,6 +89,13 @@ angular.module('resourceFoundryApp').controller 'MainCtrl', ($scope, Resources, 
         name: ""
       ]
       cost: "free"
-    $scope.input = {
-      authors: []
-    }
+    ).then (res) ->
+      if res.success
+        $scope.input =
+          authors: []
+      else
+        console.log res
+        alert 'there was an error with your request, see console for details'
+
+
+

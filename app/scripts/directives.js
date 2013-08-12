@@ -5,6 +5,17 @@
 
   angular.module('resourceFoundryDirectives', ['resourceFoundryServices']);
 
+  angular.module('resourceFoundryDirectives').directive('enterKey', function() {
+    return function(scope, elem, attrs) {
+      return elem.bind('keydown', function(e) {
+        if (e.keyCode === 13) {
+          e.preventDefault();
+          return scope.$apply(attrs.enterKey);
+        }
+      });
+    };
+  });
+
   angular.module('resourceFoundryDirectives').directive('tag', function($timeout) {
     return {
       restrict: 'EA',
@@ -14,13 +25,13 @@
         remove: "&"
       },
       template: "<span class=\"tag label label-info\">\n  <span class=\"name\" ng-transclude></span>\n  <a class=\"delete\" href=\"\" ng-show=\"deletable\" ng-click=\"remove({$key: key})\">x</a>\n</span>",
-      link: function($s, $e, attrs) {
+      link: function(scope, elem, attrs) {
         if (attrs.deletable != null) {
-          $s.deletable = true;
+          scope.deletable = true;
         }
         return $timeout(function() {
-          $s.value = $e.find('.name').text();
-          return $s.key = attrs.key;
+          scope.value = elem.find('.name').text();
+          return scope.key = attrs.key;
         });
       }
     };

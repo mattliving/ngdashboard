@@ -2,6 +2,13 @@
 
 angular.module 'resourceFoundryDirectives', ['resourceFoundryServices']
 
+angular.module('resourceFoundryDirectives').directive 'enterKey', ->
+  (scope, elem, attrs) ->
+    elem.bind 'keydown', (e) ->
+      if e.keyCode is 13
+        e.preventDefault()
+        scope.$apply attrs.enterKey
+
 angular.module('resourceFoundryDirectives').directive 'tag', ($timeout) ->
   restrict: 'EA'
   transclude: true
@@ -14,11 +21,11 @@ angular.module('resourceFoundryDirectives').directive 'tag', ($timeout) ->
       <a class="delete" href="" ng-show="deletable" ng-click="remove({$key: key})">x</a>
     </span>
     """
-  link: ($s, $e, attrs) ->
-    if attrs.deletable? then $s.deletable = true
+  link: (scope, elem, attrs) ->
+    if attrs.deletable? then scope.deletable = true
     $timeout ->
-      $s.value = $e.find('.name').text()
-      $s.key = attrs.key
+      scope.value = elem.find('.name').text()
+      scope.key = attrs.key
 
 angular.module('resourceFoundryDirectives').directive 'tagInput', (keygen) ->
   restrict: 'E'

@@ -10,20 +10,50 @@
     $scope.costs = costs;
     $scope.paths = paths;
     $scope.valueFor = map;
-    Resources.get().then(function(resources) {
-      $scope.resources = resources;
-      return $scope.authors = _(resources, "authors").pluck().flatten().uniq(JSON.stringify);
-    });
+    $scope.resources = Resources.get();
     $scope.authorCount = 1;
-    $scope.input = {};
-    $scope.input.authors = [
-      [
-        {
-          key: "name",
-          value: ""
-        }
-      ]
-    ];
+    $scope.input = {
+      authors: [
+        [
+          {
+            key: "name",
+            value: ""
+          }
+        ]
+      ],
+      cost: "free"
+    };
+    $scope.testData = function() {
+      return $scope.input = {
+        path: "webdevelopment",
+        level: "all",
+        title: "Google",
+        link: "http://google.com",
+        topic: ["html"],
+        mediaType: ["tool"],
+        authors: [
+          [
+            {
+              key: "name",
+              value: "Sergy Brin"
+            }, {
+              key: "organisation",
+              value: "Google"
+            }
+          ], [
+            {
+              key: "name",
+              value: "Larry Page"
+            }, {
+              key: "organisation",
+              value: "Google"
+            }
+          ]
+        ],
+        cost: "free",
+        description: "BEST SITE EVER USE IT FOR EVERYTHING"
+      };
+    };
     $scope.addAuthorAttr = function(author, attr) {
       if (attr && __indexOf.call(_.pluck(author, "key"), attr) < 0) {
         return author.push({
@@ -82,7 +112,7 @@
         });
         return author;
       });
-      Resources.add(_.defaults(input, {
+      return Resources.add(_.defaults(input, {
         topic: [],
         mediaType: [],
         description: "",
@@ -92,10 +122,16 @@
           }
         ],
         cost: "free"
-      }));
-      return $scope.input = {
-        authors: []
-      };
+      })).then(function(res) {
+        if (res.success) {
+          return $scope.input = {
+            authors: []
+          };
+        } else {
+          console.log(res);
+          return alert('there was an error with your request, see console for details');
+        }
+      });
     };
   });
 

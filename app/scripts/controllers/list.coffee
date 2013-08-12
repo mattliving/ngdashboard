@@ -5,3 +5,6 @@ angular.module('resourceFoundryApp').controller 'ListCtrl', ($scope, $routeParam
   $scope.levels = levels
   $scope.resources = Resources.get()
   $scope.path = $routeParams.path
+
+  $scope.deleteResource = (resource) ->
+    if confirm("Are you sure you want to delete this resource?") then Resources.delete(resource)

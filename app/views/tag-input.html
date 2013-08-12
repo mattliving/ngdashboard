@@ -1,6 +1,6 @@
 <tag ng-repeat="key in tagList" key="{{key}}" remove="removeTag($key)" deletable>{{tags[key]}}</tag>
 <br>
-<input type="text" class="tag" ng-model="tagInput" placeholder="{{placeholder}}">
+<input type="text" class="tag form-control" ng-model="tagInput" placeholder="{{placeholder}}">
 <div class="suggest" ng-show="downKey || (tagInput.length > 0)">
 <div class="suggestion" name="{{tag}}" ng-class="{highlight: $index == hIndex}" ng-repeat="(key, tag) in suggestions">{{tag}}</div>
 <div class="suggestion" ng-class="{highlight: hIndex == sCount}" ng-show="canCreate" name="{{tagInput}}">{{tagInput}}</div>
