@@ -8,7 +8,7 @@ routes   = require './routes'
 app = express()
 
 app.configure ->
-  app.set 'port', 7000
+  app.set 'port', 8080
   app.use express.bodyParser()
   app.use express.methodOverride()
   app.enable 'trust proxy'
