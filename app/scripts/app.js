@@ -8,8 +8,11 @@
     }
   };
 
-  angular.module('resourceFoundryApp', ['resourceFoundryDirectives', 'resourceFoundryServices', 'resourceFoundryData', 'ui.bootstrap']).config(function($routeProvider, $locationProvider) {
+  angular.module('resourceFoundryApp', ['resourceFoundryDirectives', 'resourceFoundryServices', 'resourceFoundryData', 'ui.bootstrap', 'ngResource']).config(function($routeProvider, $locationProvider) {
     $routeProvider.when('/', {
+      templateUrl: 'views/main.html',
+      controller: 'MainCtrl'
+    }).when('/edit/:id', {
       templateUrl: 'views/main.html',
       controller: 'MainCtrl'
     }).when('/list/:path', {

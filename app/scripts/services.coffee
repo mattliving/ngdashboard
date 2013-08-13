@@ -9,21 +9,30 @@ angular.module('resourceFoundryServices').service 'Resources',
   class Resources
 
     constructor: (@$http, @$q, @$rootScope) ->
-      @resources = @$q.defer()
-      @loaded = false
       @fetch()
 
     fetch: ->
-      if @loaded then @resources = @$q.defer()
+      @resources = @$q.defer()
       @$http.get('/resources')
-        .success (data, status, config) =>
+        .success (data, status) =>
           @resources.resolve data
-          @loaded = true
         .error =>
           console.log 'data error has occurred'
           @resources.reject 'error fetching data'
 
-    get: -> @resources.promise
+    get: (id) ->
+      if id?
+        resource = @$q.defer()
+        @$http.get("/resources/#{id}")
+          .success (data) ->
+            resource.resolve data
+          .error ->
+            console.log 'error getting specific id'
+            resource.reject 'error getting specific id'
+
+        resource.promise
+      else
+        @resources.promise
 
     add: (resource) ->
       response = @$q.defer()
@@ -40,9 +49,26 @@ angular.module('resourceFoundryServices').service 'Resources',
 
       response.promise
 
+    edit: (resource) ->
+      response = @$q.defer()
+      @$http.put("/resources/#{resource._id}", resource)
+        .success (data) =>
+          response.resolve success: true
+          @resources.promise.then (resources) ->
+            for res in resources
+              if res._id is resource._id
+                for key, value of resource
+                  res[key] = value
+        .error (data) ->
+          data.success = false
+          response.resolve data
+          console.log 'server error has occurred', data
+
+      response.promise
+
     delete: (resource) ->
       response = @$q.defer()
-      @$http(method: "DELETE", url: "/resources/#{resource._id}")
+      @$http.delete("/resources/#{resource._id}")
       .success (data) =>
         response.resolve success: true
         @resources.promise.then (resources) -> resources.remove resource

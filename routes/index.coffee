@@ -35,6 +35,15 @@ module.exports =
           console.log err
           res.json error: err
 
+    get: (req, res) ->
+      Resource.findById req.params.id, (err, resource) ->
+        if err
+          res.status 400
+          err.success = false
+          res.json err
+        else
+          res.json resource
+
     add: (req, res) ->
       # console.log req.body
       resource = new Resource
@@ -54,7 +63,6 @@ module.exports =
           res.status 400
           res.send err
         else
-          console.log 'saved'
           res.json _id: resource._id
 
     delete: (req, res) ->
@@ -65,6 +73,32 @@ module.exports =
           res.json err
         else
           res.json success: true
+
+    edit: (req, res) ->
+      Resource.findById req.params.id, (err, resource) ->
+        if err
+          res.status 400
+          err.success = false
+          res.json err
+        else
+          # now we modify the resource object
+          resource.authors     = req.body.authors
+          resource.topic       = req.body.topic
+          resource.mediaType   = req.body.mediaType
+          resource.title       = req.body.title
+          resource.link        = req.body.link
+          resource.level       = req.body.level
+          resource.path        = req.body.path
+          resource.cost        = req.body.cost
+          resource.description = req.body.description
+          resource.save (err) ->
+            if err
+              console.log err
+              res.status 400
+              err.success = false
+              res.json err
+            else
+              res.json success: true
 
     path: (req, res) ->
       Resource.find()

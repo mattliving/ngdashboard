@@ -16,27 +16,34 @@
       this.$http = $http;
       this.$q = $q;
       this.$rootScope = $rootScope;
-      this.resources = this.$q.defer();
-      this.loaded = false;
       this.fetch();
     }
 
     Resources.prototype.fetch = function() {
       var _this = this;
-      if (this.loaded) {
-        this.resources = this.$q.defer();
-      }
-      return this.$http.get('/resources').success(function(data, status, config) {
-        _this.resources.resolve(data);
-        return _this.loaded = true;
+      this.resources = this.$q.defer();
+      return this.$http.get('/resources').success(function(data, status) {
+        return _this.resources.resolve(data);
       }).error(function() {
         console.log('data error has occurred');
         return _this.resources.reject('error fetching data');
       });
     };
 
-    Resources.prototype.get = function() {
-      return this.resources.promise;
+    Resources.prototype.get = function(id) {
+      var resource;
+      if (id != null) {
+        resource = this.$q.defer();
+        this.$http.get("/resources/" + id).success(function(data) {
+          return resource.resolve(data);
+        }).error(function() {
+          console.log('error getting specific id');
+          return resource.reject('error getting specific id');
+        });
+        return resource.promise;
+      } else {
+        return this.resources.promise;
+      }
     };
 
     Resources.prototype.add = function(resource) {
@@ -59,14 +66,48 @@
       return response.promise;
     };
 
+    Resources.prototype.edit = function(resource) {
+      var response,
+        _this = this;
+      response = this.$q.defer();
+      this.$http.put("/resources/" + resource._id, resource).success(function(data) {
+        response.resolve({
+          success: true
+        });
+        return _this.resources.promise.then(function(resources) {
+          var key, res, value, _i, _len, _results;
+          _results = [];
+          for (_i = 0, _len = resources.length; _i < _len; _i++) {
+            res = resources[_i];
+            if (res._id === resource._id) {
+              _results.push((function() {
+                var _results1;
+                _results1 = [];
+                for (key in resource) {
+                  value = resource[key];
+                  _results1.push(res[key] = value);
+                }
+                return _results1;
+              })());
+            } else {
+              _results.push(void 0);
+            }
+          }
+          return _results;
+        });
+      }).error(function(data) {
+        data.success = false;
+        response.resolve(data);
+        return console.log('server error has occurred', data);
+      });
+      return response.promise;
+    };
+
     Resources.prototype["delete"] = function(resource) {
       var response,
         _this = this;
       response = this.$q.defer();
-      this.$http({
-        method: "DELETE",
-        url: "/resources/" + resource._id
-      }).success(function(data) {
+      this.$http["delete"]("/resources/" + resource._id).success(function(data) {
         response.resolve({
           success: true
         });

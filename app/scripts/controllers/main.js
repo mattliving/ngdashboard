@@ -3,7 +3,7 @@
   'use strict';
   var __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
-  angular.module('resourceFoundryApp').controller('MainCtrl', function($scope, Resources, mediaTypes, topics, levels, costs, paths, map) {
+  angular.module('resourceFoundryApp').controller('MainCtrl', function($scope, $routeParams, Resources, mediaTypes, topics, levels, costs, paths, map) {
     $scope.mediaTypes = mediaTypes;
     $scope.topics = topics;
     $scope.levels = levels;
@@ -23,6 +23,29 @@
       ],
       cost: "free"
     };
+    $scope.editing = false;
+    if ($routeParams.id != null) {
+      $scope.editing = true;
+      Resources.get($routeParams.id).then(function(resource) {
+        var author, authorData, authorsData, key, value, _i, _len, _ref;
+        authorsData = [];
+        _ref = resource.authors;
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          author = _ref[_i];
+          authorData = [];
+          for (key in author) {
+            value = author[key];
+            authorData.push({
+              key: key,
+              value: value
+            });
+          }
+          authorsData.push(authorData);
+        }
+        resource.authors = authorsData;
+        return $scope.input = resource;
+      });
+    }
     $scope.testData = function() {
       return $scope.input = {
         path: "webdevelopment",
@@ -98,7 +121,7 @@
       }
     });
     return $scope.addResource = function() {
-      var input;
+      var fetch, input;
       input = angular.copy($scope.input);
       if (!(input.level && input.path && input.cost)) {
         alert("you must have a level, path and cost");
@@ -112,21 +135,30 @@
         });
         return author;
       });
-      return Resources.add(_.defaults(input, {
-        topic: [],
-        mediaType: [],
-        description: "",
-        authors: [
-          {
-            name: ""
-          }
-        ],
-        cost: "free"
-      })).then(function(res) {
+      if ($scope.editing) {
+        input._id = $routeParams.id;
+        fetch = Resources.edit(input);
+      } else {
+        fetch = Resources.add(_.defaults(input, {
+          topic: [],
+          mediaType: [],
+          description: "",
+          authors: [
+            {
+              name: ""
+            }
+          ],
+          cost: "free"
+        }));
+      }
+      return fetch.then(function(res) {
         if (res.success) {
-          return $scope.input = {
+          $scope.input = {
             authors: []
           };
+          if ($scope.editing) {
+            return window.location = "#/";
+          }
         } else {
           console.log(res);
           return alert('there was an error with your request, see console for details');

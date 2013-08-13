@@ -23,8 +23,10 @@ mongoose.connect('mongodb://localhost/jobfoundry')
 
 # Resources
 app.get '/resources', routes.resources.all
+app.get '/resources/:id', routes.resources.get
 app.post '/resources', routes.resources.add
 app.delete '/resources/:id', routes.resources.delete
+app.put '/resources/:id', routes.resources.edit
 
 # not currently used
 

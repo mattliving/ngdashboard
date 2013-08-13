@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('resourceFoundryApp').controller 'MainCtrl', ($scope, Resources, mediaTypes, topics, levels, costs, paths, map) ->
+angular.module('resourceFoundryApp').controller 'MainCtrl', ($scope, $routeParams, Resources, mediaTypes, topics, levels, costs, paths, map) ->
   $scope.mediaTypes = mediaTypes
   $scope.topics = topics
   $scope.levels = levels
@@ -18,6 +18,19 @@ angular.module('resourceFoundryApp').controller 'MainCtrl', ($scope, Resources, 
       value :""
     ]]
     cost: "free"
+
+  $scope.editing = false
+  if $routeParams.id?
+    $scope.editing = true
+    Resources.get($routeParams.id).then (resource) ->
+      authorsData = []
+      for author in resource.authors
+        authorData = []
+        for key, value of author
+          authorData.push key: key, value: value
+        authorsData.push authorData
+      resource.authors = authorsData
+      $scope.input = resource
 
   $scope.testData = ->
     $scope.input =
@@ -81,21 +94,29 @@ angular.module('resourceFoundryApp').controller 'MainCtrl', ($scope, Resources, 
       _.each attrs, (attr) -> author[attr.key] = attr.value
       return author
 
-    Resources.add(_.defaults input,
-      topic: []
-      mediaType: []
-      description: ""
-      authors: [
-        name: ""
-      ]
-      cost: "free"
-    ).then (res) ->
-      if res.success
-        $scope.input =
-          authors: []
-      else
-        console.log res
-        alert 'there was an error with your request, see console for details'
+    if $scope.editing
+      input._id = $routeParams.id
+      fetch = Resources.edit input
+    else
+      fetch = Resources.add _.defaults input,
+        topic: []
+        mediaType: []
+        description: ""
+        authors: [
+          name: ""
+        ]
+        cost: "free"
+
+    fetch.then (res) ->
+        if res.success
+          $scope.input =
+            authors: []
+
+          if $scope.editing
+            window.location = "#/"
+        else
+          console.log res
+          alert 'there was an error with your request, see console for details'
 
 
 

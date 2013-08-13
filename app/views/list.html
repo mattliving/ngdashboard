@@ -24,7 +24,7 @@
                 Cost: {{valueFor('cost', resource.cost)}}<br>
             </div>
         </div>
-        <a href="" class="btn btn-danger" ng-hide="collapsed" ng-click="deleteResource(resource)">Delete this resource</a><br>
+        <a href="" class="btn btn-danger" ng-hide="collapsed" ng-click="deleteResource(resource)">Delete this resource</a><a ng-hide="collapsed" ng-href="#/edit/{{resource._id}}" class="btn btn-success">Edit this resource</a><br>
         <div class="line" ng-show="!$last"></div>
     </div>
 </div>
