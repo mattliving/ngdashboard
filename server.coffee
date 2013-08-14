@@ -1,5 +1,6 @@
 fs        = require 'fs'
 express   = require 'express'
+cons = require 'consolidate'
 http      = require 'http'
 mongoose  = require 'mongoose'
 path      = require 'path'
@@ -15,20 +16,24 @@ app.configure ->
   app.use express.bodyParser()
   app.use express.methodOverride()
   app.enable 'trust proxy'
+
+  # these let us use express's built in rendering with _.template
+  app.engine 'html', cons.underscore
+  app.set 'view engine', 'html'
+  app.set 'views', __dirname + '/static-pages'
+
+  # function to handle sending stuff to google
   app.use (req, res, next) ->
     if req.query._escaped_fragment_?
-      # return rendered html
       switch req.path
         when '/'
-          page = fs.readFileSync('static-pages/landing.html').toString()
-          console.log page
-          template = _.template page
-          data = Content.findOne(key: "options").exec (err, options) ->
-            console.log "options", options
+          Content.findOne(key: "options").exec (err, options) ->
             unless err
-              res.send template(options: options.data)
+              res.render 'landing', options: options.data
+            else
+              res.status(500).render '404'
         else
-          res.status(404).sendfile 'static-pages/404.html'
+          res.status(404).render '404'
     else
       next()
   app.use express.static(__dirname + '/app')
