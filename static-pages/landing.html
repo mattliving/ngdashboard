@@ -12,8 +12,12 @@
   <p>We recommend the most useful and relevant learning resources, so you can concentrate on building the next big thing.</p>
   <h3>What do you want to <strong>build?</strong></h3>
 
+  <ul>
+  <% _.forEach(options, function(option){ %>
+    <li><%=option%></li>
+  <% }); %>
+  </ul>
   <!-- OPTIONS LIST GOES HERE WITH TEMPLATING  -->
-
   <p>We aren't quite ready yet, so sign up and be one of the first to join Job Foundry!</p>
 </body>
 </html>

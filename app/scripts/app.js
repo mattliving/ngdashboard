@@ -8,7 +8,7 @@
     }
   };
 
-  angular.module('jobFoundryApp', ['jobFoundryDirectives', 'jobFoundryServices', 'jobFoundryData', 'ui.bootstrap', 'ngResource']).config(function($routeProvider, $locationProvider) {
+  angular.module('jobFoundryApp', ['jobFoundryDirectives', 'jobFoundryServices', 'resourceData', 'ui.bootstrap', 'ngResource']).config(function($routeProvider, $locationProvider) {
     $routeProvider.when('/', {
       templateUrl: '/views/landing.html',
       controller: 'LandingCtrl'
