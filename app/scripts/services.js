@@ -3,15 +3,15 @@
   'use strict';
   var Resources;
 
-  angular.module('resourceFoundryServices', []);
+  angular.module('jobFoundryServices', []);
 
-  angular.module('resourceFoundryServices').factory('keygen', function() {
+  angular.module('jobFoundryServices').factory('keygen', function() {
     return function(string) {
       return string.toLowerCase().replace(" ", "");
     };
   });
 
-  angular.module('resourceFoundryServices').service('Resources', Resources = (function() {
+  angular.module('jobFoundryServices').service('Resources', Resources = (function() {
     function Resources($http, $q, $rootScope) {
       this.$http = $http;
       this.$q = $q;

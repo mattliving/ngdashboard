@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('resourceFoundryApp').controller 'ResourceCtrl', ($scope, $routeParams, Resources, mediaTypes, topics, levels, costs, paths, map) ->
+angular.module('jobFoundryApp').controller 'ResourceCtrl', ($scope, $routeParams, $location, Resources, mediaTypes, topics, levels, costs, paths, map) ->
   $scope.mediaTypes = mediaTypes
   $scope.topics = topics
   $scope.levels = levels
@@ -121,7 +121,7 @@ angular.module('resourceFoundryApp').controller 'ResourceCtrl', ($scope, $routeP
             authors: []
 
           if $scope.editing
-            window.location = "#/add"
+            $location.path "/add"
         else
           console.log res
           alert 'there was an error with your request, see console for details'

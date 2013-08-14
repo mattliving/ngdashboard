@@ -1,6 +1,6 @@
 "use strict"
 
-angular.module("resourceFoundryApp").controller "LandingCtrl", ($scope) ->
+angular.module("jobFoundryApp").controller "LandingCtrl", ($scope) ->
 
 	$scope.subscribe = false
 	$scope.options = [

@@ -1,11 +1,11 @@
 'use strict'
 
-angular.module 'resourceFoundryServices', []
+angular.module 'jobFoundryServices', []
 
 # simple key creation from values for now, may be more complex later
-angular.module('resourceFoundryServices').factory 'keygen', -> (string) -> string.toLowerCase().replace(" ", "")
+angular.module('jobFoundryServices').factory 'keygen', -> (string) -> string.toLowerCase().replace(" ", "")
 
-angular.module('resourceFoundryServices').service 'Resources',
+angular.module('jobFoundryServices').service 'Resources',
   class Resources
 
     constructor: (@$http, @$q, @$rootScope) ->

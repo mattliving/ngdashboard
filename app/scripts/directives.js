@@ -3,9 +3,9 @@
   'use strict';
   var __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
-  angular.module('resourceFoundryDirectives', ['resourceFoundryServices']);
+  angular.module('jobFoundryDirectives', ['jobFoundryServices']);
 
-  angular.module('resourceFoundryDirectives').directive('enterKey', function() {
+  angular.module('jobFoundryDirectives').directive('enterKey', function() {
     return function(scope, elem, attrs) {
       return elem.bind('keydown', function(e) {
         if (e.keyCode === 13) {
@@ -16,7 +16,7 @@
     };
   });
 
-  angular.module('resourceFoundryDirectives').directive('tag', function($timeout) {
+  angular.module('jobFoundryDirectives').directive('tag', function($timeout) {
     return {
       restrict: 'EA',
       transclude: true,
@@ -37,7 +37,7 @@
     };
   });
 
-  angular.module('resourceFoundryDirectives').directive('tagInput', function(keygen) {
+  angular.module('jobFoundryDirectives').directive('tagInput', function(keygen) {
     return {
       restrict: 'E',
       scope: {

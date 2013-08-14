@@ -13,8 +13,15 @@ app.configure ->
   app.use express.methodOverride()
   app.enable 'trust proxy'
   app.use (req, res, next) ->
-    req.google = req.query._escaped_fragment_?
-    next()
+    if req.query._escaped_fragment_?
+      # return rendered html
+      switch req.path
+        when '/' then res.sendfile 'static-pages/landing.html'
+        else
+          res.status(404).sendfile 'static-pages/404.html'
+
+    else
+      next()
   app.use express.static(__dirname + '/app')
 
 mongoose.connect('mongodb://localhost/jobfoundry')
@@ -27,12 +34,9 @@ app.delete '/api/v1/resources/:id', routes.resources.delete
 app.put '/api/v1/resources/:id', routes.resources.edit
 
 # Pages
-app.get '*', (req, res) ->
-  if req.google
-    # return rendered html
-    res.send 'hey google'
-  else
-    res.sendfile 'app/index.html'
+# this definitely needs to be a little more robust...
+app.get '*', (req, res) -> res.sendfile 'app/index.html'
+
 # not currently used
 
 # Site
