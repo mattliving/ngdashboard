@@ -5,7 +5,7 @@
     "express": "latest",
     "mongojs": "latest",
     "mongoose": "latest",
-    "lodash": "~1.3.1",
+    "underscore": "latest",
     "consolidate": "~0.9.1"
   },
   "devDependencies": {

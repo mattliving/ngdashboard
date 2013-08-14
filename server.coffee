@@ -4,7 +4,6 @@ cons = require 'consolidate'
 http      = require 'http'
 mongoose  = require 'mongoose'
 path      = require 'path'
-_         = require 'lodash'
 routes    = require './routes'
 {Content} = require './models/content'
 
