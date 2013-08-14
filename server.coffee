@@ -3,7 +3,7 @@ express  = require 'express'
 http     = require 'http'
 mongoose = require 'mongoose'
 path     = require 'path'
-_        = require 'underscore'
+_        = require 'lodash'
 routes   = require './routes'
 {Content}   = require './models/content'
 
