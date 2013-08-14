@@ -1,6 +1,6 @@
 mongoose = require 'mongoose'
 
-Resource = mongoose.model 'Resource', new mongoose.Schema(
+Resource = mongoose.model 'Resource', new mongoose.Schema
   path:
     type: String
     required: true
@@ -21,7 +21,6 @@ Resource = mongoose.model 'Resource', new mongoose.Schema(
     required: true
   authors: [{}]
   cost: String
-)
 
 validateArray = (array) -> array.length > 0
 

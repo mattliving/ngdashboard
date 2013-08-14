@@ -3,7 +3,7 @@
   'use strict';
   var __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
-  angular.module('resourceFoundryApp').controller('ResourceCtrl', function($scope, $routeParams, Resources, mediaTypes, topics, levels, costs, paths, map) {
+  angular.module('jobFoundryApp').controller('ResourceCtrl', function($scope, $routeParams, $location, Resources, mediaTypes, topics, levels, costs, paths, map) {
     $scope.mediaTypes = mediaTypes;
     $scope.topics = topics;
     $scope.levels = levels;
@@ -168,7 +168,7 @@
             authors: []
           };
           if ($scope.editing) {
-            return window.location = "#/add";
+            return $location.path("/add");
           }
         } else {
           console.log(res);

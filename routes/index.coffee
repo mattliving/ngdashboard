@@ -1,5 +1,6 @@
-{Resource} = require('../models/resource')
-{Topic}    = require('../models/topic')
+{Resource} = require '../models/resource'
+{Topic}    = require '../models/topic'
+{Content}  = require '../models/content'
 
 module.exports =
   site:
@@ -144,3 +145,14 @@ module.exports =
         unless err
           res.json resources
         else console.log err
+
+  content:
+    get: (req, res) ->
+      console.log req.params
+      Content.findOne(key: req.params.key).exec (err, content) ->
+        console.log err, content
+        unless err
+          res.json content.data
+        else
+          console.log err
+          res.json error: err

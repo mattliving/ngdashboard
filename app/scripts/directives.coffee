@@ -1,15 +1,15 @@
 'use strict'
 
-angular.module 'resourceFoundryDirectives', ['resourceFoundryServices']
+angular.module 'jobFoundryDirectives', ['jobFoundryServices']
 
-angular.module('resourceFoundryDirectives').directive 'enterKey', ->
+angular.module('jobFoundryDirectives').directive 'enterKey', ->
   (scope, elem, attrs) ->
     elem.bind 'keydown', (e) ->
       if e.keyCode is 13
         e.preventDefault()
         scope.$apply attrs.enterKey
 
-angular.module('resourceFoundryDirectives').directive 'tag', ($timeout) ->
+angular.module('jobFoundryDirectives').directive 'tag', ($timeout) ->
   restrict: 'EA'
   transclude: true
   scope:
@@ -27,7 +27,7 @@ angular.module('resourceFoundryDirectives').directive 'tag', ($timeout) ->
       scope.value = elem.find('.name').text()
       scope.key   = attrs.key
 
-angular.module('resourceFoundryDirectives').directive 'tagInput', (keygen) ->
+angular.module('jobFoundryDirectives').directive 'tagInput', (keygen) ->
   restrict: 'E'
   scope:
     tags: '='

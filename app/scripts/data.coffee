@@ -1,9 +1,9 @@
 'use strict'
 
 # static key-value maps for data types
-angular.module("resourceFoundryData", [])
+angular.module("resourceData", [])
 
-angular.module("resourceFoundryData").value "mediaTypes",
+angular.module("resourceData").value "mediaTypes",
   article: "Article"
   reference: "Reference"
   tutorial: "Tutorial"
@@ -14,7 +14,7 @@ angular.module("resourceFoundryData").value "mediaTypes",
   book: "Book"
 
 # this data changes, so this especially will need to update from the server
-angular.module("resourceFoundryData").value "topics",
+angular.module("resourceData").value "topics",
   html: "HTML"
   css: "CSS"
   javascript: "JavaScript"
@@ -27,22 +27,22 @@ angular.module("resourceFoundryData").value "topics",
   sass: "SASS"
   angular: "AngularJS"
 
-angular.module("resourceFoundryData").value "levels",
+angular.module("resourceData").value "levels",
   beginner:"Beginner"
   intermediate:"Intermediate"
   advanced:"Advanced"
   all:"All"
 
-angular.module("resourceFoundryData").value "costs",
+angular.module("resourceData").value "costs",
   free: "Free"
   paid: "Paid"
   freemium: "Freemium"
 
-angular.module("resourceFoundryData").value "paths",
+angular.module("resourceData").value "paths",
   webdevelopment: "Web Development"
   marketing: "Marketing"
 
-angular.module("resourceFoundryData").factory "map", (mediaTypes, topics, levels, costs, paths) ->
+angular.module("resourceData").factory "map", (mediaTypes, topics, levels, costs, paths) ->
   _.memoize (mapName, key) ->
     map = switch mapName
             when "mediaType" then mediaTypes

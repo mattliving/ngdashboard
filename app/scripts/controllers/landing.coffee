@@ -1,10 +1,14 @@
 "use strict"
 
-angular.module("resourceFoundryApp").controller "LandingCtrl", ($scope) ->
+angular.module("jobFoundryApp").controller "LandingCtrl", ($http, $scope) ->
 
-	$scope.subscribe = false
-	$scope.options = [
-  	"Web Application",
-  	"Mobile Application",
-  	"Social Media Presence"
-  ]
+  $scope.subscribe = false
+
+  $http.get('/api/v1/content/options').success (options) ->
+    $scope.options = options
+
+  # $scope.options = [
+  #  	"Web Application",
+  #  	"Mobile Application",
+  #  	"Social Media Presence"
+  #  ]
