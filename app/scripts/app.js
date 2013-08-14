@@ -10,14 +10,17 @@
 
   angular.module('resourceFoundryApp', ['resourceFoundryDirectives', 'resourceFoundryServices', 'resourceFoundryData', 'ui.bootstrap', 'ngResource']).config(function($routeProvider, $locationProvider) {
     $routeProvider.when('/', {
-      templateUrl: 'views/main.html',
-      controller: 'MainCtrl'
+      templateUrl: 'views/landing.html',
+      controller: 'LandingCtrl'
+    }).when('/add', {
+      templateUrl: 'views/resource-form.html',
+      controller: 'ResourceCtrl'
     }).when('/edit/:id', {
-      templateUrl: 'views/main.html',
-      controller: 'MainCtrl'
+      templateUrl: 'views/resource-form.html',
+      controller: 'ResourceCtrl'
     }).when('/list/:path', {
       templateUrl: 'views/list.html',
-      controller: 'ListCtrl'
+      controller: 'ResourceCtrl'
     }).otherwise({
       redirectTo: '/'
     });

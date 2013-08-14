@@ -3,12 +3,18 @@
   'use strict';
   var __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
-  angular.module('resourceFoundryApp').controller('MainCtrl', function($scope, $routeParams, Resources, mediaTypes, topics, levels, costs, paths, map) {
+  angular.module('resourceFoundryApp').controller('ResourceCtrl', function($scope, $routeParams, Resources, mediaTypes, topics, levels, costs, paths, map) {
     $scope.mediaTypes = mediaTypes;
     $scope.topics = topics;
     $scope.levels = levels;
     $scope.costs = costs;
     $scope.paths = paths;
+    $scope.path = $routeParams.path;
+    $scope.deleteResource = function(resource) {
+      if (confirm("Are you sure you want to delete this resource?")) {
+        return Resources["delete"](resource);
+      }
+    };
     $scope.valueFor = map;
     $scope.resources = Resources.get();
     $scope.authorCount = 1;
@@ -157,7 +163,7 @@
             authors: []
           };
           if ($scope.editing) {
-            return window.location = "#/";
+            return window.location = "#/add";
           }
         } else {
           console.log(res);

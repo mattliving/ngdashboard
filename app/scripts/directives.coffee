@@ -25,7 +25,7 @@ angular.module('resourceFoundryDirectives').directive 'tag', ($timeout) ->
     if attrs.deletable? then scope.deletable = true
     $timeout ->
       scope.value = elem.find('.name').text()
-      scope.key = attrs.key
+      scope.key   = attrs.key
 
 angular.module('resourceFoundryDirectives').directive 'tagInput', (keygen) ->
   restrict: 'E'

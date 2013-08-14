@@ -1,11 +1,17 @@
 'use strict'
 
-angular.module('resourceFoundryApp').controller 'MainCtrl', ($scope, $routeParams, Resources, mediaTypes, topics, levels, costs, paths, map) ->
+angular.module('resourceFoundryApp').controller 'ResourceCtrl', ($scope, $routeParams, Resources, mediaTypes, topics, levels, costs, paths, map) ->
   $scope.mediaTypes = mediaTypes
   $scope.topics = topics
   $scope.levels = levels
   $scope.costs = costs
   $scope.paths = paths
+
+  # used in the list view
+  $scope.path = $routeParams.path
+
+  $scope.deleteResource = (resource) ->
+    if confirm("Are you sure you want to delete this resource?") then Resources.delete(resource)
 
   $scope.valueFor = map
 
@@ -20,6 +26,8 @@ angular.module('resourceFoundryApp').controller 'MainCtrl', ($scope, $routeParam
     cost: "free"
 
   $scope.editing = false
+
+  # get and modify the data to be used in the form correctly
   if $routeParams.id?
     $scope.editing = true
     Resources.get($routeParams.id).then (resource) ->
@@ -113,7 +121,7 @@ angular.module('resourceFoundryApp').controller 'MainCtrl', ($scope, $routeParam
             authors: []
 
           if $scope.editing
-            window.location = "#/"
+            window.location = "#/add"
         else
           console.log res
           alert 'there was an error with your request, see console for details'

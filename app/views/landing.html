@@ -1,0 +1,20 @@
+<div class="jumbotron text-center">
+  <h1>Job <span>Foundry</span></h1>
+  <h2>Personalised learning based on your project.</h2>
+  <p class="lead">We recommend the most useful and relevant learning resources, so you can concentrate on building the next big thing.</p>
+  <div class="row" ng-hide="subscribe">
+    <h2 id="question">What do you want to <strong>build?</strong></h2>
+    <div class="btn-group-vertical" ng-click="subscribe=true">
+      <a class="btn btn-large btn-default"  ng-repeat="option in options">{{option}}</a>
+    </div>
+  </div>
+  <form ng-cloak ng-if="subscribe" ng-class="{'fade-in-active': subscribe}" class="form-inline fade-in">
+    <div class="row">
+      <p class="lead">We aren't quite ready yet, so sign up and be one of the first to join Job Foundry!</p>
+      <div class="col-lg-2"></div>
+      <input class="form-control col-lg-4" id="focusedInput" type="text" placeholder="E-mail">
+      <button type="submit" class="btn btn-default col-lg-2">Sign Up</button>
+      <div class="col-lg-2"></div>
+    </div>
+  </form>
+</div>
