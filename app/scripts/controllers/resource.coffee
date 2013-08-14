@@ -2,10 +2,10 @@
 
 angular.module('jobFoundryApp').controller 'ResourceCtrl', ($scope, $routeParams, $location, Resources, mediaTypes, topics, levels, costs, paths, map) ->
   $scope.mediaTypes = mediaTypes
-  $scope.topics = topics
-  $scope.levels = levels
-  $scope.costs = costs
-  $scope.paths = paths
+  $scope.topics     = topics
+  $scope.levels     = levels
+  $scope.costs      = costs
+  $scope.paths      = paths
 
   # used in the list view
   $scope.path = $routeParams.path

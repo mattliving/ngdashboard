@@ -6,6 +6,10 @@ html, body {
     color: #333;
 }
 
+h1 {
+    font-weight: 100;
+}
+
 .hero-bg {
     position: absolute;
     z-index: -2;
@@ -20,45 +24,65 @@ html, body {
     background-size: cover;
 }
 
-.jumbotron {
+.decision {
+    margin: 4% 4% 4% 4%;
+    background: #efefef;
+}
+
+.decision .jumbotron {
+    font-size: 24px;
+    padding: 40px 50px;
+}
+
+.decision h1 {
+    border-bottom: 1px solid #777;
+    padding-bottom: 1%;
+    margin: 0;
+    margin-bottom: 3%;
+}
+
+.decision .thumbnail {
+    border-radius: 2px;
+    padding: 10px;
+}
+
+.decision .thumbnail {
+    color: #455;
+}
+
+.decision .thumbnail:hover {
+    border-color: #FF6600;
+}
+
+.landing.jumbotron {
     margin: 4%;
-    margin-top: 120px;
+    margin-top: 8%;
     padding: 1%;
     padding-bottom: 4%;
     opacity: 0.85;
 }
 
-.jumbotron .form-control {
+.landing.jumbotron .form-control {
     margin-right: 1%;
     width: 50%;
 }
 
-.jumbotron h1 {
-    margin-bottom: 2%;
+.landing h1 {
     font-size: 96px;
-    font-weight: 100;
 }
 
-.jumbotron h1 span {
+.landing.jumbotron h1 span {
     color: #FF6600;
 }
 
-.jumbotron h2 {
+.landing h2 {
     font-size: 36px;
     font-weight: 200;
     margin-bottom: 2%;
 }
 
-.jumbotron p {
+.landing .jumbotron p {
     margin-bottom: 2%;
-}
-
-.btn-group-vertical .btn::first-child {
-    margin-right: 5px;
-}
-
-.btn-group-vertical .btn::last-child {
-    margin-left: 5px;
 }
 
 /* resource view styles */

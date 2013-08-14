@@ -5,6 +5,16 @@
 
   angular.module('jobFoundryDirectives', ['jobFoundryServices']);
 
+  angular.module('jobFoundryDirectives').directive('decision', function() {
+    return function(scope, elem, attrs) {
+      return {
+        restrict: 'E',
+        templateUrl: "decision.html",
+        link: function(scope, elem, attrs) {}
+      };
+    };
+  });
+
   angular.module('jobFoundryDirectives').directive('enterKey', function() {
     return function(scope, elem, attrs) {
       return elem.bind('keydown', function(e) {

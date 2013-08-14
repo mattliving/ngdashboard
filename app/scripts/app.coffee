@@ -10,6 +10,9 @@ angular.module('jobFoundryApp', ['jobFoundryDirectives', 'jobFoundryServices', '
       .when '/',
         templateUrl: '/views/landing.html'
         controller: 'LandingCtrl'
+      .when '/getting-started',
+        templateUrl: 'views/getting-started.html'
+        controller: 'DecisionTreeCtrl'
       .when '/add',
         templateUrl: '/views/resource-form.html'
         controller: 'ResourceCtrl'

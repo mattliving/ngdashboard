@@ -2,6 +2,13 @@
 
 angular.module 'jobFoundryDirectives', ['jobFoundryServices']
 
+angular.module('jobFoundryDirectives').directive 'decision', ->
+  (scope, elem, attrs) ->
+    restrict: 'E'
+    templateUrl: "decision.html"
+    link: (scope, elem, attrs) ->
+
+
 angular.module('jobFoundryDirectives').directive 'enterKey', ->
   (scope, elem, attrs) ->
     elem.bind 'keydown', (e) ->

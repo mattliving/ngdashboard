@@ -6,9 +6,3 @@ angular.module("jobFoundryApp").controller "LandingCtrl", ($http, $scope) ->
 
   $http.get('/api/v1/content/options').success (options) ->
     $scope.options = options
-
-  # $scope.options = [
-  #  	"Web Application",
-  #  	"Mobile Application",
-  #  	"Social Media Presence"
-  #  ]
