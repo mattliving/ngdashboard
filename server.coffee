@@ -13,31 +13,39 @@ app.configure ->
   app.use express.methodOverride()
   app.enable 'trust proxy'
   app.use (req, res, next) ->
-    if req.query._escaped_fragment_?
-      res.send "Google is watching!"
-    else
-      next()
+    res.google = req.query._escaped_fragment_?
+    next()
   app.use express.static(__dirname + '/app')
 
 mongoose.connect('mongodb://localhost/jobfoundry')
 
-# Resources
-app.get '/resources', routes.resources.all
-app.get '/resources/:id', routes.resources.get
-app.post '/resources', routes.resources.add
-app.delete '/resources/:id', routes.resources.delete
-app.put '/resources/:id', routes.resources.edit
+# Pages
+
+app.get '*', (req, res) ->
+  if req.google
+    # return rendered html
+    res.send 'hey google'
+  else
+    res.sendfile 'app/index.html'
+
+
+# API
+app.get '/api/v1/resources', routes.resources.all
+app.get '/api/v1/resources/:id', routes.resources.get
+app.post '/api/v1/resources', routes.resources.add
+app.delete '/api/v1/resources/:id', routes.resources.delete
+app.put '/api/v1/resources/:id', routes.resources.edit
 
 # not currently used
 
 # Site
-app.get '/paths', routes.site.paths
-app.get '/:path/topics', routes.site.topics
-app.get '/:path/topicsByName', routes.site.topicsByName
-app.get '/:path/topicDependancies', routes.site.topicDependancies
+# app.get '/paths', routes.site.paths
+# app.get '/:path/topics', routes.site.topics
+# app.get '/:path/topicsByName', routes.site.topicsByName
+# app.get '/:path/topicDependancies', routes.site.topicDependancies
 
-app.get '/resources/:path', routes.resources.path
-app.get '/resources/:path/:topic', routes.resources.topic
+# app.get '/resources/:path', routes.resources.path
+# app.get '/resources/:path/:topic', routes.resources.topic
 # app.get '/:path/:topic?level=:level', routes.resources.level
 # app.get '/:path/:topic?type=:type', routes.resources.type
 # app.get '/:path/:topic?type=:type&level=:level', routes.resources.typeAndLevel
