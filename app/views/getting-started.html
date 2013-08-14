@@ -1,8 +1,1 @@
-<div class="decision jumbotron text-center">
-  <h1>{{curQuestion}}</h1>
-  <div class="row">
-    <div class="col-lg-4" ng-repeat="option in options">
-    	<a ng-click="step(option)" class="thumbnail">{{option.name}}</a>
-    </div>
-  </div>
-</div>
+<decision question="{{decision.question}}" options="decision.options" next="step(next)" ng-animate="'fade'" ng-repeat="decision in decisions"></decision>

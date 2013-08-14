@@ -53,13 +53,16 @@ angular.module("jobFoundryApp").controller "DecisionTreeCtrl", ($scope) ->
       ]
       parent: "a"
 
+  $s.decisions   = []
   curNode        = $s.tree.a
   $s.curQuestion = curNode.question
   $s.options     = curNode.options
+  $s.decisions.push curNode
 
-  $s.step = (option) ->
-    curNode        = $s.tree[option.child]
+  $s.step = (next) ->
+    curNode        = $s.tree[next]
     $s.curQuestion = curNode.question
     $s.options     = curNode.options
+    $s.decisions.push curNode
 
     
