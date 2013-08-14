@@ -13,7 +13,7 @@ angular.module('resourceFoundryServices').service 'Resources',
 
     fetch: ->
       @resources = @$q.defer()
-      @$http.get('/resources')
+      @$http.get('/api/v1/resources')
         .success (data, status) =>
           @resources.resolve data
         .error =>
@@ -23,7 +23,7 @@ angular.module('resourceFoundryServices').service 'Resources',
     get: (id) ->
       if id?
         resource = @$q.defer()
-        @$http.get("/resources/#{id}")
+        @$http.get("/api/v1/resources/#{id}")
           .success (data) ->
             resource.resolve data
           .error ->
@@ -36,7 +36,7 @@ angular.module('resourceFoundryServices').service 'Resources',
 
     add: (resource) ->
       response = @$q.defer()
-      @$http.post('/resources', resource)
+      @$http.post('/api/v1/resources', resource)
         .success (data) =>
           response.resolve success: true
           @resources.promise.then (resources) ->
@@ -51,7 +51,7 @@ angular.module('resourceFoundryServices').service 'Resources',
 
     edit: (resource) ->
       response = @$q.defer()
-      @$http.put("/resources/#{resource._id}", resource)
+      @$http.put("/api/v1/resources/#{resource._id}", resource)
         .success (data) =>
           response.resolve success: true
           @resources.promise.then (resources) ->
@@ -68,7 +68,7 @@ angular.module('resourceFoundryServices').service 'Resources',
 
     delete: (resource) ->
       response = @$q.defer()
-      @$http.delete("/resources/#{resource._id}")
+      @$http.delete("/api/v1/resources/#{resource._id}")
       .success (data) =>
         response.resolve success: true
         @resources.promise.then (resources) -> resources.remove resource

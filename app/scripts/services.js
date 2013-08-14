@@ -22,7 +22,7 @@
     Resources.prototype.fetch = function() {
       var _this = this;
       this.resources = this.$q.defer();
-      return this.$http.get('/resources').success(function(data, status) {
+      return this.$http.get('/api/v1/resources').success(function(data, status) {
         return _this.resources.resolve(data);
       }).error(function() {
         console.log('data error has occurred');
@@ -34,7 +34,7 @@
       var resource;
       if (id != null) {
         resource = this.$q.defer();
-        this.$http.get("/resources/" + id).success(function(data) {
+        this.$http.get("/api/v1/resources/" + id).success(function(data) {
           return resource.resolve(data);
         }).error(function() {
           console.log('error getting specific id');
@@ -50,7 +50,7 @@
       var response,
         _this = this;
       response = this.$q.defer();
-      this.$http.post('/resources', resource).success(function(data) {
+      this.$http.post('/api/v1/resources', resource).success(function(data) {
         response.resolve({
           success: true
         });
@@ -70,7 +70,7 @@
       var response,
         _this = this;
       response = this.$q.defer();
-      this.$http.put("/resources/" + resource._id, resource).success(function(data) {
+      this.$http.put("/api/v1/resources/" + resource._id, resource).success(function(data) {
         response.resolve({
           success: true
         });
@@ -107,7 +107,7 @@
       var response,
         _this = this;
       response = this.$q.defer();
-      this.$http["delete"]("/resources/" + resource._id).success(function(data) {
+      this.$http["delete"]("/api/v1/resources/" + resource._id).success(function(data) {
         response.resolve({
           success: true
         });

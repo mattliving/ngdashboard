@@ -13,21 +13,11 @@ app.configure ->
   app.use express.methodOverride()
   app.enable 'trust proxy'
   app.use (req, res, next) ->
-    res.google = req.query._escaped_fragment_?
+    req.google = req.query._escaped_fragment_?
     next()
   app.use express.static(__dirname + '/app')
 
 mongoose.connect('mongodb://localhost/jobfoundry')
-
-# Pages
-
-app.get '*', (req, res) ->
-  if req.google
-    # return rendered html
-    res.send 'hey google'
-  else
-    res.sendfile 'app/index.html'
-
 
 # API
 app.get '/api/v1/resources', routes.resources.all
@@ -36,6 +26,13 @@ app.post '/api/v1/resources', routes.resources.add
 app.delete '/api/v1/resources/:id', routes.resources.delete
 app.put '/api/v1/resources/:id', routes.resources.edit
 
+# Pages
+app.get '*', (req, res) ->
+  if req.google
+    # return rendered html
+    res.send 'hey google'
+  else
+    res.sendfile 'app/index.html'
 # not currently used
 
 # Site
