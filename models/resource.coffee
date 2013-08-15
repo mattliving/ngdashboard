@@ -14,7 +14,6 @@ Resource = mongoose.model 'Resource', new mongoose.Schema
     required: true
   mediaType:
     type: [String]
-    enum: []
   description: String
   link:
     type: String

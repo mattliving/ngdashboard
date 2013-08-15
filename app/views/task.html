@@ -1,0 +1,22 @@
+<div class="row task">
+    <h1>{{task.title}}</h1>
+    <h2>{{task.outcome}}</h2>
+    <div class="col-md-3 sidebar">
+        <ul class="list-group">
+            <li class="list-group-item">Overview</li>
+            <li class="list-group-item">Examples</li>
+            <li class="list-group-item">How To</li>
+            <li class="list-group-item">All Resources</li>
+            <li class="list-group-item">Tools</li>
+        </ul>
+    </div>
+    <div class="col-md-9 content">
+        <ul>
+            <li ng-repeat="resource in task.resources">
+                <a href="{{resource.link}}">{{resource.title}}</a>
+                <p>{{resource.description}}</p>
+                <tag ng-repeat="type in resource.mediaType">{{type}}</tag>
+            </li>
+        </ul>
+    </div>
+</div>

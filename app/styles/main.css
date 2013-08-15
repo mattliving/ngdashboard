@@ -6,7 +6,7 @@ html, body {
     color: #333;
 }
 
-h1 {
+h1.jobfoundry {
     font-weight: 100;
 }
 
@@ -162,4 +162,8 @@ h1 {
 .author-input .new-attr a.btn {
     margin-left: -4px;
     margin-top: -11px;
+}
+
+.task h1, .task h2 {
+    text-align: center;
 }

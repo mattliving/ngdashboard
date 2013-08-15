@@ -51,6 +51,9 @@ app.put '/api/v1/resources/:id', routes.resources.edit
 # Content
 app.get '/api/v1/content/:key', routes.content.get
 
+# Tasks
+app.get '/api/v1/tasks/:name', routes.tasks.get
+
 # Pages
 # this definitely needs to be a little more robust...
 app.get '*', (req, res) -> res.sendfile 'app/index.html'

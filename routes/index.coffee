@@ -1,6 +1,7 @@
 {Resource} = require '../models/resource'
 {Topic}    = require '../models/topic'
 {Content}  = require '../models/content'
+{Task}     = require '../models/task'
 
 module.exports =
   site:
@@ -156,3 +157,13 @@ module.exports =
         else
           console.log err
           res.json error: err
+
+  tasks:
+    get: (req, res) ->
+      Task.findOne(name: req.params.name).populate('resources').exec (err, task) ->
+        unless err
+          res.json task
+        else
+          console.log err
+          res.json error: err
+

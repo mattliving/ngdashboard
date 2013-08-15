@@ -22,6 +22,9 @@ angular.module('jobFoundryApp', ['jobFoundryDirectives', 'jobFoundryServices', '
       .when '/list/:path',
         templateUrl: '/views/list.html'
         controller: 'ResourceCtrl'
+      .when '/task/:name',
+        templateUrl: '/views/task.html'
+        controller: 'TaskCtrl'
       .otherwise
         redirectTo: '/'
 
