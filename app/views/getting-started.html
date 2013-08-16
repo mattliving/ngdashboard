@@ -1,1 +1,4 @@
-<decision question="{{decision.question}}" options="decision.options" next="step(next)" ng-animate="'fade'" ng-repeat="decision in decisions"></decision>
+<div id="decisions" class="container">
+	<decision question="{{node.question}}" options="node.options" next="step(next)" ng-animate="{enter: 'animate-enter'}" ng-repeat="node in nodes"></decision>
+</div>
+<div class="textured-bg"></div>
