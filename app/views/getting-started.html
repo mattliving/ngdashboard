@@ -1,8 +1,4 @@
-<div class="decision jumbotron text-center">
-  <h1>{{curQuestion}}</h1>
-  <div class="row">
-    <div class="col-lg-4" ng-repeat="option in options">
-    	<a ng-click="step(option)" class="thumbnail">{{option.name}}</a>
-    </div>
-  </div>
+<div id="decisions" class="container">
+	<decision question="{{node.question}}" options="node.options" next="step(next)" ng-animate="{enter: 'animate-enter'}" ng-repeat="node in nodes"></decision>
 </div>
+<div class="textured-bg"></div>

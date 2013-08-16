@@ -3,11 +3,13 @@
 angular.module 'jobFoundryDirectives', ['jobFoundryServices']
 
 angular.module('jobFoundryDirectives').directive 'decision', ->
-  (scope, elem, attrs) ->
-    restrict: 'E'
-    templateUrl: "decision.html"
-    link: (scope, elem, attrs) ->
-
+  restrict: 'E'
+  scope:
+    question: '@'
+    options: '='
+    nextFunc: "&next"
+  templateUrl: "/views/decision.html"
+  link: (scope, elem, attrs) ->
 
 angular.module('jobFoundryDirectives').directive 'enterKey', ->
   (scope, elem, attrs) ->
@@ -40,7 +42,7 @@ angular.module('jobFoundryDirectives').directive 'tagInput', (keygen) ->
     tags: '='
     tagList: '=ngModel'
     placeholder: '@'
-  templateUrl: "views/tag-input.html"
+  templateUrl: "/views/tag-input.html"
   link: ($s, $e, attrs) ->
     $s.canCreate = attrs.create?
     $s.tagList ?= []

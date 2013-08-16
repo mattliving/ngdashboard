@@ -1,8 +1,14 @@
 <div class="decision jumbotron text-center">
-  <h1>{{curQuestion}}</h1>
+  <h1>{{question}}</h1>
   <div class="row">
-    <div class="col-lg-4" ng-repeat="option in options">
-    	<a ng-click="step(option)" class="thumbnail">{{option.name}}</a>
+    <div class="col-lg-{{12/options.length}}" ng-mouseenter="showExamples=true" ng-mouseleave="showExamples=false" ng-hide="option.hidden" ng-animate="{hide: 'animate-hide'}" ng-repeat="option in options">
+    	<a class="thumbnail" ng-click="nextFunc({next: option})">
+    		{{option.name}}
+    		<div ng-if="showDescription(option)" class="caption">
+    			{{option.description}}
+    		</div>
+				<p ng-animate="'examples'" ng-show="option.examples && showExamples">{{option.examples | join | eg}}</p>
+			</a>
     </div>
   </div>
 </div>

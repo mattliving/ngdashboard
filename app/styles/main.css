@@ -11,27 +11,67 @@ h1 {
 }
 
 .hero-bg {
-    position: absolute;
-    z-index: -2;
+    position: fixed;
+    z-index: -1;
     top: 0;
     left: 0;
-    height: 100%;
-    width: 100%;
-    background: url("/images/fire.jpg") no-repeat center center fixed;
+    min-height: 100%;
+    min-width: 100%;
+    background: url("/images/fire2.jpg") no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
 }
 
-.decision {
-    margin: 4% 4% 4% 4%;
-    background: #efefef;
+img.hero-bg {
+  /* Set rules to fill background */
+  min-height: 100%;
+  min-width: 100%;
+    
+  /* Set up proportionate scaling */
+  width: 100%;
+  height: auto;
+    
+  /* Set up positioning */
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
-.decision .jumbotron {
-    font-size: 24px;
+@media screen and (max-width: 1805px) { /* Specific to this particular image */
+  img.bg {
+    left: 50%;
+    margin-left: -512px; /* 50% */
+  }
+}
+
+.textured-bg {
+    position: fixed;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    min-height: 100%;
+    min-width: 100%;
+    /*background: url('../images/dark_geometric.png');*/
+    /*background: url('../images/debut_dark.png');*/
+    /*background: url('../images/navy_blue.png');*/
+    /*background: url('../images/stressed_linen.png');*/
+    background: url('../images/triangles.png');
+}
+
+#decisions {    
+    margin-top: 60px;
+}
+
+.decision {
+    background: #efefef;
     padding: 40px 50px;
+    -webkit-box-shadow: 4px 4px 7px -5px #251400;
+    -moz-box-shadow:    4px 4px 7px -5px #251400;
+    -ms-box-shadow:     4px 4px 7px -5px #251400;
+    -o-box-shadow:      4px 4px 7px -5px #251400;
+    box-shadow:         4px 4px 7px -5px #251400;
 }
 
 .decision h1 {
@@ -41,28 +81,39 @@ h1 {
     margin-bottom: 3%;
 }
 
-.decision .thumbnail {
-    border-radius: 2px;
-    padding: 10px;
+.decision a {
+    font-size: 24px;
+    text-decoration: none;
+    cursor: pointer;
+    color: #455;
+}
+
+.decision p {
+    font-size: 20px;
+    margin-bottom: 0px;
 }
 
 .decision .thumbnail {
-    color: #455;
+    border-radius: 2px;
+    padding: 10px;
 }
 
 .decision .thumbnail:hover {
     border-color: #FF6600;
 }
 
-.landing.jumbotron {
+.landing {
+    /*background: #bdc3c7;*/
+    background: #111;
+    color: #ffffff;
     margin: 4%;
     margin-top: 8%;
     padding: 1%;
     padding-bottom: 4%;
-    opacity: 0.85;
+    opacity: 0.75;
 }
 
-.landing.jumbotron .form-control {
+.landing .form-control {
     margin-right: 1%;
     width: 50%;
 }
@@ -71,7 +122,7 @@ h1 {
     font-size: 96px;
 }
 
-.landing.jumbotron h1 span {
+.landing h1 span {
     color: #FF6600;
 }
 
@@ -81,7 +132,7 @@ h1 {
     margin-bottom: 2%;
 }
 
-.landing .jumbotron p {
+.landing.jumbotron p {
     margin-bottom: 2%;
 }
 
