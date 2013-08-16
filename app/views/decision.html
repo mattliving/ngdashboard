@@ -7,7 +7,7 @@
     		<div ng-if="showDescription(option)" class="caption">
     			{{option.description}}
     		</div>
-				<p ng-animate="'examples'" ng-show="option.examples && showExamples">{{option.examples | join | eg}}</p>
+				<p ng-animate="'examples'" ng-show="option.examples && showExamples">(e.g {{option.examples | join}})</p>
 			</a>
     </div>
   </div>
