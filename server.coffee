@@ -6,6 +6,7 @@ mongoose  = require 'mongoose'
 path      = require 'path'
 routes    = require './routes'
 {Content} = require './models/content'
+{Task}    = require './models/task'
 
 # Create server
 app = express()
@@ -24,13 +25,18 @@ app.configure ->
   # function to handle sending stuff to google
   app.use (req, res, next) ->
     if req.query._escaped_fragment_?
-      switch req.path
-        when '/'
+      switch true
+        when req.path is '/'
           Content.findOne(key: "options").exec (err, options) ->
             unless err
               res.render 'landing', options: options.data
             else
               res.status(500).render '404'
+        when /\/task\/\w+/.test req.path
+          name = req.path.match(/\/task\/(\w+)/)[1]
+          Task.findOne(name: name).populate('resources').exec (err, task) ->
+            console.log task
+            res.render 'task', task: task
         else
           res.status(404).render '404'
     else

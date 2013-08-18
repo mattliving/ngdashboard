@@ -3,3 +3,7 @@ angular.module('jobFoundryApp').controller 'TaskCtrl', ($scope, $http, $routePar
   .success (task) ->
     $scope.task = task
   .error -> console.log 'error getting data'
+
+  $scope.resourceFilter = {}
+  $scope.filterType = (type) ->
+    $scope.resourceFilter = (resource) -> type in resource.mediaType
