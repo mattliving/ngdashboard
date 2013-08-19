@@ -22,25 +22,20 @@ app.configure ->
   app.set 'view engine', 'html'
   app.set 'views', __dirname + '/static-pages'
 
-  # function to handle sending stuff to google
-  app.use (req, res, next) ->
-    if req.query._escaped_fragment_?
-      switch true
-        when req.path is '/'
-          Content.findOne(key: "options").exec (err, options) ->
-            unless err
-              res.render 'landing', options: options.data
-            else
-              res.status(500).render '404'
-        when /\/task\/\w+/.test req.path
-          name = req.path.match(/\/task\/(\w+)/)[1]
-          Task.findOne(name: name).populate('resources').exec (err, task) ->
-            console.log task
-            res.render 'task', task: task
-        else
-          res.status(404).render '404'
-    else
-      next()
+  # # function to handle sending stuff to google
+  # app.use (req, res, next) ->
+  #   if req.query._escaped_fragment_?
+  #     switch true
+  #       when req.path is '/'
+  #         Content.findOne(key: "options").exec (err, options) ->
+  #           unless err
+  #             res.render 'landing', options: options.data
+  #           else
+  #             res.status(500).render '404'
+  #       else
+  #         res.status(404).render '404'
+  #   else
+  #     next()
   app.use express.static(__dirname + '/app')
 
 mongoose.connect('mongodb://localhost/jobfoundry')
@@ -60,8 +55,25 @@ app.get '/api/v1/content/:key', routes.content.get
 # Tasks
 app.get '/api/v1/tasks/:name', routes.tasks.get
 
+google = (req, res, next) ->
+  next() unless req.query._escaped_fragment_?
+
 # Pages
-# this definitely needs to be a little more robust...
+app.get '/task/:name', (req, res, next) ->
+  return next() unless req.query._escaped_fragment_?
+
+  Task.findOne(name: req.params.name).populate('resources').exec (err, task) ->
+    res.render 'task', task: task
+
+app.get '/', (req, res, next) ->
+  console.log "hello?"
+  console.log req.query
+  return next() unless req.query._escaped_fragment_?
+
+  Content.findOne(key: "options").exec (err, options) ->
+    unless err
+      res.render 'landing', options: options.data
+
 app.get '*', (req, res) -> res.sendfile 'app/index.html'
 
 # not currently used
