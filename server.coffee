@@ -1,13 +1,13 @@
 fs        = require 'fs'
 express   = require 'express'
-cons = require 'consolidate'
+cons      = require 'consolidate'
 http      = require 'http'
 mongoose  = require 'mongoose'
 path      = require 'path'
 routes    = require './routes'
 resources = require './routes/resources'
-{Content} = require './models/content'
-{Task}    = require './models/task'
+tasks     = require './routes/tasks'
+content   = require './routes/content'
 
 # Create server
 app = express()
@@ -24,11 +24,8 @@ app.configure ->
   # workaround for express overriding the / route and returning index.html to google
   app.use (req, res, next) ->
     if req.query._escaped_fragment_? and req.path is '/'
-      Content.findOne(key: "options").exec (err, options) ->
-        unless err
-          res.render 'landing', options: options.data
-        else
-          res.render '404'
+      content.get("options").then (options) ->
+        res.render 'landing', options: options.data
     else
       next()
   app.use express.static(__dirname + '/app')
@@ -36,6 +33,7 @@ app.configure ->
 mongoose.connect('mongodb://localhost/jobfoundry')
 
 ### API ###
+# Add error handling to this, or to express
 
 # Resources
 app.get '/api/v1/resources', (req, res) ->
@@ -50,10 +48,12 @@ app.put '/api/v1/resources/:id', (req, res) ->
   resources.edit(req.params.id, req.body).then (success) -> res.json success
 
 # Content
-app.get '/api/v1/content/:key', routes.content.get
+app.get '/api/v1/content/:key', (req, res) ->
+  content.get(req.params.key).then (data) -> res.json data["data"]
 
 # Tasks
-app.get '/api/v1/tasks/:name', routes.tasks.get
+app.get '/api/v1/tasks/:name', (req, res) ->
+  tasks.get(req.params.name).then (task) -> res.json task
 
 # Pages
 
@@ -66,7 +66,7 @@ app.get '*', (req, res, next) ->
     res.sendfile 'app/index.html'
 
 app.get '/task/:name', (req, res) ->
-  Task.findOne(name: req.params.name).populate('resources').exec (err, task) ->
+  tasks.get(req.params.name).then (task) ->
     res.render 'task', task: task
 
 # this currently doesn't get called because the static fileserver has precedence

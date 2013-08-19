@@ -1,24 +1,9 @@
 {Resource} = require '../models/resource'
 q = require 'q'
 
-# simple function to resolve or reject a promise if there's an error
-process = (promise, err, data) ->
-  if err
-    promise.reject err
-  else
-    promise.resolve data
-
 module.exports =
-  all: ->
-    resources = q.defer()
-    Resource.find().exec (err, data) ->
-      process resources, err, data
-    resources.promise
-  get: (id) ->
-    resource = q.defer()
-    Resource.findById id, (err, data) ->
-      process resource, err, data
-    resource.promise
+  all: -> q.ninvoke Resource.find(), "exec"
+  get: (id) -> q.ninvoke Resource, "findById", id
   add: (newResource) ->
     resource = new Resource
       authors:     newResource.authors
@@ -31,12 +16,9 @@ module.exports =
       cost:        newResource.cost
       description: newResource.description
 
-    success = q.defer()
-    resource.save (err) -> process success, err, success: true
-    success.promise
+    q.ninvoke resource, "save"
 
   edit: (id, newResource) ->
-    success = q.defer()
     resource =
       authors:     newResource.authors
       topic:       newResource.topic
@@ -47,11 +29,7 @@ module.exports =
       path:        newResource.path
       cost:        newResource.cost
       description: newResource.description
-    Resource.update _id: id, resource, (err) ->
-      process success, err, success: true
-    success.promise
 
-  delete: (id) ->
-    success = q.defer()
-    Resource.remove _id: id, (err) -> process success, err, success: true
-    success.promise
+    q.ninvoke Resource, "update", _id: id, resource
+
+  delete: (id) -> q.ninvoke Resource, "remove", _id: id
