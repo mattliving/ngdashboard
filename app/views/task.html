@@ -18,13 +18,13 @@
             <li ng-repeat="outcome in task.outcomes">{{outcome}}</li>
         </ul>
         <h3>Resources</h3>
-        <button class="btn" ng-click="resourceFilter={}">Show All</button>
+        <button class="btn btn-primary" ng-click="resourceFilter={}">Show All</button>
         <div class="btn-group">
-            <button class="btn" ng-click="filterType('examples')">Examples</button>
-            <button class="btn" ng-click="filterType('tool')">Tools</button>
-            <button class="btn" ng-click="filterType('tutorial')">Tutorials</button>
-            <button class="btn" ng-click="filterType('article')">Articles</button>
-            <button class="btn" ng-click="filterType('reference')">Reference</button>
+            <button class="btn btn-primary" ng-click="filterType('examples')">Examples</button>
+            <button class="btn btn-primary" ng-click="filterType('tool')">Tools</button>
+            <button class="btn btn-primary" ng-click="filterType('tutorial')">Tutorials</button>
+            <button class="btn btn-primary" ng-click="filterType('article')">Articles</button>
+            <button class="btn btn-primary" ng-click="filterType('reference')">Reference</button>
         </div>
         <ul>
             <li ng-repeat="resource in task.resources | filter:resourceFilter">
