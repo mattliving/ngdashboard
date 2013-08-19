@@ -2,7 +2,7 @@ mongoose = require 'mongoose'
 
 Content = mongoose.model 'Content', new mongoose.Schema
   key: String
-  data: mongoose.Schema.Types.Mixed
+  data: {}
 ,
   collection: 'content'
 
