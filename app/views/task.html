@@ -1,39 +1,43 @@
 <div class="row task">
-    <h1>{{task.title}}</h1>
-    <h2>{{task.subtitle}}</h2>
-    <div class="col-md-3 sidebar">
-        <ul class="list-group">
-            <li class="list-group-item">Overview</li>
-            <li class="list-group-item">Learning Outcomes</li>
-            <li class="list-group-item">Examples</li>
-            <li class="list-group-item">Resources</li>
-            <li class="list-group-item">Summary</li>
-        </ul>
-    </div>
-    <div class="col-md-9 content">
-        <h3>Overview</h3>
-        <p>{{task.overview}}</p>
-        <h3>Learning Outcomes</h3>
-        <ul>
-            <li ng-repeat="outcome in task.outcomes">{{outcome}}</li>
-        </ul>
-        <h3>Resources</h3>
-        <button class="btn btn-primary" ng-click="resourceFilter={}">Show All</button>
-        <div class="btn-group">
-            <button class="btn btn-primary" ng-click="filterType('examples')">Examples</button>
-            <button class="btn btn-primary" ng-click="filterType('tool')">Tools</button>
-            <button class="btn btn-primary" ng-click="filterType('tutorial')">Tutorials</button>
-            <button class="btn btn-primary" ng-click="filterType('article')">Articles</button>
-            <button class="btn btn-primary" ng-click="filterType('reference')">Reference</button>
+    <header>
+        <h1>{{task.title}}</h1>
+        <h2>{{task.subtitle}}</h2>
+    </header>
+    <div class="task-container">
+        <div class="col-md-3 sidebar">
+            <ul>
+                <li>Overview</li>
+                <li>Learning Outcomes</li>
+                <li>Examples</li>
+                <li>Resources</li>
+                <li>Summary</li>
+            </ul>
         </div>
-        <ul>
-            <li ng-repeat="resource in task.resources | filter:resourceFilter">
-                <a href="{{resource.link}}">{{resource.title}}</a>
-                <p>{{resource.description}}</p>
-                <tag ng-repeat="type in resource.mediaType">{{type}}</tag>
-            </li>
-        </ul>
-        <h3>Summary</h3>
-        <p>{{task.summary}}</p>
+        <div class="col-md-9 content">
+            <h3>Overview</h3>
+            <p>{{task.overview}}</p>
+            <h3>Learning Outcomes</h3>
+            <ul>
+                <li ng-repeat="outcome in task.outcomes">{{outcome}}</li>
+            </ul>
+            <h3>Resources</h3>
+            <button class="btn btn-primary" ng-click="resourceFilter={}">Show All</button>
+            <div class="btn-group">
+                <button class="btn btn-primary" ng-click="filterType('examples')">Examples</button>
+                <button class="btn btn-primary" ng-click="filterType('tool')">Tools</button>
+                <button class="btn btn-primary" ng-click="filterType('tutorial')">Tutorials</button>
+                <button class="btn btn-primary" ng-click="filterType('article')">Articles</button>
+                <button class="btn btn-primary" ng-click="filterType('reference')">Reference</button>
+            </div>
+            <ul>
+                <li ng-repeat="resource in task.resources | filter:resourceFilter">
+                    <a href="{{resource.link}}">{{resource.title}}</a>
+                    <p>{{resource.description}}</p>
+                    <tag ng-repeat="type in resource.mediaType">{{type}}</tag>
+                </li>
+            </ul>
+            <h3>Summary</h3>
+            <p>{{task.summary}}</p>
+        </div>
     </div>
 </div>

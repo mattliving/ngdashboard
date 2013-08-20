@@ -1,9 +1,12 @@
+/* @override http://localhost:8080/styles/main.css */
+
 /* landing page content */
 
 html, body {
     height: 100%;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #333;
+    font-weight: 16px;
 }
 
 h1.jobfoundry {
@@ -24,13 +27,88 @@ h1.jobfoundry {
     background-size: cover;
 }
 
+.landing.jumbotron {
+    margin: 4%;
+    margin-top: 8%;
+    padding: 1%;
+    padding-bottom: 4%;
+    opacity: 0.85;
+}
+
+.landing.jumbotron .form-control {
+    margin-right: 1%;
+    width: 50%;
+}
+
+.landing h1 {
+    font-size: 5em;
+}
+
+.landing.jumbotron h1 span {
+    color: #FF6600;
+}
+
+.landing h2 {
+    font-size: 1.7em;
+    font-weight: 200;
+    margin-bottom: 2%;
+}
+
+.landing .jumbotron p {
+    margin-bottom: 2%;
+}
+
+/* task view styles */
+
+.task header {
+	height: 15em;
+	position: absolute;
+	left: 0;
+	padding-top: 2em;
+	color: white;
+	width: 100%;
+	background-color: #2980b9;
+}
+
+.task header h1, .task header h2 {
+	text-align: center;
+	font-family: "Lato";
+	font-weight: 700;
+}
+
+.task .task-container {
+	padding-top: 15em;
+}
+
+.task .content {
+	border-left: 1px solid #dddddd;
+}
+
+.task .sidebar ul {
+	padding-top: 10px;
+	list-style: none;
+	text-align: right;
+}
+
+.task .sidebar li {
+	font-size: 1.3em;
+	padding: 4%;
+}
+
+.task .sidebar li:hover {
+	background-color: #ff6600;
+	color: white;
+}
+
+/* decison tree */
+
 .decision {
     margin: 4% 4% 4% 4%;
     background: #efefef;
 }
 
 .decision .jumbotron {
-    font-size: 24px;
+    font-size: 1.2em;
     padding: 40px 50px;
 }
 
@@ -52,37 +130,6 @@ h1.jobfoundry {
 
 .decision .thumbnail:hover {
     border-color: #FF6600;
-}
-
-.landing.jumbotron {
-    margin: 4%;
-    margin-top: 8%;
-    padding: 1%;
-    padding-bottom: 4%;
-    opacity: 0.85;
-}
-
-.landing.jumbotron .form-control {
-    margin-right: 1%;
-    width: 50%;
-}
-
-.landing h1 {
-    font-size: 96px;
-}
-
-.landing.jumbotron h1 span {
-    color: #FF6600;
-}
-
-.landing h2 {
-    font-size: 36px;
-    font-weight: 200;
-    margin-bottom: 2%;
-}
-
-.landing .jumbotron p {
-    margin-bottom: 2%;
 }
 
 /* resource view styles */
@@ -162,8 +209,4 @@ h1.jobfoundry {
 .author-input .new-attr a.btn {
     margin-left: -4px;
     margin-top: -11px;
-}
-
-.task h1, .task h2 {
-    text-align: center;
 }
