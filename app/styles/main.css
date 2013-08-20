@@ -6,10 +6,6 @@ html, body {
     color: #333;
 }
 
-h1 {
-    font-weight: 100;
-}
-
 .hero-bg {
     position: fixed;
     z-index: -1;
@@ -57,7 +53,7 @@ img.hero-bg {
     /*background: url('../images/debut_dark.png');*/
     /*background: url('../images/navy_blue.png');*/
     /*background: url('../images/stressed_linen.png');*/
-    background: url('../images/triangles.png');
+    background: url('../images/mochaGrunge.png');
 }
 
 #decisions {    
@@ -75,6 +71,7 @@ img.hero-bg {
 }
 
 .decision h1 {
+    font-weight: 100;
     border-bottom: 1px solid #777;
     padding-bottom: 1%;
     margin: 0;
@@ -110,7 +107,7 @@ img.hero-bg {
     margin-top: 8%;
     padding: 1%;
     padding-bottom: 4%;
-    opacity: 0.75;
+    opacity: 0.85;
 }
 
 .landing .form-control {
@@ -120,6 +117,9 @@ img.hero-bg {
 
 .landing h1 {
     font-size: 96px;
+    font-weight: 300;
+    /*font-style: italic;*/
+    font-family: 'Lato', sans-serif;
 }
 
 .landing h1 span {

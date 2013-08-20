@@ -1,8 +1,6 @@
 "use strict"
 
-angular.module("jobFoundryApp").controller "DecisionTreeCtrl", ($scope) ->
-
-  $s = $scope
+angular.module("jobFoundryApp").controller "DecisionTreeCtrl", ["$scope", ($s) ->
 
   $s.tree =
     a: 
@@ -61,9 +59,8 @@ angular.module("jobFoundryApp").controller "DecisionTreeCtrl", ($scope) ->
   $s.nodes       = []
   $s.decisions   = []
   curNode        = $s.tree.a
-  $s.curQuestion = curNode.question
-  $s.options     = curNode.options
   $s.nodes.push curNode
+  console.log $s.nodes
 
   # stepping through the options in the decision tree
   $s.step = (chosen) ->
@@ -76,21 +73,11 @@ angular.module("jobFoundryApp").controller "DecisionTreeCtrl", ($scope) ->
         option.hidden = true
 
     if chosen.child?
-      curNode        = $s.tree[chosen.child]
-      $s.curQuestion = curNode.question
-      $s.options     = curNode.options
+      curNode = $s.tree[chosen.child]
       $s.nodes.push curNode
     else 
       console.log $s.decisions
 
     console.log $s.nodes
 
-  # $s.showDescription = (option) ->
-  #   console.log "show Desc"
-  #   console.log option.hasOwnProperty 'description'
-
-  $s.showExamples = (option) ->
-    console.log "show Examples"
-    console.log(option.hasOwnProperty 'examples' and mouseover)
-
-    
+]

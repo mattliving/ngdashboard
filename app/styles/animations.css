@@ -1,46 +1,35 @@
-.landing-enter, .landing-leave {
-    -webkit-transition: 800ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-    -moz-transition: 800ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-    -ms-transition: 800ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-    -o-transition: 800ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-    transition: 800ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-    position: relative;
-    display: block;
-}
+/* When hiding an element */
+.am-landing.ng-hide-add {
+    -webkit-transition: 1s linear all;
+    -moz-transition: 1s linear all;
+    -o-transition: 1s linear all;
+    transition: 1s linear all;
 
-.landing-enter.landing-enter-active,
-.landing-leave {
     opacity: 1;
 }
-
-.landing-leave.landing-leave-active,
-.landing-enter {
+.am-landing.ng-hide-add.ng-hide-add-active {
     opacity: 0;
 }
 
-.animate-show, .animate-hide {
-    -webkit-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-    -moz-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-    -ms-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-    -o-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-    transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-    position: relative;
-    /*display: block;*/
-}
-
-.animate-show.animate-show-active {
-    opacity: 1;
-    color: #fff;
-    background: #FF6600;
-}
-
-.animate-hide.animate-hide-active {
+/* When showing an element */
+.am-landing.ng-hide-remove {
+    -webkit-transition: 1s linear all;
+    -moz-transition: 1s linear all;
+    -o-transition: 1s linear all;
+    transition: 1s linear all;
+    
+    /* this needs to be here to make it visible during the animation
+    since the .ng-hide class is already on the element rendering
+    it as hidden. */
+    display: block!important;
     opacity: 0;
-    color: #333;
-    background: #fff;
+}
+.am-landing,
+.am-landing.ng-hide-remove.ng-hide-remove-active {
+    opacity: 1;
 }
 
-.animate-enter, .animate-leave { 
+.am-decision.ng-enter, .am-decision.ng-leave { 
     -webkit-transition: 1s cubic-bezier(0.420, 0.000, 1.000, 1.000) all;
     -moz-transition: 1s cubic-bezier(0.420, 0.000, 1.000, 1.000) all;
     -ms-transition: 1s cubic-bezier(0.420, 0.000, 1.000, 1.000) all;
@@ -50,36 +39,41 @@
     display: block;
 }
  
-.animate-enter.animate-enter-active, 
-.animate-leave {
+.am-decision.ng-enter.am-decision.ng-enter-active, 
+.am-decision.ng-leave {
     opacity: 1;
     top: 0;
-    /*height: 30px;*/
 }
  
-.animate-leave.animate-leave-active,
-.animate-enter {
+.am-decision.ng-leave.am-decision.ng-leave-active,
+.am-decision.ng-enter {
     opacity: 0;
     top: -50px;
-    /*height: 0px;*/
 }
 
-.animate-move {
-    /*-webkit-transition: 950ms cubic-bezier(0.420, 0.000, 1.000, 1.000) all;
-    -moz-transition: 950ms cubic-bezier(0.420, 0.000, 1.000, 1.000) all;
-    -ms-transition: 950ms cubic-bezier(0.420, 0.000, 1.000, 1.000) all;
-    -o-transition: 950ms cubic-bezier(0.420, 0.000, 1.000, 1.000) all;
-    transition: 950ms cubic-bezier(0.420, 0.000, 1.000, 1.000) all;*/
-    opacity: 1;
+.am-option.ng-hide-add, .am-option.ng-hide-remove {
+    -webkit-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -moz-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -ms-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -o-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
     position: relative;
-    display: block;
+    /*display: block;*/
 }
 
-.animate-move.animate-move-active, {
-    opacity: 0.5;
+.am-option.ng-hide-remove.ng-hide-remove-active {
+    opacity: 1;
+    /*color: #fff;
+    background: #FF6600;*/
 }
 
-.examples-show, .examples-hide { 
+.am-option.ng-hide-add.ng-hide-add-active {
+    opacity: 0;
+    /*color: #333;
+    background: #fff;*/
+}
+
+.am-examples.ng-enter, .am-examples.ng-leave { 
     -webkit-transition: 400ms cubic-bezier(0.420, 0.000, 1.000, 1.000) all;
     -moz-transition: 400ms cubic-bezier(0.420, 0.000, 1.000, 1.000) all;
     -ms-transition: 400ms cubic-bezier(0.420, 0.000, 1.000, 1.000) all;
@@ -89,14 +83,14 @@
     display: block;
 }
  
-.examples-show.examples-show-active, 
-.examples-hide {
+.am-examples.ng-enter.am-examples.ng-enter-active, 
+.am-examples.ng-leave {
     opacity: 1;
     top: 0;
 }
  
-.examples-hide.examples-hide-active,
-.examples-show {
+.am-examples.ng-leave.am-examples.ng-leave-active,
+.am-examples.ng-enter {
     opacity: 0;
     top: -5px;
 }

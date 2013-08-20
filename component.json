@@ -14,7 +14,8 @@
     "angular-sanitize": "~1.0.5",
     "lodash": "~1.3.1",
     "angular-bootstrap": "~0.4.0",
-    "angular-mocks": "~1.0.7"
+    "angular-mocks": "~1.0.7",
+    "angular-animate": "*"
   },
   "devDependencies": {
     "angular-mocks": "~1.0.5",
