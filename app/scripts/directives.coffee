@@ -8,6 +8,16 @@ angular.module('jobFoundryDirectives').directive 'decision', ->
     templateUrl: "decision.html"
     link: (scope, elem, attrs) ->
 
+angular.module('jobFoundryDirectives').directive 'sticky', ($window) ->
+  (scope, elem, attrs) ->
+    console.log 'hello'
+    elemPos = elem.offset().top
+    $window.onscroll = ->
+      if elemPos < $window.scrollY
+        unless elem.hasClass('sticky-fixed')
+          elem.addClass('sticky-fixed')
+      else
+        elem.removeClass('sticky-fixed')
 
 angular.module('jobFoundryDirectives').directive 'enterKey', ->
   (scope, elem, attrs) ->

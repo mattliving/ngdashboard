@@ -25,6 +25,7 @@ angular.module('jobFoundryApp', ['jobFoundryDirectives', 'jobFoundryServices', '
       .when '/task/:name',
         templateUrl: '/views/task.html'
         controller: 'TaskCtrl'
+        reloadOnSearch: false
       .otherwise
         redirectTo: '/'
 

@@ -5,22 +5,25 @@
     </header>
     <div class="task-container">
         <div class="col-md-3 sidebar">
-            <ul>
-                <li>Overview</li>
-                <li>Learning Outcomes</li>
-                <li>Examples</li>
-                <li>Resources</li>
-                <li>Summary</li>
+            <ul sticky>
+                <li ng-click="hash('overview')">Overview</li>
+                <li ng-click="hash('learning')">Learning Outcomes</li>
+                <li ng-click="hash('resources')">Resources</li>
+                <li ng-click="hash('summary')">Summary</li>
             </ul>
         </div>
         <div class="col-md-9 content">
-            <h3>Overview</h3>
+            <h3 id="overview">Overview</h3>
             <p>{{task.overview}}</p>
-            <h3>Learning Outcomes</h3>
+            <p>{{task.overview}}</p>
+            <p>{{task.overview}}</p>
+            <h3 id="learning">Learning Outcomes</h3>
             <ul>
                 <li ng-repeat="outcome in task.outcomes">{{outcome}}</li>
+                <li ng-repeat="outcome in task.outcomes">{{outcome}}</li>
+                <li ng-repeat="outcome in task.outcomes">{{outcome}}</li>
             </ul>
-            <h3>Resources</h3>
+            <h3 id="resources">Resources</h3>
             <button class="btn btn-primary" ng-click="resourceFilter={}">Show All</button>
             <div class="btn-group">
                 <button class="btn btn-primary" ng-click="filterType('examples')">Examples</button>
@@ -36,7 +39,9 @@
                     <tag ng-repeat="type in resource.mediaType">{{type}}</tag>
                 </li>
             </ul>
-            <h3>Summary</h3>
+            <h3 id="summary">Summary</h3>
+            <p>{{task.summary}}</p>
+            <p>{{task.summary}}</p>
             <p>{{task.summary}}</p>
         </div>
     </div>

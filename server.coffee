@@ -57,7 +57,6 @@ app.get '/api/v1/tasks/:name', (req, res) ->
 
 # Check for other routes if google's making the request, otherwise send index.html
 app.get '*', (req, res, next) ->
-  console.log req.path
   if req.query._escaped_fragment_?
     next()
   else
