@@ -2,7 +2,7 @@
   "name": "resourcefoundry",
   "version": "0.0.0",
   "dependencies": {
-    "angular": "~1.2.0rc1",
+    "angular": "1.2.0rc1",
     "jquery": "latest",
     "angular-resource": "~1.0.5",
     "lodash": "~1.3.1",
