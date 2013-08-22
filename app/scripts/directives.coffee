@@ -29,33 +29,31 @@ angular.module('jobFoundryDirectives').directive 'scrollSpy', ($window) ->
       for spy in spies
         unless spyElems[spy.id]?
           spyElems[spy.id] = elem.find('#'+spy.id)
-      console.log spyElems
 
     $($window).scroll ->
-      highlighSpy = null
+      highlightSpy = null
       for spy in scope.spies
         spy.out()
-        if (pos = spyElems[spy.id].offset().top) - $window.scrollY < 10
+        if (pos = spyElems[spy.id].offset().top) - $window.scrollY <= 0
           spy.pos = pos
-          if highlightSpy?
-            if highlightSpy.pos < spy.pos
-              highlightSpy = spy
-          else
+          highlightSpy ?= spy
+          if highlightSpy.pos < spy.pos
             highlightSpy = spy
 
-      if highlightSpy?
-        highlightSpy.in()
+      highlightSpy?.in()
 
-angular.module('jobFoundryDirectives').directive 'spy', ->
+angular.module('jobFoundryDirectives').directive 'spy', ($location) ->
   restrict: "A"
   require: "^scrollSpy"
   link: (scope, elem, attrs, scrollSpy) ->
     scrollSpy.addSpy
       id: attrs.spy
-      in: -> elem.addClass 'current',
+      in: ->
+        if $location.hash() isnt attrs.spy
+          scope.$apply ->
+            $location.hash attrs.spy, false
+        elem.addClass 'current',
       out: -> elem.removeClass 'current'
-
-
 
 angular.module('jobFoundryDirectives').directive 'enterKey', ->
   (scope, elem, attrs) ->

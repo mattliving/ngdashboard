@@ -11,6 +11,4 @@ angular.module('jobFoundryApp').controller 'TaskCtrl', ($scope, $http, $routePar
   $scope.filterType = (type) ->
     $scope.resourceFilter = (resource) -> type in resource.mediaType
 
-  $scope.hash = (hash) ->
-    $location.hash(hash)
-    $anchorScroll()
+  $scope.hash = (hash) -> $location.hash(hash)
