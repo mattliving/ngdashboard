@@ -38,9 +38,10 @@ angular.module('jobFoundryServices').service 'Resources',
       response = @$q.defer()
       @$http.post('/api/v1/resources', resource)
         .success (data) =>
+          console.log data
           response.resolve success: true
           @resources.promise.then (resources) ->
-            resource._id = data._id
+            resource._id = data[0]._id
             resources.unshift resource
         .error (data) ->
           data.success = false

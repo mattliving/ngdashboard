@@ -6,7 +6,8 @@
     "mongojs": "latest",
     "mongoose": "latest",
     "underscore": "latest",
-    "consolidate": "~0.9.1"
+    "consolidate": "~0.9.1",
+    "q": "~0.9.6"
   },
   "devDependencies": {
     "grunt": "~0.4.1",

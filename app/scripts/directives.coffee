@@ -11,6 +11,53 @@ angular.module('jobFoundryDirectives').directive 'decision', ->
   templateUrl: "/views/decision.html"
   link: (scope, elem, attrs) ->
 
+angular.module('jobFoundryDirectives').directive 'sticky', ($window) ->
+  (scope, elem, attrs) ->
+    elemPos = elem.offset().top
+    $($window).scroll ->
+      if elemPos < $window.scrollY
+        unless elem.hasClass('sticky-fixed')
+          elem.addClass('sticky-fixed')
+      else
+        elem.removeClass('sticky-fixed')
+
+angular.module('jobFoundryDirectives').directive 'scrollSpy', ($window) ->
+  restrict: 'A'
+  controller: ($scope) ->
+    $scope.spies = []
+    @addSpy = (spyObj) -> $scope.spies.push spyObj
+  link: (scope, elem, attrs) ->
+    spyElems = []
+    scope.$watch 'spies', (spies) ->
+      for spy in spies
+        unless spyElems[spy.id]?
+          spyElems[spy.id] = elem.find('#'+spy.id)
+
+    $($window).scroll ->
+      highlightSpy = null
+      for spy in scope.spies
+        spy.out()
+        if (pos = spyElems[spy.id].offset().top) - $window.scrollY <= 0
+          spy.pos = pos
+          highlightSpy ?= spy
+          if highlightSpy.pos < spy.pos
+            highlightSpy = spy
+
+      highlightSpy?.in()
+
+angular.module('jobFoundryDirectives').directive 'spy', ($location) ->
+  restrict: "A"
+  require: "^scrollSpy"
+  link: (scope, elem, attrs, scrollSpy) ->
+    scrollSpy.addSpy
+      id: attrs.spy
+      in: ->
+        if $location.hash() isnt attrs.spy
+          scope.$apply ->
+            $location.hash attrs.spy, false
+        elem.addClass 'current',
+      out: -> elem.removeClass 'current'
+
 angular.module('jobFoundryDirectives').directive 'enterKey', ->
   (scope, elem, attrs) ->
     elem.bind 'keydown', (e) ->

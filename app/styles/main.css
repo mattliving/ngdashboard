@@ -1,12 +1,15 @@
+/* @override http://localhost:8080/styles/main.css */
+
 /* landing page content */
 
 html, body {
     height: 100%;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #333;
+    font-weight: 16px;
 }
 
-h1 {
+h1.jobfoundry {
     font-weight: 100;
 }
 
@@ -28,11 +31,11 @@ img.hero-bg {
   /* Set rules to fill background */
   min-height: 100%;
   min-width: 100%;
-    
+
   /* Set up proportionate scaling */
   width: 100%;
   height: auto;
-    
+
   /* Set up positioning */
   position: fixed;
   top: 0;
@@ -60,7 +63,7 @@ img.hero-bg {
     background: url('../images/triangles.png');
 }
 
-#decisions {    
+#decisions {
     margin-top: 60px;
 }
 
@@ -119,7 +122,7 @@ img.hero-bg {
 }
 
 .landing h1 {
-    font-size: 96px;
+    font-size: 5em;
 }
 
 .landing h1 span {
@@ -127,13 +130,92 @@ img.hero-bg {
 }
 
 .landing h2 {
-    font-size: 36px;
+    font-size: 1.7em;
     font-weight: 200;
     margin-bottom: 2%;
 }
 
 .landing.jumbotron p {
     margin-bottom: 2%;
+}
+
+/* task view styles */
+
+.task header {
+	height: 15em;
+	position: absolute;
+	left: 0;
+	padding-top: 2em;
+	color: white;
+	width: 100%;
+	background-color: #2980b9;
+}
+
+.task header h1, .task header h2 {
+	text-align: center;
+	font-family: "Lato";
+	font-weight: 700;
+}
+
+.task .task-container {
+	padding-top: 15em;
+}
+
+.task .content {
+	border-left: 1px solid #dddddd;
+}
+
+.task .sidebar ul {
+	padding-top: 10px;
+	list-style: none;
+	text-align: right;
+}
+
+.task .sidebar li {
+	font-size: 1.3em;
+	padding: 4%;
+}
+
+.task .sidebar li:hover, .task .sidebar li.current {
+	background-color: #ff6600;
+	color: white;
+}
+
+.task .sidebar .sticky-fixed {
+    position: fixed;
+    top: 0;
+}
+
+/* decison tree */
+
+.decision {
+    margin: 4% 4% 4% 4%;
+    background: #efefef;
+}
+
+.decision .jumbotron {
+    font-size: 1.2em;
+    padding: 40px 50px;
+}
+
+.decision h1 {
+    border-bottom: 1px solid #777;
+    padding-bottom: 1%;
+    margin: 0;
+    margin-bottom: 3%;
+}
+
+.decision .thumbnail {
+    border-radius: 2px;
+    padding: 10px;
+}
+
+.decision .thumbnail {
+    color: #455;
+}
+
+.decision .thumbnail:hover {
+    border-color: #FF6600;
 }
 
 /* resource view styles */
