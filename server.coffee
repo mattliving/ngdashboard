@@ -26,7 +26,7 @@ app.configure ->
         res.render 'landing', options: options.data
     else
       next()
-  app.use express.static(__dirname + '/app')
+  app.use express.static(__dirname + '/_public')
 
 mongoose.connect('mongodb://localhost/jobfoundry')
 
@@ -60,7 +60,7 @@ app.get '*', (req, res, next) ->
   if req.query._escaped_fragment_?
     next()
   else
-    res.sendfile 'app/index.html'
+    res.sendfile '_public/index.html'
 
 app.get '/task/:name', (req, res) ->
   tasks.get(req.params.name).then (task) ->
