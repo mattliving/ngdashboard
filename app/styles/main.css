@@ -95,7 +95,7 @@ h1.jobfoundry {
 	padding: 4%;
 }
 
-.task .sidebar li:hover {
+.task .sidebar li:hover, .task .sidebar li.current {
 	background-color: #ff6600;
 	color: white;
 }
