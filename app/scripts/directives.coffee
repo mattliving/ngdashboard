@@ -18,7 +18,7 @@ angular.module('jobFoundryDirectives').directive 'sticky', ($window) ->
       else
         elem.removeClass('sticky-fixed')
 
-angular.module('jobFoundryDirectives').directive 'affix', ($window) ->
+angular.module('jobFoundryDirectives').directive 'scrollSpy', ($window) ->
   restrict: 'A'
   controller: ($scope) ->
     $scope.spies = []
@@ -44,7 +44,7 @@ angular.module('jobFoundryDirectives').directive 'affix', ($window) ->
 
 angular.module('jobFoundryDirectives').directive 'spy', ($location) ->
   restrict: "A"
-  require: "^affix"
+  require: "^scrollSpy"
   link: (scope, elem, attrs, scrollSpy) ->
     elem.click ->
       scope.$apply ->
@@ -52,11 +52,7 @@ angular.module('jobFoundryDirectives').directive 'spy', ($location) ->
 
     scrollSpy.addSpy
       id: attrs.spy
-      in: ->
-        if $location.hash() isnt attrs.spy
-          scope.$apply ->
-            $location.hash attrs.spy
-        elem.addClass 'current',
+      in: -> elem.addClass 'current',
       out: -> elem.removeClass 'current'
 
 angular.module('jobFoundryDirectives').directive 'enterKey', ->
