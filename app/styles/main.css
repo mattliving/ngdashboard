@@ -12,10 +12,9 @@ html, body {
 h1.jobfoundry {
     font-weight: 100;
 }
-
+/*
 .hero-bg {
     position: fixed;
-    z-index: -1;
     top: 0;
     left: 0;
     min-height: 100%;
@@ -26,7 +25,7 @@ h1.jobfoundry {
     -o-background-size: cover;
     background-size: cover;
 }
-
+*/
 img.hero-bg {
   /* Set rules to fill background */
   min-height: 100%;
@@ -38,6 +37,7 @@ img.hero-bg {
 
   /* Set up positioning */
   position: fixed;
+  z-index: -1;
   top: 0;
   left: 0;
 }
