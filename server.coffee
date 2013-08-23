@@ -67,11 +67,5 @@ app.get '/task/:name', (req, res) ->
   tasks.get(req.params.name).then (task) ->
     res.render 'task', task: task
 
-# this currently doesn't get called because the static fileserver has precedence
-app.get '/', (req, res) ->
-  Content.findOne(key: "options").exec (err, options) ->
-    unless err
-      res.render 'landing', options: options.data
-
 http.createServer(app).listen app.get('port'), ->
   console.log 'Express server listening on port ' + app.get 'port'
