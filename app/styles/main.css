@@ -12,20 +12,7 @@ html, body {
 h1.jobfoundry {
     font-weight: 100;
 }
-/*
-.hero-bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    min-height: 100%;
-    min-width: 100%;
-    background: url("/images/fire2.jpg") no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-}
-*/
+
 img.hero-bg {
   /* Set rules to fill background */
   min-height: 100%;
@@ -184,6 +171,11 @@ img.hero-bg {
 .task .sidebar .sticky-fixed {
     position: fixed;
     top: 0;
+}
+
+.task .resource-list .info, .task .resource-list img {
+    float: left;
+
 }
 
 /* decison tree */

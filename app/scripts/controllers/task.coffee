@@ -1,4 +1,7 @@
-angular.module('jobFoundryApp').controller 'TaskCtrl', ($scope, $http, $routeParams, $location) ->
+angular.module('jobFoundryApp').controller 'TaskCtrl', ($scope, $http, $routeParams, map, mediaTypes) ->
+
+  $scope.mediaTypes = mediaTypes
+  $scope.valueOf = map
 
   $http.get("/api/v1/tasks/#{$routeParams.name}")
   .success (task) ->
