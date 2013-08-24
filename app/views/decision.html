@@ -1,4 +1,4 @@
-<div class="decision jumbotron text-center">
+<div class="decision jumbotron text-center" ng-show="show">
   <h1>{{question}}</h1>
   <div class="row">
     <div id="option" class="col-lg-{{12/options.length}} am-option" ng-mouseenter="examplesVisible=true" ng-mouseleave="examplesVisible=false" ng-hide="option.hidden" ng-repeat="option in options">

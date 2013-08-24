@@ -2,6 +2,6 @@
 	<ul ng-hide="decisions | isEmpty" class="breadcrumb am-breadcrumb-scale">
 		<li ng-repeat="decision in decisions"><a href="{{decision.question}}">{{decision.name}}</a></li>
 	</ul>
-	<decision question="{{node.question}}" options="node.options" next="step(next)" class="am-decision" ng-repeat="node in nodes | filter:isCurrent"></decision>
+	<decision question="{{node.question}}" options="node.options" next="step(next)" class="am-decision" show="key == current" ng-repeat="(key, node) in tree"></decision>
 </div>
 <div class="textured-bg"></div>

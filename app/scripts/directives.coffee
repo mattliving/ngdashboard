@@ -8,6 +8,7 @@ angular.module('jobFoundryDirectives').directive 'decision', ->
     question: '@'
     options: '='
     nextFunc: "&next"
+    show: "="
   templateUrl: "/views/decision.html"
   link: (scope, elem, attrs) ->
     # scope.isCurrent = (item) ->

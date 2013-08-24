@@ -6,7 +6,7 @@ angular.module('jobFoundryFilters').filter 'join', ->
 
 angular.module('jobFoundryFilters').filter 'isEmpty', ->
 	(array) ->
-		if array.length is 0 then true else false
+		array.length is 0
 
 # angular.module('jobFoundryFilters').filter 'isCurrent', ->
 # 	(item) ->
