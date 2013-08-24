@@ -1,14 +1,12 @@
 "use strict"
 
-angular.module("jobFoundryApp").controller "DecisionTreeCtrl", ($scope) ->
-
-  $s = $scope
+angular.module("jobFoundryApp").controller "DecisionFlowCtrl", ["$scope", ($s) ->
 
   $s.tree =
-    a: 
+    a:
       question: "What would you like to build?"
       options: [
-          name: "Web Site or Application"
+          name: "Website"
           child: "b"
         ,
           name: "Mobile Application"
@@ -16,6 +14,7 @@ angular.module("jobFoundryApp").controller "DecisionTreeCtrl", ($scope) ->
         ,
           name: "Social Media Presence"
       ]
+      current: false
       parent: ""
     b:
       question: "What kind of web site is it?"
@@ -30,6 +29,7 @@ angular.module("jobFoundryApp").controller "DecisionTreeCtrl", ($scope) ->
           name: "Online Store"
           examples: ["Amazon", "Boutique Retailers"]
       ]
+      current: false
       parent: "a"
     c:
       question: "Which platform are you targetting?"
@@ -40,8 +40,9 @@ angular.module("jobFoundryApp").controller "DecisionTreeCtrl", ($scope) ->
         ,
           name: "Mobile Web"
       ]
+      current: false
       parent: "a"
-    d: 
+    d:
       question: "Choose an option."
       options: [
           name: "Node.js"
@@ -56,41 +57,14 @@ angular.module("jobFoundryApp").controller "DecisionTreeCtrl", ($scope) ->
           description: "The favoured web framework for Pythonists."
           language: "Python"
       ]
+      current: false
       parent: "b"
 
-  $s.nodes       = []
-  $s.decisions   = []
-  curNode        = $s.tree.a
-  $s.curQuestion = curNode.question
-  $s.options     = curNode.options
-  $s.nodes.push curNode
+  $s.decisions = []
+  $s.current   = "a"
 
-  # stepping through the options in the decision tree
   $s.step = (chosen) ->
-    # keep a list of all of the chosen options
-    $s.decisions.push chosen.name
-
-    # hide the choices that weren't chosen
-    for option in curNode.options
-      if option.name isnt chosen.name
-        option.hidden = true
-
+    $s.decisions.push chosen
     if chosen.child?
-      curNode        = $s.tree[chosen.child]
-      $s.curQuestion = curNode.question
-      $s.options     = curNode.options
-      $s.nodes.push curNode
-    else 
-      console.log $s.decisions
-
-    console.log $s.nodes
-
-  # $s.showDescription = (option) ->
-  #   console.log "show Desc"
-  #   console.log option.hasOwnProperty 'description'
-
-  $s.showExamples = (option) ->
-    console.log "show Examples"
-    console.log(option.hasOwnProperty 'examples' and mouseover)
-
-    
+      $s.current = chosen.child
+]

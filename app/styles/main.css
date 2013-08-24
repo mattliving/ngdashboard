@@ -1,40 +1,30 @@
+/* @override http://localhost:8080/styles/main.css */
+
 /* landing page content */
 
 html, body {
     height: 100%;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #333;
+    font-weight: 16px;
 }
 
-h1 {
+h1.jobfoundry {
     font-weight: 100;
-}
-
-.hero-bg {
-    position: fixed;
-    z-index: -1;
-    top: 0;
-    left: 0;
-    min-height: 100%;
-    min-width: 100%;
-    background: url("/images/fire2.jpg") no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
 }
 
 img.hero-bg {
   /* Set rules to fill background */
   min-height: 100%;
   min-width: 100%;
-    
+
   /* Set up proportionate scaling */
   width: 100%;
   height: auto;
-    
+
   /* Set up positioning */
   position: fixed;
+  z-index: -1;
   top: 0;
   left: 0;
 }
@@ -55,13 +45,20 @@ img.hero-bg {
     min-width: 100%;
     /*background: url('../images/dark_geometric.png');*/
     /*background: url('../images/debut_dark.png');*/
-    /*background: url('../images/navy_blue.png');*/
+    background: url('../images/navy_blue.png');
     /*background: url('../images/stressed_linen.png');*/
-    background: url('../images/triangles.png');
+    /*background: url('../images/mochaGrunge.png');*/
 }
 
-#decisions {    
+#decisions {
     margin-top: 60px;
+}
+
+#decisions .breadcrumb li > a {
+    font-size: 20px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 200;
+    color: #FF6600;
 }
 
 .decision {
@@ -74,7 +71,12 @@ img.hero-bg {
     box-shadow:         4px 4px 7px -5px #251400;
 }
 
+.decision #option {
+    border: none;
+}
+
 .decision h1 {
+    font-weight: 100;
     border-bottom: 1px solid #777;
     padding-bottom: 1%;
     margin: 0;
@@ -82,7 +84,9 @@ img.hero-bg {
 }
 
 .decision a {
-    font-size: 24px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 200;
+    font-size: 26px;
     text-decoration: none;
     cursor: pointer;
     color: #455;
@@ -94,23 +98,30 @@ img.hero-bg {
 }
 
 .decision .thumbnail {
-    border-radius: 2px;
+    -webkit-transition: 400ms cubic-bezier(0.420, 0.000, 1.000, 1.000) all;
+    -moz-transition: 400ms cubic-bezier(0.420, 0.000, 1.000, 1.000) all;
+    -ms-transition: 400ms cubic-bezier(0.420, 0.000, 1.000, 1.000) all;
+    -o-transition: 400ms cubic-bezier(0.420, 0.000, 1.000, 1.000) all;
+    transition: 400ms cubic-bezier(0.420, 0.000, 1.000, 1.000) all;
+
+    border: none;
+    border-radius: 6px;
     padding: 10px;
 }
 
 .decision .thumbnail:hover {
-    border-color: #FF6600;
+    color: #333;
+    background: #FF6600;
 }
 
 .landing {
-    /*background: #bdc3c7;*/
     background: #111;
     color: #ffffff;
     margin: 4%;
     margin-top: 8%;
     padding: 1%;
     padding-bottom: 4%;
-    opacity: 0.75;
+    opacity: 0.85;
 }
 
 .landing .form-control {
@@ -119,7 +130,14 @@ img.hero-bg {
 }
 
 .landing h1 {
+<<<<<<< HEAD
+    font-size: 5em;
+=======
     font-size: 96px;
+    font-weight: 300;
+    /*font-style: italic;*/
+    font-family: 'Lato', sans-serif;
+>>>>>>> decisions-broken
 }
 
 .landing h1 span {
@@ -127,13 +145,100 @@ img.hero-bg {
 }
 
 .landing h2 {
-    font-size: 36px;
+    font-size: 1.7em;
     font-weight: 200;
     margin-bottom: 2%;
 }
 
 .landing.jumbotron p {
     margin-bottom: 2%;
+}
+
+/* task view styles */
+
+.task header {
+	height: 15em;
+	position: absolute;
+	left: 0;
+	padding-top: 2em;
+	color: white;
+	width: 100%;
+	background-color: #2980b9;
+}
+
+.task header h1, .task header h2 {
+	text-align: center;
+	font-family: "Lato";
+	font-weight: 700;
+}
+
+.task .task-container {
+	padding-top: 15em;
+}
+
+.task .content {
+	border-left: 1px solid #dddddd;
+}
+
+.task .sidebar ul {
+	padding-top: 10px;
+	list-style: none;
+	text-align: right;
+}
+
+.task .sidebar li {
+	font-size: 1.3em;
+	padding: 4%;
+}
+
+.task .sidebar li:hover, .task .sidebar li.current {
+	background-color: #ff6600;
+	color: white;
+}
+
+.task .sidebar .sticky-fixed {
+    position: fixed;
+    top: 0;
+}
+
+.task .resource {
+    padding: 10px;
+}
+
+.task .resource img {
+    box-shadow: 1px 1px 1px black;
+}
+
+/* decison tree */
+
+.decision {
+    margin: 4% 4% 4% 4%;
+    background: #efefef;
+}
+
+.decision .jumbotron {
+    font-size: 1.2em;
+    padding: 40px 50px;
+}
+
+.decision h1 {
+    border-bottom: 1px solid #777;
+    padding-bottom: 1%;
+    margin: 0;
+    margin-bottom: 3%;
+}
+
+.decision .thumbnail {
+    border-radius: 2px;
+    padding: 10px;
+}
+
+.decision .thumbnail {
+    color: #455;
+}
+
+.decision .thumbnail:hover {
+    border-color: #FF6600;
 }
 
 /* resource view styles */
