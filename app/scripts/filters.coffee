@@ -4,6 +4,6 @@ angular.module('jobFoundryFilters').filter 'join', ->
 	(array) ->
 		array.join ', '		
 
-angular.module('jobFoundryFilters').filter 'eg', ->
-	(string) ->
-		'(e.g. ' + string + ')'
+angular.module('jobFoundryFilters').filter 'isEmpty', ->
+	(array) ->
+		array.length is 0

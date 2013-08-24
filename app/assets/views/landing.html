@@ -1,14 +1,15 @@
 <div class="landing jumbotron text-center">
   <h1 class="jobfoundry">Job <span>Foundry</span></h1>
   <h2>Personalised learning based on your project.</h2>
-  <p class="lead">We recommend the most useful and relevant learning resources, so you can concentrate on building the next big thing.</p>
-  <div class="row" ng-hide="subscribe">
+  <p class="lead">We recommend the most useful and relevant learning resources,<br>so you can focus on building the next big thing.</p>
+  <!-- <div class="row" ng-hide="subscribe">
     <h2 id="question">What do you want to <strong>build?</strong></h2>
     <div class="btn-group-vertical" ng-click="subscribe=true">
       <a class="btn btn-large btn-default"  ng-repeat="option in options">{{option}}</a>
     </div>
-  </div>
-  <form ng-cloak ng-animate="'landing'" ng-if="subscribe" class="form-inline" action="http://gmail.us6.list-manage1.com/subscribe/post?u=8397893b3f&amp;id=78168c8cc6" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+  </div> -->
+  <button type="button" ng-hide="subscribe" ng-click="subscribe=true" class="btn btn-lg btn-default">Learn More</button>
+  <form ng-cloak ng-show="subscribe" class="form-inline am-landing" action="http://gmail.us6.list-manage1.com/subscribe/post?u=8397893b3f&amp;id=78168c8cc6" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
     <div class="row">
       <p class="lead">We aren't quite ready yet, so sign up and be one of the first to join Job Foundry!</p>
       <div class="col-lg-2"></div>

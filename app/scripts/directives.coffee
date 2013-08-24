@@ -7,9 +7,13 @@ angular.module('jobFoundryDirectives').directive 'decision', ->
   scope:
     question: '@'
     options: '='
-    nextFunc: "&next"
+    nextFunc: '&next'
+    show: '='
   templateUrl: "/views/decision.html"
   link: (scope, elem, attrs) ->
+    scope.showOnly = (choice) ->
+      for option in scope.options
+        option.hidden = option isnt choice
 
 angular.module('jobFoundryDirectives').directive 'sticky', ($window) ->
   (scope, elem, attrs) ->

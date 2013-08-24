@@ -116,15 +116,15 @@ angular.module('jobFoundryApp').controller 'ResourceCtrl', ($scope, $routeParams
         cost: "free"
 
     fetch.then (res) ->
-        if res.success
-          $scope.input =
-            authors: []
+      if res.success
+        $scope.input =
+          authors: []
 
-          if $scope.editing
-            $location.path "/add"
-        else
-          console.log res
-          alert 'there was an error with your request, see console for details'
+        if $scope.editing
+          $location.path "/add"
+      else
+        console.log res
+        alert 'there was an error with your request, see console for details'
 
 
 

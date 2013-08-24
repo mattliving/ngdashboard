@@ -1,4 +1,7 @@
 <div id="decisions" class="container">
-	<decision question="{{node.question}}" options="node.options" next="step(next)" ng-animate="{enter: 'animate-enter'}" ng-repeat="node in nodes"></decision>
+	<ul ng-show="decisions.length" class="breadcrumb am-breadcrumb-scale">
+		<li ng-repeat="decision in decisions"><a href="{{decision.question}}">{{decision.name}}</a></li>
+	</ul>
+	<decision question="{{node.question}}" options="node.options" next="step(next)" class="am-decision" show="key == current" ng-repeat="(key, node) in tree"></decision>
 </div>
 <div class="textured-bg"></div>
