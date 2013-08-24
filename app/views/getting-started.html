@@ -1,5 +1,5 @@
 <div id="decisions" class="container">
-	<ul ng-hide="decisions | isEmpty" class="breadcrumb am-breadcrumb-scale">
+	<ul ng-show="decisions.length" class="breadcrumb am-breadcrumb-scale">
 		<li ng-repeat="decision in decisions"><a href="{{decision.question}}">{{decision.name}}</a></li>
 	</ul>
 	<decision question="{{node.question}}" options="node.options" next="step(next)" class="am-decision" show="key == current" ng-repeat="(key, node) in tree"></decision>
