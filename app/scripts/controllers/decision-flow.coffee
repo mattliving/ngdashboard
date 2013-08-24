@@ -3,7 +3,7 @@
 angular.module("jobFoundryApp").controller "DecisionFlowCtrl", ["$scope", ($s) ->
 
   $s.tree =
-    a: 
+    a:
       question: "What would you like to build?"
       options: [
           name: "Website"
@@ -42,7 +42,7 @@ angular.module("jobFoundryApp").controller "DecisionFlowCtrl", ["$scope", ($s) -
       ]
       current: false
       parent: "a"
-    d: 
+    d:
       question: "Choose an option."
       options: [
           name: "Node.js"
@@ -60,33 +60,12 @@ angular.module("jobFoundryApp").controller "DecisionFlowCtrl", ["$scope", ($s) -
       current: false
       parent: "b"
 
-  $s.nodes     = []
+  $s.questionName = "a"
   $s.decisions = []
-  node         = $s.tree.a
-  node.current = true
-  $s.nodes.push node
-  index = 0
 
-  # stepping through the options in the decision tree
   $s.step = (chosen) ->
-    # keep a list of all of the chosen options
     $s.decisions.push chosen
-
-    # hide the choices that weren't chosen
-    for option in node.options
-      if option.name isnt chosen.name
-        option.hidden = true
-
     if chosen.child?
-      $s.nodes[index].current = false
-      node = $s.tree[chosen.child]
-      node.current = true
-      index = $s.nodes.push(node) - 1
-      console.log index
-    else 
-      console.log $s.decisions
+      $s.questionName = chosen.child
 
-  $s.isCurrent = (item) ->
-    # console.log item
-    item.current
 ]

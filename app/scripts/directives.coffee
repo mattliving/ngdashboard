@@ -8,10 +8,12 @@ angular.module('jobFoundryDirectives').directive 'decision', ->
     question: '@'
     options: '='
     nextFunc: "&next"
+    show: '='
   templateUrl: "/views/decision.html"
   link: (scope, elem, attrs) ->
-    # scope.isCurrent = (item) ->
-    #   item.current
+    scope.showOnly = (choice) ->
+      for option in scope.options
+        option.hidden = option isnt choice
 
 angular.module('jobFoundryDirectives').directive 'enterKey', ->
   (scope, elem, attrs) ->
