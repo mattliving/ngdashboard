@@ -60,6 +60,13 @@ img.hero-bg {
     margin-top: 60px;
 }
 
+#decisions .breadcrumb li > a {
+    font-size: 20px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 200;
+    color: #FF6600;
+}
+
 .decision {
     background: #efefef;
     padding: 40px 50px;

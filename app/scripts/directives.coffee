@@ -10,6 +10,8 @@ angular.module('jobFoundryDirectives').directive 'decision', ->
     nextFunc: "&next"
   templateUrl: "/views/decision.html"
   link: (scope, elem, attrs) ->
+    # scope.isCurrent = (item) ->
+    #   item.current
 
 angular.module('jobFoundryDirectives').directive 'enterKey', ->
   (scope, elem, attrs) ->

@@ -1,12 +1,12 @@
 "use strict"
 
-angular.module("jobFoundryApp").controller "DecisionTreeCtrl", ["$scope", ($s) ->
+angular.module("jobFoundryApp").controller "DecisionFlowCtrl", ["$scope", ($s) ->
 
   $s.tree =
     a: 
       question: "What would you like to build?"
       options: [
-          name: "Web Site or Application"
+          name: "Website"
           child: "b"
         ,
           name: "Mobile Application"
@@ -14,6 +14,7 @@ angular.module("jobFoundryApp").controller "DecisionTreeCtrl", ["$scope", ($s) -
         ,
           name: "Social Media Presence"
       ]
+      current: false
       parent: ""
     b:
       question: "What kind of web site is it?"
@@ -28,6 +29,7 @@ angular.module("jobFoundryApp").controller "DecisionTreeCtrl", ["$scope", ($s) -
           name: "Online Store"
           examples: ["Amazon", "Boutique Retailers"]
       ]
+      current: false
       parent: "a"
     c:
       question: "Which platform are you targetting?"
@@ -38,6 +40,7 @@ angular.module("jobFoundryApp").controller "DecisionTreeCtrl", ["$scope", ($s) -
         ,
           name: "Mobile Web"
       ]
+      current: false
       parent: "a"
     d: 
       question: "Choose an option."
@@ -54,30 +57,36 @@ angular.module("jobFoundryApp").controller "DecisionTreeCtrl", ["$scope", ($s) -
           description: "The favoured web framework for Pythonists."
           language: "Python"
       ]
+      current: false
       parent: "b"
 
-  $s.nodes       = []
-  $s.decisions   = []
-  curNode        = $s.tree.a
-  $s.nodes.push curNode
-  console.log $s.nodes
+  $s.nodes     = []
+  $s.decisions = []
+  node         = $s.tree.a
+  node.current = true
+  $s.nodes.push node
+  index = 0
 
   # stepping through the options in the decision tree
   $s.step = (chosen) ->
     # keep a list of all of the chosen options
-    $s.decisions.push chosen.name
+    $s.decisions.push chosen
 
     # hide the choices that weren't chosen
-    for option in curNode.options
+    for option in node.options
       if option.name isnt chosen.name
         option.hidden = true
 
     if chosen.child?
-      curNode = $s.tree[chosen.child]
-      $s.nodes.push curNode
+      $s.nodes[index].current = false
+      node = $s.tree[chosen.child]
+      node.current = true
+      index = $s.nodes.push(node) - 1
+      console.log index
     else 
       console.log $s.decisions
 
-    console.log $s.nodes
-
+  $s.isCurrent = (item) ->
+    # console.log item
+    item.current
 ]
