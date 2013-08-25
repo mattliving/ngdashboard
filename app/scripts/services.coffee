@@ -1,5 +1,3 @@
-'use strict'
-
 angular.module 'jobFoundryServices', []
 
 # simple key creation from values for now, may be more complex later
