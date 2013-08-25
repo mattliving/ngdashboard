@@ -119,6 +119,8 @@ angular.module('jobFoundryApp').controller 'ResourceCtrl', ($scope, $routeParams
       if res.success
         $scope.input =
           authors: []
+          mediaType: []
+          topics: []
 
         if $scope.editing
           $location.path "/add"

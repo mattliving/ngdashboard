@@ -148,6 +148,8 @@ angular.module('jobFoundryDirectives').directive 'tagInput', (keygen) ->
           $s.suggestions = _.take $s.tags, 5
 
     $s.addTag = ->
+      $s.tagList ?= []
+
       tag = $s.tagInput
       key = keygen tag
 
