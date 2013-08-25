@@ -50,69 +50,7 @@ img.hero-bg {
     /*background: url('../images/mochaGrunge.png');*/
 }
 
-#decisions {
-    margin-top: 60px;
-}
-
-#decisions .breadcrumb li > a {
-    font-size: 20px;
-    font-family: 'Lato', sans-serif;
-    font-weight: 200;
-    color: #FF6600;
-}
-
-.decision {
-    background: #efefef;
-    padding: 40px 50px;
-    -webkit-box-shadow: 4px 4px 7px -5px #251400;
-    -moz-box-shadow:    4px 4px 7px -5px #251400;
-    -ms-box-shadow:     4px 4px 7px -5px #251400;
-    -o-box-shadow:      4px 4px 7px -5px #251400;
-    box-shadow:         4px 4px 7px -5px #251400;
-}
-
-.decision #option {
-    border: none;
-}
-
-.decision h1 {
-    font-weight: 100;
-    border-bottom: 1px solid #777;
-    padding-bottom: 1%;
-    margin: 0;
-    margin-bottom: 3%;
-}
-
-.decision a {
-    font-family: 'Lato', sans-serif;
-    font-weight: 200;
-    font-size: 26px;
-    text-decoration: none;
-    cursor: pointer;
-    color: #455;
-}
-
-.decision p {
-    font-size: 20px;
-    margin-bottom: 0px;
-}
-
-.decision .thumbnail {
-    -webkit-transition: 400ms cubic-bezier(0.420, 0.000, 1.000, 1.000) all;
-    -moz-transition: 400ms cubic-bezier(0.420, 0.000, 1.000, 1.000) all;
-    -ms-transition: 400ms cubic-bezier(0.420, 0.000, 1.000, 1.000) all;
-    -o-transition: 400ms cubic-bezier(0.420, 0.000, 1.000, 1.000) all;
-    transition: 400ms cubic-bezier(0.420, 0.000, 1.000, 1.000) all;
-
-    border: none;
-    border-radius: 6px;
-    padding: 10px;
-}
-
-.decision .thumbnail:hover {
-    color: #333;
-    background: #FF6600;
-}
+/* landing page */
 
 .landing {
     background: #111;
@@ -130,14 +68,10 @@ img.hero-bg {
 }
 
 .landing h1 {
-<<<<<<< HEAD
     font-size: 5em;
-=======
-    font-size: 96px;
     font-weight: 300;
     /*font-style: italic;*/
     font-family: 'Lato', sans-serif;
->>>>>>> decisions-broken
 }
 
 .landing h1 span {
@@ -154,7 +88,7 @@ img.hero-bg {
     margin-bottom: 2%;
 }
 
-/* task view styles */
+/* task view */
 
 .task header {
 	height: 15em;
@@ -209,11 +143,59 @@ img.hero-bg {
     box-shadow: 1px 1px 1px black;
 }
 
-/* decison tree */
+/* decison flow view */
+
+#decisions {
+    margin-top: 60px;
+}
+
+#decisions .breadcrumb li > a {
+    font-size: 20px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 200;
+    color: #FF6600;
+}
 
 .decision {
+    background: #efefef;
+    padding: 40px 50px;
+    -webkit-box-shadow: 4px 4px 7px -5px #251400;
+    -moz-box-shadow:    4px 4px 7px -5px #251400;
+    -ms-box-shadow:     4px 4px 7px -5px #251400;
+    -o-box-shadow:      4px 4px 7px -5px #251400;
+    box-shadow:         4px 4px 7px -5px #251400;
+}
+
+/*.decision {
     margin: 4% 4% 4% 4%;
     background: #efefef;
+}*/
+
+.decision #option {
+    border: none;
+}
+
+.decision h1 {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    border-bottom: 1px solid #777;
+    padding-bottom: 1%;
+    margin: 0;
+    margin-bottom: 3%;
+}
+
+.decision a {
+    font-family: 'Lato', sans-serif;
+    font-weight: 200;
+    font-size: 26px;
+    text-decoration: none;
+    cursor: pointer;
+    color: #455;
+}
+
+.decision p {
+    font-size: 20px;
+    margin-bottom: 0px;
 }
 
 .decision .jumbotron {
@@ -221,24 +203,22 @@ img.hero-bg {
     padding: 40px 50px;
 }
 
-.decision h1 {
-    border-bottom: 1px solid #777;
-    padding-bottom: 1%;
-    margin: 0;
-    margin-bottom: 3%;
-}
-
 .decision .thumbnail {
+    -webkit-transition: 400ms cubic-bezier(0.420, 0.000, 1.000, 1.000) all;
+    -moz-transition: 400ms cubic-bezier(0.420, 0.000, 1.000, 1.000) all;
+    -ms-transition: 400ms cubic-bezier(0.420, 0.000, 1.000, 1.000) all;
+    -o-transition: 400ms cubic-bezier(0.420, 0.000, 1.000, 1.000) all;
+    transition: 400ms cubic-bezier(0.420, 0.000, 1.000, 1.000) all;
+
+    border: none;
     border-radius: 2px;
     padding: 10px;
-}
-
-.decision .thumbnail {
     color: #455;
 }
 
 .decision .thumbnail:hover {
-    border-color: #FF6600;
+    color: #333;
+    background: #FF6600;
 }
 
 /* resource view styles */

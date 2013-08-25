@@ -13,6 +13,7 @@ angular.module('jobFoundryApp', ['jobFoundryDirectives', 'jobFoundryServices', '
       .when '/getting-started',
         templateUrl: 'views/getting-started.html'
         controller: 'DecisionFlowCtrl'
+        reloadOnSearch: false
       .when '/add',
         templateUrl: '/views/resource-form.html'
         controller: 'ResourceCtrl'
@@ -28,6 +29,5 @@ angular.module('jobFoundryApp', ['jobFoundryDirectives', 'jobFoundryServices', '
         reloadOnSearch: false
       .otherwise
         redirectTo: '/'
-
     $locationProvider.html5Mode true
-    return
+
