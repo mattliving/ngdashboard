@@ -18,7 +18,6 @@ angular.module('jobFoundryServices').factory 'Tree', ->
         ,
           name: "Social Media Presence"
       ]
-      current: false
       parent: ""
     b:
       question: "What kind of web site is it?"
@@ -33,7 +32,6 @@ angular.module('jobFoundryServices').factory 'Tree', ->
           name: "Online Store"
           examples: ["Amazon", "Boutique Retailers"]
       ]
-      current: false
       parent: "a"
     c:
       question: "Which platform are you targetting?"
@@ -44,10 +42,9 @@ angular.module('jobFoundryServices').factory 'Tree', ->
         ,
           name: "Mobile Web"
       ]
-      current: false
       parent: "a"
     d:
-      question: "Choose an option."
+      question: "Choose a framework."
       options: [
           name: "Node.js"
           description: "Node.js allows the development of fast, scalable web applications written entirely in JavaScript."
@@ -61,7 +58,6 @@ angular.module('jobFoundryServices').factory 'Tree', ->
           description: "The favoured web framework for Pythonists."
           language: "Python"
       ]
-      current: false
       parent: "b"
 
 angular.module('jobFoundryServices').service 'Resources',

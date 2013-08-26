@@ -11,9 +11,9 @@ angular.module('jobFoundryDirectives').directive 'decision', ->
     show: '='
   templateUrl: "/views/decision.html"
   link: (scope, elem, attrs) ->
-    scope.showOnly = (choice) ->
-      for option in scope.options
-        option.hidden = option isnt choice
+    # scope.showOnly = (choice) ->
+    #   for option in scope.options
+    #     option.hidden = option isnt choice
 
 angular.module('jobFoundryDirectives').directive 'sticky', ($window) ->
   (scope, elem, attrs) ->
