@@ -25,8 +25,9 @@
                 <div class="resource row" ng-repeat="resource in task.resources | filter:filterType(key)">
                     <div class="col-md-3"><img ng-src="images/screenshots/{{resource._id}}.png" width="150"></div>
                     <div class="info col-md-9">
-                        <h5>{{resource.title}}</h5>
-                        <p>{{resource.link}}</p>
+                        <h5><a target="_blank" href="{{resource.link}}">{{resource.title}}</a></h5>
+                        <p>{{domain(resource.link)}}</p>
+                        <p>{{resource.description}}</p>
                     </div>
                 </div>
             </div>

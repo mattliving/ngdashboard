@@ -203,6 +203,7 @@ img.hero-bg {
 
 .task .resource {
     padding: 10px;
+    border-bottom: 1px solid #ddd;
 }
 
 .task .resource img {

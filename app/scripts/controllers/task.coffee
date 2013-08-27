@@ -11,3 +11,12 @@ angular.module('jobFoundryApp').controller 'TaskCtrl', ($scope, $http, $routePar
   $scope.resourceFilter = {}
   $scope.filterType = (type) ->
     $scope.resourceFilter = (resource) -> type in resource.mediaType
+
+  urlParser = document.createElement 'a'
+  $scope.domain = (link) ->
+    urlParser.href = link
+    host = urlParser.hostname
+    if host[0..2] is 'www'
+      host[4..]
+    else
+      host
