@@ -1,0 +1,27 @@
+<div class="row task">
+    <header>
+        <h1>My First Project</h1>
+        <h2>This is my first project.</h2>
+    </header>
+    <div class="task-container" scroll-spy>
+        <div class="col-md-3 sidebar">
+            <ul sticky>
+                <li spy="current">Current</li>
+                <li spy="completed">Completed</li>
+            </ul>
+        </div>
+        <div class="col-md-9 content">
+            <h3 id="current">Current</h3>
+            <div class="row" ng-repeat="task in tasks" ng-show="(task.resources | filter:filterType(key)).length">
+                <h4 class="resource-title">{{type + 's'}}</h4> <!-- There will need to be a better way of pluralizing at some point... -->
+                <div class="resource row" ng-repeat="resource in task.resources | filter:filterType(key)">
+                    <div class="col-md-3"><img ng-src="images/screenshots/{{resource._id}}.png" width="150"></div>
+                    <div class="info col-md-9">
+                        <h5>{{resource.title}}</h5>
+                        <p>{{resource.link}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

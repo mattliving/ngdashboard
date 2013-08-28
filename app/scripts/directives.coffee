@@ -5,15 +5,81 @@ angular.module 'jobFoundryDirectives', ['jobFoundryServices']
 angular.module('jobFoundryDirectives').directive 'decision', ->
   restrict: 'E'
   scope:
-    question: '@'
-    options: '='
-    nextFunc: '&next'
+    type: '@'
+    content: '='
     show: '='
-  templateUrl: "/views/decision.html"
+    nextFunc: '&next'
+  templateUrl: '/views/decision.html'
   link: (scope, elem, attrs) ->
     # scope.showOnly = (choice) ->
     #   for option in scope.options
     #     option.hidden = option isnt choice
+
+angular.module('jobFoundryDirectives').directive 'choice', ->
+  restrict: 'E'
+  templateUrl: '/views/choice.html'
+  link: (scope, elem, attrs) ->
+
+angular.module('jobFoundryDirectives').directive 'evaluation', ->
+  restrict: 'E'
+  templateUrl: '/views/evaluation.html'
+  link: (scope, elem, attrs) ->
+
+angular.module('jobFoundryDirectives').directive 'progressBar', ->
+  restrict: 'E'
+  templateUrl: '/views/progress-bar.html'
+  scope:
+    level: '='
+  link: (scope, elem, attrs) ->
+    scope.progressBars = []
+    scope.progressBars.push
+      percent: 0
+      rank: "Sparkling"
+      bgColour: '#E2B822'
+    scope.progressBars.push
+      percent: 0
+      rank: "Novice"
+      bgColour: '#E29822'
+    scope.progressBars.push
+      percent: 0
+      rank: "Fire Dancer"
+      bgColour: '#E27822'
+    scope.progressBars.push
+      percent: 0
+      rank: "Expert"
+      bgColour: '#E25822'
+    scope.progressBars.push
+      percent: 0
+      rank: "Pyromaster"
+      bgColour: '#22ACE2'
+
+    scope.progressUpdate = _.debounce (event) ->
+      $target = $(event.currentTarget)
+      offset  = $target.offset().left
+      width   = $target.width()
+
+      percent = Math.round (event.clientX - offset) / width * 100
+      switch true
+        when percent > 0 and percent <= 20
+          for bar, index in scope.progressBars
+            bar.percent = if index <= 0 then 20 else 0
+        when percent > 21 and percent <= 40
+          for bar, index in scope.progressBars
+            bar.percent = if index <= 1 then 20 else 0
+        when percent > 41 and percent <= 60
+          for bar, index in scope.progressBars
+            bar.percent = if index <= 2 then 20 else 0
+        when percent > 61 and percent <= 80
+          for bar, index in scope.progressBars
+            bar.percent = if index <= 3 then 20 else 0
+        when percent > 81 and percent <= 100
+          for bar, index in scope.progressBars
+            bar.percent = if index <= 4 then 20 else 0
+    ,
+      50
+    ,
+      leading: true
+      trailing: true
 
 angular.module('jobFoundryDirectives').directive 'sticky', ($window) ->
   (scope, elem, attrs) ->

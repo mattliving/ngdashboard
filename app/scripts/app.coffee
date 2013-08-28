@@ -23,6 +23,10 @@ angular.module('jobFoundryApp', ['jobFoundryDirectives', 'jobFoundryServices', '
       .when '/list/:path',
         templateUrl: '/views/list.html'
         controller: 'ResourceCtrl'
+      .when '/projects/overview',
+        templateUrl: '/views/project-overview.html'
+        controller: 'ProjectOverviewCtrl'
+        reloadOnSearch: false
       .when '/task/:name',
         templateUrl: '/views/task.html'
         controller: 'TaskCtrl'

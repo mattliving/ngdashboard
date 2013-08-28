@@ -8,57 +8,80 @@ angular.module('jobFoundryServices').factory 'keygen', -> (string) -> string.toL
 angular.module('jobFoundryServices').factory 'Tree', ->
   Tree =
     a:
-      question: "What would you like to build?"
-      options: [
-          name: "Website"
-          child: "b"
-        ,
-          name: "Mobile Application"
-          child: "c"
-        ,
-          name: "Social Media Presence"
-      ]
+      content:
+        question: "What would you like to build?"
+        options: [
+            name: "Website"
+            child: "b"
+          ,
+            name: "Mobile Application"
+            child: "c"
+          ,
+            name: "Social Media Presence"
+        ]
       parent: ""
+      type: "choice"
     b:
-      question: "What kind of web site is it?"
-      options: [
-          name: "Web Application"
-          examples: ["Facebook", "Twitter", "Gmail"]
-          child: "d"
-        ,
-          name: "Content-based Site"
-          examples: ["Blog", "Photography Portfolio"]
-        ,
-          name: "Online Store"
-          examples: ["Amazon", "Boutique Retailers"]
-      ]
+      content:
+        question: "What kind of web site is it?"
+        options: [
+            name: "Web Application"
+            examples: ["Facebook", "Twitter", "Gmail"]
+            child: "d"
+          ,
+            name: "Content-based Site"
+            examples: ["Blog", "Photography Portfolio"]
+          ,
+            name: "Online Store"
+            examples: ["Amazon", "Boutique Retailers"]
+        ]
       parent: "a"
+      type: "choice"
     c:
-      question: "Which platform are you targetting?"
-      options: [
-          name: "iOS"
-        ,
-          name: "Android"
-        ,
-          name: "Mobile Web"
-      ]
+      content:
+        question: "Which platform are you targetting?"
+        options: [
+            name: "iOS"
+          ,
+            name: "Android"
+          ,
+            name: "Mobile Web"
+        ]
       parent: "a"
+      type: "choice"
     d:
-      question: "Choose a framework."
-      options: [
-          name: "Node.js"
-          description: "Node.js allows the development of fast, scalable web applications written entirely in JavaScript."
-          language: "JavaScript"
-        ,
-          name: "Ruby on Rails"
-          description: "Ruby on Rails is one of the most popular web frameworks, favouring convention over configuration to make development faster and easier."
-          language: "Ruby"
-        ,
-          name: "Django"
-          description: "The favoured web framework for Pythonists."
-          language: "Python"
-      ]
+      content:
+        question: "Choose a framework."
+        options: [
+            name: "Node.js"
+            description: "Node.js allows the development of fast, scalable web applications written entirely in JavaScript."
+            language: "JavaScript"
+            child: "e"
+          ,
+            name: "Ruby on Rails"
+            description: "Ruby on Rails is one of the most popular web frameworks, favouring convention over configuration to make development faster and easier."
+            language: "Ruby"
+            child: "e"
+          ,
+            name: "Django"
+            description: "The favoured web framework for Pythonists."
+            language: "Python"
+            child: "e"
+        ]
       parent: "b"
+      type: "choice"
+    e:
+      content:
+        question: "What skills do you have?"
+        options: [
+            name: "HTML"
+          ,
+            name: "CSS"
+          ,
+            name: "JavaScript"
+        ]
+      parent: "d"
+      type: "evaluation"
 
 angular.module('jobFoundryServices').service 'Resources',
   class Resources
