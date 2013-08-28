@@ -1,5 +1,3 @@
-'use strict'
-
 angular.module 'jobFoundryDirectives', ['jobFoundryServices']
 
 angular.module('jobFoundryDirectives').directive 'decision', ->
