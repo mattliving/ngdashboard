@@ -207,7 +207,7 @@ img.hero-bg {
 }
 
 .task .resource img {
-    box-shadow: 1px 1px 1px black;
+    box-shadow: 1px 1px 5px #7f7f7f;
 }
 
 /* decison tree */

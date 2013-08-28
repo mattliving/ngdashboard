@@ -1,19 +1,18 @@
 fs = require 'fs'
+gm = require 'gm'
 webshot = require 'webshot'
-resources = require './resources.json'
+[node, script, url, filename] = process.argv
 
-index = -1
+console.log 'dir', __dirname
 
-do render = (err = false) ->
-  if err then console.log 'err ', err
-  index++
-  if index < resources.length
-    resource = resources[index]
-    filename = "app/assets/images/screenshots/#{resource._id}.png"
-    fs.exists filename, (exists) ->
-      if not exists
-        console.log 'rendering ' + resource.link
-        webshot resource.link, filename, render
-      else
-        console.log 'already rendered ' + resource.link
-        render()
+directory = __dirname + "/app/assets/images/screenshots/"
+filename += '.png'
+
+console.log directory + filename
+
+webshot url, (err, stream) ->
+  gm(stream, filename).resize(200).write directory + filename, (err) ->
+    if err
+      console.log 'err:', err
+    else
+      console.log 'success'

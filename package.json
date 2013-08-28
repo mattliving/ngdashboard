@@ -8,7 +8,8 @@
     "underscore": "latest",
     "consolidate": "~0.9.1",
     "q": "~0.9.6",
-    "webshot": "~0.5.1"
+    "webshot": "~0.5.1",
+    "gm": "~1.11.1"
   },
   "devDependencies": {
     "brunch": "~1.7",

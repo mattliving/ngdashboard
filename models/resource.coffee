@@ -1,4 +1,5 @@
 mongoose = require 'mongoose'
+# {spawn} = require('child_process')
 
 ResourceSchema = new mongoose.Schema
   path:
@@ -22,7 +23,9 @@ ResourceSchema = new mongoose.Schema
   cost: String
 
 ResourceSchema.post 'save', (doc) ->
-  console.log "this would now render #{doc.link} to #{doc._id}.png"
+  console.log "(not) rendering #{doc.link} to #{doc._id}.png"
+  # render = spawn 'coffee', ["render.coffee", doc.link, doc._id], cwd: require('path').dirname(require.main.filename)
+  # render.stdout.on 'data', (data) -> console.log data.toString()
 
 ResourceModel = mongoose.model 'Resource', ResourceSchema
 
