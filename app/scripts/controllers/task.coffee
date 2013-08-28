@@ -8,9 +8,15 @@ angular.module('jobFoundryApp').controller 'TaskCtrl', ($scope, $http, $routePar
     $scope.task = task
   .error -> console.log 'error getting data'
 
-  $scope.resourceFilter = {}
-  $scope.filterType = (type) ->
-    $scope.resourceFilter = (resource) -> type in resource.mediaType
+  $scope.filter = {}
+  $scope.filterFunc = (resource) ->
+    if _.isEmpty $scope.filter
+      return true
+    else
+      for type, filter of $scope.filter
+        if filter and type not in resource.mediaType
+          return false
+      return true
 
   urlParser = document.createElement 'a'
   $scope.domain = (link) ->

@@ -130,14 +130,11 @@ img.hero-bg {
 }
 
 .landing h1 {
-<<<<<<< HEAD
     font-size: 5em;
-=======
     font-size: 96px;
     font-weight: 300;
     /*font-style: italic;*/
     font-family: 'Lato', sans-serif;
->>>>>>> decisions-broken
 }
 
 .landing h1 span {
@@ -191,9 +188,23 @@ img.hero-bg {
 	padding: 4%;
 }
 
-.task .sidebar li:hover, .task .sidebar li.current {
+.task .sidebar > ul > li:hover, .task .sidebar > ul > li.current {
 	background-color: #ff6600;
 	color: white;
+}
+
+.task .sidebar ul.media-type-filter li {
+    background-color: white;
+    font-size: 1.2em;
+}
+
+.task .sidebar ul.media-type-filter li:hover, .task .sidebar ul.media-type-filter li.active {
+    background-color: #2980b9;
+    color: white;
+}
+
+.task .sidebar .current ul.media-type-filter, .task .sidebar li:hover ul.media-type:hover {
+    color: black;
 }
 
 .task .sidebar .sticky-fixed {
@@ -204,10 +215,6 @@ img.hero-bg {
 .task .resource {
     padding: 10px;
     border-bottom: 1px solid #ddd;
-}
-
-.task .resource img {
-    box-shadow: 1px 1px 5px #7f7f7f;
 }
 
 /* decison tree */
