@@ -6,7 +6,6 @@ angular.module('jobFoundryApp').controller 'ProjectOverviewCtrl', ($scope, $http
   $http.get("/api/v1/tasks")
   .success (tasks) ->
     $scope.tasks = tasks
-    console.log $scope.tasks
   .error -> console.log 'error getting data'
 
   $scope.resourceFilter = {}

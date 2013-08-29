@@ -23,6 +23,17 @@ angular.module('jobFoundryDirectives').directive 'evaluation', ->
   templateUrl: '/views/evaluation.html'
   link: (scope, elem, attrs) ->
 
+angular.module('jobFoundryDirectives').directive 'multiRepeat', ($timeout) ->
+  replace: true
+  scope:
+    columns: '@'
+    collection: '='
+  templateUrl: '/views/multi-repeat.html'
+  link: (scope, elem, attrs) ->
+    $timeout ->
+      scope.set = _.groupBy scope.collection, (item) ->
+        index = Math.floor ((_.indexOf scope.collection, item) / scope.columns)
+
 angular.module('jobFoundryDirectives').directive 'progressBar', ->
   restrict: 'E'
   templateUrl: '/views/progress-bar.html'

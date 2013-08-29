@@ -81,9 +81,8 @@ angular.module('jobFoundryServices').factory 'Tree', ->
       parent: "d"
       type: "evaluation"
 
-angular.module('jobFoundryServices').service
-
-'Resources', class Resources
+angular.module('jobFoundryServices').service 'Resources', ->
+  class Resources
   # ngmin can't detect the dependencies in CoffeeScript's class syntax
   Resources.$inject = ['$http', '$q', '$rootScope']
   constructor: (@$http, @$q, @$rootScope) ->
