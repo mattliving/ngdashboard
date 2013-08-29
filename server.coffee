@@ -51,6 +51,8 @@ app.get '/api/v1/content/:key', (req, res) ->
   content.get(req.params.key).then (data) -> res.json data["data"]
 
 # Tasks
+app.get '/api/v1/tasks', (req, res) ->
+  tasks.all().then (tasks) -> res.json tasks
 app.get '/api/v1/tasks/:name', (req, res) ->
   tasks.get(req.params.name).then (task) -> res.json task
 

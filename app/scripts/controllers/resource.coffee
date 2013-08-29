@@ -1,5 +1,3 @@
-'use strict'
-
 angular.module('jobFoundryApp').controller 'ResourceCtrl', ($scope, $routeParams, $location, Resources, mediaTypes, topics, levels, costs, paths, map) ->
   $scope.mediaTypes = mediaTypes
   $scope.topics     = topics

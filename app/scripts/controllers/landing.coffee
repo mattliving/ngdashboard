@@ -1,5 +1,3 @@
-"use strict"
-
 angular.module("jobFoundryApp").controller "LandingCtrl", ($http, $scope) ->
 
   $scope.subscribe = false

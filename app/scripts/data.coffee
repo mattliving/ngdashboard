@@ -1,5 +1,3 @@
-'use strict'
-
 # static key-value maps for data types
 angular.module("resourceData", [])
 
