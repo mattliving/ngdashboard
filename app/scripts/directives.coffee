@@ -30,7 +30,7 @@ angular.module('jobFoundryDirectives').directive 'multiRepeat', ($timeout) ->
     collection: '='
   templateUrl: '/views/multi-repeat.html'
   link: (scope, elem, attrs) ->
-    $timeout ->
+    scope.$watch 'collection', ->
       scope.set = _.groupBy scope.collection, (item) ->
         index = Math.floor ((_.indexOf scope.collection, item) / scope.columns)
 
