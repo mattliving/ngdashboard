@@ -251,6 +251,14 @@ img.hero-bg {
 
 /* resource view styles */
 
+.unfinished-resource {
+    clear: both;
+}
+
+.unfinished-resource a.btn {
+    float: right;
+}
+
 .dot {
     width: 8px;
     height: 8px;

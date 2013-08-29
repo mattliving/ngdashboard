@@ -28,3 +28,9 @@
         <div class="line" ng-show="!$last"></div>
     </div>
 </div>
+<h3 ng-show="(resources | filter:{path: path, unfinished: true}).length">Unfinished Resources</h3>
+<div class="unfinished-resource" ng-repeat="resource in resources | filter:{path: path, unfinished: true}">
+    <div class="line" ng-show="!$first"></div>
+    <a href="{{resource.link}}">{{resource.title}}</a>
+    <a href="" class="btn btn-sm btn-danger" ng-click="deleteResource(resource)">Delete this resource</a><a ng-href="#/edit/{{resource._id}}" class="btn btn-sm btn-success">Edit this resource</a><br>
+</div>

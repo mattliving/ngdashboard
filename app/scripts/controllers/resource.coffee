@@ -93,9 +93,6 @@ angular.module('jobFoundryApp').controller 'ResourceCtrl', ($scope, $routeParams
 
   $scope.addResource = ->
     input = angular.copy $scope.input
-    if not (input.level and input.path and input.cost)
-      alert "you must have a level, path and cost"
-      return
 
     input.authors = input.authors.map (attrs) ->
       author = {}
@@ -104,9 +101,9 @@ angular.module('jobFoundryApp').controller 'ResourceCtrl', ($scope, $routeParams
 
     if $scope.editing
       input._id = $routeParams.id
-      fetch = Resources.edit input
+      updatedResource = Resources.edit input
     else
-      fetch = Resources.add _.defaults input,
+      updatedResource = Resources.add _.defaults input,
         topic: []
         mediaType: []
         description: ""
@@ -115,7 +112,7 @@ angular.module('jobFoundryApp').controller 'ResourceCtrl', ($scope, $routeParams
         ]
         cost: "free"
 
-    fetch.then (res) ->
+    updatedResource.then (res) ->
       if res.success
         $scope.input =
           authors: []
