@@ -19,7 +19,7 @@ Resource.find().select('link').exec (err, resources) ->
       path = "/app/assets/images/screenshots/#{resource._id}.png"
       fs.exists cwd + path, (exists) ->
         unless exists
-          console.log "rendering #{resource.link} to #{resource._id}.png"
+          console.log "rendering #{resource.link} to #{resource._id}.png (#{index} of #{resources.length})"
           render = spawn 'coffee', ['render.coffee', resource.link, resource._id], cwd: cwd
           render.on 'exit', next
         else

@@ -34,6 +34,7 @@ ResourceSchema.pre 'save', (next) ->
 ResourceSchema.post 'save', (doc) ->
   console.log "rendering #{doc.link} to #{doc._id}.png"
   render = spawn 'coffee', ["render.coffee", doc.link, doc._id], cwd: require('path').dirname(require.main.filename)
+  render.on 'exit', -> console.log 'done'
 
 ResourceModel = mongoose.model 'Resource', ResourceSchema
 
