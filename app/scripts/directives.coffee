@@ -24,11 +24,17 @@ angular.module('jobFoundryDirectives').directive 'evaluation', ->
   link: (scope, elem, attrs) ->
 
 angular.module('jobFoundryDirectives').directive 'multiRepeat', ($timeout) ->
-  replace: true
+  restrict: 'EA' # challenge everything
+  transclude: true
   scope:
     columns: '@'
     collection: '='
-  templateUrl: '/views/multi-repeat.html'
+  template: """
+  <div class="row" ng-repeat="(index, items) in set">
+    <div class="col-lg-{{12/columns}}" ng-repeat="item in items">
+      <div ng-transclude></div>
+    </div>
+  </div>"""
   link: (scope, elem, attrs) ->
     scope.$watch 'collection', ->
       scope.set = _.groupBy scope.collection, (item) ->
