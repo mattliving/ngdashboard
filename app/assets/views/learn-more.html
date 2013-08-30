@@ -1,99 +1,96 @@
 <style type="text/css">
-body {
-  background: #ecf0f1;
-}
+  body {
+    background: #ecf0f1;
+  }
 
-header {
-  text-align: center;
-  margin-top: 10%;
-}
+  header {
+    text-align: center;
+    margin-top: 10%;
+  }
 
-header h1 {
-  font-size: 3.5em;
-  font-weight: bold;
-  margin-top: 40px;
-}
+  hr {
+    border-color: #cccccc;
+    width: 100%;
+    border-style: solid none;
+    border-bottom: 1px 0;
+  }
 
-section {
-  background-color: #ecf0f1;
-  padding-top: 30px;
-  color: #333333;
-  font-size: 1.4em;
-  font-family: 'Open Sans', sans-serif;
-}
+  header h1 {
+    font-size: 3.5em;
+    font-weight: bold;
+    margin-top: 40px;
+  }
 
-section h2 {
-  color: #ff6600;
-}
+  section {
+    background-color: #ecf0f1;
+    padding-top: 30px;
+    color: #333333;
+    font-size: 1.4em;
+    font-family: 'Open Sans', sans-serif;
+  }
 
-section.negative {
-  background-color: #0d0d0d;
-  color: #ffffff;
+  section h2 {
+    color: #ff6600;
+    font-family: "Lato", "Open Sans", sans-serif;
+    font-weight: bold;
+    font-style: italic;
+    text-align: center;
+    border-bottom: 1px #eeeeee;
+  }
 
-}
+  section.negative {
+    background-color: #0d0d0d;
+    color: #ffffff;
 
-.head {
-  height: 100px;
-  background-color: #00001B;
-  margin: -30px -30px 0px -30px;
-}
-.head h1 {
-  font-weight: bold;
-  font-style: italic;
-  font-size: 60px;
-  color: #FFFFFF;
+  }
 
-}
-.powerlines {
-  text-align: center;
-  margin-top: 150px;
-  margin-bottom: 100px;
-}
-.powerlines h1 {
-  font-weight: bold;
-  font-style: italic;
-  padding-top: 10px;
-  color: #0d0d0d;
-}
-.powerlines h2 {
-  font-weight: bold;
-  font-style: italic;
-  padding-top: 10px;
-  color: #0d0d0d;
-}
-.powerlines h3 {
-  font-weight: bold;
-  font-style: italic;
-  padding-top: 15px;
-  color: #0d0d0d;
-}
-.powerlines .btn {
-  margin-top: 40px;
+  .head {
+    height: 100px;
+    background-color: #00001B;
+    margin: -30px -30px 0px -30px;
+  }
+  .head h1 {
+    font-weight: bold;
+    font-style: italic;
+    font-size: 60px;
+    color: #FFFFFF;
 
-}
-.orange {
-  color: #ff6600;
-}
-.btn-mofo {
-  padding: 10px 32px;
-  font-size: 24px;
-  line-height: 1.53;
-  border-radius: 12px;
-}
+  }
+  .powerlines {
+    text-align: center;
+    margin-top: 150px;
+    margin-bottom: 100px;
+  }
+  .powerlines h2 {
+    font-weight: bold;
+    font-style: italic;
+    padding-top: 10px;
+    color: #0d0d0d;
+  }
+  .powerlines .btn {
+    margin-top: 40px;
 
+  }
+  .orange {
+    color: #ff6600;
+  }
+  .btn-mofo {
+    padding: 10px 32px;
+    font-size: 24px;
+    line-height: 1.53;
+    border-radius: 12px;
+  }
 </style>
-<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+
 <header>
   <img src="/images/logo-light-large.png">
   <h1>Learn fast and build things.</h1>
 </header>
 
 <section class="powerlines">
-
-  <h1>What are you working on <span class="orange">right now?</span></h1>
+  <h2>What are you working on <span class="orange">right now?</span></h2>
   <h2>What's the most effective way for you to<br> learn <span class="orange">how to get it done?</span></h2>
-  <h3>How can we <span class="orange">organise that all for you</span>, anywhere, for free?</h3>
-
+  <h2>How can we <span class="orange">organise that all for you</span>, anywhere, for free?</h2>
   <a href="" ng-click="location.hash('idea-to-done')" class="btn btn-default btn-mofo">Learn More</a>
 </section>
 
@@ -101,8 +98,11 @@ section.negative {
   <div class="col-md-8 col-md-offset-2" id="idea-to-done">
     <div class="text-center">
       <h2>Idea-to-Done, Faster Than Ever.</h2>
+      <hr>
     </div>
-    <p>Job Foundry organises learning by tasks, just like you do in real life with real work. On each task, you'll find the most useful examples, tools and helpful resources, so you can stop searching and start doing.</p>
+    <p>Job Foundry organises learning by tasks, just like you do in real life with real work.</p>
+
+    <p>On each task, you'll find the most useful examples, tools and helpful resources, so you can stop searching and start doing.</p>
   </div>
 </section>
 
@@ -110,9 +110,14 @@ section.negative {
 
   <div class="col-md-6">
 
-    <p>Never again will you ask "why am I learning this?". You'll always find clear goals and actionable next steps. Tasks are ordered and grouped into your project, like creating a website, a mobile app or a marketing campaign. From your project overview, you can see what tasks to do next so you can make real progress towards creating your next big thing.</p>
+    <h2>Productivity Guaranteed</h2>
+    <hr>
 
-    <p>So instead of attending a lecture, reading a book, watching a video and ploughing through content that you might apply bits of later that day… later that week… maybe months on -- try Job Foundry. Productivity guaranteed.</p>
+    <p>You'll always find clear goals and actionable next steps. Tasks are ordered and grouped into your projects, like creating a website, a mobile app or a marketing campaign.</p>
+
+    <p>From your project overview, you can see what tasks to do next so you can make real progress towards creating your next big thing.</p>
+
+    <p>So instead of attending a lecture, reading a book, watching a video series and ploughing through content that you might apply bits of later that day… later that week… maybe months on -- try Job Foundry. Productivity guaranteed.</p>
 
     </div>
     <div class="col-md-6">
@@ -128,10 +133,11 @@ section.negative {
   <div class="col-md-6">
 
     <h2>Learn What Really Matters</h2>
+    <hr>
 
-    <p>You don't "learn to code" on Job Foundry. Learning is centred around what you're working on right now. You choose what you need to learn and when you need to learn it.</p>
+    <p>You don't "learn to code" on Job Foundry - you learn to do what you're working on right now. You choose what you need to learn and when you need to learn it.</p>
 
-    <p>Yes, there are areas where you need to study complex topics in detail, but whilst you're guided towards mastery, you'll be working towards achieving your own goals, not someone else's.</p>
+    <p>Yes, sometimes you need to study complex topics in detail, but you'll also be working towards achieving your own goals, not someone else's.</p>
   </div>
 
 </section>
@@ -140,8 +146,9 @@ section.negative {
   <div class="col-md-6 pull-left">
 
     <h2>There is no "one size fits all"</h2>
+    <hr>
 
-    <p>How you learn is as different as what you learn. Whether you learn best from videos examples, interactive tutorials, written guides or anything else, you'll find the most useful help for your learning style for what you're working on right now.</p>
+    <p>How you learn is as different as what you learn. You'll find the most useful resources for your learning style for what you're working on right now.</p>
 
   </div>
   <div class="col-md-6">
@@ -156,11 +163,12 @@ section.negative {
   </div>
   <div class="col-md-6">
 
-    <h2>Find only the most useful resources.</h2>
+    <h2>Only the most useful resources.</h2>
+    <hr>
 
-    <p>Search engines sort by relevance. Social sites sort by popularity. But what you need is world-class help sorted strictly by usefulness -- did someone else like you doing this task find this resource useful, yes or no?</p>
+    <p>Search engines sort by relevance. Social sites sort by popularity. But what you need is world-class help sorted strictly by usefulness.</p>
 
-    <p>Relevant suggestions can be useless. Popular advice can be useless too. Save hours cutting through buzz and clutter, and instead zone straight in what's proven to be helpful by people before you.</p>
+    <p>Save hours cutting through buzz and clutter, and instead zone straight in what's proven to be helpful for your specific task by people before you.</p>
 
   </div>
 
@@ -169,9 +177,11 @@ section.negative {
 
   <div class="col-md-6 pull-left">
 
-    <h2>Share and Collaborate on Public or Private Projects</h2>
+    <h2>Share and Collaborate<br> on Public or Private Projects</h2>
+    <hr>
+    <p>Just like real life, you can share and collaborate on tasks and projects.</p>
 
-    <p>Just like real life, you can share and collaborate on tasks and projects. Invite your co-workers, your clients, your mentors and anyone else to leave comments, collaborate and share tasks.</p>
+    <p>Invite your co-workers, your clients, your mentors and anyone else you like to leave comments, collaborate and share tasks.</p>
 
     <p>Keep your projects public for anyone too see, or private to yourself and select people only.</p>
 
@@ -181,15 +191,7 @@ section.negative {
   </div>
 </section>
 <section class="row">
-
-  <div class="col-md-2"></div>
-
-  <div class="col-md-8">
-
+  <div class="col-md-8 col-md-offset-2">
     <invite-form show="true"></invite-form>
-
   </div>
-  <div class="col-md-2"></div>
-
-</div>
-</div>
+</section>
