@@ -9,6 +9,16 @@ html, body {
     font-weight: 16px;
 }
 
+.container .jumbotron, .jumbotron, .well {
+    background-color: #ecf0f1;
+    border: none;
+    border-radius: 0px;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    -o-box-shadow: none;
+    box-shadow: none;
+}
+
 h1.jobfoundry {
     font-weight: 100;
 }
@@ -110,7 +120,13 @@ img.hero-bg {
 	padding-top: 15em;
 }
 
+.task .sidebar {
+    /*padding-left: 0px;*/
+    /*padding-right: 30px;*/
+}
+
 .task .content {
+    /*padding-left: 30px;*/
 	border-left: 1px solid #dddddd;
 }
 
@@ -141,6 +157,31 @@ img.hero-bg {
 
 .task .resource img {
     box-shadow: 1px 1px 1px black;
+}
+
+/* project overview specific */
+
+.task .jumbotron {
+    margin-top: 15px;
+}
+
+.task .jumbotron h1 {
+    margin-top: 11px;
+    color: #FF6600;
+}
+
+.task multi-repeat .well {
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.task multi-repeat .well:hover {
+    color: white;
+    background-color: #2980b9;
+}
+
+.task multi-repeat .well h3 {
+    margin-top: 11px;
 }
 
 /* decison flow view */

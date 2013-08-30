@@ -1,13 +1,7 @@
-angular.module('jobFoundryApp').controller 'ProjectOverviewCtrl', ($scope, $http, $routeParams, map, mediaTypes) ->
-
-  $scope.mediaTypes = mediaTypes
-  $scope.valueOf = map
+angular.module('jobFoundryApp').controller 'ProjectOverviewCtrl', ($scope, $http, $routeParams) ->
 
   $http.get("/api/v1/tasks")
   .success (tasks) ->
+    $scope.first = tasks.shift()
     $scope.tasks = tasks
   .error -> console.log 'error getting data'
-
-  $scope.resourceFilter = {}
-  $scope.filterType = (type) ->
-    $scope.resourceFilter = (resource) -> type in resource.mediaType

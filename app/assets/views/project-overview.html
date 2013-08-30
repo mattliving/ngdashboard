@@ -1,20 +1,29 @@
 <div class="row task">
-    <header>
-        <h1>My First Project</h1>
-        <h2>This is my first project.</h2>
-    </header>
-    <div class="task-container" scroll-spy>
-        <div class="col-md-3 sidebar">
-            <ul sticky>
-                <li spy="current">Current</li>
-                <li spy="completed">Completed</li>
-            </ul>
-        </div>
-        <div class="col-md-9 content">
-            <h3 id="current">Current</h3>
-            <multi-repeat collection="tasks" columns="2">
-                <div class="well">{{item.name}}</div>
-            </multi-repeat>
-        </div>
+  <header>
+    <h1>My First Project</h1>
+    <h2>This is my first project.</h2>
+  </header>
+  <div class="task-container" scroll-spy>
+    <div class="col-md-2 sidebar">
+      <ul sticky>
+        <li spy="current">Current</li>
+        <li spy="completed">Completed</li>
+      </ul>
     </div>
+    <div class="col-md-10 content">
+      <div class="jumbotron col-lg-12">
+        <h1>{{first.title}}</h1>
+        <h3>{{first.subtitle}}</h3>
+        <p class="lead">{{first.}}
+        </div>
+        <multi-repeat collection="tasks" columns="2">
+        <div class="well">
+          <a href="/task/{{item.name}}">
+            <h3>{{item.title}}</h3>
+            <h5>{{item.subtitle}}</h5>
+          </a>
+        </div>
+      </multi-repeat>
+    </div>
+  </div>
 </div>
