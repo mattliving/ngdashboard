@@ -1,22 +1,37 @@
 <style type="text/css">
 body {
-  background-color: #ecf0f1;
-}
-p {
-  font-family: 'Open Sans', sans serif;
-  color: #0d0d0d;
-}
-.landing-content {
-  padding-top: 30px;
+  background: #ecf0f1;
 }
 
-.landing-content p {
+header {
+  text-align: center;
+  margin-top: 10%;
+}
+
+header h1 {
+  font-size: 3.5em;
+  font-weight: bold;
+  margin-top: 40px;
+}
+
+section {
+  background-color: #ecf0f1;
+  padding-top: 30px;
   color: #333333;
   font-size: 1.4em;
+  font-family: 'Open Sans', sans-serif;
 }
-.landing-content h2 {
+
+section h2 {
   color: #ff6600;
 }
+
+section.negative {
+  background-color: #0d0d0d;
+  color: #ffffff;
+
+}
+
 .head {
   height: 100px;
   background-color: #00001B;
@@ -27,7 +42,7 @@ p {
   font-style: italic;
   font-size: 60px;
   color: #FFFFFF;
-  
+
 }
 .powerlines {
   text-align: center;
@@ -60,45 +75,38 @@ p {
   color: #ff6600;
 }
 .btn-mofo {
-padding: 10px 32px;
-font-size: 24px;
-line-height: 1.53;
-border-radius: 12px;
+  padding: 10px 32px;
+  font-size: 24px;
+  line-height: 1.53;
+  border-radius: 12px;
 }
-.negative {
-  background-color: #0d0d0d;
-  color: #ffffff;
-  padding-top: 30px;
-  padding-bottom: 30px;
-}
-.negative p {
-
-}
-
-
 
 </style>
 <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-<div class="powerlines">
+<header>
+  <img src="/images/logo-light-large.png">
+  <h1>Learn fast and build things.</h1>
+</header>
+
+<section class="powerlines">
+
   <h1>What are you working on <span class="orange">right now?</span></h1>
   <h2>What's the most effective way for you to<br> learn <span class="orange">how to get it done?</span></h2>
   <h3>How can we <span class="orange">organise that all for you</span>, anywhere, for free?</h3>
 
   <a href="" ng-click="location.hash('idea-to-done')" class="btn btn-default btn-mofo">Learn More</a>
-</div>
-<div class="row landing-content negative">
-  <div class="col-md-2"></div>
-  <div class="col-md-8" id="idea-to-done">
+</section>
+
+<section class="row negative">
+  <div class="col-md-8 col-md-offset-2" id="idea-to-done">
     <div class="text-center">
-      <img src="/images/logo-light-large.png" />
       <h2>Idea-to-Done, Faster Than Ever.</h2>
     </div>
     <p>Job Foundry organises learning by tasks, just like you do in real life with real work. On each task, you'll find the most useful examples, tools and helpful resources, so you can stop searching and start doing.</p>
   </div>
-  <div class="col-md-2"></div>
-</div>
-<hr>
-<div class="row landing-content">
+</section>
+
+<section class="row">
 
   <div class="col-md-6">
 
@@ -106,13 +114,13 @@ border-radius: 12px;
 
     <p>So instead of attending a lecture, reading a book, watching a video and ploughing through content that you might apply bits of later that day… later that week… maybe months on -- try Job Foundry. Productivity guaranteed.</p>
 
-  </div>
-  <div class="col-md-6">
-    <img src="http://placehold.it/480x320">
-  </div>
+    </div>
+    <div class="col-md-6">
+      <img src="http://placehold.it/480x320">
+    </div>
+</section>
 
-</div>
-<div class="row landing-content">
+<section class="row negative">
 
   <div class="col-md-6 pull-left">
     <img src="http://placehold.it/480x320">
@@ -126,8 +134,8 @@ border-radius: 12px;
     <p>Yes, there are areas where you need to study complex topics in detail, but whilst you're guided towards mastery, you'll be working towards achieving your own goals, not someone else's.</p>
   </div>
 
-</div>
-<div class="row landing-content">
+</section>
+<section class="row">
 
   <div class="col-md-6 pull-left">
 
@@ -140,8 +148,8 @@ border-radius: 12px;
     <img src="http://placehold.it/480x320">
   </div>
 
-</div>
-<div class="row landing-content">
+</section>
+<section class="row negative">
 
   <div class="col-md-6 pull-left">
     <img src="http://placehold.it/480x320">
@@ -156,8 +164,8 @@ border-radius: 12px;
 
   </div>
 
-</div>
-<div class="row landing-content">
+</section>
+<section class="row">
 
   <div class="col-md-6 pull-left">
 
@@ -171,8 +179,8 @@ border-radius: 12px;
   <div class="col-md-6">
     <img src="http://placehold.it/480x320">
   </div>
-</div>
-<div class="row landing-content">
+</section>
+<section class="row">
 
   <div class="col-md-2"></div>
 
