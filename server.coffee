@@ -7,6 +7,7 @@ path      = require 'path'
 resources = require './routes/resources'
 tasks     = require './routes/tasks'
 content   = require './routes/content'
+types     = require './routes/types'
 
 app = express()
 
@@ -50,7 +51,13 @@ app.put '/api/v1/resources/:id', (req, res) ->
 app.get '/api/v1/content/:key', (req, res) ->
   content.get(req.params.key).then (data) -> res.json data["data"]
 
+# Resource Types
+app.get '/api/v1/types/:key', (req, res) ->
+  types.get(req.params.key).then (data) -> res.json data
+
 # Tasks
+app.get '/api/v1/tasks', (req, res) ->
+  tasks.all().then (tasks) -> res.json tasks
 app.get '/api/v1/tasks/:name', (req, res) ->
   tasks.get(req.params.name).then (task) -> res.json task
 

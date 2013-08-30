@@ -3,7 +3,7 @@
     <div ng-repeat="(levelKey, levelName) in levels">
         <h3>{{levelName}}</h3>
         <div ng-repeat="resource in resources | filter:{path: path, level: levelKey}" ng-init="collapsed=true">
-            <span class="{{resource.level}} glyphicon" ng-class="{'glyphicon-collapse-down': !collapsed, 'glyphicon-collapse-up': collapsed}" ng-click="collapsed = !collapsed"></span>
+            <span class="{{resource.level}} glyphicon" ng-class="{'glyphicon-collapse-down': !collapsed, 'glyphicon-collapse-up': collapsed}" ng-click="collapsed = !collapsed"></span>gett
             <!-- <span class="dot {{resource.level}}"></span> -->
             <a href="{{resource.link}}">{{resource.title}}</a>
             <div class="content row" ng-hide="collapsed">
@@ -29,4 +29,10 @@
             <div class="line" ng-show="!$last"></div>
         </div>
     </div>
+</div>
+<h3 ng-show="(resources | filter:{path: path, unfinished: true}).length">Unfinished Resources</h3>
+<div class="unfinished-resource" ng-repeat="resource in resources | filter:{path: path, unfinished: true}">
+    <div class="line" ng-show="!$first"></div>
+    <a href="{{resource.link}}">{{resource.title}}</a>
+    <a href="" class="btn btn-sm btn-danger" ng-click="deleteResource(resource)">Delete this resource</a><a ng-href="#/edit/{{resource._id}}" class="btn btn-sm btn-success">Edit this resource</a><br>
 </div>

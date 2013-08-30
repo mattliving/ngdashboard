@@ -13,6 +13,7 @@ angular.module('jobFoundryApp', ['jobFoundryDirectives', 'jobFoundryServices', '
       .when '/getting-started',
         templateUrl: 'views/getting-started.html'
         controller: 'DecisionFlowCtrl'
+        reloadOnSearch: false
       .when '/add',
         templateUrl: '/views/resource-form.html'
         controller: 'ResourceCtrl'
@@ -22,6 +23,10 @@ angular.module('jobFoundryApp', ['jobFoundryDirectives', 'jobFoundryServices', '
       .when '/list/:path',
         templateUrl: '/views/list.html'
         controller: 'ResourceCtrl'
+      .when '/projects/overview',
+        templateUrl: '/views/project-overview.html'
+        controller: 'ProjectOverviewCtrl'
+        reloadOnSearch: false
       .when '/task/:name',
         templateUrl: '/views/task.html'
         controller: 'TaskCtrl'
@@ -32,6 +37,5 @@ angular.module('jobFoundryApp', ['jobFoundryDirectives', 'jobFoundryServices', '
         reloadOnSearch: false
       .otherwise
         redirectTo: '/'
-
     $locationProvider.html5Mode true
-    return
+

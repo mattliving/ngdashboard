@@ -19,17 +19,24 @@ module.exports =
     q.ninvoke resource, "save"
 
   edit: (id, newResource) ->
-    resource =
-      authors:     newResource.authors
-      topic:       newResource.topic
-      mediaType:   newResource.mediaType
-      title:       newResource.title
-      link:        newResource.link
-      level:       newResource.level
-      path:        newResource.path
-      cost:        newResource.cost
-      description: newResource.description
+    # using find instead of update so middleware is called
+    result = q.defer()
+    Resource.findById id, (err, resource) ->
+      resource.authors = newResource.authors
+      resource.topic = newResource.topic
+      resource.mediaType = newResource.mediaType
+      resource.title = newResource.title
+      resource.link = newResource.link
+      resource.level = newResource.level
+      resource.path = newResource.path
+      resource.cost = newResource.cost
+      resource.description = newResource.description
 
-    q.ninvoke Resource, "update", _id: id, resource
+      resource.save (err) ->
+        if err
+          result.reject err
+        else
+          result.resolve resource
+    return result.promise
 
   delete: (id) -> q.ninvoke Resource, "remove", _id: id

@@ -1,0 +1,19 @@
+<div class="row task">
+    <header>
+        <h1>My First Project</h1>
+        <h2>This is my first project.</h2>
+    </header>
+    <div class="task-container" scroll-spy>
+        <div class="col-md-3 sidebar">
+            <ul sticky>
+                <li spy="current">Current</li>
+                <li spy="completed">Completed</li>
+            </ul>
+        </div>
+        <div class="col-md-9 content">
+            <h3 id="current">Current</h3>
+            <div multi-repeat collection="tasks" columns="2">
+            </div>
+        </div>
+    </div>
+</div>

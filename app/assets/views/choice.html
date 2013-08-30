@@ -1,0 +1,11 @@
+<div class="row">
+  <div id="option" class="col-lg-{{12/content.options.length}} am-option" ng-mouseenter="examplesVisible=true" ng-mouseleave="examplesVisible=false" ng-hide="content.option.hidden" ng-repeat="option in content.options">
+  	<a class="thumbnail" ng-click="nextFunc({next: option}); showOnly(option)">
+  		{{option.name}}
+  		<div ng-if="option.description" class="caption">
+  			<p>{{option.description}}</p>
+  		</div>
+  		<p class="am-examples" ng-if="option.examples && examplesVisible">(e.g. {{option.examples | join}})</p>
+  	</a>
+  </div>
+</div>
