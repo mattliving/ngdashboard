@@ -1,21 +1,20 @@
 "use strict"
 
-angular.module("jobFoundryApp").controller "DecisionFlowCtrl", ["$scope", "$log", "Tree", ($s, $log, Tree) ->
+angular.module("jobFoundryApp").controller "DecisionFlowCtrl", ($scope, Tree) ->
 
-  $s.tree = Tree
+  $scope.tree = Tree
 
-  $s.decisions = []
-  $s.current   = 'a'
+  $scope.decisions = []
+  $scope.current   = 'a'
 
-  $s.step = (chosen) ->
+  $scope.step = (chosen) ->
     if chosen.child?
-      $s.current = chosen.child
+      $scope.current = chosen.child
     else
       console.log 'redirect to project overview'
-    chosen.parent = $s.tree[$s.current].parent
-    $s.decisions.push chosen
+    chosen.parent = $scope.tree[$scope.current].parent
+    $scope.decisions.push chosen
 
-  $s.navigate = (decision, index) ->
-    $s.decisions.splice index, $s.decisions.length-index
-    $s.current = decision.parent
-]
+  $scope.navigate = (decision, index) ->
+    $scope.decisions.splice index, $scope.decisions.length-index
+    $scope.current = decision.parent

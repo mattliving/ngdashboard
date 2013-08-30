@@ -12,8 +12,9 @@
         </div>
         <div class="col-md-9 content">
             <h3 id="current">Current</h3>
-            <div multi-repeat collection="tasks" columns="2">
-            </div>
+            <multi-repeat collection="tasks" columns="2">
+                <div class="well">{{item.name}}</div>
+            </multi-repeat>
         </div>
     </div>
 </div>
