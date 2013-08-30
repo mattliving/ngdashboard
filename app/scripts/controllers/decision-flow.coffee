@@ -1,6 +1,6 @@
 "use strict"
 
-angular.module("jobFoundryApp").controller "DecisionFlowCtrl", ($scope, Tree) ->
+angular.module("jobFoundryApp").controller "DecisionFlowCtrl", ($scope, $location, Tree) ->
 
   $scope.tree = Tree
 
@@ -11,7 +11,7 @@ angular.module("jobFoundryApp").controller "DecisionFlowCtrl", ($scope, Tree) ->
     if chosen.child?
       $scope.current = chosen.child
     else
-      console.log 'redirect to project overview'
+      $location.path '/projects/' + chosen.project
     chosen.parent = $scope.tree[$scope.current].parent
     $scope.decisions.push chosen
 
