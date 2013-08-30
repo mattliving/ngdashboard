@@ -23,6 +23,23 @@ angular.module('jobFoundryDirectives').directive 'evaluation', ->
   templateUrl: '/views/evaluation.html'
   link: (scope, elem, attrs) ->
 
+angular.module('jobFoundryDirectives').directive 'multiRepeat', ($timeout) ->
+  restrict: 'EA' # challenge everything
+  transclude: true
+  scope:
+    columns: '@'
+    collection: '='
+  template: """
+  <div class="row" ng-repeat="(index, items) in set">
+    <div class="col-lg-{{12/columns}}" ng-repeat="item in items">
+      <div ng-transclude></div>
+    </div>
+  </div>"""
+  link: (scope, elem, attrs) ->
+    scope.$watch 'collection', ->
+      scope.set = _.groupBy scope.collection, (item) ->
+        index = Math.floor ((_.indexOf scope.collection, item) / scope.columns)
+
 angular.module('jobFoundryDirectives').directive 'progressBar', ->
   restrict: 'E'
   templateUrl: '/views/progress-bar.html'
@@ -212,6 +229,8 @@ angular.module('jobFoundryDirectives').directive 'tagInput', (keygen) ->
           $s.suggestions = _.take $s.tags, 5
 
     $s.addTag = ->
+      $s.tagList ?= []
+
       tag = $s.tagInput
       key = keygen tag
 

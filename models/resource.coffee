@@ -1,6 +1,7 @@
 mongoose = require 'mongoose'
+{spawn} = require 'child_process'
 
-Resource = mongoose.model 'Resource', new mongoose.Schema
+ResourceSchema = new mongoose.Schema
   path:
     type: String
     required: true
@@ -8,23 +9,34 @@ Resource = mongoose.model 'Resource', new mongoose.Schema
   level:
     type: String
     enum: ['beginner', 'intermediate', 'advanced', 'all']
-    required: true
   title:
     type: String
     required: true
   mediaType:
     type: [String]
+  resourceType: String
   description: String
   link:
     type: String
     required: true
   authors: [{}]
-  cost: String
+  cost:
+    type: String
+    default: "free"
+  unfinished: Boolean
 
-validateArray = (array) -> array.length > 0
+ResourceSchema.pre 'save', (next) ->
+  arraysDone = @topic? and @topic > 0 and @mediaType? and @mediaType.length > 0
+  textDone = @title? and @resourceType? and @level?
+  @unfinished = not (arraysDone and textDone)
+  next()
 
-for key in ["mediaType", "authors", "topic"]
-  Resource.schema.path(key).validate validateArray, "#{key} must have one or more elements"
+ResourceSchema.post 'save', (doc) ->
+  console.log "rendering #{doc.link} to #{doc._id}.png"
+  render = spawn 'coffee', ["render.coffee", doc.link, doc._id], cwd: require('path').dirname(require.main.filename)
+  render.on 'exit', -> console.log 'done'
+
+ResourceModel = mongoose.model 'Resource', ResourceSchema
 
 module.exports =
-  Resource: Resource
+  Resource: ResourceModel

@@ -1,6 +1,9 @@
 # static key-value maps for data types
 angular.module("resourceData", [])
 
+angular.module("resourceData").factory "types", ($http) ->
+  (type) -> $http.get("/api/v1/types/#{type}")
+
 angular.module("resourceData").value "mediaTypes",
   article: "Article"
   reference: "Reference"
