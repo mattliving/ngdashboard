@@ -124,20 +124,17 @@ img.hero-bg {
     opacity: 0.85;
 }
 
-.landing .form-control {
+.landing .form-control, .invite-form .form-control {
     margin-right: 1%;
     width: 50%;
 }
 
 .landing h1 {
-<<<<<<< HEAD
     font-size: 5em;
-=======
     font-size: 96px;
     font-weight: 300;
     /*font-style: italic;*/
     font-family: 'Lato', sans-serif;
->>>>>>> decisions-broken
 }
 
 .landing h1 span {

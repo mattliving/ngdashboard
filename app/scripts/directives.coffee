@@ -2,6 +2,14 @@
 
 angular.module 'jobFoundryDirectives', ['jobFoundryServices']
 
+angular.module('jobFoundryDirectives').directive 'inviteForm', ->
+  restrict: 'E'
+  scope:
+    show: '='
+  templateUrl: "/views/invite-form.html"
+  link: (scope, elem, attrs) ->
+    scope.show ?= true
+
 angular.module('jobFoundryDirectives').directive 'decision', ->
   restrict: 'E'
   scope:
