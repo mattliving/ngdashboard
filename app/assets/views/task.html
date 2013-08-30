@@ -17,17 +17,22 @@
                     </ul>
                 </div>
                 <h3 id="resources">Resources</h3>
-                <div class="resources">
-                    <multi-repeat columns="4" collection="task.resources">
-                        <div class="resource">
-                            <img ng-src="images/screenshots/{{item._id}}.png" width="200">
-                            <div class="info">
-                                <h5><a target="_blank" href="{{item.link}}">{{item.title}}</a></h5>
-                                <p>{{item.link}}</p>
-                                <p>{{item.description}}</p>
-                            </div>
-                        </div>
-                    </multi-repeat>
+                <div ng-repeat="(type, resources) in task.resources" class="clearfix" ng-init="mainResource=resources[0]">
+                    <h4>{{resourceMap(type)}}s</h4>
+                    <div class="main-resource">
+                        <img ng-src="images/screenshots/{{mainResource._id}}.png">
+                    </div>
+                    <ul class="resources">
+                        <li class="resource" ng-repeat="resource in resources | limitTo:5 ">
+                            <span class="taglist">
+                                <tag ng-repeat="type in resource.mediaType">{{type}}</tag>
+                            </span>
+                            <a href="{{resource.link}}">
+                                <img ng-src="images/screenshots/{{resource._id}}.png">
+                                <p>{{resource.title}}</p>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
                 <h3 id="summary">Summary</h3>
                 <p>{{task.summary}}</p>

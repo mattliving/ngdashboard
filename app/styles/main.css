@@ -126,12 +126,25 @@ img.hero-bg {
 }
 
 .task .resources {
-    clear: both;
+    list-style: none;
 }
 
 .task .resource {
+    display: inline-block;
     text-align: center;
     max-width: 200px;
+    position: relative;
+    float: left;
+    padding-right: 10px;
+}
+
+.task .resource .taglist {
+    position: absolute;
+    left: 0;
+    top: 120px;
+}
+
+.task .resource tag {
 }
 
 .task .resource img {
