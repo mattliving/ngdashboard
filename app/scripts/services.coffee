@@ -81,6 +81,16 @@ angular.module('jobFoundryServices').factory 'Tree', ->
       parent: "d"
       type: "evaluation"
 
+angular.module('jobFoundryServices')
+.factory('Project', ($resource) ->
+  $resource 'api/v1/projects/:id',
+    id: '@id'
+)
+.factory('Task', ($resource) ->
+  $resource 'api/v1/tasks/:id',
+    id: '@id'
+)
+
 angular.module('jobFoundryServices').service 'Resources', ->
   class Resources
   # ngmin can't detect the dependencies in CoffeeScript's class syntax

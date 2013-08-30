@@ -5,6 +5,7 @@ http      = require 'http'
 mongoose  = require 'mongoose'
 path      = require 'path'
 resources = require './routes/resources'
+projects  = require './routes/projects'
 tasks     = require './routes/tasks'
 content   = require './routes/content'
 
@@ -49,6 +50,12 @@ app.put '/api/v1/resources/:id', (req, res) ->
 # Content
 app.get '/api/v1/content/:key', (req, res) ->
   content.get(req.params.key).then (data) -> res.json data["data"]
+
+# Projects
+app.get '/api/v1/projects', (req, res) ->
+  projects.all().then (projects) -> res.json projects
+app.get '/api/v1/projects/:name', (req, res) ->
+  projects.get(req.params.name).then (project) -> res.json project
 
 # Tasks
 app.get '/api/v1/tasks', (req, res) ->

@@ -1,7 +1,7 @@
 <div class="row task">
   <header>
-    <h1>My First Project</h1>
-    <h2>This is my first project.</h2>
+    <h1>{{project.title}}</h1>
+    <h3>{{project.description}}</h3>
   </header>
   <div class="task-container" scroll-spy>
     <div class="col-md-2 sidebar">
@@ -17,12 +17,12 @@
         <p class="lead">{{first.}}
         </div>
         <multi-repeat collection="tasks" columns="2">
-        <div class="well">
-          <a href="/task/{{item.name}}">
-            <h3>{{item.title}}</h3>
-            <h5>{{item.subtitle}}</h5>
-          </a>
-        </div>
+        <a href="/task/{{item.name}}">
+          <div class="well">
+              <h3>{{item.title}}</h3>
+              <h5>{{item.subtitle}}</h5>
+          </div>
+        </a>
       </multi-repeat>
     </div>
   </div>

@@ -171,13 +171,20 @@ img.hero-bg {
 }
 
 .task multi-repeat .well {
-    color: #333;
     margin-bottom: 30px;
 }
 
 .task multi-repeat .well:hover {
     color: white;
     background-color: #2980b9;
+}
+
+.task multi-repeat a {
+    color: #333;
+}
+
+.task multi-repeat a:hover {
+    text-decoration: none;
 }
 
 .task multi-repeat .well h3 {
