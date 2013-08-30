@@ -19,11 +19,17 @@
                 <h3 id="resources">Resources</h3>
                 <div ng-repeat="(type, resources) in task.resources" class="clearfix" ng-init="mainResource=resources[0]">
                     <h4>{{resourceMap(type)}}s</h4>
-                    <div class="main-resource">
-                        <img ng-src="images/screenshots/{{mainResource._id}}.png">
+                    <div class="main-resource row well">
+                        <div class="col-md-3">
+                            <img ng-src="images/screenshots/{{mainResource._id}}.png">
+                        </div>
+                        <div class="col-md-9">
+                            <h5>{{mainResource.title}}</h5>
+                            <p>{{mainResource.description}}</p>
+                        </div>
                     </div>
                     <ul class="resources">
-                        <li class="resource" ng-repeat="resource in resources | limitTo:5 ">
+                        <li class="resource" ng-repeat="resource in resources | limitTo:4 ">
                             <span class="taglist">
                                 <tag ng-repeat="type in resource.mediaType">{{type}}</tag>
                             </span>

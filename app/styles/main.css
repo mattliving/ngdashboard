@@ -135,13 +135,13 @@ img.hero-bg {
     max-width: 200px;
     position: relative;
     float: left;
-    padding-right: 10px;
+    margin-right: 80px;
 }
 
 .task .resource .taglist {
     position: absolute;
     left: 0;
-    top: 120px;
+    top: 129px;
 }
 
 .task .resource tag {
@@ -149,6 +149,10 @@ img.hero-bg {
 
 .task .resource img {
     max-width: 100%
+}
+
+.task .main-resource img {
+    max-width: 100%;
 }
 
 /* decison flow view */
