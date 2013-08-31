@@ -9,7 +9,8 @@
     "consolidate": "~0.9.1",
     "q": "~0.9.6",
     "webshot": "~0.5.1",
-    "gm": "~1.11.1"
+    "gm": "~1.11.1",
+    "auto-reload-brunch": "~1.6.5"
   },
   "devDependencies": {
     "brunch": "~1.7",
