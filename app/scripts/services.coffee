@@ -54,17 +54,17 @@ angular.module('jobFoundryServices').factory 'Tree', ->
             name: "Node.js"
             description: "Node.js allows the development of fast, scalable web applications written entirely in JavaScript."
             language: "JavaScript"
-            child: "e"
+            project: "nodejs-web-app"
           ,
             name: "Ruby on Rails"
             description: "Ruby on Rails is one of the most popular web frameworks, favouring convention over configuration to make development faster and easier."
             language: "Ruby"
-            child: "e"
+            project: "ruby-on-rails-web-app"
           ,
             name: "Django"
             description: "The favoured web framework for Pythonists."
             language: "Python"
-            child: "e"
+            project: "django-web-app"
         ]
       parent: "b"
       type: "choice"
@@ -80,6 +80,16 @@ angular.module('jobFoundryServices').factory 'Tree', ->
         ]
       parent: "d"
       type: "evaluation"
+
+angular.module('jobFoundryServices')
+.factory('Project', ($resource) ->
+  $resource 'api/v1/projects/:id',
+    id: '@id'
+)
+.factory('Task', ($resource) ->
+  $resource 'api/v1/tasks/:id',
+    id: '@id'
+)
 
 angular.module('jobFoundryServices').service 'Resources', ->
   class Resources

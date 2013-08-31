@@ -31,18 +31,19 @@ angular.module('jobFoundryDirectives').directive 'evaluation', ->
   templateUrl: '/views/evaluation.html'
   link: (scope, elem, attrs) ->
 
-angular.module('jobFoundryDirectives').directive 'multiRepeat', ($timeout) ->
-  restrict: 'EA' # challenge everything
+angular.module('jobFoundryDirectives').directive 'multiRepeat', ->
+  restrict: 'EA' # challenge EVERYTHING!
   transclude: true
   scope:
     columns: '@'
     collection: '='
-  template: """
-  <div class="row" ng-repeat="(index, items) in set">
-    <div class="col-lg-{{12/columns}}" ng-repeat="item in items">
-      <div ng-transclude></div>
+  template: '''
+    <div class="row" ng-repeat="(index, items) in set">
+      <div class="col-lg-{{12/columns}}" ng-repeat="item in items">
+        <div ng-transclude></div>
+      </div>
     </div>
-  </div>"""
+  '''
   link: (scope, elem, attrs) ->
     scope.$watch 'collection', ->
       scope.set = _.groupBy scope.collection, (item) ->

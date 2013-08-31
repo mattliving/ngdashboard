@@ -23,7 +23,7 @@ angular.module('jobFoundryApp', ['jobFoundryDirectives', 'jobFoundryServices', '
       .when '/list/:path',
         templateUrl: '/views/list.html'
         controller: 'ResourceCtrl'
-      .when '/projects/overview',
+      .when '/projects/:id',
         templateUrl: '/views/project-overview.html'
         controller: 'ProjectOverviewCtrl'
         reloadOnSearch: false
