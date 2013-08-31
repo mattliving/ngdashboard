@@ -120,7 +120,6 @@ img.hero-bg {
     padding-top: 15em;
 }
 
-<<<<<<< HEAD
 .sidebar {
     position: absolute;
     left: 0;
@@ -128,16 +127,6 @@ img.hero-bg {
     padding-top: 10px;
     list-style: none;
     text-align: left;
-=======
-.task .sidebar {
-    /*padding-left: 0px;*/
-    /*padding-right: 30px;*/
-}
-
-.task .content {
-    /*padding-left: 30px;*/
-	border-left: 1px solid #dddddd;
->>>>>>> projectOverview
 }
 
 .sidebar.sticky-fixed {
