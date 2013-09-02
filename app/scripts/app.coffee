@@ -4,7 +4,7 @@
 # is incredibly annoying. Nice one JavaScript.
 Array::remove = (e) -> @splice i, 1 if (i = @indexOf e) isnt -1
 
-angular.module('jobFoundryApp', ['jobFoundryDirectives', 'jobFoundryServices', 'jobFoundryFilters', 'resourceData', 'ui.bootstrap', 'ngResource', 'ngRoute', 'ngAnimate'])
+angular.module('jobFoundryApp', ['jobFoundryDirectives', 'jobFoundryServices', 'jobFoundryFilters', 'jobFoundryAnimations', 'resourceData', 'ui.bootstrap', 'ngResource', 'ngRoute', 'ngAnimate'])
   .config ($routeProvider, $locationProvider) ->
     $routeProvider
       .when '/',

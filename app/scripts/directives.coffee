@@ -27,19 +27,50 @@ angular.module('jobFoundryDirectives').directive 'multiRepeat', ->
   restrict: 'EA' # challenge EVERYTHING!
   transclude: true
   scope:
+    active: '='
     columns: '@'
     collection: '='
+    dragging: '&dragging'
   template: '''
     <div class="row" ng-repeat="(index, items) in set">
       <div class="col-lg-{{12/columns}}" ng-repeat="item in items">
-        <div ng-transclude></div>
+        <div class="draggable" draggable ng-mousedown="dragging({dragged: item, index: calcIndex($index, $parent)})" ng-transclude></div>
       </div>
     </div>
   '''
   link: (scope, elem, attrs) ->
-    scope.$watch 'collection', ->
+    scope.$watchCollection 'collection', ->
       scope.set = _.groupBy scope.collection, (item) ->
         index = Math.floor ((_.indexOf scope.collection, item) / scope.columns)
+    scope.calcIndex = (index, parent) ->
+      parseInt(parent.index)*scope.columns+index
+
+angular.module('jobFoundryDirectives').directive 'draggable', ->
+  restrict: 'A'
+  link: (scope, elem, attrs) ->
+    elem.draggable
+      revert: true
+      zIndex: 9000
+      containment: angular.element '.row.task'
+      start: (event, ui) ->
+        scope.$dragTarget = angular.element(@).find '.well'
+        scope.$emit 'startedDragging', scope.$dragTarget.parent().parent()
+        scope.$dragTarget.addClass 'translucent'
+      stop: (event, ui) ->
+        scope.$emit 'stoppedDragging', angular.element(@)
+        scope.$dragTarget.removeClass 'translucent'
+
+angular.module('jobFoundryDirectives').directive 'droppable', ->
+  restrict: 'A'
+  link: (scope, elem, attrs) ->
+    elem.droppable
+      accept: '.draggable'
+      hoverClass: 'drop-hover'
+      drop: (event, ui) ->
+        scope.tasks[scope.dragged.index] = scope.active.task
+        scope.active.task   = scope.dragged
+        scope.active.hidden = false
+        scope.$apply()
 
 angular.module('jobFoundryDirectives').directive 'progressBar', ->
   restrict: 'E'
