@@ -13,6 +13,11 @@ html, body {
     background-color: #ecf0f1;
     border: none;
     border-radius: 0px;
+    -webkit-transition: 250ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -moz-transition: 250ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -ms-transition: 250ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -o-transition: 250ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    transition: 250ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     -o-box-shadow: none;
@@ -102,16 +107,16 @@ img.hero-bg {
 
 .task header {
     height: 15em;
+    width: 100%;
     position: absolute;
     left: 0;
     padding-top: 2em;
+    text-align: center;
     color: white;
-    width: 100%;
     background-color: #2980b9;
 }
 
 .task header h1, .task header h2 {
-    text-align: center;
     font-family: "Lato";
     font-weight: 700;
 }
@@ -120,19 +125,39 @@ img.hero-bg {
     padding-top: 15em;
 }
 
-.sidebar {
+/*.sidebar {
     position: absolute;
     left: 0;
     top: 220px;
     padding-top: 10px;
     list-style: none;
     text-align: left;
+}*/
+
+.task .content {
+    /*padding-left: 30px;*/
+    border-left: 1px solid #dddddd;
 }
 
-.sidebar.sticky-fixed {
+.task .sidebar ul {
+    padding-top: 10px;
+    list-style: none;
+    text-align: right;
+}
+
+.task .sidebar li {
+    font-size: 1.3em;
+    padding: 4%;
+}
+
+.task .sidebar li:hover, .task .sidebar li.current {
+    background-color: #ff6600;
+    color: white;
+}
+
+.task .sidebar .sticky-fixed {
     position: fixed;
     top: 0;
-    left: 0;
 }
 
 .task .resources {
@@ -167,13 +192,22 @@ img.hero-bg {
 
 /* project overview specific */
 
-.task .jumbotron {
+.content .jumbotron {
+    text-align: center;
     margin-top: 15px;
 }
 
-.task .jumbotron h1 {
+.content .jumbotron h1 {
     margin-top: 11px;
     color: #FF6600;
+}
+
+.jumbotron.drop-hover {
+    -webkit-box-shadow: 0 0 44px 10px #FF6600 inset;
+    -moz-box-shadow:    0 0 44px 10px #FF6600 inset;
+    -ms-box-shadow:     0 0 44px 10px #FF6600 inset;
+    -o-box-shadow:      0 0 44px 10px #FF6600 inset;
+    box-shadow:         0 0 44px 10px #FF6600 inset;
 }
 
 .task multi-repeat .well {
@@ -183,6 +217,10 @@ img.hero-bg {
 .task multi-repeat .well:hover {
     color: white;
     background-color: #2980b9;
+}
+
+.task multi-repeat .well.translucent:hover {
+    background-color: rgba(41, 128, 185, 0.85);
 }
 
 .task multi-repeat a {
@@ -219,11 +257,6 @@ img.hero-bg {
     -o-box-shadow:      4px 4px 7px -5px #251400;
     box-shadow:         4px 4px 7px -5px #251400;
 }
-
-/*.decision {
-    margin: 4% 4% 4% 4%;
-    background: #efefef;
-}*/
 
 .decision #option {
     border: none;

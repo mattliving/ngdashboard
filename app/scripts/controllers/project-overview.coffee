@@ -1,6 +1,24 @@
-angular.module('jobFoundryApp').controller 'ProjectOverviewCtrl', ($scope, $http, $routeParams, Project, Task) ->
+angular.module('jobFoundryApp').controller 'ProjectOverviewCtrl', ($scope, $routeParams, Project) ->
+
+  $scope.active = {}
+  $scope.active.hidden = false
 
   $scope.project = Project.get
     id: $routeParams.id, (project) ->
-      $scope.first = project.tasks.shift()
-      $scope.tasks = project.tasks
+      $scope.active.task = project.tasks.shift()
+      $scope.tasks       = project.tasks
+
+  $scope.dragging = (dragged, index) ->
+    dragged.index  = index
+    $scope.dragged = dragged
+
+  $scope.$on 'startedDragging', (event) ->
+    height = $('#active').height()
+    $scope.active.hidden = true
+    $scope.$digest()
+    $('#drop-zone').height height
+    $('#drop-zone h3').css 'line-height', parseInt(height, 10) - 20 + 'px'
+
+  $scope.$on 'stoppedDragging', (event, $dragTarget) ->
+    $scope.active.hidden = false
+    $scope.$digest()
