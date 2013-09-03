@@ -28,6 +28,10 @@ h1, h2, h3 {
     box-shadow: none;
 }
 
+.orange {
+    color: #ff6600;
+}
+
 h1.jobfoundry {
     font-weight: 100;
 }
@@ -76,14 +80,15 @@ img.hero-bg {
 @lightestblue: #62ABCE;
 @lightblue: #3B9ECE;
 @darkblue: #024666;
-@orange: #ff7700;
+@orange: #ff6600;
 @lightorange: #FBA43F;
 @lightestorange: #FBBB71;
 @darkorange: #251400;
+@clouds: #ecf0f1;
 
 /* Mixins */
 
-.box-shadow (@x: 10px, @y: 10px, @blur: 10px, @spread: -5px, @colour: @orange, @inset...) {
+.box-shadow (@x: 10px, @y: 10px, @blur: 10px, @spread: -5px, @colour: black, @inset...) {
     -webkit-box-shadow: @x @y @blur @spread @colour @inset;
     -moz-box-shadow:    @x @y @blur @spread @colour @inset;
     -ms-box-shadow:     @x @y @blur @spread @colour @inset;
@@ -94,13 +99,19 @@ img.hero-bg {
 /* landing page */
 
 .landing {
-    background: #111;
-    color: #ffffff;
-    margin: 4%;
-    margin-top: 8%;
-    padding: 1%;
-    padding-bottom: 4%;
-    opacity: 0.85;
+    background: @clouds;
+    hr {
+        border-color: #cccccc;
+        width: 100%;
+        border-style: solid none;
+        border-bottom: 1px 0;
+    }
+
+    header {
+        text-align: center;
+        padding-top: 10%;
+        height: 100%;
+    }
     h1 {
         font-size: 5em;
         font-weight: 300;
@@ -108,14 +119,14 @@ img.hero-bg {
         font-family: 'Lato', sans-serif;
 
         span {
-            color: #FF6600;
+            color: @orange;
         }
     }
     h2 {
         font-size: 1.7em;
         font-weight: 200;
         margin-bottom: 2%;
-        color: #ff6600;
+        color: @orange;
         font-family: "Lato", "Open Sans", sans-serif;
         font-weight: bold;
         font-style: italic;
@@ -130,6 +141,7 @@ img.hero-bg {
     }
 
     section {
+        height: 100%;
         background-color: #ecf0f1;
         padding-top: 30px;
         color: #333333;
@@ -138,6 +150,25 @@ img.hero-bg {
         &.negative {
             background-color: #0d0d0d;
             color: #ffffff;
+        }
+    }
+
+    .powerlines {
+        text-align: center;
+        margin-top: 150px;
+        margin-bottom: 100px;
+        h2 {
+            font-weight: bold;
+            font-style: italic;
+            padding-top: 10px;
+            color: white;
+        }
+
+        .btn {
+            margin-bottom: 30px;
+            padding: 10px 32px;
+            font-size: 24px;
+            border-radius: 6px;
         }
     }
 
@@ -191,10 +222,6 @@ img.hero-bg {
             top: 0;
         }
     }
-    .content {
-        /*padding-left: 30px;*/
-        border-left: 1px solid #dddddd;
-    }
 }
 
 /* task view */
@@ -209,7 +236,7 @@ img.hero-bg {
         max-width: 200px;
         position: relative;
         float: left;
-        margin-right: 80px;
+        margin-right: 6%;
         .taglist {
             position: absolute;
             left: 0;

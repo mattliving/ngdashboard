@@ -1,6 +1,11 @@
-angular.module('jobFoundryApp').controller 'ResourceCtrl', ($scope, $routeParams, $location, Resources, mediaTypes, topics, levels, costs, paths, map) ->
-  $scope.mediaTypes = mediaTypes
-  $scope.topics     = topics
+angular.module('jobFoundryApp').controller 'ResourceCtrl', ($scope, $routeParams, $location, $http, Resources, levels, costs, paths, map) ->
+
+  # get the media and resource types
+  $http.get("/api/v1/types").success (types) ->
+    types = _.groupBy types, 'type'
+    for type, val of types
+      $scope[type] = val
+
   $scope.levels     = levels
   $scope.costs      = costs
   $scope.paths      = paths

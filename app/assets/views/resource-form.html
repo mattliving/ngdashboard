@@ -23,6 +23,7 @@
                 <!-- Media type -->
                 <tag-input ng-model="input.mediaType" tags="mediaTypes" placeholder="Select media types"></tag-input>
                 <br>
+                <input type="text" ng-model="input.resourceType" typeahead="type in resourceType | filter:$viewValue | limitTo:8">
                 <!-- Author data -->
                 <div class="author-wrapper">
                     Number of authors: <br>

@@ -53,6 +53,8 @@ app.get '/api/v1/content/:key', (req, res) ->
   content.get(req.params.key).then (data) -> res.json data["data"]
 
 # Resource Types
+app.get '/api/v1/types', (req, res) ->
+  types.all().then (data) -> res.json data
 app.get '/api/v1/types/:key', (req, res) ->
   types.get(req.params.key).then (data) -> res.json data
 

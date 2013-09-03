@@ -9,17 +9,16 @@
     "consolidate": "~0.9.1",
     "q": "~0.9.6",
     "webshot": "~0.5.1",
-    "gm": "~1.11.1",
-    "auto-reload-brunch": "~1.6.5",
-    "less-brunch": "~1.5.2"
+    "gm": "~1.11.1"
   },
   "devDependencies": {
-    "brunch": "~1.7",
     "javascript-brunch": ">= 1.0 < 1.8",
     "coffee-script-brunch": ">= 1.0 < 1.8",
     "css-brunch": ">= 1.0 < 1.8",
     "ngmin-uglify-js-brunch": "~1.7.2",
-    "clean-css-brunch": ">= 1.0 < 1.8"
+    "clean-css-brunch": ">= 1.0 < 1.8",
+    "auto-reload-brunch": "~1.6.5",
+    "less-brunch": "~1.5.2"
   },
   "engines": {
     "node": ">=0.8.0"

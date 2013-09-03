@@ -4,7 +4,7 @@
             <h1>{{task.title}}</h1>
             <h2>{{task.subtitle}}</h2>
         </header>
-        <div class="task-container">
+        <div class="container">
             <div class="content">
                 <div class="col-md-6">
                     <h3 id="overview">Overview</h3>
@@ -26,6 +26,9 @@
                         <div class="col-md-9">
                             <h5>{{mainResource.title}}</h5>
                             <p>{{mainResource.description}}</p>
+                            <span class="taglist">
+                                <tag ng-repeat="type in mainResource.mediaType">{{type}}</tag>
+                            </span>
                         </div>
                     </div>
                     <ul class="resources">
