@@ -13,12 +13,12 @@
     </div>
     <div class="col-lg-10 content">
       <div class="jumbotron col-lg-12" ng-switch="active.hidden" droppable>
-        <div id="active" class="am-switch-scaleY" ng-switch-when="false">
+        <div id="active" ng-switch-when="false">
           <h1>{{active.task.title}}</h1>
           <h3>{{active.task.subtitle}}</h3>
           <p class="lead">{{active.task.name}}</p>
         </div>
-        <div id="drop-zone" class="am-switch-scaleY" ng-switch-when="true">
+        <div id="drop-zone" ng-switch-when="true">
           <h3>Drop Here to Set Active Task</h3>
         </div>
       </div>
