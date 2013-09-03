@@ -1,6 +1,6 @@
 /* @override http://localhost:8080/styles/main.css */
 
-/* landing page content */
+/* General */
 
 html, body {
     height: 100%;
@@ -65,6 +65,28 @@ img.hero-bg {
     /*background: url('../images/mochaGrunge.png');*/
 }
 
+/* Colours */
+
+@lightgrey: #fafafa;
+@grey: #dddddd;
+@lightestblue: #62ABCE;
+@lightblue: #3B9ECE;
+@darkblue: #024666;
+@orange: #ff7700;
+@lightorange: #FBA43F;
+@lightestorange: #FBBB71;
+@darkorange: #251400;
+
+/* Mixins */
+
+.box-shadow (@x: 10px, @y: 10px, @blur: 10px, @spread: -5px, @colour: @orange, @inset...) {
+    -webkit-box-shadow: @x @y @blur @spread @colour @inset;
+    -moz-box-shadow:    @x @y @blur @spread @colour @inset;
+    -ms-box-shadow:     @x @y @blur @spread @colour @inset;
+    -o-box-shadow:      @x @y @blur @spread @colour @inset;
+    box-shadow:         @x @y @blur @spread @colour @inset;
+}
+
 /* landing page */
 
 .landing {
@@ -75,6 +97,24 @@ img.hero-bg {
     padding: 1%;
     padding-bottom: 4%;
     opacity: 0.85;
+    h1 {
+        font-size: 5em;
+        font-weight: 300;
+        /*font-style: italic;*/
+        font-family: 'Lato', sans-serif;
+
+        span {
+            color: #FF6600;
+        }
+    }
+    h2 {
+        font-size: 1.7em;
+        font-weight: 200;
+        margin-bottom: 2%;
+    }
+    &.jumbotron p {
+        margin-bottom: 2%;
+    }
 }
 
 .landing .form-control, .invite-form .form-control {
@@ -82,47 +122,74 @@ img.hero-bg {
     width: 50%;
 }
 
-.landing h1 {
-    font-size: 5em;
-    font-weight: 300;
-    /*font-style: italic;*/
-    font-family: 'Lato', sans-serif;
-}
-
-.landing h1 span {
-    color: #FF6600;
-}
-
-.landing h2 {
-    font-size: 1.7em;
-    font-weight: 200;
-    margin-bottom: 2%;
-}
-
-.landing.jumbotron p {
-    margin-bottom: 2%;
+.project, .task {
+    header {
+        height: 15em;
+        width: 100%;
+        position: absolute;
+        left: 0;
+        padding-top: 2em;
+        text-align: center;
+        color: white;
+        background-color: #2980b9;
+        h1, h2 {
+            font-family: "Lato";
+            font-weight: 700;
+        }
+    }
+    .container {
+        padding-top: 15em;
+    }
+    .sidebar {
+        li {
+            font-size: 1.3em;
+            padding: 4%;
+        }
+        li:hover, li.current {
+            background-color: #ff6600;
+            color: white;
+        }
+        ul {
+            padding-top: 10px;
+            list-style: none;
+            text-align: right;
+        }
+        .sticky-fixed {
+            position: fixed;
+            top: 0;
+        }
+    }
+    .content {
+        /*padding-left: 30px;*/
+        border-left: 1px solid #dddddd;
+    }
 }
 
 /* task view */
 
-.task header {
-    height: 15em;
-    width: 100%;
-    position: absolute;
-    left: 0;
-    padding-top: 2em;
-    text-align: center;
-    color: white;
-    background-color: #2980b9;
-}
-
-.task header h1, .task header h2 {
-    font-family: "Lato";
-    font-weight: 700;
-}
-
-.task .task-container {
-    padding-top: 15em;
+.task {
+    .resources {
+        list-style: none;
+    }
+    .resource {
+        display: inline-block;
+        text-align: center;
+        max-width: 200px;
+        position: relative;
+        float: left;
+        margin-right: 80px;
+        .taglist {
+            position: absolute;
+            left: 0;
+            top: 129px;
+        }
+        img {
+            max-width: 100%
+        }
+    }
+    .main-resource img {
+        max-width: 100%;
+    }
 }
 
 /*.sidebar {
@@ -134,105 +201,43 @@ img.hero-bg {
     text-align: left;
 }*/
 
-.task .content {
-    /*padding-left: 30px;*/
-    border-left: 1px solid #dddddd;
-}
+/* project dashboard */
 
-.task .sidebar ul {
-    padding-top: 10px;
-    list-style: none;
-    text-align: right;
-}
-
-.task .sidebar li {
-    font-size: 1.3em;
-    padding: 4%;
-}
-
-.task .sidebar li:hover, .task .sidebar li.current {
-    background-color: #ff6600;
-    color: white;
-}
-
-.task .sidebar .sticky-fixed {
-    position: fixed;
-    top: 0;
-}
-
-.task .resources {
-    list-style: none;
-}
-
-.task .resource {
-    display: inline-block;
-    text-align: center;
-    max-width: 200px;
-    position: relative;
-    float: left;
-    margin-right: 80px;
-}
-
-.task .resource .taglist {
-    position: absolute;
-    left: 0;
-    top: 129px;
-}
-
-.task .resource tag {
-}
-
-.task .resource img {
-    max-width: 100%
-}
-
-.task .main-resource img {
-    max-width: 100%;
-}
-
-/* project overview specific */
-
-.content .jumbotron {
-    text-align: center;
-    margin-top: 15px;
-}
-
-.content .jumbotron h1 {
-    margin-top: 11px;
-    color: #FF6600;
-}
-
-.jumbotron.drop-hover {
-    -webkit-box-shadow: 0 0 44px 10px #FF6600 inset;
-    -moz-box-shadow:    0 0 44px 10px #FF6600 inset;
-    -ms-box-shadow:     0 0 44px 10px #FF6600 inset;
-    -o-box-shadow:      0 0 44px 10px #FF6600 inset;
-    box-shadow:         0 0 44px 10px #FF6600 inset;
-}
-
-.task multi-repeat .well {
-    margin-bottom: 30px;
-}
-
-.task multi-repeat .well:hover {
-    color: white;
-    background-color: #2980b9;
-}
-
-.task multi-repeat .well.translucent:hover {
-    background-color: rgba(41, 128, 185, 0.85);
-}
-
-.task multi-repeat a {
-    color: #333;
-}
-
-.task multi-repeat a:hover {
-    text-decoration: none;
-}
-
-.task multi-repeat .well h3 {
-    margin-top: 11px;
+.project {
+    .content {
+        .jumbotron {
+            text-align: center;
+            margin-top: 15px;
+            h1 {
+                margin-top: 11px;
+                color: #FF6600;
+            }
+            &.drop-hover {
+                .box-shadow(0, 0, 44px, 10px, @orange, inset);
+            }
+        }
+    }
+    multi-repeat {
+        .well {
+            margin-bottom: 30px;
+            &:hover {
+                color: white;
+                background-color: #2980b9;
+            }
+            &.translucent:hover {
+                background-color: rgba(41, 128, 185, 0.85);
+            }
+        }
+        a {
+            color: #333;
+            &:hover {
+                text-decoration: none;
+            }
+        }
+        h3 {
+            margin-top: 11px;
+        }
+    }
 }
 
 /* decison flow view */
