@@ -1,7 +1,7 @@
 <div class="row project">
   <header>
     <h1>{{project.title}}</h1>
-    <h3><em>A {{project.type}}</em></h3>
+    <h4><em>A {{project.type}}</em></h3>
     <h5 ng-show="project.description !== ''">{{project.desciption}}</h5>
   </header>
   <div class="container" scroll-spy>
@@ -15,18 +15,18 @@
       <div class="jumbotron col-lg-12" ng-switch="active.hidden" droppable>
         <div id="active" ng-switch-when="false">
           <h1>{{active.task.title}}</h1>
-          <h3>{{active.task.subtitle}}</h3>
+          <h2>{{active.task.subtitle}}</h2>
           <p class="lead">{{active.task.name}}</p>
         </div>
         <div id="drop-zone" ng-switch-when="true">
-          <h3>Drop Here to Set Active Task</h3>
+          <h2>Drop Here to Set Active Task</h2>
         </div>
       </div>
       <multi-repeat collection="tasks" columns="2" dragging="dragging(dragged, index)">
         <a href="/task/{{item.name}}">
           <div class="well">
-              <h3>{{item.title}}</h3>
-              <h5>{{item.subtitle}}</h5>
+              <h2>{{item.title}}</h2>
+              <h4>{{item.subtitle}}</h4>
           </div>
         </a>
       </multi-repeat>
