@@ -9,6 +9,10 @@ html, body {
     font-size: 16px;
 }
 
+h1, h2, h3 {
+    font-family: "Lato", "Helvetica Neue", "Helvetica", Arial, sans-serif;
+}
+
 .container .jumbotron, .jumbotron, .well {
     background-color: #ecf0f1;
     border: none;
@@ -111,10 +115,38 @@ img.hero-bg {
         font-size: 1.7em;
         font-weight: 200;
         margin-bottom: 2%;
+        color: #ff6600;
+        font-family: "Lato", "Open Sans", sans-serif;
+        font-weight: bold;
+        font-style: italic;
+        text-align: center;
+        border-bottom: 1px #eeeeee;
     }
     &.jumbotron p {
         margin-bottom: 2%;
     }
+    p {
+        font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+
+    section {
+        background-color: #ecf0f1;
+        padding-top: 30px;
+        color: #333333;
+        font-size: 1.4em;
+        font-family: 'Open Sans', sans-serif;
+        &.negative {
+            background-color: #0d0d0d;
+            color: #ffffff;
+        }
+    }
+
+    header h1 {
+      font-size: 3.5em;
+      font-weight: bold;
+      margin-top: 40px;
+    }
+
 }
 
 .landing .form-control, .invite-form .form-control {
