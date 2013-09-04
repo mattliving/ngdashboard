@@ -6,7 +6,7 @@ html, body {
     height: 100%;
     font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #333;
-    font-size: 16px;
+    font-size: 18px;
 }
 
 h1, h2, h3 {
@@ -220,19 +220,34 @@ img.hero-bg {
         left: 0;
         padding-top: 2em;
         text-align: center;
-        color: black;
-        background-color: @lightgrey;
+        color: lighten(black, 10%);
+        background-color: @clouds;
         h1, h2 {
             font-family: "Lato";
+        }
+        h1 {
             font-weight: 700;
+            font-size: 3em;
+            font-style: italic;
+            padding-bottom: 10px;
+            color: @darkblue;
+        }
+        h2 {
+            font-weight: 300;
         }
     }
     nav {
+        .logo {
+            float: left;
+            margin-top: 7px;
+            margin-left: 10px;
+        }
         z-index: 100;
         left: 0;
         right: 0;
         position: absolute;
         top: @header-height;
+        border-bottom: 4px solid @orange;
         &.sticky-fixed {
             position: fixed;
             top: 0;
@@ -243,28 +258,27 @@ img.hero-bg {
             margin: 0 auto;
         }
     }
-    .container {
-        padding-top: 15em;
+    .content {
+        padding-top: 30px;
     }
-    .sidebar {
+    #overview {
+        padding-bottom: 10px;
+        font-size: 1.4em;
+        text-align: center;
+    }
+    #learning {
+        list-style: none;
         li {
-            font-size: 1.3em;
-            padding: 4%;
-        }
-        li:hover, li.current {
-            background-color: #ff6600;
-            color: white;
-        }
-        ul {
-            padding-top: 10px;
-            list-style: none;
-            text-align: right;
-        }
-        .sticky-fixed {
-            position: fixed;
-            top: 0;
+            margin-bottom: 6px;
+            .glyphicon {
+                margin-right: 10px;
+            }
         }
     }
+    .container {
+        padding-top: @header-height + 3;
+    }
+
 }
 
 /* task view */

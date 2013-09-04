@@ -171,7 +171,7 @@ angular.module('jobFoundryDirectives').directive 'scrollSpy', ($window) ->
           else
             spyElems[spy.id]
 
-        if spyElems[spy.id] isnt 0
+        if spyElems[spy.id].length isnt 0
           if (pos = spyElems[spy.id].offset().top) - $window.scrollY <= 0
             spy.pos = pos
             highlightSpy ?= spy
