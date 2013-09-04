@@ -12,6 +12,7 @@
       </ul>
     </div>
     <div class="col-lg-10 content">
+      <!-- <input id="how" type="text" placeholder="How Do I ... ?" ng-model="how"> -->
       <div class="jumbotron col-lg-12" ng-switch="active.hidden" droppable>
         <div id="active" ng-switch-when="false">
           <h1>{{active.task.title}}</h1>
@@ -22,14 +23,17 @@
           <h2>Drop Here to Set Active Task</h2>
         </div>
       </div>
-      <multi-repeat collection="tasks" columns="2" dragging="dragging(dragged, index)">
-        <a href="/task/{{item.name}}">
-          <div class="well">
-              <h2>{{item.title}}</h2>
-              <h4>{{item.subtitle}}</h4>
-          </div>
-        </a>
-      </multi-repeat>
+      <div class="jumbotron tasks">
+        <h2>Current Tasks</h2>
+        <multi-repeat collection="tasks" columns="2" dragging="dragging(dragged, index)">
+          <a href="/task/{{item.name}}">
+            <div class="well">
+                <h2>{{item.title}}</h2>
+                <h4>{{item.subtitle}}</h4>
+            </div>
+          </a>
+        </multi-repeat>
+      </div>
     </div>
   </div>
 </div>

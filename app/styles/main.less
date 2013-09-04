@@ -10,14 +10,10 @@ html, body {
 }
 
 .container .jumbotron, .jumbotron, .well {
-    background-color: #ecf0f1;
+    background-color: @cloud;
     border: none;
     border-radius: 0px;
-    -webkit-transition: 250ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-    -moz-transition: 250ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-    -ms-transition: 250ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-    -o-transition: 250ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
-    transition: 250ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    .transition-ease();
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     -o-box-shadow: none;
@@ -69,13 +65,43 @@ img.hero-bg {
 
 @lightgrey: #fafafa;
 @grey: #dddddd;
+@darkgrey: #333;
+@cloud: #ecf0f1;
 @lightestblue: #62ABCE;
 @lightblue: #3B9ECE;
 @darkblue: #024666;
-@orange: #ff6600;
+@orange: #FF6600;
 @lightestorange: #FBBB71;
 @lightorange: #FBA43F;
 @darkorange: #251400;
+
+/* Flat UI */
+
+/* Greens */
+@turquoise: #1abc9c;
+@greenSea: #16a085;
+@emerald:#2ecc71;
+@nephritis: #27ae60;
+/* Blues */
+@peterRiver: #3498db;
+@belizeRiver: #2980b9;
+/* Purples */
+@amethyst: #9b59b6;
+@wisteria: #8e44ad;
+@wetAsphalt: #34495e;
+@midnightBlue: #2c3e50;
+/* Yellows & Oranges */
+@sunFlower: #f1c40f;
+// @orange: #f39c12;
+@carrot: #e67e22;
+@pumpkin: #d35400;
+@alizarin: #e74c3c;
+@pomegranate: #c0392b;
+/* Greys */
+@clouds: #ecf0f1;
+@silver: #bdc3c7;
+@concrete: #95a5a6;
+@asbestos: #7f8c8d;
 
 /* Mixins */
 
@@ -85,6 +111,14 @@ img.hero-bg {
     -ms-box-shadow:     @x @y @blur @spread @colour @inset;
     -o-box-shadow:      @x @y @blur @spread @colour @inset;
     box-shadow:         @x @y @blur @spread @colour @inset;
+}
+
+.transition-ease (@time: 250ms) {
+    -webkit-transition: @time cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -moz-transition: @time cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -ms-transition: @time cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -o-transition: @time cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    transition: @time cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
 }
 
 .transition-ease-in (@time: 400ms) {
@@ -112,7 +146,7 @@ img.hero-bg {
         font-family: 'Lato', sans-serif;
 
         span {
-            color: #FF6600;
+            color: @orange;
         }
     }
     h2 {
@@ -154,7 +188,7 @@ img.hero-bg {
             padding: 4%;
         }
         li:hover, li.current {
-            background-color: #ff6600;
+            background-color: @orange;
             color: white;
         }
         ul {
@@ -209,18 +243,61 @@ img.hero-bg {
 
 .project {
     .content {
-        border-left: 1px solid #dddddd;
+        border-left: 1px solid @grey;
+        input {
+            width: 100%;
+            margin-top: 15px;
+            padding: 12px 24px;
+            height: 54px;
+            // font-family: 'Lato', sans-serif;
+            color: @darkgrey;
+            font-size: 22px;
+            background-color: @cloud; // rgba(255, 102, 0, 0.6);
+            border: 0px;
+            border-radius: none;
+            &:focus {
+                border-color: @darkorange;
+                .box-shadow(0 10px 10px 0 @orange inset);
+            }
+            &::-webkit-input-placeholder {
+              color: @darkgrey;
+              text-shadow: 0px 1px rgba(255, 214, 94, 0.5);
+            }
+            &:-moz-placeholder {
+              color: @darkgrey;
+              text-shadow: 0px 1px rgba(255, 214, 94, 0.5);
+            }
+            &::-moz-placeholder {
+              color: @darkgrey;
+              text-shadow: 0px 1px rgba(255, 214, 94, 0.5);
+            }
+            &:-ms-input-placeholder {
+              color: @darkgrey;
+              text-shadow: 0px 1px rgba(255, 214, 94, 0.5);
+            }
+
+        }
         .jumbotron {
+            // background-color: @midnightBlue;
             text-align: center;
             margin-top: 15px;
             h1 {
                 font-weight: 400;
                 margin-top: 11px;
-                color: #FF6600;
             }
             &.drop-hover {
                 .box-shadow(0, 0, 44px, 10px, @orange, inset);
             }
+            &.tasks {
+                padding-top: 15px;
+                h2 {
+                    margin-top: 0px;
+                    margin-bottom: 15px;
+                }
+            }
+            // #active {
+            //     background-color: @cloud;
+            // }
         }
         h3, h4, h5, p {
             font-weight: 400;
@@ -229,8 +306,26 @@ img.hero-bg {
     }
     multi-repeat {
         text-align: center;
+        .row {
+            background-color: @midnightBlue;
+            .multi-item:first-child .well {
+                margin-left: 15px;
+            }
+            .multi-item:last-child .well {
+                margin-right: 15px;
+            }
+            .multi-item:first-child:last-child .well {
+                margin-right: 0px;
+            }
+            &:last-child {
+                .multi-item {
+                    margin-bottom: 30px;
+                }
+            }
+        }
         .well {
-            margin-bottom: 30px;
+            margin-top: 30px;
+            margin-bottom: 0;
             &:hover {
                 color: white;
                 background-color: #2980b9;
@@ -259,7 +354,7 @@ img.hero-bg {
         font-size: 20px;
         font-family: 'Lato', sans-serif;
         font-weight: 200;
-        color: #FF6600;
+        color: @orange;
     }
 }
 
@@ -279,7 +374,7 @@ img.hero-bg {
         color: #455;
         &:hover {
             color: #333;
-            background: #FF6600;
+            background: @orange;
         }
     }
     h1 {
@@ -308,7 +403,7 @@ img.hero-bg {
 }
 
 .progress-bar {
-    background-color: #FF6600;
+    background-color: @orange;
 }
 
 /* resource view styles */
