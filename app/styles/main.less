@@ -212,7 +212,7 @@ img.hero-bg {
 }
 
 .project, .task {
-    @header-height: 14em;
+    @header-height: 13em;
     header {
         height: @header-height;
         width: 100%;
@@ -220,8 +220,8 @@ img.hero-bg {
         left: 0;
         padding-top: 2em;
         text-align: center;
-        color: white;
-        background-color: #2980b9;
+        color: black;
+        background-color: @lightgrey;
         h1, h2 {
             font-family: "Lato";
             font-weight: 700;
@@ -232,10 +232,15 @@ img.hero-bg {
         left: 0;
         right: 0;
         position: absolute;
-        top: 14em;
+        top: @header-height;
         &.sticky-fixed {
             position: fixed;
             top: 0;
+        }
+        ul {
+            float: none;
+            width: 80%;
+            margin: 0 auto;
         }
     }
     .container {

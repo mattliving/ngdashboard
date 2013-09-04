@@ -162,6 +162,9 @@ angular.module('jobFoundryDirectives').directive 'scrollSpy', ($window) ->
       highlightSpy = null
       for spy in scope.spies
         spy.out()
+
+        # the elem might not have been available when it was originally cached,
+        # so we check again to get another element in case this one doesn't exist.
         spyElems[spy.id] =
           if spyElems[spy.id].length is 0
             elem.find('#'+spy.id)
