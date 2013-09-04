@@ -212,8 +212,9 @@ img.hero-bg {
 }
 
 .project, .task {
+    @header-height: 14em;
     header {
-        height: 15em;
+        height: @header-height;
         width: 100%;
         position: absolute;
         left: 0;
@@ -224,6 +225,17 @@ img.hero-bg {
         h1, h2 {
             font-family: "Lato";
             font-weight: 700;
+        }
+    }
+    nav {
+        z-index: 100;
+        left: 0;
+        right: 0;
+        position: absolute;
+        top: 14em;
+        &.sticky-fixed {
+            position: fixed;
+            top: 0;
         }
     }
     .container {

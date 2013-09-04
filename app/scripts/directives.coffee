@@ -141,10 +141,10 @@ angular.module('jobFoundryDirectives').directive 'sticky', ($window) ->
     elemPos = elem.offset().top
     $($window).scroll ->
       if elemPos < $window.scrollY
-        unless elem.hasClass('sticky-fixed')
-          elem.addClass('sticky-fixed')
+        unless elem.hasClass("sticky-fixed")
+          elem.addClass("sticky-fixed")
       else
-        elem.removeClass('sticky-fixed')
+        elem.removeClass("sticky-fixed")
 
 angular.module('jobFoundryDirectives').directive 'scrollSpy', ($window) ->
   restrict: 'A'
@@ -162,11 +162,18 @@ angular.module('jobFoundryDirectives').directive 'scrollSpy', ($window) ->
       highlightSpy = null
       for spy in scope.spies
         spy.out()
-        if (pos = spyElems[spy.id].offset().top) - $window.scrollY <= 0
-          spy.pos = pos
-          highlightSpy ?= spy
-          if highlightSpy.pos < spy.pos
-            highlightSpy = spy
+        spyElems[spy.id] =
+          if spyElems[spy.id].length is 0
+            elem.find('#'+spy.id)
+          else
+            spyElems[spy.id]
+
+        if spyElems[spy.id] isnt 0
+          if (pos = spyElems[spy.id].offset().top) - $window.scrollY <= 0
+            spy.pos = pos
+            highlightSpy ?= spy
+            if highlightSpy.pos < spy.pos
+              highlightSpy = spy
 
       highlightSpy?.in()
 
@@ -174,14 +181,16 @@ angular.module('jobFoundryDirectives').directive 'spy', ($location) ->
   restrict: "A"
   require: "^scrollSpy"
   link: (scope, elem, attrs, scrollSpy) ->
+    attrs.spyClass ?= "current"
+
     elem.click ->
       scope.$apply ->
         $location.hash(attrs.spy)
 
     scrollSpy.addSpy
       id: attrs.spy
-      in: -> elem.addClass 'current',
-      out: -> elem.removeClass 'current'
+      in: -> elem.addClass attrs.spyClass,
+      out: -> elem.removeClass attrs.spyClass
 
 angular.module('jobFoundryDirectives').directive 'enterKey', ->
   (scope, elem, attrs) ->

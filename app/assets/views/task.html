@@ -1,9 +1,21 @@
 <div class="task container">
-    <div class="row">
+    <div class="row" scroll-spy>
         <header>
             <h1>{{task.title}}</h1>
             <h2>{{task.subtitle}}</h2>
         </header>
+        <nav sticky class="navbar-default navbar-inverse" role="navigation">
+            <ul class="nav navbar-nav">
+                <a href="" class="navbar-brand">jobfoundry</a>
+                <!-- <li><img src="/images/logo-dark.png" height="30px;" /></li> -->
+                <li spy="overview" spy-class="active"><a><span class="glyphicon glyphicon-unchecked"></span> Overview</a></li>
+                <li spy="learning" spy-class="active"><a><span class="glyphicon glyphicon-unchecked"></span> Goals</a></li>
+                <li spy="resources-concept" spy-class="active"><a><span class="glyphicon glyphicon-unchecked"></span> Concepts</a></li>
+                <li spy="resources-course" spy-class="active"><a><span class="glyphicon glyphicon-unchecked"></span> Courses</a></li>
+                <li spy="resources-tool" spy-class="active"><a><span class="glyphicon glyphicon-unchecked"></span> Tools</a></li>
+                <li spy="resources-tutorial" spy-class="active"><a><span class="glyphicon glyphicon-unchecked"></span> Tutorials</a></li>
+            </ul>
+        </nav>
         <div class="container">
             <div class="content">
                 <div class="col-md-6">
@@ -17,7 +29,7 @@
                     </ul>
                 </div>
                 <h3 id="resources">Resources</h3>
-                <div ng-repeat="(type, resources) in task.resources" class="clearfix" ng-init="mainResource=resources[0]">
+                <div ng-repeat="(type, resources) in task.resources" class="clearfix" id="resources-{{type}}" ng-init="mainResource=resources[0]">
                     <h4>{{resourceMap(type)}}s</h4>
                     <div class="main-resource row well">
                         <div class="col-md-3">
