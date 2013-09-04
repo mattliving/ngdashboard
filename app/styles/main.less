@@ -29,7 +29,7 @@ h1, h2, h3 {
 }
 
 .orange {
-    color: #ff6600;
+    color: @orange;
 }
 
 h1.jobfoundry {
@@ -111,13 +111,17 @@ img.hero-bg {
         text-align: center;
         padding-top: 10%;
         height: 100%;
+        h1 {
+            font-size: 3.5em;
+            font-weight: bold;
+            margin-top: 40px;
+        }
     }
     h1 {
         font-size: 5em;
         font-weight: 300;
         /*font-style: italic;*/
         font-family: 'Lato', sans-serif;
-
         span {
             color: @orange;
         }
@@ -141,12 +145,41 @@ img.hero-bg {
     }
 
     section {
+        clear: both;
+        overflow: auto;
+        padding-bottom: 2em;
+        padding-top: 2em;
         height: 100%;
         background-color: #ecf0f1;
-        padding-top: 30px;
         color: #333333;
         font-size: 1.4em;
-        font-family: 'Open Sans', sans-serif;
+        font-family: 'open sans', sans-serif;
+
+        h2 {
+            padding-bottom: 0.4em
+        }
+
+        #idea-to-done {
+            h2 {
+                text-align: center;
+            }
+            width: 55%;
+            margin: 0 auto;
+        }
+        .section-container {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        &:nth-child(even) img {
+            padding-right: 1em;
+            float: left;
+        }
+
+        &:nth-child(odd) img {
+            padding-left: 1em;
+            float: right;
+        }
         &.negative {
             background-color: #0d0d0d;
             color: #ffffff;
@@ -171,13 +204,6 @@ img.hero-bg {
             border-radius: 6px;
         }
     }
-
-    header h1 {
-      font-size: 3.5em;
-      font-weight: bold;
-      margin-top: 40px;
-    }
-
 }
 
 .landing .form-control, .invite-form .form-control {
