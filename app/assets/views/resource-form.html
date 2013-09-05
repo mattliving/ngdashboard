@@ -18,12 +18,12 @@
                 <input type="text" ng-model="input.link" class="form-control" required placeholder="URL">
                 <br>
                 <!-- Topic selection -->
-                <tag-input ng-model="input.topic" tags="topics" placeholder="Select topics" create></tag-input>
+                <tag-input ng-model="input.topic" tags="topicTypes" placeholder="Select topics" create></tag-input>
                 <br>
                 <!-- Media type -->
                 <tag-input ng-model="input.mediaType" tags="mediaTypes" placeholder="Select media types"></tag-input>
                 <br>
-                <input type="text" ng-model="input.resourceType" typeahead="type in resourceType | filter:$viewValue | limitTo:8">
+                <input type="text" ng-model="input.resourceType" typeahead="type.key for type in resourceTypes | filter:$viewValue | limitTo:8">
                 <!-- Author data -->
                 <div class="author-wrapper">
                     Number of authors: <br>

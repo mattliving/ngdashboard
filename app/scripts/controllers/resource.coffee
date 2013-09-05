@@ -1,10 +1,13 @@
-angular.module('jobFoundryApp').controller 'ResourceCtrl', ($scope, $routeParams, $location, $http, Resources, levels, costs, paths, map) ->
+angular.module('jobFoundryApp').controller 'ResourceCtrl', ($scope, $routeParams, $location, $http, Resource, levels, costs, paths, map) ->
 
   # get the media and resource types
   $http.get("/api/v1/types").success (types) ->
     types = _.groupBy types, 'type'
     for type, val of types
-      $scope[type] = val
+      typeMap = {}
+      for pair in val
+        typeMap[pair.key] = pair.value
+      $scope[type+"Types"] = typeMap
 
   $scope.levels     = levels
   $scope.costs      = costs
@@ -14,11 +17,15 @@ angular.module('jobFoundryApp').controller 'ResourceCtrl', ($scope, $routeParams
   $scope.path = $routeParams.path
 
   $scope.deleteResource = (resource) ->
-    if confirm("Are you sure you want to delete this resource?") then Resources.delete(resource)
+    if confirm("Are you sure you want to delete this resource?")
+      Resource.delete(id: resource._id)
+      $scope.resources.remove resource
 
   $scope.valueFor = map
 
-  $scope.resources = Resources.get()
+  $scope.resources = Resource.query()
+
+  window.scope = $scope
 
   $scope.authorCount = 1
   $scope.input =
@@ -33,7 +40,7 @@ angular.module('jobFoundryApp').controller 'ResourceCtrl', ($scope, $routeParams
   # get and modify the data to be used in the form correctly
   if $routeParams.id?
     $scope.editing = true
-    Resources.get($routeParams.id).then (resource) ->
+    Resource.get id: $routeParams.id, (resource) ->
       authorsData = []
       for author in resource.authors
         authorData = []
@@ -85,6 +92,7 @@ angular.module('jobFoundryApp').controller 'ResourceCtrl', ($scope, $routeParams
     diff = newVal - $scope.input.authors.length
     if diff > 0
       while diff-- > 0
+        console.log 'about to call push'
         $scope.input.authors.push [
           key: "name"
           value: ""
@@ -104,9 +112,9 @@ angular.module('jobFoundryApp').controller 'ResourceCtrl', ($scope, $routeParams
 
     if $scope.editing
       input._id = $routeParams.id
-      updatedResource = Resources.edit input
+      updatedResource = Resource.update id: input._id, input
     else
-      updatedResource = Resources.add _.defaults input,
+      input = _.defaults input,
         topic: []
         mediaType: []
         description: ""
@@ -114,8 +122,9 @@ angular.module('jobFoundryApp').controller 'ResourceCtrl', ($scope, $routeParams
           name: ""
         ]
         cost: "free"
+      updatedResource = Resource.save input
 
-    updatedResource.then (res) ->
+    updatedResource.success (res) ->
       if res.success
         $scope.input =
           authors: []

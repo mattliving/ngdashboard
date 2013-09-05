@@ -3,7 +3,7 @@
     <div ng-repeat="(levelKey, levelName) in levels">
         <h3>{{levelName}}</h3>
         <div ng-repeat="resource in resources | filter:{path: path, level: levelKey}" ng-init="collapsed=true">
-            <span class="{{resource.level}} glyphicon" ng-class="{'glyphicon-collapse-down': !collapsed, 'glyphicon-collapse-up': collapsed}" ng-click="collapsed = !collapsed"></span>
+            <span class="{{resource.level}} glyphicon" ng-class="{'glyphicon-collapse-down': collapsed, 'glyphicon-collapse-up': !collapsed}" ng-click="collapsed = !collapsed"></span>
             <!-- <span class="dot {{resource.level}}"></span> -->
             <a href="{{resource.link}}">{{resource.title}}</a>
             <div class="content row" ng-hide="collapsed">

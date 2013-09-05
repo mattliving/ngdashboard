@@ -1,4 +1,4 @@
-angular.module('jobFoundryApp').controller 'TaskCtrl', ($scope, $http, $routeParams, types, map, mediaTypes) ->
+angular.module('jobFoundryApp').controller 'TaskCtrl', ($scope, $http, $routeParams, Task, types, map, mediaTypes) ->
 
   types('resource').success (resourceTypes) ->
     $scope.resourceMap = (key) ->
@@ -8,11 +8,7 @@ angular.module('jobFoundryApp').controller 'TaskCtrl', ($scope, $http, $routePar
 
   $scope.valueOf = map
 
-  $http.get("/api/v1/tasks/#{$routeParams.name}")
-  .success (task) ->
-    console.log task
-    $scope.task = task
-  .error -> console.log 'error getting data'
+  $scope.task = Task.get name: $routeParams.name
 
   $scope.filter = {}
 
