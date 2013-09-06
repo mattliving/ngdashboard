@@ -1,0 +1,39 @@
+<style>
+    .highlight {
+        background-color: red;
+    }
+</style>
+<div class="container">
+    <div class="row">
+        <h1>Create a task</h1>
+        <form ng-submit="addTask()">
+            <input type="text" placeholder="Task Name" class="form-control" ng-model="input.name"><br>
+            <input type="text" placeholder="Task Title" class="form-control" ng-model="input.title"><br>
+            <input type="text" placeholder="Task Subtitle" class="form-control" ng-model="input.subtitle"><br>
+            <textarea name="overview" cols="30" rows="10" class="form-control" placeholder="Task Overview" ng-model="input.overview"></textarea>
+            <h2>Task Outcomes</h2>
+            <ul>
+                <li ng-repeat="outcome in input.outcomes"><a href="" ng-click="input.outcomes.remove(outcome)">x</a> {{outcome}}</li>
+            </ul>
+            <input type="text" placeholder="Add Outcome" class="form-control" enter-key="addOutcome(newOutcome);newOutcome=''" ng-model="newOutcome"><br>
+            <h2>Add Resources</h2>
+            <h3>Resource List</h3>
+            <ul>
+                <li ng-repeat="resource in inputResources">{{resource.title}}</li>
+            </ul>
+            <div class="col-md-6">
+                <h3>Find a resource</h3>
+                <input type="search" placeholder="Search..." class="form-control" ng-model="resourceSearch" enter-key="addResource()">
+                <ul>
+                    <li ng-repeat="resource in resources | filter:resourceSearch | limitTo:10" ng-click="addResource(resource)">{{resource.title}}</li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <h3>Add a resource</h3>
+
+            </div>
+            <br>
+            <button type="submit" class="btn btn-lg btn-primary btn-block">Submit</button>
+        </form>
+    </div>
+</div>
