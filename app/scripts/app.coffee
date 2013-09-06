@@ -14,15 +14,18 @@ angular.module('jobFoundryApp', ['jobFoundryDirectives', 'jobFoundryServices', '
         templateUrl: 'views/getting-started.html'
         controller: 'DecisionFlowCtrl'
         reloadOnSearch: false
-      .when '/add',
+      .when '/add/resource',
         templateUrl: '/views/resource-form.html'
         controller: 'ResourceCtrl'
-      .when '/edit/:id',
+      .when '/edit/resource/:id',
         templateUrl: '/views/resource-form.html'
         controller: 'ResourceCtrl'
-      .when '/list/:path',
+      .when '/list/resource/:path',
         templateUrl: '/views/list.html'
         controller: 'ResourceCtrl'
+      .when '/add/task',
+        templateUrl: '/views/task-form.html'
+        controller: 'TaskFormCtrl'
       .when '/projects/:id',
         templateUrl: '/views/project-overview.html'
         controller: 'ProjectOverviewCtrl'

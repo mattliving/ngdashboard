@@ -42,11 +42,11 @@ app.get '/api/v1/resources', (req, res) ->
 app.get '/api/v1/resources/:id', (req, res) ->
   resources.get(req.params.id).then (resource) -> res.json resource
 app.post '/api/v1/resources', (req, res) ->
-  resources.add(req.body).then (success) -> res.json success
+  resources.add(req.body).then (success) -> res.json success[0]
 app.delete '/api/v1/resources/:id', (req, res) ->
   resources.delete(req.params.id).then (success) -> res.json success
 app.put '/api/v1/resources/:id', (req, res) ->
-  resources.edit(req.params.id, req.body).then (success) -> res.json success
+  resources.edit(req.params.id, req.body).then (success) -> res.json success[0]
 
 # Content
 app.get '/api/v1/content/:key', (req, res) ->

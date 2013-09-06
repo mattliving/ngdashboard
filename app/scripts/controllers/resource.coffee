@@ -9,9 +9,9 @@ angular.module('jobFoundryApp').controller 'ResourceCtrl', ($scope, $routeParams
         typeMap[pair.key] = pair.value
       $scope[type+"Types"] = typeMap
 
-  $scope.levels     = levels
-  $scope.costs      = costs
-  $scope.paths      = paths
+  $scope.levels = levels
+  $scope.costs  = costs
+  $scope.paths  = paths
 
   # used in the list view
   $scope.path = $routeParams.path
@@ -48,6 +48,7 @@ angular.module('jobFoundryApp').controller 'ResourceCtrl', ($scope, $routeParams
           authorData.push key: key, value: value
         authorsData.push authorData
       resource.authors = authorsData
+      $scope.authorCount = resource.authors.length
       $scope.input = resource
 
   $scope.testData = ->
@@ -110,21 +111,7 @@ angular.module('jobFoundryApp').controller 'ResourceCtrl', ($scope, $routeParams
       _.each attrs, (attr) -> author[attr.key] = attr.value
       return author
 
-    if $scope.editing
-      input._id = $routeParams.id
-      updatedResource = Resource.update id: input._id, input
-    else
-      input = _.defaults input,
-        topic: []
-        mediaType: []
-        description: ""
-        authors: [
-          name: ""
-        ]
-        cost: "free"
-      updatedResource = Resource.save input
-
-    updatedResource.success (res) ->
+    callback = (res) ->
       if res.success
         $scope.input =
           authors: []
@@ -136,6 +123,23 @@ angular.module('jobFoundryApp').controller 'ResourceCtrl', ($scope, $routeParams
       else
         console.log res
         alert 'there was an error with your request, see console for details'
+
+    if $scope.editing
+      input._id = $routeParams.id
+      updatedResource = Resource.update id: input._id, input, callback
+    else
+      console.log 'about to use _defaults'
+      input = _.defaults input,
+        topic: []
+        mediaType: []
+        description: ""
+        authors: [
+          name: ""
+        ]
+        cost: "free"
+      console.log 'done'
+      updatedResource = Resource.save input, callback
+
 
 
 
