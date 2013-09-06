@@ -4,16 +4,6 @@
             <h1>Add a new resource</h1>
             <a href="" ng-click="testData()">Add test data</a>
             <form ng-submit="addResource()">
-                <!-- Path selection -->
-                <div class="btn-group btn-group-justified">
-                    <a ng-repeat="(key, path) in paths" type="button" class="btn btn-primary" ng-model="input.path" btn-radio="'{{key}}'">{{path}}</a>
-                </div>
-                <br><br>
-                <!-- Difficulty level selection -->
-                <div class="btn-group btn-group-justified">
-                    <a ng-repeat="(key, level) in levels" type="button" class="btn btn-primary" ng-model="input.level" btn-radio="'{{key}}'">{{level}}</a>
-                </div>
-                <br><br>
                 <input type="text" ng-model="input.title" class="form-control" required placeholder="Title"><br>
                 <input type="text" ng-model="input.link" class="form-control" required placeholder="URL">
                 <br>
