@@ -9,7 +9,6 @@ Task = mongoose.model 'Task', new mongoose.Schema
   outcomes: [String]
   overview: String
   resources: [type: mongoose.Schema.Types.ObjectId, ref: 'Resource']
-  summary: String
 
 module.exports =
   Task: Task

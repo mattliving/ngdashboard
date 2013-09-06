@@ -2,18 +2,12 @@ mongoose = require 'mongoose'
 {spawn} = require 'child_process'
 
 ResourceSchema = new mongoose.Schema
-  path:
-    type: String
-    required: true
-  topic: [String]
-  level:
-    type: String
-    enum: ['beginner', 'intermediate', 'advanced', 'all']
   title:
     type: String
     required: true
   mediaType:
     type: [String]
+  topic: [String]
   resourceType: String
   description: String
   link:
@@ -27,7 +21,7 @@ ResourceSchema = new mongoose.Schema
 
 ResourceSchema.pre 'save', (next) ->
   arraysDone = @topic? and @topic > 0 and @mediaType? and @mediaType.length > 0
-  textDone = @title? and @resourceType? and @level?
+  textDone = @title? and @resourceType?
   @unfinished = not (arraysDone and textDone)
   next()
 

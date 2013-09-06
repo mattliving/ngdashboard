@@ -9,6 +9,7 @@ angular.module('jobFoundryApp').controller 'ResourceCtrl', ($scope, $routeParams
         typeMap[pair.key] = pair.value
       $scope[type+"Types"] = typeMap
 
+  window.scope = $scope
   $scope.levels = levels
   $scope.costs  = costs
   $scope.paths  = paths
@@ -29,10 +30,6 @@ angular.module('jobFoundryApp').controller 'ResourceCtrl', ($scope, $routeParams
 
   $scope.authorCount = 1
   $scope.input =
-    authors: [[
-      key: "name"
-      value :""
-    ]]
     cost: "free"
 
   $scope.editing = false
@@ -74,34 +71,6 @@ angular.module('jobFoundryApp').controller 'ResourceCtrl', ($scope, $routeParams
       ]]
       cost: "free"
       description: "BEST SITE EVER USE IT FOR EVERYTHING"
-
-  $scope.addAuthorAttr = (author, attr) ->
-    if attr and attr not in _.pluck author, "key"
-      author.push
-        key: attr
-        value: ""
-
-  $scope.removeAuthorAttr = (author, attr) ->
-    for val, i in author
-      if val.key is attr
-        author.splice i, 1
-        return
-
-  $scope.$watch 'authorCount', (newVal) ->
-    if newVal <= 0 then return
-
-    diff = newVal - $scope.input.authors.length
-    if diff > 0
-      while diff-- > 0
-        console.log 'about to call push'
-        $scope.input.authors.push [
-          key: "name"
-          value: ""
-        ]
-    else if diff < 0
-      if diff is -1 then $scope.input.authors.pop()
-      else
-        $scope.input.authors.splice ($scope.input.authors.length - 1 + diff), diff*-1
 
   $scope.addResource = ->
     input = angular.copy $scope.input

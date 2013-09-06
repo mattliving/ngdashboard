@@ -23,25 +23,9 @@
                 <!-- Media type -->
                 <tag-input ng-model="input.mediaType" tags="mediaTypes" placeholder="Select media types"></tag-input>
                 <br>
-                <input type="text" ng-model="input.resourceType" typeahead="type.key for type in resourceTypes | filter:$viewValue | limitTo:8">
+                <input type="text" placeholder="Resource Type" class="form-control" ng-model="input.resourceType"><br>
                 <!-- Author data -->
-                <div class="author-wrapper">
-                    Number of authors: <br>
-                    <input type="number" class="form-control" ng-model="authorCount" min="1" max="100">
-                    <div class="clearfix"></div>
-                    <div class="author-input" ng-repeat="author in input.authors">
-                        <div class="attr" ng-repeat="attr in author">
-                            <input type="text" class="form-control" ng-model="attr.value" placeholder="{{attr.key}}">
-                            <a href="" ng-click="removeAuthorAttr(author, attr.key)" class="btn btn-primary"><i class="icon-minus"></i></a>
-                        </div>
-                        <div class="new-attr">
-                            <input type="text" class="new-attr form-control" enter-key="addAuthorAttr(author, newAttr); newAttr=''" ng-model="newAttr" placeholder="New attribute">
-                            <a href="" ng-click="addAuthorAttr(author, newAttr); newAttr=''" class="btn btn-primary"><i class="icon-plus"></i></a>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <br>
-                </div>
+                <author-input authors="input.authors"></author-input>
                 <!-- Cost data -->
                 <div class="clearfix"></div>
                 <br>

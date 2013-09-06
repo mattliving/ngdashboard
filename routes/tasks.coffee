@@ -13,3 +13,30 @@ module.exports =
       task.resources = _.groupBy task.resources, 'resourceType'
       taskPromise.resolve task
     return taskPromise.promise
+  add: (newTask) ->
+    task = new Task
+      name: newTask.name
+      title: newTask.title
+      subtitle: newTask.subtitle
+      overview: newTask.overview
+      outcomes: newTask.outcomes
+      resources: newTask.resources
+    q.ninvoke task, "save"
+  edit: (name, newTask) ->
+    result = q.defer()
+    Task.findById id, (err, task) ->
+      if err then return result.reject err
+      task.name = newTask.name
+      task.title = newTask.title
+      task.subtitle = newTask.subtitle
+      task.overview = newTask.overview
+      task.outcomes = newTask.outcomes
+      task.resources = newTask.resources
+
+      task.save (err) ->
+        if err
+          result.reject err
+        else
+          result.resolve resource
+    return result.promise
+  delete: (name) -> q.ninvoke Task, "remove", name: name

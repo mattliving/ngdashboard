@@ -1,0 +1,17 @@
+<div class="author-wrapper">
+    Number of authors: <br>
+    <input type="number" class="form-control" ng-model="authorCount" min="1" max="10">
+    <div class="clearfix"></div>
+    <div class="author-input" ng-repeat="author in authorsArray">
+        <div class="attr" ng-repeat="attr in author">
+            <input type="text" class="form-control" ng-model="attr.value" placeholder="{{attr.key}}">
+            <a href="" ng-click="removeAuthorAttr(author, attr.key)" class="btn btn-primary"><span class="glyphicon glyphicon-minus"></span></a>
+        </div>
+        <div class="new-attr">
+            <input type="text" class="new-attr form-control" enter-key="addAuthorAttr(author, newAttr); newAttr=''" ng-model="newAttr" placeholder="New attribute">
+            <a href="" ng-click="addAuthorAttr(author, newAttr); newAttr=''" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span></a>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <br>
+</div>
