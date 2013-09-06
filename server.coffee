@@ -69,6 +69,10 @@ app.get '/api/v1/tasks', (req, res) ->
   tasks.all().then (tasks) -> res.json tasks
 app.get '/api/v1/tasks/:name', (req, res) ->
   tasks.get(req.params.name).then (task) -> res.json task
+app.post '/api/v1/tasks/:name?', (req, res) -> #needs optional name because $resource is stupid
+  tasks.add(req.body).then (success) -> res.json success[0]
+app.put '/api/v1/tasks/:name', (req, res) ->
+  tasks.edit(req.params.name, req.body).then (success) -> res.json success[0]
 
 # Pages
 
