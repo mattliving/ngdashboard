@@ -26,23 +26,23 @@
                     </div>
                 </div>
                 <h3 id="resources">Resources</h3>
-                <div ng-repeat="(type, resources) in task.resources" class="clearfix" id="resources-{{type}}" ng-init="mainResource=resources[0]">
+                <div ng-repeat="(type, resources) in task.resources" class="clearfix" id="resources-{{type}}">
                     <h4>{{resourceMap(type)}}s</h4>
                     <div class="main-resource row panel panel-default">
                         <div class="col-md-3">
-                            <img ng-src="images/screenshots/{{mainResource._id}}.png">
+                            <img ng-src="images/screenshots/{{mainResource(type)._id}}.png">
                         </div>
                         <div class="col-md-9">
-                            <h5><a href="{{mainResource.link}}" target="_blank">{{mainResource.title}}</a></h5>
-                            <p>{{mainResource.description}}</p>
+                            <h5><a href="{{mainResource(type).link}}" target="_blank">{{mainResource(type).title}}</a></h5>
+                            <p>{{mainResource(type).description}}</p>
                             <span class="taglist">
-                                <tag ng-repeat="type in mainResource.mediaType">{{type}}</tag>
+                                <tag ng-repeat="type in mainResource(type).mediaType">{{type}}</tag>
                             </span>
                         </div>
                     </div>
                     <ul class="resources row">
                         <li class="resource panel panel-default" ng-repeat="resource in resources | limitTo:4">
-                            <a href="{{resource.link}}" target="_blank">
+                            <a href="" ng-click="setMainResource(type, resource)">
                                 <div class="image-wrapper">
                                     <span class="taglist">
                                         <tag ng-repeat="type in resource.mediaType">{{type}}</tag>
