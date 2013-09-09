@@ -29,7 +29,6 @@
                 </div>
                 <a href="" class="btn btn-danger" ng-hide="collapsed" ng-click="deleteResource(resource)">Delete this resource</a><a ng-hide="collapsed" ng-href="#/edit/{{resource._id}}" class="btn btn-success">Edit this resource</a><br>
             </div>
-            <div class="line" ng-show="!$last"></div>
         </div>
     </div>
     <h3 ng-show="(resources | filter:{path: path, unfinished: true}).length">Unfinished Resources</h3>
