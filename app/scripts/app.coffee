@@ -5,7 +5,7 @@
 Array::remove = (e) -> @splice i, 1 if (i = @indexOf e) isnt -1
 
 angular.module('jobFoundryApp', ['jobFoundryDirectives', 'jobFoundryServices', 'jobFoundryFilters', 'resourceData', 'ui.bootstrap', 'ngResource', 'ngRoute', 'ngAnimate'])
-  .config ($routeProvider, $locationProvider) ->
+  .config ($routeProvider, $locationProvider, $httpProvider) ->
     $routeProvider
       .when '/',
         templateUrl: '/views/landing.html'
@@ -24,6 +24,9 @@ angular.module('jobFoundryApp', ['jobFoundryDirectives', 'jobFoundryServices', '
         templateUrl: '/views/list.html'
         controller: 'ResourceCtrl'
       .when '/add/task',
+        templateUrl: '/views/task-form.html'
+        controller: 'TaskFormCtrl'
+      .when '/task/:name/edit',
         templateUrl: '/views/task-form.html'
         controller: 'TaskFormCtrl'
       .when '/projects/:id',

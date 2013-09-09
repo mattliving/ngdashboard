@@ -34,9 +34,7 @@ app.configure ->
 mongoose.connect('mongodb://localhost/jobfoundry')
 
 dbSuccess = (res, prop) ->
-  console.log 'making callback', prop
   (data) ->
-    console.log 'returning data', data
     res.json if prop? then data[prop] else data
 
 dbErr = (err) ->
@@ -61,7 +59,6 @@ app.delete '/api/v1/resources/:id', (req, res) ->
 app.put '/api/v1/resources/:id', (req, res) ->
   resources.edit(req.params.id, req.body).then dbSuccess(res, 0), dbErr
 
-
 # Content
 app.get '/api/v1/content/:key', (req, res) ->
   content.get(req.params.key).then dbSuccess(res, "data"), dbErr
@@ -84,8 +81,8 @@ app.get '/api/v1/projects/:name', (req, res) ->
 app.get '/api/v1/tasks', (req, res) ->
   tasks.all().then dbSuccess(res), dbErr
 
-app.get '/api/v1/tasks/:name', (req, res) ->
-  tasks.get(req.params.name).then dbSuccess(res), dbErr
+app.get '/api/v1/tasks/:name/:cmd?', (req, res) ->
+  tasks.get(req.params.name, req.params.cmd is 'group').then dbSuccess(res), dbErr
 
 app.post '/api/v1/tasks/:name?', (req, res) -> #needs optional name because $resource is stupid
   tasks.add(req.body).then dbSuccess(res, 0), dbErr

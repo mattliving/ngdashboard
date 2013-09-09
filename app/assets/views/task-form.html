@@ -41,4 +41,10 @@
             <button type="submit" class="btn btn-lg btn-primary btn-block">Submit</button>
         </form>
     </div>
+    <div class="row">
+        <h1>List of tasks</h1>
+        <div class="task" ng-repeat="task in tasks">
+            <a href="/edit/task/{{task.name}}">{{task.title}} - <span class="task-name">{{task.name}}</span></a>
+        </div>
+    </div>
 </div>

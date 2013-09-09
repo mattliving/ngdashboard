@@ -1,4 +1,4 @@
-angular.module('jobFoundryApp').controller 'TaskFormCtrl', ($scope, $http, Task, Resource, levels, costs, paths, map) ->
+angular.module('jobFoundryApp').controller 'TaskFormCtrl', ($scope, $http, $location, $routeParams, Task, Resource, levels, costs, paths, map) ->
   $scope.tasks = Task.query()
   $scope.resources = Resource.query()
 
@@ -28,15 +28,21 @@ angular.module('jobFoundryApp').controller 'TaskFormCtrl', ($scope, $http, Task,
     $scope.input = task
     $scope.inputResources = []
 
+  if $routeParams.name?
+    editing = yes
+    $scope.input = Task.get name: $routeParams.name, ->
+      $scope.inputResources = $scope.input.resources
+
   $scope.addOutcome = (outcome) ->
     $scope.input.outcomes.push outcome
 
   $scope.addTask = ->
-    # this will need to turn the list of resources into a list with just the ids
     $scope.input.resources = _.pluck $scope.inputResources, '_id'
-    console.log $scope.input
-    $scope.input.$save -> console.log 'saved task'
-    reset()
+    if editing
+      $scope.input.$update (-> alert 'updated task'), (-> alert 'there was an error updating the task, see console for details')
+    else
+      $scope.input.$save((-> console.log('saved task')), (-> alert 'there was an error saving the task, see console for details'))
+      reset()
 
   $scope.addResource = (resource) ->
     if resource not in $scope.inputResources

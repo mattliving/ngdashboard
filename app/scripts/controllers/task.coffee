@@ -8,7 +8,7 @@ angular.module('jobFoundryApp').controller 'TaskCtrl', ($scope, $http, $routePar
 
   $scope.valueOf = map
 
-  $scope.task = Task.get name: $routeParams.name
+  $scope.task = Task.get name: $routeParams.name, cmd: 'group'
 
   $scope.filter = {}
 

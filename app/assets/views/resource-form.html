@@ -32,7 +32,7 @@
         </div>
         <div class="col-lg-6">
             <h1>List of URLs</h1>
-            <div class="unstyled" ng-repeat="(key, path) in paths" ng-init="limit = 10">
+            <div ng-repeat="(key, path) in paths" ng-init="limit = 10">
                 <h3>{{path}}</h3>
                 <a href="#/list/{{key}}">View all ></a>
                 <div ng-repeat="resource in resources | filter:{path: key} | limitTo: limit">

@@ -86,6 +86,6 @@ angular.module('jobFoundryServices')
   .factory 'Project', ($resource) ->
     $resource 'api/v1/projects/:id', id: '@id'
   .factory 'Task', ($resource) ->
-    $resource 'api/v1/tasks/:name', name: '@name'
+    $resource 'api/v1/tasks/:name/:cmd', {name: '@name'}, update: {method: "PUT"}
   .factory 'Resource', ($resource) ->
     $resource 'api/v1/resources/:id', {id: '@id'}, update: {method: "PUT"}
