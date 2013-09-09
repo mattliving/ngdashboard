@@ -11,8 +11,6 @@ module.exports =
       mediaType:   newResource.mediaType
       title:       newResource.title
       link:        newResource.link
-      level:       newResource.level
-      path:        newResource.path
       cost:        newResource.cost
       description: newResource.description
 
@@ -27,8 +25,6 @@ module.exports =
       resource.mediaType = newResource.mediaType
       resource.title = newResource.title
       resource.link = newResource.link
-      resource.level = newResource.level
-      resource.path = newResource.path
       resource.cost = newResource.cost
       resource.description = newResource.description
 

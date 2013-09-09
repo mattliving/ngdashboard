@@ -1,39 +1,41 @@
-<h2>{{valueFor('path',path)}}</h2>
-<div ng-repeat="(levelKey, levelName) in levels">
-    <h3>{{levelName}}</h3>
-    <div ng-repeat="resource in resources | filter:{path: path, level: levelKey}" ng-init="collapsed=true">
-        <span class="{{resource.level}} glyphicon" ng-class="{'glyphicon-collapse-down': !collapsed, 'glyphicon-collapse-up': collapsed}" ng-click="collapsed = !collapsed"></span>
-        <!-- <span class="dot {{resource.level}}"></span> -->
-        <a href="{{resource.link}}">{{resource.title}}</a>
-        <div class="content row" ng-hide="collapsed">
-            <div class="col-lg-3">
-                <img ng-src="/images/screenshots/{{resource._id}}.png" width="200">
+<div class="container">
+    <h2>{{valueFor('path',path)}}</h2>
+    <div ng-repeat="(levelKey, levelName) in levels">
+        <h3>{{levelName}}</h3>
+        <div ng-repeat="resource in resources | filter:{path: path, level: levelKey}" ng-init="collapsed=true">
+            <span class="{{resource.level}} glyphicon" ng-class="{'glyphicon-collapse-down': !collapsed, 'glyphicon-collapse-up': collapsed}" ng-click="collapsed = !collapsed"></span>
+            <!-- <span class="dot {{resource.level}}"></span> -->
+            <a href="{{resource.link}}">{{resource.title}}</a>
+            <div class="content row" ng-hide="collapsed">
+                <div class="col-lg-3">
+                    <img ng-src="/images/screenshots/{{resource._id}}.png" width="200">
+                </div>
+                <div class="col-lg-3">
+                    <a target="_blank" href="{{resource.link}}"><p class="muted small">{{resource.link}}</p></a>
+                    Level: <p>{{valueFor('level', resource.level)}}</p>
+                    Topics: <p><tag key="{{topic}}" ng-repeat="topic in resource.topic">{{valueFor('topic', topic)}}</tag></p>
+                    Media Types: <p><tag key="{{type}}" ng-repeat="type in resource.mediaType">{{valueFor('mediaType', type)}}</tag></p>
+                </div>
+                <div class="col-lg-3">
+                    Author data: <br>
+                    <span ng-repeat="author in resource.authors">
+                        <p ng-repeat="(key, value) in author track by key">{{key}}: {{value}}</p>
+                    </span>
+                </div>
+                <div class="col-lg-3" ng-show="resource.description">
+                    Description:
+                    <p class="small description">{{resource.description}}</p>
+                    Cost: {{valueFor('cost', resource.cost)}}<br>
+                </div>
+                <a href="" class="btn btn-danger" ng-hide="collapsed" ng-click="deleteResource(resource)">Delete this resource</a><a ng-hide="collapsed" ng-href="#/edit/{{resource._id}}" class="btn btn-success">Edit this resource</a><br>
             </div>
-            <div class="col-lg-3">
-                <a target="_blank" href="{{resource.link}}"><p class="muted small">{{resource.link}}</p></a>
-                Level: <p>{{valueFor('level', resource.level)}}</p>
-                Topics: <p><tag key="{{topic}}" ng-repeat="topic in resource.topic">{{valueFor('topic', topic)}}</tag></p>
-                Media Types: <p><tag key="{{type}}" ng-repeat="type in resource.mediaType">{{valueFor('mediaType', type)}}</tag></p>
-            </div>
-            <div class="col-lg-3">
-                Author data: <br>
-                <span ng-repeat="author in resource.authors">
-                    <p ng-repeat="(key, value) in author track by key">{{key}}: {{value}}</p>
-                </span>
-            </div>
-            <div class="col-lg-3" ng-show="resource.description">
-                Description:
-                <p class="small description">{{resource.description}}</p>
-                Cost: {{valueFor('cost', resource.cost)}}<br>
-            </div>
+            <div class="line" ng-show="!$last"></div>
         </div>
-        <a href="" class="btn btn-danger" ng-hide="collapsed" ng-click="deleteResource(resource)">Delete this resource</a><a ng-hide="collapsed" ng-href="#/edit/{{resource._id}}" class="btn btn-success">Edit this resource</a><br>
-        <div class="line" ng-show="!$last"></div>
     </div>
-</div>
-<h3 ng-show="(resources | filter:{path: path, unfinished: true}).length">Unfinished Resources</h3>
-<div class="unfinished-resource" ng-repeat="resource in resources | filter:{path: path, unfinished: true}">
-    <div class="line" ng-show="!$first"></div>
-    <a href="{{resource.link}}">{{resource.title}}</a>
-    <a href="" class="btn btn-sm btn-danger" ng-click="deleteResource(resource)">Delete this resource</a><a ng-href="#/edit/{{resource._id}}" class="btn btn-sm btn-success">Edit this resource</a><br>
+    <h3 ng-show="(resources | filter:{path: path, unfinished: true}).length">Unfinished Resources</h3>
+    <div class="unfinished-resource" ng-repeat="resource in resources | filter:{path: path, unfinished: true}">
+        <div class="line" ng-show="!$first"></div>
+        <a href="{{resource.link}}">{{resource.title}}</a>
+        <a href="" class="btn btn-sm btn-danger" ng-click="deleteResource(resource)">Delete this resource</a><a ng-href="#/edit/{{resource._id}}" class="btn btn-sm btn-success">Edit this resource</a><br>
+    </div>
 </div>

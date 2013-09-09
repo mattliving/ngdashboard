@@ -6,12 +6,12 @@ webshot = require 'webshot'
 console.log 'dir', __dirname
 
 directory = __dirname + "/app/assets/images/screenshots/"
-filename += '.png'
+extension = '.png'
 
-console.log directory + filename
+console.log directory + filename + extension
 
 webshot url, (err, stream) ->
-  gm(stream, filename).resize(200).write directory + filename, (err) ->
+  gm(stream, filename + extension).write directory + filename + extension, (err) ->
     if err
       console.log 'err:', err
     else

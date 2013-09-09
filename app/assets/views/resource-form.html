@@ -1,69 +1,46 @@
-<div class="row">
-    <div class="col-lg-6">
-        <h1>Add a new resource</h1>
-        <a href="" ng-click="testData()">Add test data</a>
-        <form ng-submit="addResource()">
-            <!-- Path selection -->
-            <div class="btn-group btn-group-justified">
-                <a ng-repeat="(key, path) in paths" type="button" class="btn btn-primary" ng-model="input.path" btn-radio="'{{key}}'">{{path}}</a>
-            </div>
-            <br><br>
-            <!-- Difficulty level selection -->
-            <div class="btn-group btn-group-justified">
-                <a ng-repeat="(key, level) in levels" type="button" class="btn btn-primary" ng-model="input.level" btn-radio="'{{key}}'">{{level}}</a>
-            </div>
-            <br><br>
-            <input type="text" ng-model="input.title" class="form-control" required placeholder="Title"><br>
-            <input type="text" ng-model="input.link" class="form-control" required placeholder="URL">
-            <br>
-            <!-- Topic selection -->
-            <tag-input ng-model="input.topic" tags="topics" placeholder="Select topics" create></tag-input>
-            <br>
-            <!-- Media type -->
-            <tag-input ng-model="input.mediaType" tags="mediaTypes" placeholder="Select media types"></tag-input>
-            <br>
-            <!-- Author data -->
-            <div class="author-wrapper">
-                Number of authors: <br>
-                <input type="number" class="form-control" ng-model="authorCount" min="1" max="100">
-                <div class="clearfix"></div>
-                <div class="author-input" ng-repeat="author in input.authors">
-                    <div class="attr" ng-repeat="attr in author">
-                        <input type="text" class="form-control" ng-model="attr.value" placeholder="{{attr.key}}">
-                        <a href="" ng-click="removeAuthorAttr(author, attr.key)" class="btn btn-primary"><i class="icon-minus"></i></a>
-                    </div>
-                    <div class="new-attr">
-                        <input type="text" class="new-attr form-control" enter-key="addAuthorAttr(author, newAttr); newAttr=''" ng-model="newAttr" placeholder="New attribute">
-                        <a href="" ng-click="addAuthorAttr(author, newAttr); newAttr=''" class="btn btn-primary"><i class="icon-plus"></i></a>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6">
+            <h1>Add a new resource</h1>
+            <a href="" ng-click="testData()">Add test data</a>
+            <form ng-submit="addResource()">
+                <input type="text" ng-model="input.title" class="form-control" required placeholder="Title"><br>
+                <input type="text" ng-model="input.link" class="form-control" required placeholder="URL">
                 <br>
-            </div>
-            <!-- Cost data -->
-            <div class="clearfix"></div>
-            <br>
-            <div class="btn-group btn-group-justified">
-                <a href="" ng-repeat="(key, cost) in costs" type="button" class="btn btn-primary" ng-model="input.cost" btn-radio="'{{key}}'">{{cost}}</a>
-            </div>
-            <br><br>
-            <!-- Description -->
-            <textarea rows="4" ng-model="input.description" class="form-control" placeholder="Enter a description (optional)"></textarea>
+                <!-- Topic selection -->
+                <tag-input ng-model="input.topic" tags="topicTypes" placeholder="Select topics" create></tag-input>
+                <br>
+                <!-- Media type -->
+                <tag-input ng-model="input.mediaType" tags="mediaTypes" placeholder="Select media types"></tag-input>
+                <br>
+                <input type="text" placeholder="Resource Type" class="form-control" ng-model="input.resourceType"><br>
+                <!-- Author data -->
+                <author-input authors="input.authors"></author-input>
+                <!-- Cost data -->
+                <div class="clearfix"></div>
+                <br>
+                <div class="btn-group btn-group-justified">
+                    <a href="" ng-repeat="(key, cost) in costs" type="button" class="btn btn-primary" ng-model="input.cost" btn-radio="'{{key}}'">{{cost}}</a>
+                </div>
+                <br><br>
+                <!-- Description -->
+                <textarea rows="4" ng-model="input.description" class="form-control" placeholder="Enter a description (optional)"></textarea>
 
-            <br>
-            <button type="submit" class="btn btn-lg btn-primary btn-block">Submit</button>
-        </form>
-    </div>
-    <div class="col-lg-6">
-        <h1>List of URLs</h1>
-        <div class="unstyled" ng-repeat="(key, path) in paths" ng-init="limit = 10">
-            <h3>{{path}}</h3>
-            <a href="#/list/{{key}}">View all ></a>
-            <div ng-repeat="resource in resources | filter:{path: key} | limitTo: limit">
-                <span class="dot dot-{{resource.level}}"></span>
-                <a href="{{resource.link}}">{{resource.title}}</a>
+                <br>
+                <button type="submit" class="btn btn-lg btn-primary btn-block">Submit</button>
+            </form>
+        </div>
+        <div class="col-lg-6">
+            <h1>List of URLs</h1>
+            <div ng-repeat="(key, path) in paths" ng-init="limit = 10">
+                <h3>{{path}}</h3>
+                <a href="#/list/{{key}}">View all ></a>
+                <div ng-repeat="resource in resources | filter:{path: key} | limitTo: limit">
+                    <span class="dot dot-{{resource.level}}"></span>
+                    <a href="{{resource.link}}">{{resource.title}}</a>
+                </div>
+                <div ng-show="(resources | filter:{path: key}).length > limit">and {{(resources | filter:{path: key}).length - limit}} more...</div>
             </div>
-            <div ng-show="(resources | filter:{path: key}).length > limit">and {{(resources | filter:{path: key}).length - limit}} more...</div>
         </div>
     </div>
 </div>

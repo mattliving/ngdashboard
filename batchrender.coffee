@@ -10,7 +10,6 @@ Resource.find().select('link').exec (err, resources) ->
 
   index = 0
   cwd = require('path').dirname(require.main.filename)
-  console.log cwd
 
   do next = ->
     if index < resources.length

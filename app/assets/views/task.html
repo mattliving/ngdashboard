@@ -1,40 +1,60 @@
-<div class="row task">
-    <header>
-        <h1>{{task.title}}</h1>
-        <h2>{{task.subtitle}}</h2>
-    </header>
-    <div class="task-container" scroll-spy>
-        <div class="col-md-3 sidebar">
-            <ul sticky>
-                <li spy="overview">Overview</li>
-                <li spy="learning">Learning Outcomes</li>
-                <li spy="resources">
-                    Resources
-                </li>
-                <ul class="media-type-filter">
-                    <li ng-repeat="(key, type) in mediaTypes" ng-click="filter[key] = !filter[key]" ng-class="{'active': filter[key]}">{{type}}</li>
-                </ul>
-                <li spy="summary">Summary</li>
+<div class="task container">
+    <div class="row" scroll-spy>
+        <header>
+            <h1>{{task.title}}</h1>
+            <h2>{{task.subtitle}}</h2>
+        </header>
+        <nav sticky class="navbar-inverse" role="navigation">
+            <img class="logo" src="/images/logo-light-nav.png" height="35"/>
+            <ul class="nav navbar-nav">
+                <li spy="overview" spy-class="active"><a><span class="glyphicon glyphicon-unchecked"></span> Overview</a></li>
+                <li spy="learning" spy-class="active"><a><span class="glyphicon glyphicon-unchecked"></span> Goals</a></li>
+                <li spy="resources-concept" spy-class="active"><a><span class="glyphicon glyphicon-unchecked"></span> Concepts</a></li>
+                <li spy="resources-course" spy-class="active"><a><span class="glyphicon glyphicon-unchecked"></span> Courses</a></li>
+                <li spy="resources-tool" spy-class="active"><a><span class="glyphicon glyphicon-unchecked"></span> Tools</a></li>
+                <li spy="resources-tutorial" spy-class="active"><a><span class="glyphicon glyphicon-unchecked"></span> Tutorials</a></li>
             </ul>
-        </div>
-        <div class="col-md-9 content">
-            <h3 id="overview">Overview</h3>
-            <p>{{task.overview}}</p>
-            <h3 id="learning">Learning Outcomes</h3>
-            <ul>
-                <li ng-repeat="outcome in task.outcomes">{{outcome}}</li>
-            </ul>
-            <h3 id="resources">Resources</h3>
-            <div class="resource row" ng-repeat="resource in task.resources | filter:filterFunc">
-                <div class="col-md-3"><img class="img-thumbnail" ng-src="images/screenshots/{{resource._id}}.png" width="150"></div>
-                <div class="info col-md-9">
-                    <h5><a target="_blank" href="{{resource.link}}">{{resource.title}}</a></h5>
-                    <p>{{domain(resource.link)}}</p>
-                    <p>{{resource.description}}</p>
+        </nav>
+        <div class="container">
+            <div class="content">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <p id="overview">{{task.overview}}</p>
+                        <ul id="learning">
+                            <li ng-repeat="outcome in task.outcomes"><span class="glyphicon glyphicon-ok"></span>{{outcome}}</li>
+                        </ul>
+                    </div>
                 </div>
+                <h3 id="resources">Resources</h3>
+                <div ng-repeat="(type, resources) in task.resources" class="clearfix" id="resources-{{type}}" ng-init="mainResource=resources[0]">
+                    <h4>{{resourceMap(type)}}s</h4>
+                    <div class="main-resource row panel panel-default">
+                        <div class="col-md-3">
+                            <img ng-src="images/screenshots/{{mainResource._id}}.png">
+                        </div>
+                        <div class="col-md-9 panel-body">
+                            <h5><a href="{{mainResource.link}}" target="_blank">{{mainResource.title}}</a></h5>
+                            <p>{{mainResource.description}}</p>
+                            <span class="taglist">
+                                <tag ng-repeat="type in mainResource.mediaType">{{type}}</tag>
+                            </span>
+                        </div>
+                    </div>
+                    <ul class="resources row">
+                        <li class="resource panel panel-default" ng-repeat="resource in resources | limitTo:4">
+                            <span class="taglist">
+                                <tag ng-repeat="type in resource.mediaType">{{type}}</tag>
+                            </span>
+                            <a href="{{resource.link}}" target="_blank">
+                                <img ng-src="images/screenshots/{{resource._id}}.png">
+                                <p>{{resource.title}}</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <h3 id="summary">Summary</h3>
+                <p>{{task.summary}}</p>
             </div>
-            <h3 id="summary">Summary</h3>
-            <p>{{task.summary}}</p>
         </div>
     </div>
 </div>

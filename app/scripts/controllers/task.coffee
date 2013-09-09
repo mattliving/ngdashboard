@@ -1,22 +1,16 @@
-angular.module('jobFoundryApp').controller 'TaskCtrl', ($scope, $http, $routeParams, map, mediaTypes) ->
+angular.module('jobFoundryApp').controller 'TaskCtrl', ($scope, $http, $routeParams, Task, types, map, mediaTypes) ->
 
-  $scope.mediaTypes = mediaTypes
+  types('resource').success (resourceTypes) ->
+    $scope.resourceMap = (key) ->
+      for resource in resourceTypes
+        if resource.key is key
+          return resource.value
+
   $scope.valueOf = map
 
-  $http.get("/api/v1/tasks/#{$routeParams.name}")
-  .success (task) ->
-    $scope.task = task
-  .error -> console.log 'error getting data'
+  $scope.task = Task.get name: $routeParams.name, cmd: 'group'
 
   $scope.filter = {}
-  $scope.filterFunc = (resource) ->
-    if _.isEmpty $scope.filter
-      return true
-    else
-      for type, filter of $scope.filter
-        if filter and type not in resource.mediaType
-          return false
-      return true
 
   urlParser = document.createElement 'a'
   $scope.domain = (link) ->

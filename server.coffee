@@ -5,8 +5,10 @@ http      = require 'http'
 mongoose  = require 'mongoose'
 path      = require 'path'
 resources = require './routes/resources'
+projects  = require './routes/projects'
 tasks     = require './routes/tasks'
 content   = require './routes/content'
+types     = require './routes/types'
 
 app = express()
 
@@ -31,32 +33,67 @@ app.configure ->
 
 mongoose.connect('mongodb://localhost/jobfoundry')
 
+dbSuccess = (res, prop) ->
+  (data) ->
+    res.json if prop? then data[prop] else data
+
+dbErr = (err) ->
+  res.send 500, err
+
 ### API ###
 # Add error handling to this, or to express
 
 # Resources
 app.get '/api/v1/resources', (req, res) ->
-  resources.all().then (resources) -> res.json resources
+  resources.all().then dbSuccess(res), dbErr
+
 app.get '/api/v1/resources/:id', (req, res) ->
-  resources.get(req.params.id).then (resource) -> res.json resource
+  resources.get(req.params.id).then dbSuccess(res), dbErr
+
 app.post '/api/v1/resources', (req, res) ->
-  resources.add(req.body).then (success) -> res.json success
+  resources.add(req.body).then dbSuccess(res, 0), dbErr
+
 app.delete '/api/v1/resources/:id', (req, res) ->
-  resources.delete(req.params.id).then (success) -> res.json success
+  resources.delete(req.params.id).then dbSuccess(res),  dbErr
+
 app.put '/api/v1/resources/:id', (req, res) ->
-  resources.edit(req.params.id, req.body).then (success) -> res.json success
+  resources.edit(req.params.id, req.body).then dbSuccess(res, 0), dbErr
 
 # Content
 app.get '/api/v1/content/:key', (req, res) ->
-  content.get(req.params.key).then (data) -> res.json data["data"]
+  content.get(req.params.key).then dbSuccess(res, "data"), dbErr
+
+# Resource Types
+app.get '/api/v1/types', (req, res) ->
+  types.all().then dbSuccess(res), dbErr
+
+app.get '/api/v1/types/:key', (req, res) ->
+  types.get(req.params.key).then dbSuccess(res), dbErr
+
+# Projects
+app.get '/api/v1/projects', (req, res) ->
+  projects.all().then dbSuccess(res), dbErr
+
+app.get '/api/v1/projects/:name', (req, res) ->
+  projects.get(req.params.name).then dbSuccess(res), dbErr
 
 # Tasks
-app.get '/api/v1/tasks/:name', (req, res) ->
-  tasks.get(req.params.name).then (task) -> res.json task
+app.get '/api/v1/tasks', (req, res) ->
+  tasks.all().then dbSuccess(res), dbErr
+
+app.get '/api/v1/tasks/:name/:cmd?', (req, res) ->
+  tasks.get(req.params.name, req.params.cmd is 'group').then dbSuccess(res), dbErr
+
+app.post '/api/v1/tasks/:name?', (req, res) -> #needs optional name because $resource is stupid
+  tasks.add(req.body).then dbSuccess(res, 0), dbErr
+
+app.put '/api/v1/tasks/:name', (req, res) ->
+  tasks.edit(req.params.name, req.body).then dbSuccess(res, 0), dbErr
 
 # Pages
 
 # Check for other routes if google's making the request, otherwise send index.html
+# this will need to be updated to check for the facebook page crawler when using open graph
 app.get '*', (req, res, next) ->
   if req.query._escaped_fragment_?
     next()
