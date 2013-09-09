@@ -10,7 +10,7 @@ angular.module('jobFoundryApp').controller 'TaskCtrl', ($scope, $http, $routePar
 
   $scope.task = Task.get name: $routeParams.name, cmd: 'group'
   mainResources = {}
-  $scope.mainResource = (type) -> if mainResources[type]? then mainResources[type] else mainResources[type] = $scope.task?.resources?[type][0]
+  $scope.mainResource = (type) -> mainResources[type] ? mainResources[type] = $scope.task?.resources?[type][0]
   $scope.setMainResource = (type, resource) ->
     console.log type, resource
     mainResources[type] = resource

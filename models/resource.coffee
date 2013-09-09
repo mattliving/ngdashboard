@@ -19,13 +19,6 @@ ResourceSchema = new mongoose.Schema
   cost:
     type: String
     default: "free"
-  unfinished: Boolean
-
-ResourceSchema.pre 'save', (next) ->
-  arraysDone = @topic? and @topic > 0 and @mediaType? and @mediaType.length > 0
-  textDone = @title? and @resourceType?
-  @unfinished = not (arraysDone and textDone)
-  next()
 
 ResourceSchema.post 'save', (doc) ->
   console.log "rendering #{doc.link} to #{doc._id}.png"

@@ -35,6 +35,7 @@
                         <div class="col-md-9">
                             <h5><a href="{{mainResource(type).link}}" target="_blank">{{mainResource(type).title}}</a></h5>
                             <p>{{mainResource(type).description}}</p>
+                            <small class="text-muted">{{mainResource(type).link}}</small><br>
                             <span class="taglist">
                                 <tag ng-repeat="type in mainResource(type).mediaType">{{type}}</tag>
                             </span>
@@ -54,8 +55,6 @@
                         </li>
                     </ul>
                 </div>
-                <h3 id="summary">Summary</h3>
-                <p>{{task.summary}}</p>
             </div>
         </div>
     </div>
