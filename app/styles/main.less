@@ -291,20 +291,28 @@ img.hero-bg {
         display: inline-block;
         text-align: center;
         max-width: 200px;
-        position: relative;
         float: left;
         margin-right: 6%;
+        .image-wrapper {
+            position: relative;
+        }
         .taglist {
             position: absolute;
             left: 0;
-            top: 129px;
+            bottom: 5px;
         }
         img {
             max-width: 100%
         }
     }
-    .main-resource img {
-        max-width: 100%;
+    .main-resource {
+        padding: 10px;
+        h5 {
+            font-size: 1.3em;
+        }
+        img {
+            max-width: 100%;
+        }
     }
 }
 

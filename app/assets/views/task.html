@@ -32,7 +32,7 @@
                         <div class="col-md-3">
                             <img ng-src="images/screenshots/{{mainResource._id}}.png">
                         </div>
-                        <div class="col-md-9 panel-body">
+                        <div class="col-md-9">
                             <h5><a href="{{mainResource.link}}" target="_blank">{{mainResource.title}}</a></h5>
                             <p>{{mainResource.description}}</p>
                             <span class="taglist">
@@ -42,11 +42,13 @@
                     </div>
                     <ul class="resources row">
                         <li class="resource panel panel-default" ng-repeat="resource in resources | limitTo:4">
-                            <span class="taglist">
-                                <tag ng-repeat="type in resource.mediaType">{{type}}</tag>
-                            </span>
                             <a href="{{resource.link}}" target="_blank">
-                                <img ng-src="images/screenshots/{{resource._id}}.png">
+                                <div class="image-wrapper">
+                                    <span class="taglist">
+                                        <tag ng-repeat="type in resource.mediaType">{{type}}</tag>
+                                    </span>
+                                    <img ng-src="images/screenshots/{{resource._id}}.png">
+                                </div>
                                 <p>{{resource.title}}</p>
                             </a>
                         </li>
