@@ -38,7 +38,7 @@ dbSuccess = (res, prop) ->
     res.json if prop? then data[prop] else data
 
 dbErr = (err) ->
-  res.send 500, err
+  res.send 401, err
 
 ### API ###
 # Add error handling to this, or to express
@@ -89,6 +89,9 @@ app.post '/api/v1/tasks/:name?', (req, res) -> #needs optional name because $res
 
 app.put '/api/v1/tasks/:name', (req, res) ->
   tasks.edit(req.params.name, req.body).then dbSuccess(res, 0), dbErr
+
+app.delete '/api/v1/tasks/:name', (req, res) ->
+  tasks.delete(req.params.name).then dbSuccess(res, 0), dbErr
 
 # Pages
 

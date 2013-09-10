@@ -35,12 +35,13 @@
             </div>
             <br>
             <button type="submit" class="btn btn-lg btn-primary btn-block">Submit</button>
+            <button type="button" class="btn btn-lg btn-danger btn-block" ng-show="editing" ng-click="deleteTask()">Delete</button>
         </form>
     </div>
     <div class="row">
         <h1>List of tasks</h1>
         <div class="task" ng-repeat="task in tasks">
-            <a href="/edit/task/{{task.name}}">{{task.title}} - <span class="task-name">{{task.name}}</span></a>
+            <a href="/task/{{task.name}}/edit">{{task.title}} - <span class="task-name">{{task.name}}</span></a>
         </div>
     </div>
 </div>

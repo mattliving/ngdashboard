@@ -1,5 +1,4 @@
 angular.module('jobFoundryApp').controller 'TaskFormCtrl', ($scope, $http, $location, $routeParams, Task, Resource, levels, costs, paths, map) ->
-  $scope.tasks = Task.query()
   $scope.resources = Resource.query()
 
   window.scope = $scope
@@ -18,6 +17,7 @@ angular.module('jobFoundryApp').controller 'TaskFormCtrl', ($scope, $http, $loca
   $scope.paths  = paths
 
   do reset = ->
+    $scope.tasks = Task.query()
     task = new Task()
     task.outcomes = []
     task.resources = []
@@ -29,7 +29,7 @@ angular.module('jobFoundryApp').controller 'TaskFormCtrl', ($scope, $http, $loca
     $scope.inputResources = []
 
   if $routeParams.name?
-    editing = yes
+    $scope.editing = yes
     $scope.input = Task.get name: $routeParams.name, ->
       $scope.inputResources = $scope.input.resources
 
@@ -38,11 +38,18 @@ angular.module('jobFoundryApp').controller 'TaskFormCtrl', ($scope, $http, $loca
 
   $scope.addTask = ->
     $scope.input.resources = _.pluck $scope.inputResources, '_id'
-    if editing
+    if $scope.editing
       $scope.input.$update (-> alert 'updated task'), (-> alert 'there was an error updating the task, see console for details')
     else
       $scope.input.$save((-> console.log('saved task')), (-> alert 'there was an error saving the task, see console for details'))
       reset()
+
+  $scope.deleteTask = ->
+    if confirm 'are you sure you want to delete this task?'
+      $scope.input.$delete (->
+        alert 'deleted resource'
+        $location.path '/add/task'
+        ), (-> alert 'there was an error deleting the resource, see console')
 
   $scope.addResource = (resource) ->
     if resource not in $scope.inputResources
