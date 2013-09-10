@@ -40,8 +40,8 @@ angular.module('jobFoundryDirectives').directive 'multiRepeat', ->
     collection: '='
     dragging: '&dragging'
   template: '''
-    <div class="row" ng-repeat="(index, items) in set">
-      <div class="col-lg-{{12/columns}}" ng-repeat="item in items">
+    <div class="row multi-items" ng-repeat="(index, items) in set">
+      <div class="col-lg-{{12/columns}} multi-item" ng-repeat="item in items">
         <div class="draggable" draggable ng-mousedown="dragging({dragged: item, index: calcIndex($index, $parent)})" ng-transclude></div>
       </div>
     </div>

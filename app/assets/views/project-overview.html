@@ -1,35 +1,57 @@
 <div class="row project">
   <header>
     <h1>{{project.title}}</h1>
-    <h3><em>A {{project.type}}</em></h3>
     <h5 ng-show="project.description !== ''">{{project.desciption}}</h5>
   </header>
+  <nav sticky class="navbar-inverse navbar-static-top" role="navigation">
+    <img class="logo" src="/images/logo-light-nav.png" height="35"/>
+    <ul class="nav navbar-nav">
+        <li spy="overview" spy-class="active"><a><span class="glyphicon glyphicon-unchecked"></span> Active Task</a></li>
+        <li spy="learning" spy-class="active"><a><span class="glyphicon glyphicon-unchecked"></span> Goals</a></li>
+        <li spy="resources-concept" spy-class="active"><a><span class="glyphicon glyphicon-unchecked"></span> Concepts</a></li>
+        <li spy="resources-course" spy-class="active"><a><span class="glyphicon glyphicon-unchecked"></span> Courses</a></li>
+        <li spy="resources-tool" spy-class="active"><a><span class="glyphicon glyphicon-unchecked"></span> Tools</a></li>
+        <li spy="resources-tutorial" spy-class="active"><a><span class="glyphicon glyphicon-unchecked"></span> Tutorials</a></li>
+    </ul>
+  </nav>
   <div class="container" scroll-spy>
-    <div class="col-lg-2 sidebar">
-      <ul sticky>
-        <li spy="current">Current</li>
-        <li spy="completed">Completed</li>
-      </ul>
-    </div>
+    <div class="col-lg-1"></div>
     <div class="col-lg-10 content">
-      <div class="jumbotron col-lg-12" ng-switch="active.hidden" droppable>
-        <div id="active" class="am-switch-scaleY" ng-switch-when="false">
+      <!-- <div class="jumbotron col-lg-12" ng-switch="active.hidden" droppable>
+        <div id="active" ng-switch-when="false">
           <h1>{{active.task.title}}</h1>
-          <h3>{{active.task.subtitle}}</h3>
+          <h2>{{active.task.subtitle}}</h2>
           <p class="lead">{{active.task.name}}</p>
         </div>
-        <div id="drop-zone" class="am-switch-scaleY" ng-switch-when="true">
-          <h3>Drop Here to Set Active Task</h3>
+        <div id="drop-zone" ng-switch-when="true">
+          <h2>Drop Here to Set Active Task</h2>
         </div>
-      </div>
-      <multi-repeat collection="tasks" columns="2" dragging="dragging(dragged, index)">
-        <a href="/task/{{item.name}}">
-          <div class="well">
-              <h3>{{item.title}}</h3>
-              <h5>{{item.subtitle}}</h5>
+      </div> -->
+      <div class="jumbotron tasks">
+        <div class="row">
+          <input id="filterTasks" type="text" placeholder="What do you need to do?" ng-model="filterTasks">
+        </div>
+        <!-- <div class="row active">
+          <div class="col-lg-12" ng-switch="active.hidden" droppable>
+            <div id="active" class="well" ng-switch-when="false">
+              <h1>{{active.task.title}}</h1>
+              <h2>{{active.task.subtitle}}</h2>
+            </div>
+            <div id="drop-zone" class="well" ng-switch-when="true">
+              <h2>Drop Here to Set Active Task</h2>
+            </div>
           </div>
-        </a>
-      </multi-repeat>
+        </div> -->
+        <multi-repeat collection="tasks" columns="2" dragging="dragging(dragged, index)">
+          <a href="/task/{{item.name}}">
+            <div class="well">
+                <h2>{{item.title}}</h2>
+                <h4>{{item.subtitle}}</h4>
+            </div>
+          </a>
+        </multi-repeat>
+      </div>
     </div>
+    <div class="col-lg-1"></div>
   </div>
 </div>
