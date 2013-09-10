@@ -29,6 +29,9 @@ angular.module('jobFoundryApp', ['jobFoundryDirectives', 'jobFoundryServices', '
       .when '/task/:name/edit',
         templateUrl: '/views/task-form.html'
         controller: 'TaskFormCtrl'
+      .when '/add/project',
+        templateUrl: '/view/project-form.html'
+        controller: 'ProjectFormCtrl'
       .when '/projects/:id',
         templateUrl: '/views/project-overview.html'
         controller: 'ProjectOverviewCtrl'

@@ -1,4 +1,4 @@
-angular.module('jobFoundryApp').controller 'TaskFormCtrl', ($scope, $http, $location, $routeParams, Task, Resource, levels, costs, paths, map) ->
+angular.module('jobFoundryApp').controller 'TaskFormCtrl', ($scope, $http, $location, $routeParams, Task, Resource, costs, paths, map) ->
   $scope.resources = Resource.query()
 
   window.scope = $scope
@@ -12,7 +12,6 @@ angular.module('jobFoundryApp').controller 'TaskFormCtrl', ($scope, $http, $loca
         typeMap[pair.key] = pair.value
       $scope[type+"Types"] = typeMap
 
-  $scope.levels = levels
   $scope.costs  = costs
   $scope.paths  = paths
 
