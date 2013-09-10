@@ -24,7 +24,20 @@
         </div>
       </div>
       <div class="jumbotron tasks">
-        <h2>Current Tasks</h2>
+        <div class="row">
+          <input id="filterTasks" type="text" placeholder="What do you need to do?" ng-model="filterTasks">
+        </div>
+        <!-- <div class="row active">
+          <div class="col-lg-12" ng-switch="active.hidden" droppable>
+            <div id="active" class="well" ng-switch-when="false">
+              <h1>{{active.task.title}}</h1>
+              <h2>{{active.task.subtitle}}</h2>
+            </div>
+            <div id="drop-zone" class="well" ng-switch-when="true">
+              <h2>Drop Here to Set Active Task</h2>
+            </div>
+          </div>
+        </div> -->
         <multi-repeat collection="tasks" columns="2" dragging="dragging(dragged, index)">
           <a href="/task/{{item.name}}">
             <div class="well">
