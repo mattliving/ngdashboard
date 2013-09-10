@@ -31,7 +31,7 @@ app.configure ->
   app.use express.compress()
   app.use express.static(__dirname + '/_public')
 
-mongoose.connect('mongodb://localhost/jobfoundry')
+mongoose.connect fs.readFileSync('mongoconfig.txt', 'ascii').trim()
 
 dbSuccess = (res, prop) ->
   (data) ->

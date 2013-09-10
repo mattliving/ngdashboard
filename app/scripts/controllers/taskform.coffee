@@ -47,9 +47,9 @@ angular.module('jobFoundryApp').controller 'TaskFormCtrl', ($scope, $http, $loca
   $scope.deleteTask = ->
     if confirm 'are you sure you want to delete this task?'
       $scope.input.$delete (->
-        alert 'deleted resource'
+        alert 'deleted task'
         $location.path '/add/task'
-        ), (-> alert 'there was an error deleting the resource, see console')
+        ), (-> alert 'there was an error deleting the task, see console')
 
   $scope.addResource = (resource) ->
     if resource not in $scope.inputResources
