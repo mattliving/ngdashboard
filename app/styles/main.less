@@ -27,6 +27,10 @@ h1, h2, h3 {
 .orange {
     color: @orange;
 }
+.orange-underline {
+    border-bottom: solid 2px @orange;
+    padding: 0px 30px 15px 30px;
+}
 
 h1.jobfoundry {
     font-weight: 100;
@@ -111,7 +115,6 @@ img.hero-bg {
 @silver: #bdc3c7;
 @concrete: #95a5a6;
 @asbestos: #7f8c8d;
-
 /* Mixins */
 
 .box-shadow (@x: 10px, @y: 10px, @blur: 10px, @spread: -5px, @colour: black, @inset...) {
@@ -141,22 +144,16 @@ img.hero-bg {
 /* landing page */
 
 .landing {
-    background: @clouds;
-    hr {
-        border-color: #cccccc;
-        width: 100%;
-        border-style: solid none;
-        border-bottom: 1px 0;
-    }
-
     header {
+        background-color: @clouds;
         text-align: center;
-        padding-top: 10%;
+        padding-top: 5em;
         height: 100%;
         h1 {
             font-size: 3.5em;
             font-weight: bold;
-            margin-top: 40px;
+            margin-top: 0.7em;
+            margin-bottom: 2em;
         }
     }
     h1 {
@@ -169,15 +166,13 @@ img.hero-bg {
         }
     }
     h2 {
-        font-size: 1.7em;
+        font-size: 1.8em;
         font-weight: 200;
         margin-bottom: 2%;
-        color: @orange;
+        color: @darkgrey;
         font-family: "Lato", "Open Sans", sans-serif;
         font-weight: bold;
-        font-style: italic;
         text-align: center;
-        border-bottom: 1px #eeeeee;
     }
     &.jumbotron p {
         margin-bottom: 2%;
@@ -192,7 +187,6 @@ img.hero-bg {
         padding-bottom: 2em;
         padding-top: 2em;
         height: 100%;
-        background-color: #ecf0f1;
         color: #333333;
         font-size: 1.4em;
         font-family: 'open sans', sans-serif;
@@ -201,12 +195,19 @@ img.hero-bg {
             padding-bottom: 0.4em
         }
 
-        #idea-to-done {
+        &#idea-to-done {
             h2 {
                 text-align: center;
+
             }
-            width: 55%;
+            span {
+                width: 60%;
+                display: block;
+                margin: 0 auto;
+            }
             margin: 0 auto;
+            padding: 5em 0em 5em 0em;
+            background-color: @clouds;
         }
         .section-container {
             width: 80%;
@@ -222,16 +223,18 @@ img.hero-bg {
             padding-left: 1em;
             float: right;
         }
+        &.light {
+            background-color: @clouds;
+        }
         &.negative {
-            background-color: #0d0d0d;
-            color: #ffffff;
+            background-color: @dark;
+            color: white;
         }
     }
 
     .powerlines {
         text-align: center;
         margin-top: 150px;
-        margin-bottom: 100px;
         h2 {
             font-weight: bold;
             font-style: italic;
@@ -324,6 +327,11 @@ img.hero-bg {
         position: absolute;
         top: @header-height;
         border-bottom: 4px solid @orange;
+        .logo {
+            float: left;
+            margin-top: 7px;
+            margin-left: 10px;
+        }
         &.sticky-fixed {
             position: fixed;
             top: 0;
@@ -469,6 +477,7 @@ img.hero-bg {
             h1 {
                 font-weight: 400;
                 margin-top: 11px;
+                color: @orange;
             }
             &.drop-hover {
                 .box-shadow(0, 0, 44px, 10px, @orange, inset);
