@@ -6,58 +6,59 @@
         </header>
         <section class="negative goal">
             <div class="row">
-                    <div class="col-md-8 col-md-offset-2">
-                        <h2><span>Your goals for this task</span></h2>
-                        <ul id="learning">
-                            <li ng-repeat="outcome in task.outcomes"><span class="glyphicon glyphicon-ok"></span> {{outcome}}</li>
-                        </ul>
-                        <p id="overview">{{task.overview}}<br><br>Below are the most useful resources we've found to learn how to {{task.title}}.</p>
-                    </div>
+                <div class="col-md-8 col-md-offset-2">
+                    <h2><span>Your goals for this task</span></h2>
+                    <ul id="learning">
+                        <li ng-repeat="outcome in task.outcomes"><span class="glyphicon glyphicon-ok"></span> {{outcome}}</li>
+                    </ul>
+                    <p id="overview">{{task.overview}}<br><br>Below are the most useful resources we've found to learn how to {{task.title}}.</p>
                 </div>
             </div>
-        </section>
-        <nav sticky class="navbar-inverse" role="navigation">
-            <img class="logo" src="/images/logo-light-nav.png" height="35"/>
-            <ul class="nav navbar-nav">
-                <li spy="overview" spy-class="active"><a><span class="glyphicon glyphicon-unchecked"></span> Overview</a></li>
-                <li spy="learning" spy-class="active"><a><span class="glyphicon glyphicon-unchecked"></span> Goals</a></li>
-                <li spy="resources-concept" spy-class="active"><a><span class="glyphicon glyphicon-unchecked"></span> Concepts</a></li>
-                <li spy="resources-course" spy-class="active"><a><span class="glyphicon glyphicon-unchecked"></span> Courses</a></li>
-                <li spy="resources-tool" spy-class="active"><a><span class="glyphicon glyphicon-unchecked"></span> Tools</a></li>
-                <li spy="resources-tutorial" spy-class="active"><a><span class="glyphicon glyphicon-unchecked"></span> Tutorials</a></li>
-            </ul>
-        </nav>
-        <div class="container">
-            <div class="content">
-                <div ng-repeat="(type, resources) in task.resources" class="clearfix" id="resources-{{type}}">
-                    <h4>{{resourceMap(type)}}s</h4>
-                    <div class="main-resource row panel panel-default">
-                        <div class="col-md-3">
+        </div>
+    </section>
+    <nav sticky class="navbar-inverse" role="navigation">
+        <img class="logo" src="/images/logo-light-nav.png" height="35"/>
+        <ul class="nav navbar-nav">
+            <li spy="overview" spy-class="active"><a><span class="glyphicon glyphicon-unchecked"></span> Overview</a></li>
+            <li spy="learning" spy-class="active"><a><span class="glyphicon glyphicon-unchecked"></span> Goals</a></li>
+            <li spy="resources-concept" spy-class="active"><a><span class="glyphicon glyphicon-unchecked"></span> Concepts</a></li>
+            <li spy="resources-course" spy-class="active"><a><span class="glyphicon glyphicon-unchecked"></span> Courses</a></li>
+            <li spy="resources-tool" spy-class="active"><a><span class="glyphicon glyphicon-unchecked"></span> Tools</a></li>
+            <li spy="resources-tutorial" spy-class="active"><a><span class="glyphicon glyphicon-unchecked"></span> Tutorials</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <div class="content">
+            <div ng-repeat="(type, resources) in task.resources" class="clearfix" id="resources-{{type}}">
+                <h4>{{resourceMap(type)}}s</h4>
+                <div class="main-resource row panel panel-default">
+                    <div class="col-md-3">
+                        <div class="image-wrapper">
                             <img ng-src="images/screenshots/{{mainResource(type)._id}}.png">
-                        </div>
-                        <div class="col-md-9">
-                            <h5><a href="{{mainResource(type).link}}" target="_blank">{{mainResource(type).title}}</a></h5>
-                            <p>{{mainResource(type).description}}</p>
-                            <small class="text-muted">{{mainResource(type).link}}</small><br>
-                            <span class="taglist">
-                                <tag ng-repeat="type in mainResource(type).mediaType">{{type}}</tag>
-                            </span>
+                            <div class="tags" ng-show="mainResource(type).mediaType.length">
+                                {{mainResource(type).mediaType | join}}
+                            </div>
                         </div>
                     </div>
-                    <ul class="resources row">
-                        <li class="resource panel panel-default" ng-repeat="resource in resources | limitTo:4">
-                            <a href="" ng-click="setMainResource(type, resource)">
-                                <div class="image-wrapper">
-                                    <span class="taglist">
-                                        <tag ng-repeat="type in resource.mediaType">{{type}}</tag>
-                                    </span>
-                                    <img ng-src="images/screenshots/{{resource._id}}.png">
-                                </div>
-                                <p>{{resource.title}}</p>
-                            </a>
-                        </li>
-                    </ul>
+                    <div class="col-md-9">
+                        <h5><a href="{{mainResource(type).link}}" target="_blank">{{mainResource(type).title}}</a></h5>
+                        <p>{{mainResource(type).description}}</p>
+                        <small class="text-muted">{{mainResource(type).link}}</small><br>
+                    </div>
                 </div>
+                <ul class="resources row">
+                    <li class="resource panel panel-default" ng-repeat="resource in resources | limitTo:4">
+                        <a href="" ng-click="setMainResource(type, resource)">
+                            <div class="image-wrapper">
+                                <span class="taglist">
+                                    <tag ng-repeat="type in resource.mediaType">{{type}}</tag>
+                                </span>
+                                <img ng-src="images/screenshots/{{resource._id}}.png">
+                            </div>
+                            <p>{{resource.title}}</p>
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>

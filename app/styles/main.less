@@ -253,15 +253,15 @@ img.hero-bg {
     width: 50%;
 }
 
-@header-height: 10em;
 .project, .task {
-    @header-height: 26em;
+    @header-height: 14em;
+    @goal-height: 40em;
     header {
         height: @header-height;
         width: 100%;
         position: absolute;
         left: 0;
-        padding-top: 6em;
+        padding-top: 2em;
         text-align: center;
         color: @darkgrey;
         background-color: @clouds;
@@ -279,7 +279,6 @@ img.hero-bg {
             padding-top: 1em;
         }
     }
-    @goal-height: 40em;
     section {
         h2 {
             text-align: center;
@@ -297,7 +296,7 @@ img.hero-bg {
         }
     }
     .container {
-        padding-top: @header-height + 3;
+        // padding-top: @header-height + 3;
     }
     .sidebar {
         li {
@@ -323,7 +322,7 @@ img.hero-bg {
         left: 0;
         right: 0;
         position: absolute;
-        top: @header-height + @goal-height;
+        top: @header-height;
         border-bottom: 4px solid @orange;
         &.sticky-fixed {
             position: fixed;
@@ -371,15 +370,15 @@ img.hero-bg {
     .resources {
         list-style: none;
     }
+    .image-wrapper {
+        position: relative;
+    }
     .resource {
         display: inline-block;
         text-align: center;
         max-width: 200px;
         float: left;
         margin-right: 6%;
-        .image-wrapper {
-            position: relative;
-        }
         .taglist {
             position: absolute;
             left: 0;
@@ -393,6 +392,16 @@ img.hero-bg {
         padding: 10px;
         h5 {
             font-size: 1.3em;
+        }
+        .tags {
+            text-align: center;
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0px;
+            height: 30px;
+            background-color: fade(@darkgrey, 50%);
+            color: white;
         }
         img {
             max-width: 100%;
