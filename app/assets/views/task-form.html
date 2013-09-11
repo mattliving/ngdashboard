@@ -2,8 +2,8 @@
     <div class="row">
         <h1>Create a task</h1>
         <form ng-submit="addTask()">
-            <input type="text" placeholder="Task Name" class="form-control" ng-model="input.name"><br>
             <input type="text" placeholder="Task Title" class="form-control" ng-model="input.title"><br>
+            <input type="text" placeholder="Task Name (in url)" class="form-control" ng-model="input.name" ng-focus="createName=false"><br>
             <input type="text" placeholder="Task Subtitle" class="form-control" ng-model="input.subtitle"><br>
             <textarea name="overview" cols="30" rows="10" class="form-control" placeholder="Task Overview" ng-model="input.overview"></textarea>
             <h2>Task Outcomes</h2>

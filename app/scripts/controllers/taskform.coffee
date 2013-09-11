@@ -1,7 +1,26 @@
 angular.module('jobFoundryApp').controller 'TaskFormCtrl', ($scope, $http, $location, $routeParams, Task, Resource, costs, paths, map) ->
   $scope.resources = Resource.query()
 
-  window.scope = $scope
+  do reset = ->
+    task = new Task()
+    task.outcomes = []
+    task.resources = []
+
+    resource = new Resource()
+
+    $scope.tasks = Task.query()
+    $scope.resourceInput = resource
+    $scope.input = task
+    $scope.inputResources = []
+    $scope.createName = yes
+
+  $scope.$watch 'input.title', ->
+    if $scope.input.title is "" then $scope.createName = yes
+    if $scope.createName
+      $scope.input.name = $scope.input.title
+
+  $scope.$watch 'input.name', ->
+    $scope.input.name = $scope.input.name?.replace(/-/g, " ").split(" ").map((word) -> word.replace(/\W/g, '').toLowerCase()).join("-")
 
   # get the media and resource types
   $http.get("/api/v1/types").success (types) ->
@@ -15,17 +34,6 @@ angular.module('jobFoundryApp').controller 'TaskFormCtrl', ($scope, $http, $loca
   $scope.costs  = costs
   $scope.paths  = paths
 
-  do reset = ->
-    $scope.tasks = Task.query()
-    task = new Task()
-    task.outcomes = []
-    task.resources = []
-
-    resource = new Resource()
-
-    $scope.resourceInput = resource
-    $scope.input = task
-    $scope.inputResources = []
 
   if $routeParams.name?
     $scope.editing = yes
