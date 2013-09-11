@@ -1,6 +1,6 @@
 "use strict"
 
-angular.module("jobFoundryApp").controller "DecisionFlowCtrl", ($window, $scope, $location, Tree) ->
+angular.module("jobFoundryApp").controller "DecisionFlowCtrl", ($scope, $location, Tree) ->
 
   $scope.tree = Tree
 

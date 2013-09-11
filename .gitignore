@@ -4,6 +4,7 @@ npm-debug.log
 dist
 .tmp
 .sass-cache
+mongoconfig.txt
 app/components
 app/assets/images/screenshots/*
 bower_components

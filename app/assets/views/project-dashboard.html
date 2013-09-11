@@ -1,0 +1,59 @@
+<div class="row project">
+  <header>
+    <h1>{{project.title}}</h1>
+    <h5 ng-show="project.description !== ''">{{project.desciption}}</h5>
+  </header>
+  <nav sticky class="navbar-inverse navbar-static-top" role="navigation">
+    <img class="logo" src="/images/logo-light-nav.png" height="35"/>
+    <ul class="nav navbar-nav">
+      <li spy="tasks" spy-class="active" ng-click="selected='tasks'"><a><span class="glyphicon glyphicon-unchecked"></span> Tasks</a></li>
+      <li spy="decisions" spy-class="active" ng-click="selected='decisions'"><a><span class="glyphicon glyphicon-unchecked"></span> Decisions</a></li>
+    </ul>
+  </nav>
+  <div class="container" scroll-spy>
+    <div class="col-lg-1"></div>
+    <div class="col-lg-10 content" ng-switch on="selected">
+      <!-- <div class="jumbotron col-lg-12" ng-switch="active.hidden" droppable>
+        <div id="active" ng-switch-when="false">
+          <h1>{{active.task.title}}</h1>
+          <h2>{{active.task.subtitle}}</h2>
+          <p class="lead">{{active.task.name}}</p>
+        </div>
+        <div id="drop-zone" ng-switch-when="true">
+          <h2>Drop Here to Set Active Task</h2>
+        </div>
+      </div> -->
+      <div ng-switch-when="tasks">
+        <div class="jumbotron tasks">
+          <div class="row">
+            <input id="filterTasks" type="text" placeholder="What do you need to do?" ng-model="filterTasks">
+          </div>
+          <!-- <div class="row active">
+            <div class="col-lg-12" ng-switch="active.hidden" droppable>
+              <div id="active" class="well" ng-switch-when="false">
+                <h1>{{active.task.title}}</h1>
+                <h2>{{active.task.subtitle}}</h2>
+              </div>
+              <div id="drop-zone" class="well" ng-switch-when="true">
+                <h2>Drop Here to Set Active Task</h2>
+              </div>
+            </div>
+          </div> -->
+          <multi-repeat collection="tasks" columns="2" dragging="dragging(dragged, index)">
+            <a href="/task/{{item.name}}">
+              <div class="well">
+                  <h2>{{item.title}}</h2>
+                  <h4>{{item.subtitle}}</h4>
+              </div>
+            </a>
+          </multi-repeat>
+        </div>
+      </div>
+      </ng-switch>
+      <div ng-switch-when="decisions">
+        <decision-flow></decision-flow>
+      </ng-switch>
+    </div>
+    <div class="col-lg-1"></div>
+  </div>
+</div>
