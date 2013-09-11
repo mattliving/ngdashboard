@@ -1,10 +1,10 @@
-angular.module('jobFoundryApp').controller 'ProjectOverviewCtrl', ($scope, $routeParams, Project) ->
+angular.module('jobFoundryApp').controller 'ProjectDashboardCtrl', ($scope, $routeParams, Project) ->
 
-  $scope.active = {}
+  $scope.active        = {}
   $scope.active.hidden = false
 
   $scope.project = Project.get
-    id: $routeParams.id, (project) ->
+    name: $routeParams.name, (project) ->
       $scope.active.task = project.tasks.shift()
       $scope.tasks       = project.tasks
 

@@ -254,8 +254,8 @@ img.hero-bg {
     width: 50%;
 }
 
+@header-height: 10em;
 .project, .task {
-    @header-height: 10em;
     header {
         height: @header-height;
         width: 100%;
@@ -280,9 +280,6 @@ img.hero-bg {
     }
     .container {
         padding-top: @header-height + 3;
-    }
-    .content {
-        padding-top: 30px;
     }
     .sidebar {
         li {
@@ -339,6 +336,9 @@ img.hero-bg {
 /* task view */
 
 .task {
+    .content {
+        padding-top: 30px;
+    }
     .resources {
         list-style: none;
     }
@@ -416,9 +416,10 @@ img.hero-bg {
             }
 
         }
-        .jumbotron {
+        .tasks {
             text-align: center;
-            margin-top: 15px;
+            padding: 0 30px;
+            margin-top: 30px;
             h1 {
                 font-weight: 400;
                 margin-top: 11px;
@@ -427,7 +428,6 @@ img.hero-bg {
                 .box-shadow(0, 0, 44px, 10px, @orange, inset);
             }
             &.tasks {
-                padding-top: 15px;
                 h2 {
                     margin-top: 0px;
                     margin-bottom: 15px;
@@ -487,20 +487,33 @@ img.hero-bg {
     }
 }
 
-/* decison flow view */
+/* decison flow */
 
-#decisions {
-    margin-top: 60px;
-        .breadcrumb li > a {
-        font-size: 20px;
-        font-family: 'Lato', sans-serif;
-        font-weight: 200;
-        color: @orange;
+.decision-flow {
+    padding: 0 30px;
+    margin-top: 30px;
+    .breadcrumb {
+        background-color: @midnightBlue;
+        border-radius: 0;
+        li > a {
+            font-size: 20px;
+            font-family: 'Lato', sans-serif;
+            font-weight: 200;
+            color: @cloud;
+            .transition-ease-in(150ms);
+            &:hover {
+                text-decoration: none;
+                color: @orange;
+            }
+        }
     }
 }
 
 .decision {
-    background: #efefef;
+    &.jumbotron {
+        // background-color: @wetAsphalt;
+        background-color: @midnightBlue;
+    }
     padding: 40px 50px;
     .box-shadow(4, 4, 7, -5, #251400);
     .jumbotron {
@@ -521,7 +534,8 @@ img.hero-bg {
     h1 {
         font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
         font-weight: 300;
-        border-bottom: 1px solid #777;
+        color: @cloud;
+        border-bottom: 1px solid @cloud;
         padding-bottom: 1%;
         margin: 0;
         margin-bottom: 3%;
