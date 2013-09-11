@@ -2,8 +2,20 @@
     <div class="row" scroll-spy>
         <header>
             <h1>{{task.title}}</h1>
-            <h2>{{task.subtitle}}</h2>
+            <p class="lead"><span>{{task.subtitle}}</span></p>
         </header>
+        <section class="negative goal">
+            <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <h2><span>Your goals for this task</span></h2>
+                        <ul id="learning">
+                            <li ng-repeat="outcome in task.outcomes"><span class="glyphicon glyphicon-ok"></span> {{outcome}}</li>
+                        </ul>
+                        <p id="overview">{{task.overview}}<br><br>Below are the most useful resources we've found to learn how to {{task.title}}.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
         <nav sticky class="navbar-inverse" role="navigation">
             <img class="logo" src="/images/logo-light-nav.png" height="35"/>
             <ul class="nav navbar-nav">
@@ -17,15 +29,6 @@
         </nav>
         <div class="container">
             <div class="content">
-                <div class="row">
-                    <div class="col-md-10 col-md-offset-1">
-                        <p id="overview">{{task.overview}}</p>
-                        <ul id="learning">
-                            <li ng-repeat="outcome in task.outcomes"><span class="glyphicon glyphicon-ok"></span>{{outcome}}</li>
-                        </ul>
-                    </div>
-                </div>
-                <h3 id="resources">Resources</h3>
                 <div ng-repeat="(type, resources) in task.resources" class="clearfix" id="resources-{{type}}">
                     <h4>{{resourceMap(type)}}s</h4>
                     <div class="main-resource row panel panel-default">

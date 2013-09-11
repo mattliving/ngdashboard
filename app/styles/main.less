@@ -75,16 +75,19 @@ img.hero-bg {
 
 /* Colours */
 
+@dark: #0d0d0d;
+@darkgrey: #333333;
 @lightgrey: #fafafa;
-@grey: #dddddd;
+@grey: #bdc3c7;
 @lightestblue: #62ABCE;
 @lightblue: #3B9ECE;
-@darkblue: #024666;
+@darkblue: #2c3e50;
 @orange: #ff6600;
 @lightorange: #FBA43F;
 @lightestorange: #FBBB71;
-@darkorange: #251400;
+@darkorange: #002649;
 @clouds: #ecf0f1;
+@green: #27ae60;
 
 /* Mixins */
 
@@ -212,15 +215,15 @@ img.hero-bg {
 }
 
 .project, .task {
-    @header-height: 13em;
+    @header-height: 26em;
     header {
         height: @header-height;
         width: 100%;
         position: absolute;
         left: 0;
-        padding-top: 2em;
+        padding-top: 6em;
         text-align: center;
-        color: lighten(black, 10%);
+        color: @darkgrey;
         background-color: @clouds;
         h1, h2 {
             font-family: "Lato";
@@ -228,29 +231,49 @@ img.hero-bg {
         h1 {
             font-weight: 700;
             font-size: 3em;
-            font-style: italic;
-            padding-bottom: 10px;
-            color: @darkblue;
+            padding-bottom: 0.5em;
+            // color: @darkblue;
         }
+        p span {
+            border-top: solid 2px @orange;
+            padding-top: 1em;
+        }
+    }
+    @goal-height: 40em;
+    section {
         h2 {
-            font-weight: 300;
+            text-align: center;
+            font-weight: bold;
+            font-size: 2em;
+            padding-bottom: 1em;
+            span {
+                border-bottom: solid 2px @orange;
+                padding: 0px 30px 15px 30px;
+            }
+        }
+        &.goal {
+            height: @goal-height;
+            padding-top: @header-height + 3;
         }
     }
     nav {
-        .logo {
-            float: left;
-            margin-top: 7px;
-            margin-left: 10px;
-        }
         z-index: 100;
         left: 0;
         right: 0;
         position: absolute;
-        top: @header-height;
+        top: @header-height + @goal-height;
         border-bottom: 4px solid @orange;
         &.sticky-fixed {
             position: fixed;
             top: 0;
+        }
+        &.navbar-inverse {
+            background-color: @dark;
+        }
+        .logo {
+            float: left;
+            margin-top: 7px;
+            margin-left: 10px;
         }
         ul {
             float: none;
@@ -270,8 +293,10 @@ img.hero-bg {
         list-style: none;
         li {
             margin-bottom: 6px;
+            margin-left: 30px;
             .glyphicon {
-                margin-right: 10px;
+                margin-right: 15px;
+                color: @green;
             }
         }
     }
