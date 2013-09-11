@@ -37,6 +37,7 @@ angular.module('jobFoundryApp').controller 'TaskFormCtrl', ($scope, $http, $loca
 
   if $routeParams.name?
     $scope.editing = yes
+    $scope.createName = no
     $scope.input = Task.get name: $routeParams.name, ->
       $scope.inputResources = $scope.input.resources
 
