@@ -268,6 +268,10 @@ img.hero-bg {
         text-align: center;
         color: @darkgrey;
         background-color: @clouds;
+        .glyphicon-headline {
+            margin-right: 30px;
+            color: @clouds;
+        }
         h1, h2 {
             font-family: "Lato";
         }
@@ -275,24 +279,30 @@ img.hero-bg {
             font-weight: 700;
             font-size: 3em;
             padding-bottom: 0.5em;
-            // color: @darkblue;
         }
+        span .grey-underline {
+                border-bottom: #ecf0f1 2px solid;
+                padding: 15px 30px 15px 30px;
+            }
         p span {
             border-top: solid 2px @orange;
             padding-top: 1em;
         }
     }
+    h2 {
+        text-align: center;
+        font-weight: bold;
+        font-size: 2em;
+        padding: 2em 0em 1em 0em;
+    }
+    h3 {
+        font-weight: bold;    
+    }
     section {
-        h2 {
-            text-align: center;
-            font-weight: bold;
-            font-size: 2em;
-            padding-bottom: 1em;
-            span {
+            span .orange-underline {
                 border-bottom: solid 2px @orange;
                 padding: 0px 30px 15px 30px;
             }
-        }
         &.goal {
             height: @goal-height;
             padding-top: @header-height + 3;
@@ -313,12 +323,15 @@ img.hero-bg {
     }
     nav {
         border: none;
-        background-color: #0D1A26; //#0B1621;
+        background-color: @clouds;
         .logo {
             text-align: center;
             float: left;
             margin-top: 7px;
             margin-left: 2em;
+        }
+        a {
+            color: @darkgrey;
         }
         z-index: 100;
         top: @header-height;
@@ -326,12 +339,7 @@ img.hero-bg {
         right: 0;
         position: absolute;
         top: @header-height;
-        border-bottom: 4px solid @orange;
-        .logo {
-            float: left;
-            margin-top: 7px;
-            margin-left: 10px;
-        }
+        border-bottom: 4px solid @silver;
         &.sticky-fixed {
             position: fixed;
             top: 0;
@@ -351,13 +359,9 @@ img.hero-bg {
             padding-left: 10em;
         }
     }
-    #overview {
-        padding-bottom: 10px;
-        font-size: 1.4em;
-        text-align: center;
-    }
     #learning {
         list-style: none;
+        margin-top: 1.5em;
         li {
             margin-bottom: 6px;
             margin-left: 30px;
@@ -367,16 +371,33 @@ img.hero-bg {
             }
         }
     }
+    #overview {
+        padding: 1.5em 0em 1.5em 0em;
+        font-size: 1em;
+        line-height: 1.2em;
+    }
 }
 
 /* task view */
 
 .task {
+    a {
+        color: @darkgrey;
+        &:hover {
+            color: @dark;
+            text-decoration: none;
+        }
+    }
+    .greyline {
+        padding-bottom: 2em;
+        border-bottom: 2px @clouds solid;
+    }
     .content {
         padding-top: 30px;
     }
     .resources {
         list-style: none;
+        margin-bottom: 5em;
     }
     .image-wrapper {
         position: relative;
@@ -386,7 +407,7 @@ img.hero-bg {
         text-align: center;
         max-width: 200px;
         float: left;
-        margin-right: 6%;
+        margin-right: 8%;
         .taglist {
             position: absolute;
             left: 0;
@@ -397,9 +418,12 @@ img.hero-bg {
         }
     }
     .main-resource {
-        padding: 10px;
-        h5 {
-            font-size: 1.3em;
+        margin-top: 5em;
+        .link {
+            color: @silver;
+        }
+        .description {
+            margin-top: 1em;
         }
         .tags {
             text-align: center;
