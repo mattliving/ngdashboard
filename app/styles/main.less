@@ -10,11 +10,12 @@ html, body {
 }
 
 h1, h2, h3 {
-    font-family: "Lato", "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    // font-family: "Lato", "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-family: 'Roboto Slab', serif;
 }
 
 .container .jumbotron, .jumbotron, .well {
-    background-color: @cloud;
+    background-color: @clouds;
     border: none;
     border-radius: 0px;
     .transition-ease();
@@ -74,7 +75,6 @@ img.hero-bg {
 @lightgrey: #fafafa;
 @grey: #dddddd;
 @darkgrey: #333;
-@cloud: #ecf0f1;
 @lightestblue: #62ABCE;
 @lightblue: #3B9ECE;
 @darkblue: #024666;
@@ -83,7 +83,6 @@ img.hero-bg {
 @lightestorange: #FBBB71;
 @lightorange: #FBA43F;
 @darkorange: #251400;
-@clouds: #ecf0f1;
 
 /* Flat UI */
 
@@ -266,13 +265,13 @@ img.hero-bg {
         color: lighten(black, 10%);
         background-color: @wetAsphalt;
         h1, h2 {
-            font-family: "Lato";
+            font-family: "Roboto Slab", serif;
         }
         h1 {
             font-weight: 500;
             font-size: 4em;
             margin-top: 10px;
-            color: @cloud;
+            color: @clouds;
         }
         h2 {
             font-weight: 300;
@@ -284,16 +283,18 @@ img.hero-bg {
     .sidebar {
         li {
             font-size: 1.3em;
-            padding: 4%;
+            padding: 2%;
+            margin-left: 10%;
+            .transition-ease(50ms);
         }
         li:hover, li.current {
             background-color: @orange;
-            color: @cloud;
+            color: @clouds;
         }
     }
     nav {
         border: none;
-        background-color: #0D1A26; //#0B1621;
+        background-color: #0D1A26;
         .logo {
             text-align: center;
             float: left;
@@ -309,6 +310,12 @@ img.hero-bg {
         &.sticky-fixed {
             position: fixed;
             top: 0;
+        }
+        li > a {
+            color: @clouds;
+            &:hover {
+                color: @orange;
+            }
         }
         ul {
             float: none;
@@ -363,23 +370,42 @@ img.hero-bg {
     }
 }
 
-/*.sidebar {
-    position: absolute;
-    left: 0;
-    top: 220px;
-    padding-top: 10px;
-    list-style: none;
-    text-align: left;
-}*/
-
 /* project dashboard */
 
 .project {
+    .container {
+        padding-right: 0;
+        padding-left: 0;
+        margin-right: 0;
+        margin-left: 0;
+    }
     header {
         padding-top: 2em;
     }
+    .col-lg-3 {
+        float: left;
+        margin: 0;
+        padding-right: 0;
+        padding-left: 0;
+        .well.sidebar {
+            // position: absolute;
+            // left: 0;
+            // top: 220px;
+            // padding-top: 10px;
+            border-right: 2px solid @midnightBlue;
+            background-color: @clouds;
+            list-style: none;
+            text-align: left;
+        }
+    }
     .content {
-        background-color: @cloud;
+        &.col-lg-7 {
+            float: right;
+        }
+        &.col-lg-12 {
+            float: left;
+        }
+        background-color: @clouds;
         input {
             width: 100%;
             // margin-top: 15px;
@@ -394,24 +420,24 @@ img.hero-bg {
             border: 0px;
             border-radius: none;
             &:focus {
-                color: @cloud;
+                color: @clouds;
                 border-color: @midnightBlue;
                 .box-shadow(0 10px 10px 0 @midnightBlue inset);
             }
             &::-webkit-input-placeholder {
-              color: @cloud;
+              color: @clouds;
               text-shadow: 0px 1px rgba(44, 62, 80, 0.5);
             }
             &:-moz-placeholder {
-              color: @cloud;
+              color: @clouds;
               text-shadow: 0px 1px rgba(44, 62, 80, 0.5);
             }
             &::-moz-placeholder {
-              color: @cloud;
+              color: @clouds;
               text-shadow: 0px 1px rgba(44, 62, 80, 0.5);
             }
             &:-ms-input-placeholder {
-              color: @cloud;
+              color: @clouds;
               text-shadow: 0px 1px rgba(44, 62, 80, 0.5);
             }
 
@@ -419,7 +445,7 @@ img.hero-bg {
         .tasks {
             text-align: center;
             padding: 0 30px;
-            margin-top: 30px;
+            margin-top: 10px;
             h1 {
                 font-weight: 400;
                 margin-top: 11px;
@@ -428,7 +454,12 @@ img.hero-bg {
                 .box-shadow(0, 0, 44px, 10px, @orange, inset);
             }
             &.tasks {
+                h1 {
+                    margin-top: 14px;
+                    margin-bottom: 18px;
+                }
                 h2 {
+                    font-family: 'Lato', sans-serif;
                     margin-top: 0px;
                     margin-bottom: 15px;
                 }
@@ -440,9 +471,9 @@ img.hero-bg {
                 }
             }
         }
-        h3, h4, h5, p {
+        h4, h5, p {
             font-weight: 400;
-            font-family: 'Merriweather', serif;
+            font-family: 'Merriweather', sans-serif;
         }
     }
     multi-repeat {
@@ -499,7 +530,7 @@ img.hero-bg {
             font-size: 20px;
             font-family: 'Lato', sans-serif;
             font-weight: 200;
-            color: @cloud;
+            color: @clouds;
             .transition-ease-in(150ms);
             &:hover {
                 text-decoration: none;
@@ -534,8 +565,8 @@ img.hero-bg {
     h1 {
         font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
         font-weight: 300;
-        color: @cloud;
-        border-bottom: 1px solid @cloud;
+        color: @clouds;
+        border-bottom: 1px solid @clouds;
         padding-bottom: 1%;
         margin: 0;
         margin-bottom: 3%;
@@ -555,6 +586,32 @@ img.hero-bg {
     #option {
         border: none;
     }
+}
+
+// body.modal-open,
+// .modal-open .navbar-fixed-top,
+// .modal-open .navbar-fixed-bottom {
+//     margin-right: 0;
+// }
+
+.modal {
+    // left: 50%;
+    // bottom: auto;
+    // right: auto;
+    // padding: 0;
+    // width: 500px;
+    // margin-left: -250px;
+    // background-color: #ffffff;
+    // border: 1px solid #999999;
+    // border: 1px solid rgba(0, 0, 0, 0.2);
+    // border-radius: 6px;
+    // -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+    // box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+    // background-clip: padding-box;
+}
+
+.modal.container {
+    max-width: none;
 }
 
 .progress-bar {

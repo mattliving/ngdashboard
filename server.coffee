@@ -35,7 +35,6 @@ mongoose.connect fs.readFileSync('mongoconfig.txt', 'ascii').trim()
 
 dbSuccess = (res, prop) ->
   (data) ->
-    console.log data
     res.json if prop? then data[prop] else data
 
 dbErr = (err) ->
