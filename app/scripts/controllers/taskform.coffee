@@ -1,4 +1,4 @@
-angular.module('jobFoundryApp').controller 'TaskFormCtrl', ($scope, $http, $location, $routeParams, Task, Resource, costs, paths, map) ->
+angular.module('jobFoundryApp').controller 'TaskFormCtrl', ($scope, $http, $location, $routeParams, dashify, Task, Resource, costs, paths, map) ->
   $scope.resources = Resource.query()
 
   do reset = ->
@@ -20,7 +20,7 @@ angular.module('jobFoundryApp').controller 'TaskFormCtrl', ($scope, $http, $loca
       $scope.input.name = $scope.input.title
 
   $scope.$watch 'input.name', ->
-    $scope.input.name = $scope.input.name?.replace(/-/g, " ").split(" ").map((word) -> word.replace(/\W/g, '').toLowerCase()).join("-")
+    $scope.input.name = dashify $scope.input.name
 
   # get the media and resource types
   $http.get("/api/v1/types").success (types) ->
@@ -68,3 +68,5 @@ angular.module('jobFoundryApp').controller 'TaskFormCtrl', ($scope, $http, $loca
     $scope.inputResources.push $scope.resourceInput
     $scope.resourceInput = new Resource()
     # $scope.resourceInput.$save()
+
+  $scope.isResourceAdded = (resource) -> resource not in $scope.inputResources

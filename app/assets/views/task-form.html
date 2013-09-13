@@ -17,7 +17,7 @@
             <div class="col-md-6">
                 <h3>Find a resource</h3>
                 <input type="search" placeholder="Search..." class="form-control" ng-model="resourceSearch" enter-key="addResource()">
-                <div ng-repeat="resource in resources | filter:resourceSearch | limitTo:20"><a href="" ng-click="addResource(resource)" class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-plus"></span></a> {{resource.title}}</div>
+                <div ng-repeat="resource in resources | filter:resourceSearch | filter:isResourceAdded | limitTo:20"><a href="" ng-click="addResource(resource)" class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-plus"></span></a> {{resource.title}}</div>
             </div>
             <div class="col-md-6">
                 <h3>Create a resource</h3>
@@ -41,7 +41,7 @@
     <div class="row">
         <h1>List of tasks</h1>
         <div class="task" ng-repeat="task in tasks">
-            <a href="/task/{{task.name}}/edit">{{task.title}} - <span class="task-name">{{task.name}}</span></a>
+            <a href="/task/{{task.name}}">{{task.title}} - <span class="task-name">{{task.name}}</span></a> - <a href="/task/{{task.name}}/edit">edit</a>
         </div>
     </div>
 </div>
