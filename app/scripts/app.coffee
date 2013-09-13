@@ -28,8 +28,8 @@ angular.module('jobFoundryApp', ['jobFoundryDirectives', 'jobFoundryServices', '
       .when '/add/project',
         templateUrl: '/views/project-form.html'
         controller: 'ProjectFormCtrl'
-      .when '/projects/:id',
-        templateUrl: '/views/project-overview.html'
+      .when '/projects/:name',
+        templateUrl: '/views/project-dashboard.html'
         controller: 'ProjectDashboardCtrl'
         reloadOnSearch: false
       .when '/task/:name',

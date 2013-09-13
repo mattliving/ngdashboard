@@ -3,6 +3,9 @@ angular.module 'jobFoundryServices', []
 # simple key creation from values for now, may be more complex later
 angular.module('jobFoundryServices').factory 'keygen', -> (string) -> string.toLowerCase().replace(" ", "")
 
+angular.module('jobFoundryServices').factory 'dashify', ->
+  (string) -> string?.replace(/-/g, " ").split(" ").map((word) -> word.replace(/\W/g, '').toLowerCase()).join("-")
+
 angular.module('jobFoundryServices').factory 'Tree', ->
   Tree =
     a:

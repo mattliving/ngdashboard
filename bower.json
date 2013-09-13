@@ -11,8 +11,7 @@
     "angular-mocks": "~1.0.7",
     "angular-animate": "*",
     "angular-route": "*",
-    "auto-reload-brunch": "~1.6.5",
-    "bootstrap-modal": "~2.1.0"
+    "auto-reload-brunch": "~1.6.5"
   },
   "devDependencies": {
     "angular-mocks": "~1.0.5",
