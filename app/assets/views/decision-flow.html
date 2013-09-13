@@ -1,7 +1,6 @@
-<div id="decisions" class="container">
+<div class='decision-flow row'>
 	<ul ng-show="decisions.length" class="breadcrumb am-breadcrumb-scale">
 		<li ng-repeat="decision in decisions"><a ng-click="navigate(decision, $index)" href="">{{decision.name}}</a></li>
 	</ul>
 	<decision type="{{node.type}}" content="node.content" next="step(next)" show="key == current" ng-repeat="(key, node) in tree" ng-cloak></decision>
 </div>
-<div class="textured-bg"></div>

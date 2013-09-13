@@ -1,0 +1,83 @@
+[
+  {
+    "name": "improve-your-base-knowledge",
+    "title" : "Improve your base knowledge",
+    "tasks" : [
+      ObjectId("520cf1f47a3978b86b74e098"),
+      ObjectId("521a4a9031c64a5d2d5b3e5d"),
+      ObjectId("521d13d43bdb22909ee1a759"),
+      ObjectId("521dff4a9ff7c2079f3a58b2"),
+      ObjectId("52303420ea7c65119a000001"),
+      ObjectId("521a6595dfea2031c5ed2160")
+    ]
+  },
+  {
+    "name": "build-your-user-interface",
+    "title" : "Build your user interface",
+    "tasks" : [
+      ObjectId("520cf1f47a3978b86b74e098"),
+      ObjectId("521dff4a9ff7c2079f3a58b2"),
+      ObjectId("52303420ea7c65119a000001"),
+      ObjectId("521a6595dfea2031c5ed2160")
+    ]
+  },
+  {
+    "name": "add-interactivity-to-your-application",
+    "title" : "Add interactivity to your application",
+    "tasks" : [
+      ObjectId("520cf1f47a3978b86b74e098"),
+      ObjectId("521dff4a9ff7c2079f3a58b2"),
+      ObjectId("52303420ea7c65119a000001"),
+      ObjectId("521a6595dfea2031c5ed2160")
+    ]
+  },
+  {
+    "name": "improve-your-user-experience",
+    "title" : "Improve your user experience",
+    "tasks" : [
+      ObjectId("520cf1f47a3978b86b74e098"),
+      ObjectId("521dff4a9ff7c2079f3a58b2"),
+      ObjectId("52303420ea7c65119a000001"),
+      ObjectId("521a6595dfea2031c5ed2160")
+    ]
+  },
+  {
+    "name": "setup-and-use-a-data-store",
+    "title" : "Setup and use a data store",
+    "tasks" : [
+      ObjectId("520cf1f47a3978b86b74e098"),
+      ObjectId("521dff4a9ff7c2079f3a58b2"),
+      ObjectId("52303420ea7c65119a000001"),
+      ObjectId("521a6595dfea2031c5ed2160")
+    ]
+  },
+  {
+    "name": "retrieve-data",
+    "title" : "Retrieve data",
+    "tasks" : [
+      ObjectId("520cf1f47a3978b86b74e098"),
+      ObjectId("521dff4a9ff7c2079f3a58b2"),
+      ObjectId("520cf1f47a3978b86b74e098"),
+      ObjectId("52303420ea7c65119a000001"),
+      ObjectId("521a6595dfea2031c5ed2160")
+    ]
+  },
+  {
+    "name": "learn-to-use-tools-effectively",
+    "title" : "Learn to use tools effectively",
+    "tasks" : [
+      ObjectId("520cf1f47a3978b86b74e098"),
+      ObjectId("521dff4a9ff7c2079f3a58b2"),
+      ObjectId("52303420ea7c65119a000001"),
+      ObjectId("521a6595dfea2031c5ed2160")
+    ]
+  },
+  {
+    "name": "test-your-application",
+    "title" : "Test your application",
+    "tasks" : [
+      ObjectId("520cf1f47a3978b86b74e098"),
+      ObjectId("521dff4a9ff7c2079f3a58b2")
+    ]
+  }
+]

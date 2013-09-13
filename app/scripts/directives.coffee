@@ -8,6 +8,27 @@ angular.module('jobFoundryDirectives').directive 'inviteForm', ->
   link: (scope, elem, attrs) ->
     scope.show ?= true
 
+angular.module('jobFoundryDirectives').directive 'decisionFlow', ($location, Tree) ->
+  restrict: 'E'
+  templateUrl: '/views/decision-flow.html'
+  link: (scope, elem, attrs) ->
+    scope.tree = Tree
+
+    scope.decisions = []
+    scope.current   = 'a'
+
+    scope.step = (chosen) ->
+      if chosen.child?
+        scope.current = chosen.child
+      else
+        $location.path '/projects/' + chosen.project
+      chosen.parent = scope.tree[scope.current].parent
+      scope.decisions.push chosen
+
+    scope.navigate = (decision, index) ->
+      scope.decisions.splice index, scope.decisions.length-index
+      scope.current = decision.parent
+
 angular.module('jobFoundryDirectives').directive 'decision', ->
   restrict: 'E'
   scope:
@@ -40,8 +61,8 @@ angular.module('jobFoundryDirectives').directive 'multiRepeat', ->
     collection: '='
     dragging: '&dragging'
   template: '''
-    <div class="row" ng-repeat="(index, items) in set">
-      <div class="col-lg-{{12/columns}}" ng-repeat="item in items">
+    <div class="row multi-items" ng-repeat="(index, items) in set">
+      <div class="col-lg-{{12/columns}} multi-item" ng-repeat="item in items">
         <div class="draggable" draggable ng-mousedown="dragging({dragged: item, index: calcIndex($index, $parent)})" ng-transclude></div>
       </div>
     </div>

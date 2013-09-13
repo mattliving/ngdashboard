@@ -9,7 +9,7 @@ angular.module('jobFoundryApp').controller 'ResourceCtrl', ($scope, $routeParams
         typeMap[pair.key] = pair.value
       $scope[type+"Types"] = typeMap
 
-  window.scope = $scope
+  window.scope  = $scope
   $scope.levels = levels
   $scope.costs  = costs
   $scope.paths  = paths
@@ -25,8 +25,6 @@ angular.module('jobFoundryApp').controller 'ResourceCtrl', ($scope, $routeParams
   $scope.valueFor = map
 
   $scope.resources = Resource.query()
-
-  window.scope = $scope
 
   $scope.authorCount = 1
   $scope.input =

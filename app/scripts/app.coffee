@@ -10,10 +10,6 @@ angular.module('jobFoundryApp', ['jobFoundryDirectives', 'jobFoundryServices', '
       .when '/',
         templateUrl: '/views/landing.html'
         controller: 'LandingCtrl'
-      .when '/getting-started',
-        templateUrl: 'views/getting-started.html'
-        controller: 'DecisionFlowCtrl'
-        reloadOnSearch: false
       .when '/add/resource',
         templateUrl: '/views/resource-form.html'
         controller: 'ResourceCtrl'
@@ -34,7 +30,7 @@ angular.module('jobFoundryApp', ['jobFoundryDirectives', 'jobFoundryServices', '
         controller: 'ProjectFormCtrl'
       .when '/projects/:id',
         templateUrl: '/views/project-overview.html'
-        controller: 'ProjectOverviewCtrl'
+        controller: 'ProjectDashboardCtrl'
         reloadOnSearch: false
       .when '/task/:name',
         templateUrl: '/views/task.html'
