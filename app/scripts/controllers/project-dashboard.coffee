@@ -4,7 +4,7 @@ angular.module('jobFoundryApp').controller 'ProjectDashboardCtrl', ($scope, $win
   $scope.active.hidden = false
   $scope.selected      = 'tasks'
 
-  $('.container').css 'max-width', $(window).width()
+  # $('.container').css 'max-width', $(window).width()
 
   $scope.project = Project.get
     name: $routeParams.name, (project) ->
