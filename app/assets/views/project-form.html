@@ -5,25 +5,28 @@
             <input type="text" class="form-control" placeholder="Project Title" ng-model="input.title">
             <input type="text" class="form-control" placeholder="Project Name (in url)" ng-model="input.name" ng-focus="createName=false">
             <textarea class="form-control" cols="30" rows="10" placeholder="Project Overview" ng-model="input.overview"></textarea>
-            <h2>Add Tasks</h2>
+            <h2>Add Tasks and Modules</h2>
             <div class="row">
                 <div class="col-md-6">
                     <h3>Modules List</h3>
-                    <div ng-repeat="module in input.modules">{{module.title}} <a href="" ng-click="$parent.selectedModule = module">edit</a></div>
+                    <div ng-repeat="module in input.modules">{{module.title}} <a href="" ng-click="$parent.selectedModule = module" ng-show="$parent.selectedModule != module">edit</a></div>
                     <input type="text" class="form-control" placeholder="Add a module" ng-model="newModuleTitle" enter-key="createModule(newModuleTitle);newModuleTitle=''">
                 </div>
                 <div class="col-md-6">
                     <h3>Current Module</h3>
-                    <div class="selected-module">
-                        <h5>{{selectedModule.title}}</h5>
-                        <div class="task" ng-repeat="task in selectedModule.tasks"><a href="" ng-click="removeTask(task)">x</a> {{task.title}}</div>
+                    <div class="selected-module" ng-show="selectedModule">
+                        <input type="text" ng-model="selectedModule.title" class="form-control">
+                        <input type="text" ng-model="selectedModule.name" class="form-control">
+                        <div class="module-task" ng-repeat="task in selectedModule.tasks"><a href="" ng-click="removeTask(task)" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-minus"></span></a> {{task.title}}</div>
                     </div>
                 </div>
             </div>
             <h3>Find Tasks</h3>
             <input type="text" class="form-control" placeholder="Search..." ng-model="taskSearch">
             <div ng-repeat="task in tasks | filter:taskSearch | filter:isTaskAdded | limitTo:20">
-                <a href="" ng-click="addTask(task)" class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-plus"></span></a> {{task.title}}</div>
+                <a href="" ng-click="addTask(task)" class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-plus"></span></a> {{task.title}}
+            </div><br>
+            <button type="submit" class="btn btn-lg btn-primary btn-block">Submit</button>
         </form>
     </div>
 </div>

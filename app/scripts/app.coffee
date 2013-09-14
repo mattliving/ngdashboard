@@ -32,6 +32,9 @@ angular.module('jobFoundryApp', ['jobFoundryDirectives', 'jobFoundryServices', '
         templateUrl: '/views/project-dashboard.html'
         controller: 'ProjectDashboardCtrl'
         reloadOnSearch: false
+      .when '/projects/:name/edit',
+        templateUrl: '/views/project-form.html'
+        controller: 'ProjectFormCtrl'
       .when '/task/:name',
         templateUrl: '/views/task.html'
         controller: 'TaskCtrl'

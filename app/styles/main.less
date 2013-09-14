@@ -80,7 +80,6 @@ img.hero-bg {
 @darkgrey: #333333;
 @lightgrey: #fafafa;
 @grey: #dddddd;
-@grey: #bdc3c7;
 @lightestblue: #62ABCE;
 @lightblue: #3B9ECE;
 @darkblue: #2c3e50;
@@ -334,9 +333,6 @@ img.hero-bg {
             margin-top: 7px;
             margin-left: 2em;
         }
-        a {
-            color: @darkgrey;
-        }
         z-index: 100;
         top: @header-height;
         left: 0;
@@ -348,12 +344,7 @@ img.hero-bg {
             position: fixed;
             top: 0;
         }
-        li > a {
-            color: @clouds;
-            &:hover {
-                color: @orange;
-            }
-        }
+
         &.navbar-inverse {
             background-color: @dark;
         }
@@ -392,7 +383,7 @@ img.hero-bg {
 
 .task {
     a {
-        color: @darkgrey;
+        color: lighten(@darkgrey, 20%);
         &:hover {
             color: @dark;
             text-decoration: none;

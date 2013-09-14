@@ -9,6 +9,11 @@ angular.module('jobFoundryApp').controller 'ProjectFormCtrl', ($scope, $location
 
     $scope.createName = yes
 
+  if $routeParams.name?
+    $scope.createName = no
+    $scope.editing    = yes
+    $scope.input      = Project.get name: $routeParams.name
+
   $scope.$watch 'input.title', ->
     if $scope.input.title is "" then $scope.createName = yes
     if $scope.createName
@@ -16,10 +21,6 @@ angular.module('jobFoundryApp').controller 'ProjectFormCtrl', ($scope, $location
 
   $scope.$watch 'input.name', ->
     $scope.input.name = dashify $scope.input.name
-
-  # $scope.selectModule = (module) -> $scope.selectedModule = module
-    # $scope.selectedModule = _.find $scope.input.modules, {name: moduleName}
-    # console.log $scope.selectedModule
 
   $scope.createModule = (title) ->
     newModule =
@@ -36,7 +37,19 @@ angular.module('jobFoundryApp').controller 'ProjectFormCtrl', ($scope, $location
     else
       alert 'you must select/create a module first'
 
+  $scope.removeTask = (task) ->
+    $scope.selectedModule.tasks.remove task
+
   $scope.isTaskAdded = (task) ->
     if $scope.selectedModule?
       task not in $scope.selectedModule.tasks
     else true
+
+  $scope.addProject = ->
+    for module in $scope.input.modules
+      module.tasks = _.pluck module.tasks, '_id'
+    if $scope.editing
+      $scope.input.$update (-> alert 'updated project'), (-> alert 'there was an error updating the project, see console for details')
+    else
+      $scope.input.$save((-> console.log('saved project')), (-> alert 'there was an error saving the project, see console for details'))
+      reset()

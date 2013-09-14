@@ -51,15 +51,16 @@
                     <li class="resource" ng-repeat="resource in resources | limitTo:3">
                         <p><a href="" ng-click="setMainResource(type, resource)">
                             <div class="image-wrapper">
-                                    <div class="tags" ng-repeat="type in resource.mediaType">{{type}}</div>
+                                <div class="tags" ng-repeat="type in resource.mediaType">{{type}}</div>
                                 <img ng-src="images/screenshots/{{resource._id}}.png">
                                 <div class="tags" ng-show="mainResource(type).mediaType.length">
-                            </div>
-                        </a></p>
-                        <p><a class="btn btn-default" href="" ng-click="setMainResource(type, resource)">More details</a></p>
-                        <p><a href="{{resource.link}}" target="_blank">{{resource.title}}</a></p>
-                    </li>
-                </ul>
+                                </div>
+                            </a></p>
+                            <p><a class="btn btn-default" href="" ng-click="setMainResource(type, resource)">More details</a></p>
+                            <p><a href="{{resource.link}}" target="_blank">{{resource.title}}</a></p>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>

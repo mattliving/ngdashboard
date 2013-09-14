@@ -13,8 +13,6 @@ Project = mongoose.model 'Project', new mongoose.Schema
     unique: true
   title: String
   description: String
-  type: String
-  # tasks: [type: mongoose.Schema.Types.ObjectId, ref: 'Task']
   modules: [ModuleSchema]
 
 module.exports =

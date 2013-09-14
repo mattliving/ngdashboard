@@ -77,6 +77,15 @@ app.get '/api/v1/projects', (req, res) ->
 app.get '/api/v1/projects/:name', (req, res) ->
   projects.get(req.params.name).then dbSuccess(res), dbErr
 
+app.post '/api/v1/projects/:name?', (req, res) ->
+  projects.add(req.body).then dbSuccess(res, 0), dbErr
+
+app.put '/api/v1/projects/:name', (req, res) ->
+  projects.edit(req.params.name, req.body).then dbSuccess(res, 0), dbErr
+
+app.delete '/api/v1/projects/:name', (req, res) ->
+  projects.delete(req.params.name).then dbSuccess(res, 0), dbErr
+
 # Tasks
 app.get '/api/v1/tasks', (req, res) ->
   tasks.all().then dbSuccess(res), dbErr
