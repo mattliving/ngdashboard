@@ -1,8 +1,8 @@
-<div class="task container">
-    <div class="row" scroll-spy>
+<div class="task container" scroll-spy>
+    <div class="row">
         <header>
-            <h1>{{task.title}}</h1>
-            <p class="lead"><span>{{task.subtitle}}</span></p>
+            <h1 ng-cloak><span class="orange-underline">{{task.title}}</span></h1>
+            <p class="lead">{{task.subtitle}}</p>
         </header>
     </div>
     <nav sticky class="navbar" role="navigation">
@@ -25,7 +25,7 @@
                         <ul id="learning">
                             <li ng-repeat="outcome in task.outcomes"><span class="glyphicon glyphicon-ok"></span> {{outcome}}</li>
                         </ul>
-                        <span class="greyline"><p id="overview">{{task.overview}}<br><br>Below are the most useful resources we've found to learn how to {{task.title}}.</p></span>
+                        <!-- <span class="greyline"><p id="overview">{{task.overview}}<br><br>Below are the most useful resources we've found to learn how to {{task.title}}.</p></span> -->
                     </div>
                 </div>
             </section>

@@ -1,11 +1,11 @@
-<div class="project container">
-  <div class="row" scroll-spy>
+<div class="project container" scroll-spy>
+  <div class="row">
     <header>
-      <h1>{{project.title}}</h1>
-      <p class="lead" ng-show="project.description !== ''">{{project.desciption}}</p>
+      <h1><span class="orange-underline">{{project.title}}</span></h1>
+      <p class="lead" ng-show="project.description !== ''">{{project.description}}</p>
     </header>
   </div>
-  <nav sticky class="navbar-inverse navbar-static-top" role="navigation">
+  <nav sticky class="navbar" role="navigation">
     <!-- <img class="logo" src="/images/logo-light-nav.png" height="35"/> -->
     <ul class="nav navbar-nav">
       <li ng-click="selected='tasks'"><a>Tasks</a></li>
@@ -15,49 +15,49 @@
   </nav>
   <div class="container">
     <div class="row content">
-      <div class="col-lg-3 sidebar">
+      <!-- <div class="col-lg-3 sidebar">
         <ul sticky class="nav">
           <div ng-switch on="selected">
             <div ng-switch-when="tasks">
               <li ng-repeat='module in project.modules'>{{$index+1}}: {{module.title}}</li>
             </div>
-          <!-- <div ng-switch-when="decisions">
-            <li ng-repeat='decision in decisions'>{{$index+1}}: {{decision.title}}</li>
-          </div> -->
-        </div>
-      </ul>
-    </div>
-    <div class="col-lg-9" ng-switch on="selected">
-      <!-- <div class="jumbotron col-lg-12" ng-switch="active.hidden" droppable>
-        <div id="active" ng-switch-when="false">
-          <h1>{{active.task.title}}</h1>
-          <h2>{{active.task.subtitle}}</h2>
-          <p class="lead">{{active.task.name}}</p>
-        </div>
-        <div id="drop-zone" ng-switch-when="true">
-          <h2>Drop Here to Set Active Task</h2>
-        </div>
+            <!- <div ng-switch-when="decisions">
+              <li ng-repeat='decision in decisions'>{{$index+1}}: {{decision.title}}</li>
+            </div>
+          </div>
+        </ul>
       </div> -->
-      <div ng-switch-when="tasks">
-        <div class="jumbotron tasks">
-          <div class="modules" ng-repeat='module in project.modules'>
-            <h1>{{module.title}}</h1>
-            <multi-repeat collection="module.tasks" columns="2" dragging="dragging(dragged, index)">
-            <a href="/task/{{item.name}}">
-              <div class="well">
-                <h2>{{item.title}}</h2>
-                <h4>{{item.subtitle}}</h4>
-              </div>
-            </a>
-          </multi-repeat>
+      <div class="col-lg-12" ng-switch on="selected">
+        <!-- <div class="jumbotron col-lg-12" ng-switch="active.hidden" droppable>
+          <div id="active" ng-switch-when="false">
+            <h1>{{active.task.title}}</h1>
+            <h2>{{active.task.subtitle}}</h2>
+            <p class="lead">{{active.task.name}}</p>
+          </div>
+          <div id="drop-zone" ng-switch-when="true">
+            <h2>Drop Here to Set Active Task</h2>
+          </div>
+        </div> -->
+        <div ng-switch-when="tasks">
+          <div class="jumbotron tasks">
+            <div class="modules" ng-repeat='module in project.modules'>
+              <h2>{{module.title}}</h2>
+              <multi-repeat collection="module.tasks" columns="2" dragging="dragging(dragged, index)">
+              <a href="/task/{{item.name}}">
+                <div class="well">
+                  <h2>{{item.title}}</h2>
+                  <h4>{{item.subtitle}}</h4>
+                </div>
+              </a>
+            </multi-repeat>
+          </div>
         </div>
       </div>
     </div>
+    <div class="col-lg-12" ng-switch-when="decisions">
+      <decision-flow></decision-flow>
+    </div>
   </div>
-  <div class="col-lg-12" ng-switch-when="decisions">
-    <decision-flow></decision-flow>
-  </div>
-</div>
   <!-- <div class="col-lg-1"></div> -->
 </div>
 </div>

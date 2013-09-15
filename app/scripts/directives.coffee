@@ -192,6 +192,7 @@ angular.module('jobFoundryDirectives').directive 'scrollSpy', ($window) ->
           else
             spyElems[spy.id]
 
+        # the element could still not exist, so we check first
         if spyElems[spy.id].length isnt 0
           if (pos = spyElems[spy.id].offset().top) - $window.scrollY <= 0
             spy.pos = pos
