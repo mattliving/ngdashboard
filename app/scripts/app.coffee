@@ -47,5 +47,5 @@ angular.module('jobFoundryApp', ['jobFoundryDirectives', 'jobFoundryServices', '
         controller: 'LandingCtrl'
         reloadOnSearch: false
       .otherwise
-        redirectTo: '/'
+        redirectTo: '/404'
     $locationProvider.html5Mode true

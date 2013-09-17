@@ -9,8 +9,8 @@ angular.module('jobFoundryApp').controller 'TaskCtrl', ($scope, $http, $routePar
           return resource.value
 
   $scope.task = Task.get name: $routeParams.name, cmd: 'group', (->), (response) ->
-    if response.status is 404
-      $location.path('/404')
+    console.log response
+    $location.path('/404')
   mainResources = {}
   $scope.mainResource = (type) -> mainResources[type] ?= $scope.task?.resources?[type][0]
   $scope.setMainResource = (type, resource) ->
