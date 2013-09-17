@@ -10,6 +10,9 @@ angular.module('jobFoundryApp', ['jobFoundryDirectives', 'jobFoundryServices', '
       .when '/',
         templateUrl: '/views/landing.html'
         controller: 'LandingCtrl'
+      .when '/404',
+        templateUrl: '/views/error.html'
+        # controller: 'ErrorCtrl'
       .when '/add/resource',
         templateUrl: '/views/resource-form.html'
         controller: 'ResourceCtrl'
@@ -46,4 +49,3 @@ angular.module('jobFoundryApp', ['jobFoundryDirectives', 'jobFoundryServices', '
       .otherwise
         redirectTo: '/'
     $locationProvider.html5Mode true
-

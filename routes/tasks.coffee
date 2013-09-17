@@ -8,7 +8,7 @@ module.exports =
     taskPromise = q.defer()
     Task.findOne(name: name).populate('resources').exec (err, task) ->
       if err then return taskPromise.reject err
-      unless task? then return taskPromise.reject 'no such task'
+      unless task? then return taskPromise.reject code: 404, message: "No task named #{name} found"
       # must change to JSON otherwise mongoose changes the data to match
       # the schema. weird.
       task = task.toJSON()

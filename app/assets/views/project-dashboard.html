@@ -41,7 +41,8 @@
         <div ng-switch-when="tasks">
           <div class="jumbotron tasks">
             <div class="modules" ng-repeat='module in project.modules' ng-init="show=$first">
-              <h2><span class="orange-underline">
+              <h2>
+                <span class="orange-underline">
                   {{module.title}}
                   <a href="" class="btn btn-warning showbtn" ng-show="!show" ng-click="show=true">Show</a>
                   <a href="" class="btn btn-warning hidebtn" ng-hide="!show" ng-click="show=false">Hide</a>

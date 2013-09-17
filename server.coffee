@@ -33,74 +33,79 @@ app.configure ->
 
 mongoose.connect fs.readFileSync('mongoconfig.txt', 'ascii').trim()
 
-dbSuccess = (res, prop) ->
+dbSuccess = (res, prop, log=no) ->
   (data) ->
+    if log then console.log log
     res.json if prop? then data[prop] else data
 
-dbErr = (err) ->
-  res.send 401, err
+dbErr = (res) ->
+  (err) ->
+    if err.code?
+      res.send err.code, err.message
+    else
+      res.send 500, err
 
 ### API ###
 # Add error handling to this, or to express
 
 # Resources
 app.get '/api/v1/resources', (req, res) ->
-  resources.all().then dbSuccess(res), dbErr
+  resources.all().then dbSuccess(res), dbErr(res)
 
 app.get '/api/v1/resources/:id', (req, res) ->
-  resources.get(req.params.id).then dbSuccess(res), dbErr
+  resources.get(req.params.id).then dbSuccess(res), dbErr(res)
 
 app.post '/api/v1/resources', (req, res) ->
-  resources.add(req.body).then dbSuccess(res, 0), dbErr
+  resources.add(req.body).then dbSuccess(res, 0), dbErr(res)
 
 app.delete '/api/v1/resources/:id', (req, res) ->
-  resources.delete(req.params.id).then dbSuccess(res),  dbErr
+  resources.delete(req.params.id).then dbSuccess(res),  dbErr(res)
 
 app.put '/api/v1/resources/:id', (req, res) ->
-  resources.edit(req.params.id, req.body).then dbSuccess(res, 0), dbErr
+  resources.edit(req.params.id, req.body).then dbSuccess(res, 0), dbErr(res)
 
 # Content
 app.get '/api/v1/content/:key', (req, res) ->
-  content.get(req.params.key).then dbSuccess(res, "data"), dbErr
+  content.get(req.params.key).then dbSuccess(res, "data"), dbErr(res)
 
 # Resource Types
 app.get '/api/v1/types', (req, res) ->
-  types.all().then dbSuccess(res), dbErr
+  types.all().then dbSuccess(res), dbErr(res)
 
 app.get '/api/v1/types/:key', (req, res) ->
-  types.get(req.params.key).then dbSuccess(res), dbErr
+  types.get(req.params.key).then dbSuccess(res), dbErr(res)
 
 # Projects
 app.get '/api/v1/projects', (req, res) ->
-  projects.all().then dbSuccess(res), dbErr
+  projects.all().then dbSuccess(res), dbErr(res)
 
 app.get '/api/v1/projects/:name', (req, res) ->
-  projects.get(req.params.name).then dbSuccess(res), dbErr
+  projects.get(req.params.name).then dbSuccess(res), dbErr(res)
 
 app.post '/api/v1/projects/:name?', (req, res) ->
-  projects.add(req.body).then dbSuccess(res, 0), dbErr
+  projects.add(req.body).then dbSuccess(res, 0), dbErr(res)
 
 app.put '/api/v1/projects/:name', (req, res) ->
-  projects.edit(req.params.name, req.body).then dbSuccess(res, 0), dbErr
+  projects.edit(req.params.name, req.body).then dbSuccess(res, 0), dbErr(res)
 
 app.delete '/api/v1/projects/:name', (req, res) ->
-  projects.delete(req.params.name).then dbSuccess(res, 0), dbErr
+  projects.delete(req.params.name).then dbSuccess(res, 0), dbErr(res)
 
 # Tasks
 app.get '/api/v1/tasks', (req, res) ->
-  tasks.all().then dbSuccess(res), dbErr
+  tasks.all().then dbSuccess(res), dbErr(res)
 
 app.get '/api/v1/tasks/:name/:cmd?', (req, res) ->
-  tasks.get(req.params.name, req.params.cmd is 'group').then dbSuccess(res), dbErr
+  tasks.get(req.params.name, req.params.cmd is 'group').then dbSuccess(res, null, "reached task"), dbErr(res)
 
 app.post '/api/v1/tasks/:name?', (req, res) -> #needs optional name because $resource is stupid
-  tasks.add(req.body).then dbSuccess(res, 0), dbErr
+  tasks.add(req.body).then dbSuccess(res, 0), dbErr(res)
 
 app.put '/api/v1/tasks/:name', (req, res) ->
-  tasks.edit(req.params.name, req.body).then dbSuccess(res, 0), dbErr
+  tasks.edit(req.params.name, req.body).then dbSuccess(res, 0), dbErr(res)
 
 app.delete '/api/v1/tasks/:name', (req, res) ->
-  tasks.delete(req.params.name).then dbSuccess(res, 0), dbErr
+  tasks.delete(req.params.name).then dbSuccess(res, 0), dbErr(res)
 
 # Pages
 

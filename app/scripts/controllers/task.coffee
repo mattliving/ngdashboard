@@ -1,4 +1,4 @@
-angular.module('jobFoundryApp').controller 'TaskCtrl', ($scope, $http, $routeParams, Task, types, map, mediaTypes) ->
+angular.module('jobFoundryApp').controller 'TaskCtrl', ($scope, $http, $routeParams, $location, Task, types, map, mediaTypes) ->
 
   $scope.valueOf = map
 
@@ -8,9 +8,11 @@ angular.module('jobFoundryApp').controller 'TaskCtrl', ($scope, $http, $routePar
         if resource.key is key
           return resource.value
 
-  $scope.task = Task.get name: $routeParams.name, cmd: 'group'
+  $scope.task = Task.get name: $routeParams.name, cmd: 'group', (->), (response) ->
+    if response.status is 404
+      $location.path('/404')
   mainResources = {}
-  $scope.mainResource = (type) -> mainResources[type] ? mainResources[type] = $scope.task?.resources?[type][0]
+  $scope.mainResource = (type) -> mainResources[type] ?= $scope.task?.resources?[type][0]
   $scope.setMainResource = (type, resource) ->
     console.log type, resource
     mainResources[type] = resource
