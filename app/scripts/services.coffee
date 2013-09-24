@@ -3,6 +3,18 @@ angular.module 'jobFoundryServices', []
 # simple key creation from values for now, may be more complex later
 angular.module('jobFoundryServices').factory 'keygen', -> (string) -> string.toLowerCase().replace(" ", "")
 
+angular.module('jobFoundryServices').factory 'dashify', ->
+  (string) -> string?.replace(/-/g, " ").split(" ").map((word) -> word.replace(/\W/g, '').toLowerCase()).join("-")
+
+# api access
+angular.module('jobFoundryServices')
+  .factory 'Project', ($resource) ->
+    $resource 'api/v1/projects/:name', {name: '@name'}, update: {method: "PUT"}
+  .factory 'Task', ($resource) ->
+    $resource 'api/v1/tasks/:name/:cmd', {name: '@name'}, update: {method: "PUT"}
+  .factory 'Resource', ($resource) ->
+    $resource 'api/v1/resources/:id', {id: '@id'}, update: {method: "PUT"}
+
 angular.module('jobFoundryServices').factory 'Tree', ->
   Tree =
     a:
@@ -80,12 +92,3 @@ angular.module('jobFoundryServices').factory 'Tree', ->
         ]
       parent: "d"
       type: "evaluation"
-
-# api access
-angular.module('jobFoundryServices')
-  .factory 'Project', ($resource) ->
-    $resource 'api/v1/projects/:id', id: '@id'
-  .factory 'Task', ($resource) ->
-    $resource 'api/v1/tasks/:name/:cmd', {name: '@name'}, update: {method: "PUT"}
-  .factory 'Resource', ($resource) ->
-    $resource 'api/v1/resources/:id', {id: '@id'}, update: {method: "PUT"}

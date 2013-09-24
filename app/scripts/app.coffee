@@ -10,10 +10,9 @@ angular.module('jobFoundryApp', ['jobFoundryDirectives', 'jobFoundryServices', '
       .when '/',
         templateUrl: '/views/landing.html'
         controller: 'LandingCtrl'
-      .when '/getting-started',
-        templateUrl: 'views/getting-started.html'
-        controller: 'DecisionFlowCtrl'
-        reloadOnSearch: false
+      .when '/404',
+        templateUrl: '/views/error.html'
+        # controller: 'ErrorCtrl'
       .when '/add/resource',
         templateUrl: '/views/resource-form.html'
         controller: 'ResourceCtrl'
@@ -29,10 +28,16 @@ angular.module('jobFoundryApp', ['jobFoundryDirectives', 'jobFoundryServices', '
       .when '/task/:name/edit',
         templateUrl: '/views/task-form.html'
         controller: 'TaskFormCtrl'
-      .when '/projects/:id',
-        templateUrl: '/views/project-overview.html'
-        controller: 'ProjectOverviewCtrl'
+      .when '/add/project',
+        templateUrl: '/views/project-form.html'
+        controller: 'ProjectFormCtrl'
+      .when '/projects/:name',
+        templateUrl: '/views/project-dashboard.html'
+        controller: 'ProjectDashboardCtrl'
         reloadOnSearch: false
+      .when '/projects/:name/edit',
+        templateUrl: '/views/project-form.html'
+        controller: 'ProjectFormCtrl'
       .when '/task/:name',
         templateUrl: '/views/task.html'
         controller: 'TaskCtrl'
@@ -42,6 +47,5 @@ angular.module('jobFoundryApp', ['jobFoundryDirectives', 'jobFoundryServices', '
         controller: 'LandingCtrl'
         reloadOnSearch: false
       .otherwise
-        redirectTo: '/'
+        redirectTo: '/404'
     $locationProvider.html5Mode true
-

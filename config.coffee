@@ -16,6 +16,9 @@ exports.config =
           'bower_components/lodash/lodash.js'
           'bower_components/jquery/jquery.js'
           'bower_components/jquery-ui/jquery-ui-1.10.3.custom.js'
+          'bower_components/bootstrap-modal/js/bootstrap-modalmanager.js'
+          'bower_components/bootstrap-modal/js/bootstrap-modal.js'
+          'bower_components/angular-bootstrap/ui-bootstrap.js'
           'bower_components/angular/angular.js'
           'app/scripts/directives.coffee'
         ]

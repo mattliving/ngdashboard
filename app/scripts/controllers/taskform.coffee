@@ -1,7 +1,26 @@
-angular.module('jobFoundryApp').controller 'TaskFormCtrl', ($scope, $http, $location, $routeParams, Task, Resource, levels, costs, paths, map) ->
+angular.module('jobFoundryApp').controller 'TaskFormCtrl', ($scope, $http, $location, $routeParams, dashify, Task, Resource, costs, paths, map) ->
   $scope.resources = Resource.query()
 
-  window.scope = $scope
+  do reset = ->
+    task = new Task()
+    task.outcomes = []
+    task.resources = []
+
+    resource = new Resource()
+
+    $scope.tasks = Task.query()
+    $scope.resourceInput = resource
+    $scope.input = task
+    $scope.inputResources = []
+    $scope.createName = yes
+
+  $scope.$watch 'input.title', ->
+    if $scope.input.title is "" then $scope.createName = yes
+    if $scope.createName
+      $scope.input.name = $scope.input.title
+
+  $scope.$watch 'input.name', ->
+    $scope.input.name = dashify $scope.input.name
 
   # get the media and resource types
   $http.get("/api/v1/types").success (types) ->
@@ -12,24 +31,13 @@ angular.module('jobFoundryApp').controller 'TaskFormCtrl', ($scope, $http, $loca
         typeMap[pair.key] = pair.value
       $scope[type+"Types"] = typeMap
 
-  $scope.levels = levels
   $scope.costs  = costs
   $scope.paths  = paths
 
-  do reset = ->
-    $scope.tasks = Task.query()
-    task = new Task()
-    task.outcomes = []
-    task.resources = []
-
-    resource = new Resource()
-
-    $scope.resourceInput = resource
-    $scope.input = task
-    $scope.inputResources = []
 
   if $routeParams.name?
     $scope.editing = yes
+    $scope.createName = no
     $scope.input = Task.get name: $routeParams.name, ->
       $scope.inputResources = $scope.input.resources
 
@@ -60,3 +68,5 @@ angular.module('jobFoundryApp').controller 'TaskFormCtrl', ($scope, $http, $loca
     $scope.inputResources.push $scope.resourceInput
     $scope.resourceInput = new Resource()
     # $scope.resourceInput.$save()
+
+  $scope.isResourceAdded = (resource) -> resource not in $scope.inputResources

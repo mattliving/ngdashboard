@@ -8,6 +8,27 @@ angular.module('jobFoundryDirectives').directive 'inviteForm', ->
   link: (scope, elem, attrs) ->
     scope.show ?= true
 
+angular.module('jobFoundryDirectives').directive 'decisionFlow', ($location, Tree) ->
+  restrict: 'E'
+  templateUrl: '/views/decision-flow.html'
+  link: (scope, elem, attrs) ->
+    scope.tree = Tree
+
+    scope.decisions = []
+    scope.current   = 'a'
+
+    scope.step = (chosen) ->
+      if chosen.child?
+        scope.current = chosen.child
+      else
+        $location.path '/projects/' + chosen.project
+      chosen.parent = scope.tree[scope.current].parent
+      scope.decisions.push chosen
+
+    scope.navigate = (decision, index) ->
+      scope.decisions.splice index, scope.decisions.length-index
+      scope.current = decision.parent
+
 angular.module('jobFoundryDirectives').directive 'decision', ->
   restrict: 'E'
   scope:
@@ -171,6 +192,7 @@ angular.module('jobFoundryDirectives').directive 'scrollSpy', ($window) ->
           else
             spyElems[spy.id]
 
+        # the element could still not exist, so we check first
         if spyElems[spy.id].length isnt 0
           if (pos = spyElems[spy.id].offset().top) - $window.scrollY <= 0
             spy.pos = pos

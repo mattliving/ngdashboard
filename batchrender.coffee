@@ -4,7 +4,7 @@ mongoose  = require 'mongoose'
 {Resource} = require './models/resource'
 {spawn} = require 'child_process'
 
-mongoose.connect('mongodb://localhost/jobfoundry')
+mongoose.connect fs.readFileSync('mongoconfig.txt','ascii').trim()
 
 Resource.find().select('link').exec (err, resources) ->
 

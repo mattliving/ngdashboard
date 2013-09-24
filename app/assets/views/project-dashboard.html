@@ -1,0 +1,112 @@
+<div class="project container" scroll-spy>
+  <div class="row">
+    <header>
+      <h1><span class="orange-underline">{{project.title}}</span></h1>
+      <p class="lead" ng-show="project.description !== ''">{{project.description}}</p>
+    </header>
+  </div>
+  <nav sticky class="navbar" role="navigation">
+    <!-- <img class="logo" src="/images/logo-light-nav.png" height="35"/> -->
+    <ul class="nav navbar-nav">
+      <li ng-click="selected='tasks'"><a>Tasks</a></li>
+      <li><a href="">Decisions</a></li>
+      <!-- spy="decisions" spy-class="active" ng-click="selected='decisions';open()" -->
+    </ul>
+  </nav>
+  <div class="container">
+    <div class="row content">
+      <!-- <div class="col-lg-3 sidebar">
+        <ul sticky class="nav">
+          <div ng-switch on="selected">
+            <div ng-switch-when="tasks">
+              <li ng-repeat='module in project.modules'>{{$index+1}}: {{module.title}}</li>
+            </div>
+            <!- <div ng-switch-when="decisions">
+              <li ng-repeat='decision in decisions'>{{$index+1}}: {{decision.title}}</li>
+            </div>
+          </div>
+        </ul>
+      </div> -->
+      <div class="col-lg-12" ng-switch on="selected">
+        <!-- <div class="jumbotron col-lg-12" ng-switch="active.hidden" droppable>
+          <div id="active" ng-switch-when="false">
+            <h1>{{active.task.title}}</h1>
+            <h2>{{active.task.subtitle}}</h2>
+            <p class="lead">{{active.task.name}}</p>
+          </div>
+          <div id="drop-zone" ng-switch-when="true">
+            <h2>Drop Here to Set Active Task</h2>
+          </div>
+        </div> -->
+        <div ng-switch-when="tasks">
+          <div class="jumbotron tasks">
+            <div class="modules" ng-repeat='module in project.modules' ng-init="show=$first">
+              <h2>
+                <span class="orange-underline">
+                  {{module.title}}
+                  <a href="" class="btn btn-warning showbtn" ng-show="!show" ng-click="show=true">Show</a>
+                  <a href="" class="btn btn-warning hidebtn" ng-hide="!show" ng-click="show=false">Hide</a>
+                </span>
+              </h2>
+              <div ng-show="show">
+                <multi-repeat collection="module.tasks" columns="2" dragging="dragging(dragged, index)">
+                <a href="/task/{{item.name}}">
+                  <div class="well">
+                    <h3>{{item.title}}</h3>
+                    <h4>{{item.subtitle}}</h4>
+                  </div>
+                </a>
+              </multi-repeat>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-12" ng-switch-when="decisions">
+      <decision-flow></decision-flow>
+    </div>
+  </div>
+  <!-- <div class="col-lg-1"></div> -->
+</div>
+</div>
+
+
+<!-- <div class="modal container fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        <decision-flow></decision-flow>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<!-- <div class="row">
+              <input id="filterTasks" type="text" placeholder="What do you need to do?" ng-model="filterTasks">
+              <div class="btn-group">
+                <button class="btn btn-default btn-lg dropdown-toggle" type="button" data-toggle="dropdown">
+                  {{currentModuleTitle}} <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                  <li ng-click="setCurrentModuleIndex($index)" ng-repeat="module in project.modules">{{module.title}}</li>
+                </ul>
+              </div>
+            </div> -->
+            <!-- <div class="row active">
+              <div class="col-lg-12" ng-switch="active.hidden" droppable>
+                <div id="active" class="well" ng-switch-when="false">
+                  <h1>{{active.task.title}}</h1>
+                  <h2>{{active.task.subtitle}}</h2>
+                </div>
+                <div id="drop-zone" class="well" ng-switch-when="true">
+                  <h2>Drop Here to Set Active Task</h2>
+                </div>
+              </div>
+            </div> -->
