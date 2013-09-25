@@ -96,7 +96,7 @@ app.get '/api/v1/tasks', (req, res) ->
   tasks.all().then dbSuccess(res), dbErr(res)
 
 app.get '/api/v1/tasks/:name/:cmd?', (req, res) ->
-  tasks.get(req.params.name, req.params.cmd is 'group').then dbSuccess(res, null, "reached task"), dbErr(res)
+  tasks.get(req.params.name, req.params.cmd is 'group').then dbSuccess(res), dbErr(res)
 
 app.post '/api/v1/tasks/:name?', (req, res) -> #needs optional name because $resource is stupid
   tasks.add(req.body).then dbSuccess(res, 0), dbErr(res)

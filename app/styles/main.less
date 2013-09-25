@@ -259,6 +259,7 @@ img.hero-bg {
 }
 
 @header-height: 14em;
+@nav-height: 3.4em;
 .project, .task {
     header {
         height: @header-height;
@@ -289,14 +290,14 @@ img.hero-bg {
             font-size: 1.4em;
         }
     }
+    .content {
+        padding-top: @header-height + @nav-height;
+    }
     section {
         span .orange-underline {
             border-bottom: solid 2px @orange;
             padding: 0px 30px 15px 30px;
         }
-    }
-    .content {
-        padding-top: @header-height + 3;
     }
     .sidebar {
         li {
@@ -312,6 +313,7 @@ img.hero-bg {
     }
     nav {
         border: none;
+        height: @nav-height;
         background-color: @clouds;
         .logo {
             text-align: center;
@@ -324,7 +326,6 @@ img.hero-bg {
         left: 0;
         right: 0;
         position: absolute;
-        top: @header-height;
         border-bottom: 4px solid @silver;
         &.sticky-fixed {
             position: fixed;
@@ -346,6 +347,7 @@ img.hero-bg {
             padding-left: 10em;
         }
     }
+
 }
 
 /* task view */
@@ -366,6 +368,19 @@ img.hero-bg {
     }
     h3 {
         font-weight: bold;
+    }
+    .task-project-nav {
+        .prev, .next {
+            padding: 15px;
+            font-size: 1.1em;
+            position: absolute;
+        }
+        .prev {
+            left: 0;
+        }
+        .next {
+            right: 0;
+        }
     }
     .greyline {
         padding-bottom: 2em;
@@ -438,7 +453,7 @@ img.hero-bg {
 
 .project {
     header {
-        padding-top: 2em;
+        // padding-top: 2em;
         // border-bottom: 4px solid @silver;
     }
     .sidebar {

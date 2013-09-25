@@ -1,5 +1,6 @@
 angular.module 'jobFoundryServices', []
 
+
 # simple key creation from values for now, may be more complex later
 angular.module('jobFoundryServices').factory 'keygen', -> (string) -> string.toLowerCase().replace(" ", "")
 
@@ -14,6 +15,19 @@ angular.module('jobFoundryServices')
     $resource 'api/v1/tasks/:name/:cmd', {name: '@name'}, update: {method: "PUT"}
   .factory 'Resource', ($resource) ->
     $resource 'api/v1/resources/:id', {id: '@id'}, update: {method: "PUT"}
+
+# used to persist project between pages - so task views know the next and previous task
+angular.module('jobFoundryServices').service 'CurrentProject', class CurrentProject
+  CurrentProject.$inject = ["Project"]
+  constructor: (@Project) ->
+
+  currentProject = null
+
+  get: (name, {success, err}) ->
+    if currentProject? and currentProject.name is name
+      success(currentProject)
+    else
+      @Project.get name: name, success, err
 
 angular.module('jobFoundryServices').factory 'Tree', ->
   Tree =

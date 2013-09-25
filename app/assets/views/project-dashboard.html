@@ -14,7 +14,7 @@
     </ul>
   </nav>
   <div class="container">
-    <div class="row content">
+    <div class="content">
       <!-- <div class="col-lg-3 sidebar">
         <ul sticky class="nav">
           <div ng-switch on="selected">
@@ -50,7 +50,7 @@
               </h2>
               <div ng-show="show">
                 <multi-repeat collection="module.tasks" columns="2" dragging="dragging(dragged, index)">
-                <a href="/task/{{item.name}}">
+                <a href="/projects/{{$parent.$parent.$parent.$parent.project.name}}/{{item.name}}">
                   <div class="well">
                     <h3>{{item.title}}</h3>
                     <h4>{{item.subtitle}}</h4>

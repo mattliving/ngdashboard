@@ -18,6 +18,10 @@
     </nav>
     <div class="container">
         <div class="content">
+            <div class="task-project-nav">
+                <a href="/projects/{{projectName}}/{{prevTaskName}}" class="prev" ng-show="prevTaskName"><span class="glyphicon glyphicon-chevron-left"></span> Previous Task</a>
+                <a href="/projects/{{projectName}}/{{nextTaskName}}" class="next" ng-show="nextTaskName">Next Task <span class="glyphicon glyphicon-chevron-right"></span></a>
+            </div>
             <section class="goals">
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
@@ -30,7 +34,7 @@
                 </div>
             </section>
             <div ng-repeat="(type, resources) in task.resources" class="clearfix greyline" id="resources-{{type}}">
-                <h2><span class="orange-underline">{{resourceMap(type)}}s</span></h2>
+                <h2><span class="orange-underline">{{resourceMap(type)}}</span></h2>
                 <div class="main-resource row">
                     <div class="col-md-3">
                         <div class="image-wrapper">
@@ -49,17 +53,16 @@
                 </div>
                 <ul class="resources row">
                     <li class="resource" ng-repeat="resource in resources | limitTo:3">
-                        <p><a href="" ng-click="setMainResource(type, resource)">
+                        <p><a href="" ng-click="$parent.mainResources[type] = resource">
                             <div class="image-wrapper">
                                 <img ng-src="images/screenshots/{{resource._id}}.png">
                                 <div class="tags">{{resource.mediaType | join}}</div>
-                                </div>
-                            </a></p>
-                            <p><a class="btn btn-default" href="" ng-click="setMainResource(type, resource)">More details</a></p>
-                            <p><a href="{{resource.link}}" target="_blank">{{resource.title}}</a></p>
-                        </li>
-                    </ul>
-                </div>
+                            </div>
+                        </a></p>
+                        <p><a class="btn btn-default" href="" ng-click="$parent.mainResources[type] = resource">More details</a></p>
+                        <p><a href="{{resource.link}}" target="_blank">{{resource.title}}</a></p>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
