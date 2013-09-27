@@ -1,10 +1,10 @@
 mongoose = require 'mongoose'
 
 ModuleSchema = new mongoose.Schema
-  title: String
   name:
     type: String
     unique: true
+  title: String
   tasks: [type: mongoose.Schema.Types.ObjectId, ref: 'Task']
 
 Project = mongoose.model 'Project', new mongoose.Schema
@@ -12,7 +12,8 @@ Project = mongoose.model 'Project', new mongoose.Schema
     type: String
     unique: true
   title: String
-  description: String
+  subtitle: String
+  overview: String
   modules: [ModuleSchema]
 
 module.exports =
