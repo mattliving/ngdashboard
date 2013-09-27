@@ -2,7 +2,7 @@
   <div class="row">
     <header>
       <h1><span class="orange-underline">{{project.title}}</span></h1>
-      <p class="lead" ng-show="project.description !== ''">{{project.description}}</p>
+      <p class="lead" ng-show="project.subtitle !== ''">{{project.subtitle}}</p>
     </header>
   </div>
   <nav sticky class="navbar" role="navigation">
@@ -15,6 +15,14 @@
   </nav>
   <div class="container">
     <div class="row content">
+      <section class="intro">
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2">
+            <h2>Overview for this project</h2>
+            <p class="overview">{{project.overview}}</p>
+          </div>
+        </div>
+      </section>
       <!-- <div class="col-lg-3 sidebar">
         <ul sticky class="nav">
           <div ng-switch on="selected">

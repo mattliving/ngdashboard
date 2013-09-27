@@ -51,5 +51,5 @@ angular.module('jobFoundryApp').controller 'ProjectFormCtrl', ($scope, $location
     if $scope.editing
       $scope.input.$update (-> alert 'updated project'), (-> alert 'there was an error updating the project, see console for details')
     else
-      $scope.input.$save((-> console.log('saved project')), (-> alert 'there was an error saving the project, see console for details'))
+      $scope.input.$save((-> alert 'saved project'), (-> alert 'there was an error saving the project, see console for details'))
       reset()

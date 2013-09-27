@@ -14,7 +14,8 @@ module.exports =
     project = new Project
       name: newProject.name
       title: newProject.title
-      description: newProject.description
+      subtitle: newProject.subtitle
+      overview: newProject.overview
       type: newProject.type
       modules: newProject.modules
     q.ninvoke project, "save"
@@ -25,7 +26,8 @@ module.exports =
       unless project? then return result.reject code: 404, message: "nonexistent projects cannot be edited"
       project.name = newProject.name
       project.title = newProject.title
-      project.description = newProject.description
+      project.subtitle = newProject.subtitle
+      project.overview = newProject.overview
       project.type = newProject.type
       project.modules = newProject.modules
 

@@ -18,14 +18,15 @@
     </nav>
     <div class="container">
         <div class="content">
-            <section class="goals">
+            <section class="intro">
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
                         <h2><span class="glyphicon glyphicon-list glyphicon-headline"></span> Goals for this task</h2>
                         <ul id="learning">
                             <li ng-repeat="outcome in task.outcomes"><span class="glyphicon glyphicon-ok"></span> {{outcome}}</li>
                         </ul>
-                        <!-- <span class="greyline"><p id="overview">{{task.overview}}<br><br>Below are the most useful resources we've found to learn how to {{task.title}}.</p></span> -->
+                        <br>
+                        <p class="overview">{{task.overview}}</p>
                     </div>
                 </div>
             </section>
