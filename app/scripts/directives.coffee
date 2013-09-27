@@ -8,7 +8,7 @@ angular.module('jobFoundryDirectives').directive 'inviteForm', ->
   link: (scope, elem, attrs) ->
     scope.show ?= true
 
-angular.module('jobFoundryDirectives').directive 'decisionFlow', ($location, Tree) ->
+angular.module('jobFoundryDirectives').directive 'decisionFlow', ($location, $window, Tree) ->
   restrict: 'E'
   templateUrl: '/views/decision-flow.html'
   link: (scope, elem, attrs) ->
@@ -20,8 +20,10 @@ angular.module('jobFoundryDirectives').directive 'decisionFlow', ($location, Tre
     scope.step = (chosen) ->
       if chosen.child?
         scope.current = chosen.child
-      else
+      else if chosen.project?
         $location.path '/projects/' + chosen.project
+      else if chosen.site?
+        $window.location = chosen.site
       chosen.parent = scope.tree[scope.current].parent
       scope.decisions.push chosen
 

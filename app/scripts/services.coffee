@@ -34,43 +34,46 @@ angular.module('jobFoundryServices').factory 'Tree', ->
   Tree =
     a:
       content:
-        question: "What would you like to build?"
+        question: "What type of project are you creating?"
         options: [
-            name: "Website"
+            name: "Website or Application"
             child: "b"
           ,
             name: "Mobile Application"
             child: "c"
           ,
-            name: "Social Media Presence"
+            name: "Social Media Marketing"
+            project: "create-a-social-media-marketing-strategy"
         ]
       parent: ""
       type: "choice"
     b:
       content:
-        question: "What kind of web site is it?"
+        question: "What kind of web project is it?"
         options: [
             name: "Web Application"
             examples: ["Facebook", "Twitter", "Gmail"]
-            child: "d"
+            project: "web-application"
           ,
             name: "Content-based Site"
             examples: ["Blog", "Photography Portfolio"]
+            child: "g"
           ,
-            name: "Online Store"
-            examples: ["Amazon", "Boutique Retailers"]
+            name: "E-commerce Site"
+            examples: ["Any business that buys and sells products or services online."]
+            child: "f"
         ]
       parent: "a"
       type: "choice"
     c:
       content:
-        question: "Which platform are you targetting?"
+        question: "Are you an experienced programmer?"
         options: [
-            name: "iOS"
+            name: "Yes"
+            child: "g"
           ,
-            name: "Android"
-          ,
-            name: "Mobile Web"
+            name: "No"
+            project: "hire-a-freelance-web-developer"
         ]
       parent: "a"
       type: "choice"
@@ -107,3 +110,27 @@ angular.module('jobFoundryServices').factory 'Tree', ->
         ]
       parent: "d"
       type: "evaluation"
+    f:
+      content:
+        question: "Pick an e-commerce platform."
+        options: [
+          name: "Shopify"
+          description: "Incredibly easy to setup and make small customisations, with excellent support."
+          site: "http://www.shopify.com/"
+        ,
+          name: "BigCommerce"
+          description: "Quick to setup, easily customisable themes using standard HTML/CSS as well as shipping support for anywhere in the world."
+          site: "http://www.bigcommerce.com/go/startyouronlinestore/"
+        ,
+          name: "Magento"
+          description: "The most advanced and complete solution, but which requires developer knowledge and has limited support."
+          site: "http://www.magentocommerce.com/product/overview-compare?icid=topnav"
+        ]
+      parent: "c"
+      type: "choice"
+    g:
+      content:
+        question: "Coming soon!"
+        options: []
+      parent: "c"
+      type: "choice"

@@ -1,7 +1,16 @@
-<div id="decisions" class="container">
-	<ul ng-show="decisions.length" class="breadcrumb am-breadcrumb-scale">
-		<li ng-repeat="decision in decisions"><a ng-click="navigate(decision, $index)" href="">{{decision.name}}</a></li>
-	</ul>
-	<decision type="{{node.type}}" content="node.content" next="step(next)" show="key == current" ng-repeat="(key, node) in tree" ng-cloak></decision>
+<div class="project container">
+  <div class="row">
+    <header>
+      <h1><span class="orange-underline">{{project.title}}</span></h1>
+      <p class="lead" ng-show="project.subtitle !== ''">{{project.subtitle}}</p>
+    </header>
+  </div>
+<!--   <nav class="navbar" role="navigation"></nav> -->
+  <div class="container">
+    <div class="row content">
+      <div class="col-lg-12">
+        <decision-flow></decision-flow>
+      </div>
+    </div>
+  </div>
 </div>
-<div class="textured-bg"></div>

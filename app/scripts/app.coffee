@@ -45,6 +45,9 @@ angular.module('jobFoundryApp', ['jobFoundryDirectives', 'jobFoundryServices', '
         templateUrl: '/views/task.html'
         controller: 'TaskCtrl'
         reloadOnSearch: false
+      .when '/getting-started',
+        templateUrl: '/views/getting-started.html'
+        controller: 'NewProjectCtrl'
       .when '/learn-more',
         templateUrl: "/views/learn-more.html"
         controller: 'LandingCtrl'

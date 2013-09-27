@@ -6,6 +6,3 @@ angular.module('jobFoundryApp').controller 'NewProjectCtrl', ($scope, $routePara
 
   $scope.project = {}
   $scope.project.title = 'New Project'
-
-  $scope.open = ->
-    $('#myModal').modal()
