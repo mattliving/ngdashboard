@@ -68,6 +68,7 @@ angular.module('jobFoundryDirectives').directive 'multiRepeat', ->
     </div>
   '''
   link: (scope, elem, attrs) ->
+    scope.$multiParent = scope.$parent
     scope.$watchCollection 'collection', ->
       scope.set = _.groupBy scope.collection, (item) ->
         index = Math.floor ((_.indexOf scope.collection, item) / scope.columns)

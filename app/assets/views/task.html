@@ -38,16 +38,16 @@
                 <div class="main-resource row">
                     <div class="col-md-3">
                         <div class="image-wrapper">
-                            <img ng-src="images/screenshots/{{mainResource(type)._id}}.png">
-                            <div class="tags" ng-show="mainResource(type).mediaType.length">
-                                {{mainResource(type).mediaType | join}}
+                            <img ng-src="images/screenshots/{{mainResources[type]._id}}.png">
+                            <div class="tags" ng-show="mainResources[type].mediaType.length">
+                                {{mainResources[type].mediaType | join}}
                             </div>
                         </div>
                     </div>
                     <div class="col-md-9">
-                        <h3><a href="{{mainResource(type).link}}" target="_blank">{{mainResource(type).title}}</a></h3>
-                        <p class="link">{{mainResource(type).link}}</p>
-                        <p class="description">{{mainResource(type).description}}</p>
+                        <h3><a href="{{mainResources[type].link}}" target="_blank">{{mainResources[type].title}}</a></h3>
+                        <p class="link">{{mainResources[type].link}}</p>
+                        <p class="description">{{mainResources[type].description}}</p>
                         <br>
                     </div>
                 </div>

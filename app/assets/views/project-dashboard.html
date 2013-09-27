@@ -50,7 +50,7 @@
               </h2>
               <div ng-show="show">
                 <multi-repeat collection="module.tasks" columns="2" dragging="dragging(dragged, index)">
-                <a href="/projects/{{$parent.$parent.$parent.$parent.project.name}}/{{item.name}}">
+                <a href="/projects/{{$multiParent.project.name}}/{{item.name}}" ng-click="$multiParent.setModule($multiParent.module.name)">
                   <div class="well">
                     <h3>{{item.title}}</h3>
                     <h4>{{item.subtitle}}</h4>

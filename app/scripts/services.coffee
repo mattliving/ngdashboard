@@ -22,6 +22,7 @@ angular.module('jobFoundryServices').service 'CurrentProject', class CurrentProj
   constructor: (@Project) ->
 
   currentProject = null
+  currentModule: null
 
   get: (name, {success, err}) ->
     if currentProject? and currentProject.name is name

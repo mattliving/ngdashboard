@@ -13,6 +13,8 @@ angular.module('jobFoundryApp').controller 'ProjectDashboardCtrl', ($scope, $win
       console.log response
       $location.path('/404')
 
+  $scope.setModule = (module) -> CurrentProject.currentModule = module
+
   $scope.$watch 'currentModuleIndex', ->
     $scope.currentModuleTitle = $scope.project.modules[$scope.currentModuleIndex].title
     $scope.tasks              = $scope.project.modules[$scope.currentModuleIndex].tasks
