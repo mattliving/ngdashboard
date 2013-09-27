@@ -1,18 +1,19 @@
-angular.module('jobFoundryApp').controller 'ProjectDashboardCtrl', ($scope, $window, $routeParams, $location, Project) ->
+angular.module('jobFoundryApp').controller 'ProjectDashboardCtrl', ($scope, $window, $routeParams, $location, CurrentProject) ->
 
   $scope.active        = {}
   $scope.active.hidden = false
   $scope.selected      = 'tasks'
 
-  # $('.container').css 'max-width', $(window).width()
-
-  $scope.project = Project.get
-    name: $routeParams.name, (project) ->
+  $scope.project = CurrentProject.get $routeParams.pname,
+    success: (project) ->
+      console.log $scope.project
       # $scope.active.task = project.tasks.shift()
       if project.modules.length > 0 then $scope.currentModuleIndex = 0
-    , (response) ->
+    error: (response) ->
       console.log response
       $location.path('/404')
+
+  $scope.setModule = (module) -> CurrentProject.currentModule = module
 
   $scope.$watch 'currentModuleIndex', ->
     $scope.currentModuleTitle = $scope.project.modules[$scope.currentModuleIndex].title

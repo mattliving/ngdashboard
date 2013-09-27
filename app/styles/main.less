@@ -259,6 +259,7 @@ img.hero-bg {
 }
 
 @header-height: 14em;
+@nav-height: 3.4em;
 .project, .task {
     header {
         height: @header-height;
@@ -289,14 +290,28 @@ img.hero-bg {
             font-size: 1.4em;
         }
     }
+    .content {
+        padding-top: @header-height + @nav-height;
+    }
+    .intro {
+        h2 {
+            text-align: center;
+            font-weight: bold;
+            font-size: 2em;
+            padding: 2em 0em 1em 0em;
+        }
+        h3 {
+            font-weight: bold;
+        }
+        .overview {
+            font-size: 1.1em;
+        }
+    }
     section {
-        span .orange-underline {
+        .orange-underline {
             border-bottom: solid 2px @orange;
             padding: 0px 30px 15px 30px;
         }
-    }
-    .content {
-        padding-top: @header-height + 3;
     }
     .sidebar {
         li {
@@ -312,6 +327,7 @@ img.hero-bg {
     }
     nav {
         border: none;
+        height: @nav-height;
         background-color: @clouds;
         .logo {
             text-align: center;
@@ -324,7 +340,6 @@ img.hero-bg {
         left: 0;
         right: 0;
         position: absolute;
-        top: @header-height;
         border-bottom: 4px solid @silver;
         &.sticky-fixed {
             position: fixed;
@@ -346,6 +361,7 @@ img.hero-bg {
             padding-left: 10em;
         }
     }
+
 }
 
 /* task view */
@@ -366,6 +382,19 @@ img.hero-bg {
     }
     h3 {
         font-weight: bold;
+    }
+    .task-project-nav {
+        .prev, .next {
+            padding: 15px;
+            font-size: 1.1em;
+            position: absolute;
+        }
+        .prev {
+            left: 0;
+        }
+        .next {
+            right: 0;
+        }
     }
     .greyline {
         padding-bottom: 2em;
@@ -427,18 +456,13 @@ img.hero-bg {
             }
         }
     }
-    #overview {
-        padding: 1.5em 0em 1.5em 0em;
-        font-size: 1em;
-        line-height: 1.2em;
-    }
 }
 
 /* project dashboard */
 
 .project {
     header {
-        padding-top: 2em;
+        // padding-top: 2em;
         // border-bottom: 4px solid @silver;
     }
     .sidebar {

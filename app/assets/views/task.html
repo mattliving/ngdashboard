@@ -18,48 +18,56 @@
     </nav>
     <div class="container">
         <div class="content">
+<<<<<<< HEAD
+            <div class="task-project-nav">
+                <a href="/projects/{{projectName}}/{{prevTaskName}}" class="prev" ng-show="prevTaskName"><span class="glyphicon glyphicon-chevron-left"></span> Previous Task</a>
+                <a href="/projects/{{projectName}}/{{nextTaskName}}" class="next" ng-show="nextTaskName">Next Task <span class="glyphicon glyphicon-chevron-right"></span></a>
+            </div>
             <section class="goals">
+=======
+            <section class="intro">
+>>>>>>> live-site
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
                         <h2><span class="glyphicon glyphicon-list glyphicon-headline"></span> Goals for this task</h2>
                         <ul id="learning">
                             <li ng-repeat="outcome in task.outcomes"><span class="glyphicon glyphicon-ok"></span> {{outcome}}</li>
                         </ul>
-                        <!-- <span class="greyline"><p id="overview">{{task.overview}}<br><br>Below are the most useful resources we've found to learn how to {{task.title}}.</p></span> -->
+                        <br>
+                        <p class="overview">{{task.overview}}</p>
                     </div>
                 </div>
             </section>
             <div ng-repeat="(type, resources) in task.resources" class="clearfix greyline" id="resources-{{type}}">
-                <h2><span class="orange-underline">{{resourceMap(type)}}s</span></h2>
+                <h2><span class="orange-underline">{{resourceMap(type)}}</span></h2>
                 <div class="main-resource row">
                     <div class="col-md-3">
                         <div class="image-wrapper">
-                            <img ng-src="images/screenshots/{{mainResource(type)._id}}.png">
-                            <div class="tags" ng-show="mainResource(type).mediaType.length">
-                                {{mainResource(type).mediaType | join}}
+                            <img ng-src="images/screenshots/{{mainResources[type]._id}}.png">
+                            <div class="tags" ng-show="mainResources[type].mediaType.length">
+                                {{mainResources[type].mediaType | join}}
                             </div>
                         </div>
                     </div>
                     <div class="col-md-9">
-                        <h3><a href="{{mainResource(type).link}}" target="_blank">{{mainResource(type).title}}</a></h3>
-                        <p class="link">{{mainResource(type).link}}</p>
-                        <p class="description">{{mainResource(type).description}}</p>
+                        <h3><a href="{{mainResources[type].link}}" target="_blank">{{mainResources[type].title}}</a></h3>
+                        <p class="link">{{mainResources[type].link}}</p>
+                        <p class="description">{{mainResources[type].description}}</p>
                         <br>
                     </div>
                 </div>
                 <ul class="resources row">
                     <li class="resource" ng-repeat="resource in resources | limitTo:3">
-                        <p><a href="" ng-click="setMainResource(type, resource)">
+                        <p><a href="" ng-click="$parent.mainResources[type] = resource">
                             <div class="image-wrapper">
                                 <img ng-src="images/screenshots/{{resource._id}}.png">
                                 <div class="tags">{{resource.mediaType | join}}</div>
-                                </div>
-                            </a></p>
-                            <p><a class="btn btn-default" href="" ng-click="setMainResource(type, resource)">More details</a></p>
-                            <p><a href="{{resource.link}}" target="_blank">{{resource.title}}</a></p>
-                        </li>
-                    </ul>
-                </div>
+                            </div>
+                        </a></p>
+                        <p><a class="btn btn-default" href="" ng-click="$parent.mainResources[type] = resource">More details</a></p>
+                        <p><a href="{{resource.link}}" target="_blank">{{resource.title}}</a></p>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>

@@ -25,20 +25,23 @@ angular.module('jobFoundryApp', ['jobFoundryDirectives', 'jobFoundryServices', '
       .when '/add/task',
         templateUrl: '/views/task-form.html'
         controller: 'TaskFormCtrl'
-      .when '/task/:name/edit',
+      .when '/task/:tname/edit',
         templateUrl: '/views/task-form.html'
         controller: 'TaskFormCtrl'
       .when '/add/project',
         templateUrl: '/views/project-form.html'
         controller: 'ProjectFormCtrl'
-      .when '/projects/:name',
+      .when '/projects/:pname/edit',
+        templateUrl: '/views/project-form.html'
+        controller: 'ProjectFormCtrl'
+      .when '/projects/:pname',
         templateUrl: '/views/project-dashboard.html'
         controller: 'ProjectDashboardCtrl'
         reloadOnSearch: false
-      .when '/projects/:name/edit',
-        templateUrl: '/views/project-form.html'
-        controller: 'ProjectFormCtrl'
-      .when '/task/:name',
+      .when '/projects/:pname/:tname',
+        templateUrl: '/views/task.html'
+        controller: 'TaskCtrl'
+      .when '/task/:tname',
         templateUrl: '/views/task.html'
         controller: 'TaskCtrl'
         reloadOnSearch: false
