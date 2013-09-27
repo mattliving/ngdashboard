@@ -53,3 +53,10 @@ angular.module('jobFoundryApp').controller 'ProjectFormCtrl', ($scope, $location
     else
       $scope.input.$save((-> alert 'saved project'), (-> alert 'there was an error saving the project, see console for details'))
       reset()
+
+  $scope.deleteProject = ->
+    if confirm 'are you sure you want to delete this project?'
+      $scope.input.$delete (->
+        alert 'deleted project'
+        $location.path '/add/project'
+        ), (-> alert 'there was an error deleting the project, see console')

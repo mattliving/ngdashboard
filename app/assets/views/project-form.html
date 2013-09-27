@@ -28,6 +28,13 @@
                 <a href="" ng-click="addTask(task)" class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-plus"></span></a> {{task.title}}
             </div><br>
             <button type="submit" class="btn btn-lg btn-primary btn-block">Submit</button>
+            <button type="button" class="btn btn-lg btn-danger btn-block" ng-show="editing" ng-click="deleteProject()">Delete</button>
         </form>
+    </div>
+    <div class="row">
+        <h1>Existing Projects</h1>
+        <div class="project-item" ng-repeat="p in projects">
+            <a href="/projects/{{p.name}}">{{p.title}}</a> - <a href="/projects/{{p.name}}/edit">edit</a>
+        </div>
     </div>
 </div>
