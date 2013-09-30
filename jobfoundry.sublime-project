@@ -1,9 +1,0 @@
-{
-	"folders":
-	[
-		{
-			"path": "/Users/niflhel/Projects/jobfoundry",
-			"file_exclude_patterns": ["app/scripts/*.js"]
-		}
-	]
-}

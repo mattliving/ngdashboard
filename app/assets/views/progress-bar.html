@@ -1,5 +1,0 @@
-<div ng-mouseenter="active=!active" ng-mouseleave="active=!active" ng-mousemove="progressUpdate($event)" ng-class="{active: active, 'progress-striped': active}" class="progress">
-  <div class="progress-bar" role="progressbar" aria-valuenow="{{bar.percent}}" aria-valuemin="1" aria-valuemax="5" style="width: {{bar.percent}}%; background-color: {{bar.bgColour}}" ng-repeat="bar in progressBars">
-    <span class="sr-only">{{bar.percent}}% Complete</span>
-  </div>
-</div>

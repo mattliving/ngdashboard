@@ -1,19 +1,15 @@
 {
   "name": "resourcefoundry",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "dependencies": {
     "express": "latest",
-    "mongojs": "latest",
-    "mongoose": "latest",
-    "underscore": "latest",
-    "consolidate": "~0.9.1",
-    "q": "~0.9.6",
-    "webshot": "~0.5.1",
-    "gm": "~1.11.1"
+    "node-mysql": "latest",
+    "lodash": "latest",
+    "consolidate": "latest",
+    "q": "latest"
   },
   "devDependencies": {
     "javascript-brunch": ">= 1.0 < 1.8",
-    "coffee-script-brunch": ">= 1.0 < 1.8",
     "css-brunch": ">= 1.0 < 1.8",
     "ngmin-uglify-js-brunch": "~1.7.2",
     "clean-css-brunch": ">= 1.0 < 1.8",

@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('jobFoundryApp', ['jobFoundryDirectives', 'jobFoundryServices', 'jobFoundryFilters', 'resourceData', 'ui.bootstrap', 'ngResource', 'ngRoute', 'ngAnimate'])
+angular.module('luckyDashApp', ['luckyDashDirectives', 'luckyDashServices', 'luckyDashFilters', 'ui.bootstrap', 'ngResource', 'ngRoute', 'ngAnimate'])
   .config ($routeProvider, $locationProvider, $httpProvider) ->
     $routeProvider
       .when '/',
