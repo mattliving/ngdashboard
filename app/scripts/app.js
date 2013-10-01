@@ -1,17 +1,24 @@
-'use strict'
+'use strict';
 
-angular.module('luckyDashApp', ['luckyDashDirectives', 'luckyDashServices', 'luckyDashFilters', 'ui.bootstrap', 'ngResource', 'ngRoute', 'ngAnimate'])
-  .config ($routeProvider, $locationProvider, $httpProvider) ->
-    $routeProvider
-      .when '/',
-        templateUrl: '/views/landing.html'
-        controller: 'LandingCtrl'
-      .when '/404',
-        templateUrl: '/views/error.html'
-        # controller: 'ErrorCtrl'
-      .when '/add/resource',
-        templateUrl: '/views/resource-form.html'
-        controller: 'ResourceCtrl'
-      .otherwise
-        redirectTo: '/404'
-    $locationProvider.html5Mode true
+var luckyDashApp = angular.module('luckyDashApp', ['luckyDashDirectives', 'luckyDashServices', 'luckyDashFilters', 'ui.bootstrap', 'ngResource', 'ngRoute'])
+  .config(function($routeProvider, $locationProvider, $httpProvider) {
+    $routeProvider.when('/', {
+      templateUrl: '/views/dashboard.html',
+      controller: 'DashboardCtrl'
+    }).when('/404', {
+      templateUrl: '/views/error.html'
+    }).otherwise({
+      redirectTo: '/404'
+    });
+    return $locationProvider.html5Mode(true);
+  });
+
+// luckyDashApp.run(function($rootScope, $window) {
+//   $rootScope.windowHeight = $window.outerHeight;
+//   angular.element($window).bind('resize').function() {
+//     $rootScope.windowHeight = $window.outerHeight;
+//     $rootScope.$apply('windowHeight');
+//   }
+// });
+
+
