@@ -1,13 +1,14 @@
 var app, connection, cons, dbErr, dbSuccess, express, fs, http, q, customers;
 
-fs         = require('fs');
-express    = require('express');
-cons       = require('consolidate');
-http       = require('http');
-q          = require('q');
-connection = require('./connection');
-customers  = require('./routes/customers');
-app        = express();
+fs            = require('fs');
+express       = require('express');
+cons          = require('consolidate');
+http          = require('http');
+q             = require('q');
+connection    = require('./connection');
+customers     = require('./routes/customers');
+opportunities = require('./routes/opportunities');
+app           = express();
 
 app.configure(function() {
   app.set('port', 8080);
@@ -37,15 +38,14 @@ app.configure(function() {
 var dbSuccess = function(res, prop, log) {
   if (log == null) log = false;
   return function(data) {
-    console.log(data);
     if (log) console.log(log);
+    if (data.length === 1) prop = 0;
     return res.json(prop != null ? data[prop] : data);
   };
 };
 
 var dbErr = function(res) {
   return function(err) {
-    console.log(err);
     if (err.code != null) {
       return res.send(err.code, err.message);
     }
@@ -53,8 +53,22 @@ var dbErr = function(res) {
   };
 };
 
-app.get('/api/v1/customers/:cid/adwordspend', function(req, res) {
+/* Customers */
+app.get('/api/v1/customers', function(req, res) {
   customers.all().then(dbSuccess(res), dbErr(res));
+});
+
+app.get('/api/v1/customers/:acid', function(req, res) {
+  customers.get(req.params.acid).then(dbSuccess(res), dbErr(res));
+});
+
+/* Opportunities */
+app.get('/api/v1/opportunities', function(req, res) {
+  opportunities.all(req.query).then(dbSuccess(res), dbErr(res));
+});
+
+app.get('/api/v1/opportunities/:oid', function(req, res) {
+  opportunities.get(req.params.oid).then(dbSuccess(res), dbErr(res));
 });
 
 app.get('*', function(req, res, next) {

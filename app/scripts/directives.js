@@ -6,7 +6,7 @@ angular.module('luckyDashDirectives').directive('metricTile', function() {
     restrict: 'E',
     scope: {
       title: '@',
-      metric: '@',
+      value: '=',
       width: '@'
     },
     templateUrl: "/views/metric-tile.html",
@@ -21,7 +21,7 @@ angular.module('luckyDashDirectives').directive('graphTile', function() {
     restrict: 'E',
     scope: {
       title: '@',
-      metric: '@'
+      value: '='
     },
     templateUrl: "/views/graph-tile.html",
     link: function(scope, elem, attrs) {
