@@ -9,7 +9,7 @@ angular.module('luckyDashServices').factory('dashify', function() {
   };
 });
 
-angular.module('luckyDashServices').factory('resize', function($window) {
-  var $w = angular.element($window);
+angular.module('luckyDashServices').factory('ga-adcost', function($window) {
+
 
 });

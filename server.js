@@ -1,10 +1,13 @@
-var app, cons, dbErr, dbSuccess, express, fs, http;
+var app, connection, cons, dbErr, dbSuccess, express, fs, http, q, customers;
 
-fs      = require('fs');
-express = require('express');
-cons    = require('consolidate');
-http    = require('http');
-app     = express();
+fs         = require('fs');
+express    = require('express');
+cons       = require('consolidate');
+http       = require('http');
+q          = require('q');
+connection = require('./connection');
+customers  = require('./routes/customers');
+app        = express();
 
 app.configure(function() {
   app.set('port', 8080);
@@ -29,24 +32,30 @@ app.configure(function() {
   return app.use(express["static"](__dirname + '/_public'));
 });
 
-dbSuccess = function(res, prop, log) {
-  if (log == null) {
-    log = false;
-  }
+// select * from opportunities WHERE date LIKE '%2013-09-30%';
+
+var dbSuccess = function(res, prop, log) {
+  if (log == null) log = false;
   return function(data) {
-    if (log) {
-      console.log(log);
-    }
+    console.log(data);
+    if (log) console.log(log);
     return res.json(prop != null ? data[prop] : data);
   };
 };
 
-dbErr = function(res) {
+var dbErr = function(res) {
   return function(err) {
-    if (err.code != null) return res.send(err.code, err.message);
+    console.log(err);
+    if (err.code != null) {
+      return res.send(err.code, err.message);
+    }
     else return res.send(500, err);
   };
 };
+
+app.get('/api/v1/customers/:cid/adwordspend', function(req, res) {
+  customers.all().then(dbSuccess(res), dbErr(res));
+});
 
 app.get('*', function(req, res, next) {
   if (req.query._escaped_fragment_ != null) return next();
