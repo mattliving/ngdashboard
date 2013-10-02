@@ -1,0 +1,17 @@
+{
+  "development": {
+    "host": "localhost",
+    "user": "root",
+    "database": "luckydb",
+    "connectionlimit": 10,
+    "supportBigNumbers": true
+  },
+  "production": {
+    "host": "luckymetrics.com",
+    "user": "root",
+    "password": "jasminbar123",
+    "database": "bds",
+    "connectionlimit": 10,
+    "supportBigNumbers": true
+  }
+}

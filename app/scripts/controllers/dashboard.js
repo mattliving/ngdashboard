@@ -1,35 +1,43 @@
-angular.module("luckyDashApp").controller("DashboardCtrl", function($window, $http, $scope) {
+angular.module("luckyDashApp").controller("DashboardCtrl", function($window, $scope, $routeParams, Opportunity) {
 
-  // console.log($window.height);
-  // console.log(angular.element('#tileWrapper').height());
-  // angular.element('#tileWrapper').height($window.height/3);
-  // angular.element('#graphWrapper').height($window.height/1.5);
+  var acid         = $routeParams.acid;
+  $scope.date_from = '2013-09-01';
+  $scope.date_to   = '2013-09-30';
 
-  $scope.height = 0;
-  $scope.$watch('height', function(newVal, oldVal) {
-    console.log(newVal);
-    console.log($('.tileWrapper').height());
-    $('.tileWrapper').height(newVal/3);
-    console.log($('.tileWrapper').height());
-    $('.graphWrapper').height(newVal/1.5);
-  });
+  /* Function to loop through and request metric date */
+  $scope.updateMetrics = function(metrics) {
+    _.each(metrics, function(metric) {
+      Opportunity.get({
+        acid: acid,
+        action: metric.action,
+        date_from: $scope.date_from,
+        date_to: $scope.date_to
+      }, function(opportunity) {
+        metric.value = opportunity[metric.action];
+      });
+    });
+  }
 
-  $scope.tiles = [
+  $scope.metrics = [
     {
-      title: 'First',
-      metric: '67%'
+      title: 'Total Revenue',
+      action: 'total_revenue',
+      value: 0
     },
     {
-      title: 'Second',
-      metric: '67%'
+      title: 'Google Spend',
+      action: 'google_spend',
+      value: 0
     },
     {
-      title: 'Third',
-      metric: '67%'
+      title: 'ROI',
+      action: 'roi',
+      value: 0
     },
     {
-      title: 'Fourth',
-      metric: '67%'
+      title: 'Ad Cost',
+      action: 'ad_cost',
+      value: 0
     }
   ];
   $scope.graphs = [
@@ -40,4 +48,12 @@ angular.module("luckyDashApp").controller("DashboardCtrl", function($window, $ht
       title: 'Graph Two'
     }
   ];
+
+  $window.setInterval($scope.updateMetrics($scope.metrics), 60000);
+
+  $scope.height = 0;
+  $scope.$watch('height', function(newVal, oldVal) {
+    $('.tileWrapper').height(newVal/3);
+    $('.graphWrapper').height(newVal/1.5);
+  });
 });

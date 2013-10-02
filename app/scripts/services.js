@@ -1,4 +1,3 @@
-
 angular.module('luckyDashServices', []);
 
 angular.module('luckyDashServices').factory('dashify', function() {
@@ -12,4 +11,8 @@ angular.module('luckyDashServices').factory('dashify', function() {
 angular.module('luckyDashServices').factory('ga-adcost', function($window) {
 
 
+}).factory('Customer', function($resource) {
+  return $resource('api/v1/customers/:acid', {acid: '@acid'}, {update: {method: "PUT"}});
+}).factory('Opportunity', function($resource) {
+  return $resource('api/v1/opportunities/:oid', {oid: '@oid'}, {update: {method: "PUT"}});
 });
