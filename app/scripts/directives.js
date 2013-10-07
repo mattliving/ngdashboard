@@ -21,12 +21,12 @@ angular.module('luckyDashDirectives').directive('graphTile', function() {
     restrict: 'E',
     scope: {
       title: '@',
-      value: '='
+      data: '=',
+      height: '=',
+      width: '='
     },
     templateUrl: "/views/graph-tile.html",
-    link: function(scope, elem, attrs) {
-
-    }
+    link: function(scope, elem, attrs) {}
   };
 });
 
@@ -41,4 +41,40 @@ angular.module('luckyDashDirectives').directive('resize', function($window) {
       });
     });
   };
+});
+
+angular.module('luckyDashDirectives').directive('barChart', function() {
+
+  return {
+    restrict: 'EA',
+    replace: true,
+    template: '<div class="barChart"></div>',
+    scope: {
+      data: '=',
+      hovered: '&hovered',
+      height: '=',
+      width: '='
+    },
+    link: function(scope, element, attrs) {
+
+      scope.chart   = d3.custom.barChart();
+      scope.chartEl = d3.select(element[0]);
+
+      scope.chart.on('customHover', function(d, i) {
+        scope.hovered({args: d});
+      });
+
+      scope.$watch('data', function (newVal, oldVal) {
+        scope.chartEl.datum(newVal).call(scope.chart);
+      });
+
+      scope.$watch('height', function(d, i) {
+        scope.chartEl.call(scope.chart.height(scope.height));
+      });
+
+      scope.$watch('width', function(d, i) {
+        scope.chartEl.call(scope.chart.width(scope.width));
+      });
+    }
+  }
 });

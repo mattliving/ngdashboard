@@ -16,12 +16,4 @@ var luckyDashApp = angular.module('luckyDashApp', ['luckyDashDirectives', 'lucky
     return $locationProvider.html5Mode(true);
   });
 
-// luckyDashApp.run(function($rootScope, $window) {
-//   $rootScope.windowHeight = $window.outerHeight;
-//   angular.element($window).bind('resize').function() {
-//     $rootScope.windowHeight = $window.outerHeight;
-//     $rootScope.$apply('windowHeight');
-//   }
-// });
-
 

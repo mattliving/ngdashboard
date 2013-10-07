@@ -37,8 +37,8 @@ h1, h2, h3 {
     // &:last-child {
     //     padding-right: 0px;
     // }
-    padding-left: 5px;
-    padding-right: 5px;
+    // padding-left: 5px;
+    // padding-right: 5px;
 }
 
 .tileWrapper, .graphWrapper {
@@ -54,6 +54,23 @@ h1, h2, h3 {
 metric-tile {
     h2 {
         margin-top: 30px;
+    }
+}
+
+.barChart {
+    font-size: 14px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    .axis path, .axis line {
+        fill: none;
+        stroke: black;
+        shape-rendering: crispEdges;
+    }
+    .axis path {
+        fill: none;
+        stroke: none;
+    }
+    .bar {
+        fill: @midnightBlue;
     }
 }
 

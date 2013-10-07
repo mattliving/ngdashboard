@@ -29,6 +29,7 @@ module.exports = {
   execQuery: function(connection, query) {
     var deferred = q.defer();
     connection.query(query, function(err, results) {
+      connection.release();
       if (err) throw err;
       deferred.resolve(results);
     });

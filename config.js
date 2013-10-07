@@ -21,6 +21,8 @@ exports.config = {
           'bower_components/jquery/jquery.js',
           'bower_components/angular-bootstrap/ui-bootstrap.js',
           'bower_components/angular/angular.js',
+          'bower_components/d3/d3.js',
+          'app/scripts/barChart.js',
           'app/scripts/directives.coffee']
       }
     },
