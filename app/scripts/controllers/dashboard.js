@@ -46,14 +46,6 @@ angular.module("luckyDashApp").controller("DashboardCtrl", function($window, $sc
     {
       title: 'Graph One',
       data: [0,1,2,3,4]
-    },
-    {
-      title: 'Graph Two',
-      data: [1,3,5,7,9]
-    },
-    {
-      title: 'Graph Three',
-      data: [1.5,3.0,4.5,6.0,7.5]
     }
   ];
 
@@ -72,7 +64,6 @@ angular.module("luckyDashApp").controller("DashboardCtrl", function($window, $sc
     $scope.tileWrapperHeight  = newVal/3;
     $scope.graphWrapperHeight = newVal*(2/3);
     $('.tileWrapper').height($scope.tileWrapperHeight);
-    // $('.graphWrapper').height($scope.graphWrapperHeight);
   });
 
   // $scope.$watch('width', function(newVal, oldVal) {

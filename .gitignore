@@ -4,12 +4,10 @@ npm-debug.log
 dist
 .tmp
 .sass-cache
-mongoconfig.txt
+bds_2013-10-01.sql
 app/components
-app/assets/images/screenshots/*
 bower_components
 _public
-mongoconfig.txt
 
 *.sublime-project
 *.sublime-workspace
