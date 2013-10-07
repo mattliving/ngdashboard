@@ -46,6 +46,7 @@ var dbSuccess = function(res, prop, log) {
 
 var dbErr = function(res) {
   return function(err) {
+    console.log(err);
     if (err.code != null) {
       return res.send(err.code, err.message);
     }

@@ -28,6 +28,8 @@ module.exports = {
           "AND '" + options.date_to + "';"
         ].join(' ');
       }
+      else console.log("ERROR");
+      console.log(query);
       return db.execQuery(connection, query);
     });
   },

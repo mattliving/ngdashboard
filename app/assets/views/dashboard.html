@@ -2,7 +2,8 @@
   <div resize class="row tileWrapper">
     <metric-tile title='{{metric.title}}' value='metric.value' width='{{12 / metrics.length}}' ng-repeat='metric in metrics'></metric-tile>
   </div>
-  <div resize class="row graphWrapper" ng-repeat='graph in graphs'>
-    <div class="col-lg-12">{{graph.title}}</div>
+  <div resize class="row graphWrapper">
+    <graph-tile title='{{graph.title}}' data='graph.data' height='graphWrapperHeight / graphs.length' width='width' ng-repeat='graph in graphs'></graph-tile>
+    <!-- <bar-chart data='graph.data' height='height / graphs.length' width='width' ng-repeat='graph in graphs'></bar-chart> -->
   </div>
 </div>
