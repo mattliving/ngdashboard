@@ -26,7 +26,9 @@ angular.module('luckyDashDirectives').directive('graphTile', function() {
       width: '='
     },
     templateUrl: "/views/graph-tile.html",
-    link: function(scope, elem, attrs) {}
+    link: function(scope, elem, attrs) {
+
+    }
   };
 });
 
@@ -55,18 +57,18 @@ angular.module('luckyDashDirectives').directive('barChart', function() {
       height: '=',
       width: '='
     },
-    link: function(scope, element, attrs) {
+    link: function(scope, elem, attrs) {
 
-      scope.chart   = d3.custom.barChart();
-      scope.chartEl = d3.select(element[0]);
+      scope.chart   = d3.custom.barChart(scope.options);
+      scope.chartEl = d3.select(elem[0]);
 
       scope.chart.on('customHover', function(d, i) {
         scope.hovered({args: d});
       });
 
-      scope.$watch('data', function (newVal, oldVal) {
+      scope.$watch('data', function(newVal, oldVal) {
         scope.chartEl.datum(newVal).call(scope.chart);
-      });
+      }, true);
 
       scope.$watch('height', function(d, i) {
         scope.chartEl.call(scope.chart.height(scope.height));

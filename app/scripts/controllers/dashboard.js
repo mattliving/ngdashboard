@@ -45,16 +45,25 @@ angular.module("luckyDashApp").controller("DashboardCtrl", function($window, $sc
   $scope.graphs = [
     {
       title: 'Graph One',
-      data: [0,1,2,3,4]
+      data: [1,3,5,7,9]
+    },
+    {
+      title: 'Graph Two',
+      data: [2,4,6,8,10]
     }
   ];
 
   /* Load in the data on page load and periodically every
      5 seconds thereafter */
+  var counter = 11;
+  var counter2 = 12;
   (function() {
     $scope.updateMetrics($scope.metrics);
     $timeout(function update() {
       $scope.updateMetrics($scope.metrics);
+      $scope.graphs[0].data.push(counter++);
+      $scope.graphs[1].data.push(counter2);
+      counter2 = counter2 + 2;
       $timeout(update, 5000);
     }, 5000);
   })();
