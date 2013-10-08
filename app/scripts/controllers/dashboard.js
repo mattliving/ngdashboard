@@ -1,6 +1,6 @@
 angular.module("luckyDashApp").controller("DashboardCtrl", function($window, $scope, $routeParams, $timeout, Opportunity) {
 
-  var acid = $routeParams.acid;
+  var email = $routeParams.email;
 
   /* Function to loop through and request metric data */
   $scope.updateMetrics = function(metrics) {
@@ -8,7 +8,7 @@ angular.module("luckyDashApp").controller("DashboardCtrl", function($window, $sc
     $scope.date_to   = moment().utc().format('YYYY-MM-DD HH:mm:ss');
     _.each(metrics, function(metric) {
       Opportunity.get({
-        acid: acid,
+        email: email,
         action: metric.action,
         date_from: $scope.date_from,
         date_to: $scope.date_to

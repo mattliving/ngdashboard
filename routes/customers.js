@@ -4,7 +4,7 @@ var q  = require('q');
 module.exports = {
   all: function() {
     return db.getConnection().then(function(connection) {
-      var query    = "SELECT * FROM accounts";
+      var query    = "SELECT * FROM accounts;";
       var deferred = q.defer();
       connection.query(query, function(err, results) {
         if (err) throw err;
@@ -13,9 +13,20 @@ module.exports = {
       return deferred.promise;
     });
   },
-  get: function(acid) {
+  getById: function(acid) {
     return db.getConnection().then(function(connection) {
-      var query    = "SELECT * FROM accounts WHERE acid=" + acid;
+      var query    = "SELECT * FROM accounts WHERE acid='" + acid + "';";
+      var deferred = q.defer();
+      connection.query(query, function(err, results) {
+        if (err) throw err;
+        deferred.resolve(results);
+      });
+      return deferred.promise;
+    });
+  },
+  getByEmail: function(email) {
+    return db.getConnection().then(function(connection) {
+      var query    = "SELECT * FROM accounts WHERE email='" + email + "';";
       var deferred = q.defer();
       connection.query(query, function(err, results) {
         if (err) throw err;
