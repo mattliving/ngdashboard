@@ -7,7 +7,7 @@ var luckyDashApp = angular.module('luckyDashApp', ['luckyDashDirectives', 'lucky
     }).when('/login', {
       templateUrl: '/views/login.html',
       controller: 'LoginCtrl'
-    }).when('/dashboard/:acid', {
+    }).when('/:email/dashboard', {
       templateUrl: '/views/dashboard.html',
       controller: 'DashboardCtrl'
     }).when('/404', {

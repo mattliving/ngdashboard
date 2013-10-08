@@ -17,12 +17,12 @@ module.exports = {
       var query;
       if (_.isEmpty(options)) query = "SELECT * FROM opportunities";
       else if (options.action === "total_revenue"
-            && options.acid !== "undefined"
+            && options.email !== "undefined"
             && checkDates([options.date_from, options.date_to])) {
         query = [
           "SELECT SUM(revenue) AS total_revenue",
           "FROM opportunities",
-          "WHERE acid=" + options.acid,
+          "WHERE acid=(SELECT acid FROM accounts WHERE email='" + options.email + "')",
           "AND pipelinetext IN ('Won', '')",
           "AND date BETWEEN '" + options.date_from + "'",
           "AND '" + options.date_to + "';"
@@ -35,7 +35,7 @@ module.exports = {
   },
   get: function(oid) {
     return db.getConnection().then(function(connection) {
-      var query = "SELECT * FROM opportunities WHERE oid=" + oid;
+      var query = "SELECT * FROM opportunities WHERE oid='" + oid + "';";
       return db.execQuery(connection, query);
     });
   }

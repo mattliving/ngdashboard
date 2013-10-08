@@ -76,10 +76,11 @@ d3.custom.barChart = function module(options) {
         .attr({
           x: chartW,
           width: barW,
-          y: function(d, i) { return y1(d); },
-          height: function(d, i) { return chartH - y1(d); }
+          y: chartH,
+          height: 0
         })
         .on('mouseover', dispatch.customHover);
+
 
       bars.transition()
         .duration(duration)

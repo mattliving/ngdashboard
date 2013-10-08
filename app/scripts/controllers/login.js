@@ -5,7 +5,6 @@ angular.module("luckyDashApp").controller("LoginCtrl", function($window, $scope,
 
   $scope.height = 0;
   $scope.$watch('height', function(newVal, oldVal) {
-    console.log(newVal);
     $('.login').css('margin-top', newVal/4);
   });
 });
