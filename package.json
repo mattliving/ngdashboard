@@ -6,7 +6,9 @@
     "mysql": "latest",
     "lodash": "latest",
     "consolidate": "latest",
-    "q": "latest"
+    "q": "latest",
+    "passport": "~0.1.17",
+    "passport-http": "~0.2.2"
   },
   "devDependencies": {
     "javascript-brunch": ">= 1.0 < 1.8",

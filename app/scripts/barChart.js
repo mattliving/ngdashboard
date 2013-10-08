@@ -4,7 +4,8 @@ d3.custom.barChart = function module(options) {
 
   options = options || {};
 
-  var margin = { top: 20, right: 20, bottom: 20, left: 20 },
+  var marginDefault = { top: 40, right: 60, bottom: 40, left: 60, padding: 10 };
+  var margin = options.margin || marginDefault,
       width  = options.width || 960,
       height = options.height || 500,
       gap    = options.gap || 0,
