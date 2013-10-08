@@ -3,6 +3,8 @@
 var luckyDashApp = angular.module('luckyDashApp', ['luckyDashDirectives', 'luckyDashServices', 'luckyDashFilters', 'ui.bootstrap', 'ngResource', 'ngRoute'])
   .config(function($routeProvider, $locationProvider, $httpProvider) {
     $routeProvider.when('/', {
+      redirectTo: '/login'
+    }).when('/login', {
       templateUrl: '/views/login.html',
       controller: 'LoginCtrl'
     }).when('/dashboard/:acid', {
