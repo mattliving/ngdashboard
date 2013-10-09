@@ -16,19 +16,30 @@ module.exports = {
     return db.getConnection().then(function(connection) {
       var query;
       if (_.isEmpty(options)) query = "SELECT * FROM opportunities";
-      else if (options.action === "total_revenue"
-            && options.email !== "undefined"
+      else if (options.email !== "undefined"
             && checkDates([options.date_from, options.date_to])) {
-        query = [
-          "SELECT SUM(revenue) AS total_revenue",
-          "FROM opportunities",
-          "WHERE acid=(SELECT acid FROM accounts WHERE email='" + options.email + "')",
-          "AND pipelinetext IN ('Won', '')",
-          "AND date BETWEEN '" + options.date_from + "'",
-          "AND '" + options.date_to + "';"
-        ].join(' ');
+        if (options.action === "total_revenue") {
+          query = [
+            "SELECT SUM(revenue) AS total_revenue",
+            "FROM opportunities",
+            "WHERE acid=(SELECT acid FROM accounts WHERE email='" + options.email + "')",
+            "AND pipelinetext IN ('Won', '')",
+            "AND date BETWEEN '" + options.date_from + "'",
+            "AND '" + options.date_to + "';"
+          ].join(' ');
+        }
+        else if (options.action === "revenue_over_time") {
+          query = [
+            "SELECT date, revenue",
+            "FROM opportunities",
+            "WHERE acid=(SELECT acid FROM accounts WHERE email='" + options.email + "')",
+            "AND pipelinetext IN ('Won', '')",
+            "AND date BETWEEN '" + options.date_from + "'",
+            "AND '" + options.date_to + "';"
+          ].join(' ');
+        }
       }
-      else console.log("ERROR");
+      else console.log("ERROR"); /* TODO ERROR HANDLING */
       console.log(query);
       return db.execQuery(connection, query);
     });

@@ -45,7 +45,6 @@ passport.use(new LocalStrategy({
   },
   function(email, password, done) {
     process.nextTick(function() {
-      console.log(email, password);
       // Find the user by email.  If there is no user with the given username
       // set the user to `false` to indicate failure.  Otherwise, return the
       // user and user's password.

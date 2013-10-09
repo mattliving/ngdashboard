@@ -9,7 +9,10 @@ d3.custom.barChart = function module(options) {
       width  = options.width || 960,
       height = options.height || 500,
       gap    = options.gap || 0,
-      ease   = options.ease || 'cubic-in-out';
+      ease   = options.ease || 'cubic-in-out',
+      textPadding = 5,
+      format = d3.format('.0f'),
+      number = d3.format('.2f');
 
   var svg, duration = 500;
   var dispatch      = d3.dispatch('customHover');
@@ -21,11 +24,11 @@ d3.custom.barChart = function module(options) {
           chartH = height - margin.top - margin.bottom;
 
       var x1 = d3.scale.ordinal()
-        .domain(data.map(function(d, i) { return i; }))
+        .domain(data.map(function(d, i) { return d.x; }))
         .rangeRoundBands([0, chartW], .1);
 
       var y1 = d3.scale.linear()
-        .domain([0, d3.max(data, function(d, i) { return d; })])
+        .domain([0, d3.max(data, function(d, i) { return d.y; })])
         .range([chartH, 0]);
 
       var xAxis = d3.svg.axis()
@@ -34,6 +37,7 @@ d3.custom.barChart = function module(options) {
 
       var yAxis = d3.svg.axis()
         .scale(y1)
+        .tickFormat(function(d) { return '£' + format(d); })
         .orient('left');
 
       var barW = chartW / data.length;
@@ -41,11 +45,13 @@ d3.custom.barChart = function module(options) {
       if (!svg) {
         svg = d3.select(this)
           .append('svg')
-          .classed('chart', true);
-        var container = svg.append('g').classed('container-group', true);
-        container.append('g').classed('chart-group', true);
-        container.append('g').classed('x-axis-group axis', true);
-        container.append('g').classed('y-axis-group axis', true);
+          .classed('chart', 1);
+        var container = svg.append('g').classed('container-group', 1);
+        container.append('g').classed('chart-group', 1);
+        container.append('g').classed('chart-title', 1);
+        container.append('g').classed('bar-label', 1);
+        container.append('g').classed('x-axis-group axis', 1);
+        container.append('g').classed('y-axis-group axis', 1);
       }
 
       svg.transition().duration(duration).attr({width: width, height: height});
@@ -65,14 +71,34 @@ d3.custom.barChart = function module(options) {
         .ease(ease)
         .call(yAxis);
 
+      svg.select('.chart-title')
+        .attr('x', width / 2)
+        .attr('y', 0 - (margin.top / 2))
+        .attr('text-anchor', 'middle')
+        .style('font-size', '22px')
+        .text(options.title);
+
       var gapSize = x1.rangeBand() / 100 * gap;
       var barW    = x1.rangeBand() - gapSize;
       var bars    = svg.select('.chart-group')
-        .selectAll('.bar')
+        .selectAll('.bar-group')
         .data(data);
 
-      bars.enter().append('rect')
-        .classed('bar', true)
+      var barsEnter = bars.enter()
+        .append('g')
+        .classed('bar-group', 1);
+
+      barsEnter.append('text')
+        .classed('bar-label', 1)
+        .attr({
+          x: chartW,
+          y: chartH,
+          'text-anchor': 'middle'
+        })
+        .text(function(d) { return number(d.y); });
+
+      barsEnter.append('rect')
+        .classed('bar', 1)
         .attr({
           x: chartW,
           width: barW,
@@ -81,15 +107,22 @@ d3.custom.barChart = function module(options) {
         })
         .on('mouseover', dispatch.customHover);
 
-
-      bars.transition()
+      bars.selectAll('.bar').transition()
         .duration(duration)
         .ease(ease)
         .attr({
           width: barW,
-          x: function(d, i) { return x1(i) + gapSize / 2; },
-          y: function(d, i) { return y1(d); },
-          height: function(d, i) { return chartH - y1(d); }
+          x: function(d, i) { return x1(d.x) + gapSize / 2; },
+          y: function(d, i) { return y1(d.y); },
+          height: function(d, i) { return chartH - y1(d.y); }
+        });
+
+      bars.selectAll('.bar-label').transition()
+        .duration(duration)
+        .ease(ease)
+        .attr({
+          x: function(d, i) { return x1(d.x) + barW / 2; },
+          y: function(d, i) { return y1(d.y) - textPadding; }
         });
 
       bars.exit().transition().style({opacity: 0}).remove();
