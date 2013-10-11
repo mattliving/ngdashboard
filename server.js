@@ -1,4 +1,4 @@
-var app, connection, cons, crypto, dbErr, dbSuccess, LocalStrategy, express, fs, http, passport, q, customers, opportunities;
+var app, adwords, connection, cons, crypto, dbErr, dbSuccess, LocalStrategy, express, fs, http, passport, q, customers, opportunities;
 
 cons          = require('consolidate');
 crypto        = require('crypto');
@@ -9,6 +9,7 @@ q             = require('q');
 passport      = require('passport');
 LocalStrategy = require('passport-local').Strategy;
 connection    = require('./connection');
+adwords       = require('./routes/adwords');
 customers     = require('./routes/customers');
 opportunities = require('./routes/opportunities');
 app           = express();
@@ -34,7 +35,7 @@ passport.serializeUser(function(user, done) {
 
 passport.deserializeUser(function(id, done) {
   customers.getById(id).then(function(user) {
-    console.log("derializing...");
+    console.log("deserializing...");
     console.log(user);
     done(null, user);
   }, function(err) { done(err, false); });
@@ -77,8 +78,6 @@ app.configure(function() {
   return app.use(express["static"](__dirname + '/_public'));
 });
 
-// select * from opportunities WHERE date LIKE '%2013-09-30%';
-
 var dbSuccess = function(res, prop, log) {
   if (log == null) log = false;
   return function(data) {
@@ -116,6 +115,10 @@ app.get('/api/v1/customers/:email', function(req, res) {
   customers.getByEmail(req.params.email).then(dbSuccess(res), dbErr(res));
 });
 
+app.get('/api/v1/customers/:email/id', function(req, res) {
+  customers.getId(req.params.email).then(dbSuccess(res), dbErr(res));
+});
+
 /* Opportunities */
 
 app.get('/api/v1/opportunities', function(req, res) {
@@ -124,6 +127,17 @@ app.get('/api/v1/opportunities', function(req, res) {
 
 app.get('/api/v1/opportunities/:oid', function(req, res) {
   opportunities.get(req.params.oid).then(dbSuccess(res), dbErr(res));
+});
+
+/* Adwords */
+
+app.get('/api/v1/adwords', function(req, res) {
+  adwords.all().then(dbSuccess(res), dbErr(res));
+});
+
+app.get('/api/v1/adwords/:acid', function(req, res) {
+  console.log(req.params, req.query);
+  adwords.get(req.params.acid, req.query).then(dbSuccess(res), dbErr(res));
 });
 
 app.get('/logout', function(req, res){
