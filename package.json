@@ -8,9 +8,7 @@
     "consolidate": "latest",
     "q": "latest",
     "passport": "~0.1.17",
-    "passport-http": "~0.2.2",
-    "passport-local": "~0.1.6",
-    "connect-flash": "~0.1.1"
+    "passport-local": "~0.1.6"
   },
   "devDependencies": {
     "javascript-brunch": ">= 1.0 < 1.8",

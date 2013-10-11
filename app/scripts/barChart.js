@@ -4,13 +4,13 @@ d3.custom.barChart = function module(options) {
 
   options = options || {};
 
-  var marginDefault = { top: 40, right: 60, bottom: 40, left: 60, padding: 10 };
+  var marginDefault = { top: 0, right: 40, bottom: 25, left: 70, padding: 10 };
   var margin = options.margin || marginDefault,
       width  = options.width || 960,
       height = options.height || 500,
       gap    = options.gap || 0,
       ease   = options.ease || 'cubic-in-out',
-      textPadding = 5,
+      textPadding = 13,
       format = d3.format('.0f'),
       number = d3.format('.2f');
 
@@ -38,6 +38,7 @@ d3.custom.barChart = function module(options) {
       var yAxis = d3.svg.axis()
         .scale(y1)
         .tickFormat(function(d) { return '£' + format(d); })
+        .tickSize(-chartW)
         .orient('left');
 
       var barW = chartW / data.length;
@@ -46,30 +47,16 @@ d3.custom.barChart = function module(options) {
         svg = d3.select(this)
           .append('svg')
           .classed('chart', 1);
-        var container = svg.append('g').classed('container-group', 1);
-        container.append('g').classed('chart-group', 1);
+        var container  = svg.append('g').classed('container-group', 1);
+        var chartGroup = container.append('g').classed('chart-group', 1);
         container.append('g').classed('chart-title', 1);
-        container.append('g').classed('bar-label', 1);
-        container.append('g').classed('x-axis-group axis', 1);
-        container.append('g').classed('y-axis-group axis', 1);
+        chartGroup.append('g').classed('x-axis-group axis', 1);
+        chartGroup.append('g').classed('y-axis-group axis', 1);
       }
 
       svg.transition().duration(duration).attr({width: width, height: height});
       svg.select('.container-group')
         .attr({transform: 'translate(' + margin.left + ',' + margin.top + ')'});
-
-      svg.select('.x-axis-group.axis')
-        .transition()
-        .duration(duration)
-        .ease(ease)
-        .attr({transform: 'translate(0,' + (chartH) + ')'})
-        .call(xAxis);
-
-      svg.select('.y-axis-group.axis')
-        .transition()
-        .duration(duration)
-        .ease(ease)
-        .call(yAxis);
 
       svg.select('.chart-title')
         .attr('x', width / 2)
@@ -88,15 +75,6 @@ d3.custom.barChart = function module(options) {
         .append('g')
         .classed('bar-group', 1);
 
-      barsEnter.append('text')
-        .classed('bar-label', 1)
-        .attr({
-          x: chartW,
-          y: chartH,
-          'text-anchor': 'middle'
-        })
-        .text(function(d) { return number(d.y); });
-
       barsEnter.append('rect')
         .classed('bar', 1)
         .attr({
@@ -107,13 +85,27 @@ d3.custom.barChart = function module(options) {
         })
         .on('mouseover', dispatch.customHover);
 
+      barsEnter.append('text')
+        .classed('bar-label', 1)
+        .attr({
+          x: function(d) { return x1(d.x) + barW / 2 - .5; },// chartW,
+          y: function(d) { return y1(d.y) - .5; }, //chartH
+          dx: '.35em',
+          dy: 15,
+          'text-anchor': 'middle'
+        })
+        .style('color', '#bdc3c7')
+        .text(function(d) {
+          if (chartH - y1(d.y) > 25) return '£' + number(d.y);
+        });
+
       bars.selectAll('.bar').transition()
         .duration(duration)
         .ease(ease)
         .attr({
           width: barW,
-          x: function(d, i) { return x1(d.x) + gapSize / 2; },
-          y: function(d, i) { return y1(d.y); },
+          x: function(d, i) { return x1(d.x) + gapSize / 2 - .5; },
+          y: function(d, i) { return y1(d.y) + .5; },
           height: function(d, i) { return chartH - y1(d.y); }
         });
 
@@ -121,12 +113,28 @@ d3.custom.barChart = function module(options) {
         .duration(duration)
         .ease(ease)
         .attr({
-          x: function(d, i) { return x1(d.x) + barW / 2; },
-          y: function(d, i) { return y1(d.y) - textPadding; }
-        });
+          x: function(d) { return x1(d.x) + barW / 2 - .5; },
+          y: function(d) { return y1(d.y) - .5; },
+          dx: '-0.05em',
+          dy: function(d) { return barW / 5.1; }
+        })
+        .style('font-size', (barW / 6) + 'px');
 
       bars.exit().transition().style({opacity: 0}).remove();
       duration = 500;
+
+      svg.select('.chart-group').select('.x-axis-group.axis')
+        .transition()
+        .duration(duration)
+        .ease(ease)
+        .attr({transform: 'translate(0,' + (chartH) + ')'})
+        .call(xAxis);
+
+      svg.select('.chart-group').select('.y-axis-group.axis')
+        .transition()
+        .duration(duration)
+        .ease(ease)
+        .call(yAxis);
     });
   }
 
