@@ -62,9 +62,9 @@ angular.module('luckyDashDirectives').directive('barChart', function() {
       scope.chart   = d3.custom.barChart(scope.options);
       scope.chartEl = d3.select(elem[0]);
 
-      scope.chart.on('customHover', function(d, i) {
-        scope.hovered({args: d});
-      });
+      // scope.chart.on('customHover', function(d, i) {
+      //   scope.hovered({args: d});
+      // });
 
       scope.$watch('data', function(newVal, oldVal) {
         scope.chartEl.datum(newVal).call(scope.chart);

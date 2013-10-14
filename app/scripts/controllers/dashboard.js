@@ -49,12 +49,12 @@ angular.module("luckyDashApp").controller("DashboardCtrl", function($window, $sc
       title: 'Revenue For This Month',
       action: 'monthly_revenue',
       data: []
-    },
-    {
-      title: 'Ad Costs for This Month',
-      action: 'monthly_ad_cost',
-      data: []
     }
+    // {
+    //   title: 'Ad Costs for This Month',
+    //   action: 'monthly_ad_cost',
+    //   data: []
+    // }
   ];
 
   /* Loop through and request metric data */
@@ -85,8 +85,7 @@ angular.module("luckyDashApp").controller("DashboardCtrl", function($window, $sc
 
     _.each(graphs, function(graph) {
       GraphActions[graph.action](graph, options).then(function(data) {
-        // console.log(data);
-        graph.data = data;//_.union(graph.data, data);
+        graph.data = data;
       });
     });
   }
@@ -106,8 +105,6 @@ angular.module("luckyDashApp").controller("DashboardCtrl", function($window, $sc
 
     /* Load in the data on page load and periodically every
      5 seconds thereafter */
-    // var counter = 11;
-    // var counter2 = 12;
     var updateInterval = 5000;
     $scope.updateTime();
     $scope.updateMetrics($scope.metrics);
@@ -116,10 +113,6 @@ angular.module("luckyDashApp").controller("DashboardCtrl", function($window, $sc
       $scope.updateTime();
       $scope.updateMetrics($scope.metrics);
       $scope.updateGraphs($scope.graphs);
-      // console.log($scope.graphs);
-      // $scope.graphs[0].data.push(counter++);
-      // $scope.graphs[1].data.push(counter2);
-      // counter2 = counter2 + 2;
       $timeout(update, updateInterval);
     }, updateInterval);
   })
