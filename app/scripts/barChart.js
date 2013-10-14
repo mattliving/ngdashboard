@@ -4,7 +4,7 @@ d3.custom.barChart = function module(options) {
 
   options = options || {};
 
-  var marginDefault = { top: 10, right: 40, bottom: 25, left: 70, padding: 10 };
+  var marginDefault = { top: 10, right: 40, bottom: 55, left: 80, padding: 10 };
   var margin = options.margin || marginDefault,
       width  = options.width || 960,
       height = options.height || 500,
@@ -49,21 +49,47 @@ d3.custom.barChart = function module(options) {
           .classed('chart', 1);
         var container  = svg.append('g').classed('container-group', 1);
         var chartGroup = container.append('g').classed('chart-group', 1);
-        container.append('g').classed('chart-title', 1);
         chartGroup.append('g').classed('x-axis-group axis', 1);
         chartGroup.append('g').classed('y-axis-group axis', 1);
+        svg.append('text')
+          .classed('chart-title', 1)
+          .style('font-size', '22px')
+          .text('Title');
+        svg.append('text')
+          .classed('x-axis-title', 1)
+          .attr('text-anchor', 'middle')
+          .text('Day of the Month');
+        svg.append('text')
+          .classed('y-axis-title', 1)
+          .attr('text-anchor', 'end')
+          .attr('transform', 'rotate(-90)')
+          .text('Revenue');
       }
 
       svg.transition().duration(duration).attr({width: width, height: height});
       svg.select('.container-group')
         .attr({transform: 'translate(' + margin.left + ',' + margin.top + ')'});
 
-      svg.select('.chart-title')
-        .attr('x', width / 2)
-        .attr('y', 0 - (margin.top / 2))
-        .attr('text-anchor', 'middle')
-        .style('font-size', '22px')
-        .text(options.title);
+      svg.select('.chart-title').transition()
+        .duration(duration)
+        .ease(ease)
+        .attr('x', chartW / 2)
+        .attr('y', 0 - (margin.top / 2));
+
+      svg.select('.x-axis-title').transition()
+        .duration(duration)
+        .ease(ease)
+        .attr('x', (chartW) / 2)
+        .attr('dx', margin.left)
+        .attr('y', chartH + margin.bottom)
+        .attr('dy', -2);
+
+      svg.select('.y-axis-title').transition()
+        .duration(duration)
+        .ease(ease)
+        .attr('x', -(chartH + margin.top - margin.bottom) / 2)
+        .attr('y', 12)
+        .attr('dy', '.8em');
 
       var gapSize   = x1.rangeBand() / 100 * gap;
       var barW      = x1.rangeBand() - gapSize;
@@ -75,10 +101,6 @@ d3.custom.barChart = function module(options) {
       var barLabels = svg.select('.chart-group')
         .selectAll('.bar-label')
         .data(data);
-
-      // var barGroupsEnter = barGroups.enter()
-      //   .append('g')
-      //   .classed('bar-group', 1);
 
       bars.enter().append('rect')
       .classed('bar', 1)
@@ -109,7 +131,6 @@ d3.custom.barChart = function module(options) {
           dy: 15,
           'text-anchor': 'middle'
         })
-        .style('color', '#bdc3c7')
         .text(function(d) {
           if (chartH - y1(d.y) > 30) return '£' + number(d.y);
         });
@@ -119,7 +140,7 @@ d3.custom.barChart = function module(options) {
         .ease(ease)
         .attr({
           x: function(d) { return x1(d.x) + barW / 2 - .5; },
-          y: function(d) { return y1(d.y) - .5; },
+          y: function(d) { return y1(d.y) + 3.5; },
           dx: '-0.05em',
           dy: function(d) { return barW / 5.1; }
         })
@@ -140,6 +161,7 @@ d3.custom.barChart = function module(options) {
         .call(xAxis);
 
       svg.select('.chart-group').select('.y-axis-group.axis')
+        .text("Revenue")
         .transition()
         .duration(duration)
         .ease(ease)

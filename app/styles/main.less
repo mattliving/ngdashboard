@@ -83,13 +83,17 @@ h1, h2, h3 {
 }
 
 metric-tile {
-    font-weight: 100;
+    color: @midnightBlue;
     h1 {
+        font-family: 'Roboto Slab', 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
         font-size: 72px;
         margin-top: 30px;
+        font-weight: 700;
     }
     h2 {
+        font-family: 'Roboto Slab', 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
         font-size: 56px;
+        font-weight: 400;
     }
     text-align: center;
     .well {
@@ -100,7 +104,7 @@ metric-tile {
 
 .barChart {
     font-size: 14px;
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     background: @clouds;
     .axis path, .axis line {
         fill: none;
@@ -118,8 +122,13 @@ metric-tile {
     .bar-label {
         fill: @clouds;
         text-anchor: middle;
-        // font-size: 12px;
         shape-rendering: crispEdges;
+    }
+    .title {
+    }
+    .x-axis-title, .y-axis-title {
+        font-size: 18px;
+        font-weight: 700;
     }
 }
 
