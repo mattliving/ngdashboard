@@ -131,12 +131,11 @@ app.get('/api/v1/opportunities/:oid', function(req, res) {
 
 /* Adwords */
 
-app.get('/api/v1/adwords', function(req, res) {
+app.get('/api/v1/adwordsdaily', function(req, res) {
   adwords.all().then(dbSuccess(res), dbErr(res));
 });
 
-app.get('/api/v1/adwords/:acid', function(req, res) {
-  console.log(req.params, req.query);
+app.get('/api/v1/adwordsdaily/:acid', function(req, res) {
   adwords.get(req.params.acid, req.query).then(dbSuccess(res), dbErr(res));
 });
 

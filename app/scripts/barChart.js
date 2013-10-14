@@ -4,7 +4,7 @@ d3.custom.barChart = function module(options) {
 
   options = options || {};
 
-  var marginDefault = { top: 0, right: 40, bottom: 25, left: 70, padding: 10 };
+  var marginDefault = { top: 10, right: 40, bottom: 25, left: 70, padding: 10 };
   var margin = options.margin || marginDefault,
       width  = options.width || 960,
       height = options.height || 500,
@@ -65,41 +65,32 @@ d3.custom.barChart = function module(options) {
         .style('font-size', '22px')
         .text(options.title);
 
-      var gapSize = x1.rangeBand() / 100 * gap;
-      var barW    = x1.rangeBand() - gapSize;
-      var bars    = svg.select('.chart-group')
-        .selectAll('.bar-group')
+      var gapSize   = x1.rangeBand() / 100 * gap;
+      var barW      = x1.rangeBand() - gapSize;
+
+      var bars = svg.select('.chart-group')
+        .selectAll('.bar')
         .data(data);
 
-      var barsEnter = bars.enter()
-        .append('g')
-        .classed('bar-group', 1);
+      var barLabels = svg.select('.chart-group')
+        .selectAll('.bar-label')
+        .data(data);
 
-      barsEnter.append('rect')
-        .classed('bar', 1)
-        .attr({
-          x: chartW,
-          width: barW,
-          y: chartH,
-          height: 0
-        })
-        .on('mouseover', dispatch.customHover);
+      // var barGroupsEnter = barGroups.enter()
+      //   .append('g')
+      //   .classed('bar-group', 1);
 
-      barsEnter.append('text')
-        .classed('bar-label', 1)
-        .attr({
-          x: function(d) { return x1(d.x) + barW / 2 - .5; },// chartW,
-          y: function(d) { return y1(d.y) - .5; }, //chartH
-          dx: '.35em',
-          dy: 15,
-          'text-anchor': 'middle'
-        })
-        .style('color', '#bdc3c7')
-        .text(function(d) {
-          if (chartH - y1(d.y) > 25) return '£' + number(d.y);
-        });
+      bars.enter().append('rect')
+      .classed('bar', 1)
+      .attr({
+        x: chartW,
+        width: barW,
+        y: chartH,
+        height: 0
+      })
+      .on('mouseover', dispatch.customHover);
 
-      bars.selectAll('.bar').transition()
+      bars.transition()
         .duration(duration)
         .ease(ease)
         .attr({
@@ -109,7 +100,21 @@ d3.custom.barChart = function module(options) {
           height: function(d, i) { return chartH - y1(d.y); }
         });
 
-      bars.selectAll('.bar-label').transition()
+      barLabels.enter().append('text')
+        .classed('bar-label', 1)
+        .attr({
+          x: function(d) { return x1(d.x) + barW / 2 - .5; },
+          y: function(d) { return y1(d.y) - .5; },
+          dx: '.35em',
+          dy: 15,
+          'text-anchor': 'middle'
+        })
+        .style('color', '#bdc3c7')
+        .text(function(d) {
+          if (chartH - y1(d.y) > 30) return '£' + number(d.y);
+        });
+
+      barLabels.transition()
         .duration(duration)
         .ease(ease)
         .attr({
@@ -118,9 +123,13 @@ d3.custom.barChart = function module(options) {
           dx: '-0.05em',
           dy: function(d) { return barW / 5.1; }
         })
-        .style('font-size', (barW / 6) + 'px');
+        .style('font-size', (barW / 6) + 'px')
+        .text(function(d) {
+          if (chartH - y1(d.y) > 30) return '£' + number(d.y);
+        });
 
       bars.exit().transition().style({opacity: 0}).remove();
+      barLabels.exit().transition().style({opacity: 0}).remove();
       duration = 500;
 
       svg.select('.chart-group').select('.x-axis-group.axis')

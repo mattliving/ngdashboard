@@ -1,25 +1,34 @@
-angular.module("luckyDashApp").controller("DashboardCtrl", function($window, $scope, $routeParams, $http, $timeout, MetricActions, GraphActions) {
+angular.module("luckyDashApp").controller("DashboardCtrl", function($window, $scope, $routeParams, $http, $q, $timeout, MetricActions, GraphActions) {
 
-  $scope.formatGraphData = function(data) {
-    var temp;
+  $scope.formatGraphData = function(action, data) {
+
+    var datetime, formattedData = [];
     _.each(data, function(d) {
-      temp   = moment(d.date).utc();
-      d.date = temp.format('YYYY-MM-DD');
-      d.time = temp.format('HH:mm:ss');
-      d.x = temp.date();
-      d.y = d.revenue;
-      // console.log(d);
-    });
-    formattedData = [];
-    _.map(_.groupBy(data, function(m) { return m.x; }),
-      function(array) {
-        formattedData.push({
-          'x': _.first(array).x,
-          'y': _.reduce(array, function(memo, obj) { return memo + obj.revenue; }, 0)
-        });
+      datetime = moment(d.date).utc();
+      d.date   = datetime.format('YYYY-MM-DD');
+      d.time   = datetime.format('HH:mm:ss');
+      d.x      = datetime.date();
+      if (action === 'monthly_revenue') d.y = d.revenue;
+      else if (action === 'monthly_ad_cost') d.y = d.ad_cost;
+      formattedData.push({
+        'x': d.x,
+        'y': d.y
       });
-    // console.log(formattedData);
-    return formattedData;
+    });
+    switch (action) {
+      case "monthly_revenue":
+        formattedData = [];
+        _.map(_.groupBy(data, function(m) { return m.x; }),
+          function(array) {
+            formattedData.push({
+              'x': _.first(array).x,
+              'y': _.reduce(array, function(memo, obj) { return memo + obj.revenue; }, 0)
+            });
+          });
+        return formattedData;
+      case "monthly_ad_cost":
+        return formattedData;
+    }
   }
 
   $scope.metrics = [
@@ -35,22 +44,17 @@ angular.module("luckyDashApp").controller("DashboardCtrl", function($window, $sc
     }
   ];
 
-  //   {
-  //     title: 'Ad Cost',
-  //     action: 'ad_cost',
-  //     value: 0
-  //   }
   $scope.graphs = [
     {
-      title: 'Revenue Over Time',
-      action: 'revenue_over_time',
+      title: 'Revenue For This Month',
+      action: 'monthly_revenue',
+      data: []
+    },
+    {
+      title: 'Ad Costs for This Month',
+      action: 'monthly_ad_cost',
       data: []
     }
-    // {
-    //   title: 'Revenue Over Time',
-    //   action: 'revenue_over_time',
-    //   data: []
-    // }
   ];
 
   /* Loop through and request metric data */
@@ -59,11 +63,13 @@ angular.module("luckyDashApp").controller("DashboardCtrl", function($window, $sc
     var options = {};
     options.acid      = $scope.account.acid;
     options.email     = $scope.account.email;
-    options.date_from = $scope.date_from; //'2013-09-01';
-    options.date_to   = $scope.date_to; //'2013-09-30';
+    options.date_from = $scope.date_from;
+    options.date_to   = $scope.date_to;
 
     _.each(metrics, function(metric) {
-      MetricActions[metric.action](metric, options);
+      MetricActions[metric.action](metric, options).then(function(value) {
+        metric.value = value;
+      });
     });
   }
 
@@ -73,12 +79,15 @@ angular.module("luckyDashApp").controller("DashboardCtrl", function($window, $sc
     var options = {};
     options.acid            = $scope.account.acid;
     options.email           = $scope.account.email;
-    options.date_from       = $scope.date_from; //'2013-09-01';
-    options.date_to         = $scope.date_to; //'2013-09-30';
+    options.date_from       = $scope.date_from;
+    options.date_to         = $scope.date_to;
     options.formatGraphData = $scope.formatGraphData;
 
     _.each(graphs, function(graph) {
-      GraphActions[graph.action](graph, options);
+      GraphActions[graph.action](graph, options).then(function(data) {
+        // console.log(data);
+        graph.data = data;//_.union(graph.data, data);
+      });
     });
   }
 
@@ -105,8 +114,8 @@ angular.module("luckyDashApp").controller("DashboardCtrl", function($window, $sc
     $scope.updateGraphs($scope.graphs);
     $timeout(function update() {
       $scope.updateTime();
-      // $scope.updateMetrics($scope.metrics);
-      // $scope.updateGraphs($scope.graphs);
+      $scope.updateMetrics($scope.metrics);
+      $scope.updateGraphs($scope.graphs);
       // console.log($scope.graphs);
       // $scope.graphs[0].data.push(counter++);
       // $scope.graphs[1].data.push(counter2);

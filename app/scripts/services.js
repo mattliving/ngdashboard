@@ -14,49 +14,82 @@ angular.module('luckyDashServices').factory('ga-adcost', function($window) {
   return $resource('api/v1/customers/:email/id', {email: '@email'}, {update: {method: "PUT"}});
 }).factory('Opportunity', function($resource) {
   return $resource('api/v1/opportunities/:oid', {oid: '@oid'}, {update: {method: "PUT"}});
+})
+.factory('Adwordsdaily', function($resource) {
+  return $resource('api/v1/adwordsdaily/:acid', {acid: '@acid'}, {update: {method: "PUT"}});
 });
 
-angular.module('luckyDashServices').factory('MetricActions', function($http, Opportunity) {
+angular.module('luckyDashServices').factory('MetricActions', function($q, Adwordsdaily, Opportunity) {
 
   var metricActions = {};
 
   metricActions.total_revenue = function(metric, options) {
+    var deferred = $q.defer();
+
     Opportunity.get({
       email: options.email,
       action: metric.action,
       date_from: options.date_from,
       date_to: options.date_to
     }, function(opportunity) {
-      metric.value = opportunity[metric.action];
+      deferred.resolve(opportunity[metric.action]);
     });
+
+    return deferred.promise;
   }
 
   metricActions.total_ad_cost = function(metric, options) {
-    var url = '/api/v1/adwords/' + options.acid + '?date=' + moment(options.date_to).format('YYYY-MM-DD');
-    console.log(url);
-    $http.get(url).success(function(data) {
-      console.log(data);
-    }).error(function(err) {
-      console.log("ERROR");
+    var deferred = $q.defer();
+
+    Adwordsdaily.get({
+      acid: options.acid,
+      action: metric.action,
+      date_from: options.date_from,
+      date_to: options.date_to
+    }, function(total) {
+      deferred.resolve(total[metric.action]);
     });
+
+    return deferred.promise;
   }
 
   return metricActions;
 });
 
-angular.module('luckyDashServices').factory('GraphActions', function(Opportunity) {
+angular.module('luckyDashServices').factory('GraphActions', function($q, Adwordsdaily, Opportunity) {
 
   var graphActions = {};
 
-  graphActions.revenue_over_time = function(graph, options) {
+  graphActions.monthly_revenue = function(graph, options) {
+    var deferred = $q.defer();
+
     Opportunity.query({
       email: options.email,
       action: graph.action,
       date_from: options.date_from,
       date_to: options.date_to
-    }, function(opportunity) {
-      graph.data = options.formatGraphData(opportunity);
+    }, function(data) {
+      var formatted = options.formatGraphData(graph.action, data)
+      deferred.resolve(formatted);
     });
+
+    return deferred.promise;
+  }
+
+  graphActions.monthly_ad_cost = function(graph, options) {
+    var deferred = $q.defer();
+
+    Adwordsdaily.query({
+      acid: options.acid,
+      action: graph.action,
+      date_from: options.date_from,
+      date_to: options.date_to
+    }, function(data) {
+      var formatted = options.formatGraphData(graph.action, data)
+      deferred.resolve(formatted);
+    });
+
+    return deferred.promise;
   }
 
   return graphActions;

@@ -8,11 +8,11 @@ module.exports = {
     return db.getConnection().then(function(connection) {
       var query;
       if (_.isEmpty(params)) query = "SELECT * FROM opportunities";
-      else if (params.email !== "undefined"
+      else if (typeof params.email !== "undefined"
             && helpers.checkDates([params.date_from, params.date_to])) {
         if (params.action === "total_revenue") {
           query = [
-            "SELECT SUM(revenue) AS total_revenue",
+            "SELECT ROUND(SUM(revenue), 2) AS total_revenue",
             "FROM opportunities",
             "WHERE acid=(SELECT acid FROM accounts WHERE email='" + params.email + "')",
             "AND pipelinetext IN ('Won', '')",
@@ -20,7 +20,7 @@ module.exports = {
             "AND '" + params.date_to + "';"
           ].join(' ');
         }
-        else if (params.action === "revenue_over_time") {
+        else if (params.action === "monthly_revenue") {
           query = [
             "SELECT date, revenue",
             "FROM opportunities",
