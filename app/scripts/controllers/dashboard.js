@@ -36,12 +36,12 @@ angular.module("luckyDashApp").controller("DashboardCtrl", function($window, $sc
       title: 'Total Revenue',
       action: 'total_revenue',
       value: 0
-    },
-    {
-      title: 'Total Ad Cost',
-      action: 'total_ad_cost',
-      value: 0
     }
+    // {
+    //   title: 'Total Ad Cost',
+    //   action: 'total_ad_cost',
+    //   value: 0
+    // }
   ];
 
   $scope.graphs = [
