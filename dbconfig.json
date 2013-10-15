@@ -13,5 +13,13 @@
     "database": "bds",
     "connectionlimit": 10,
     "supportBigNumbers": true
+  },
+  "live": {
+    "host": "localhost",
+    "user": "root",
+    "password": "jasminbar123",
+    "database": "bds",
+    "connectionlimit": 100,
+    "supportBigNumbers": true
   }
 }
