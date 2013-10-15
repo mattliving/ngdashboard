@@ -10,9 +10,9 @@ d3.custom.barChart = function module(options) {
       height = options.height || 500,
       gap    = options.gap || 0,
       ease   = options.ease || 'cubic-in-out',
+      ylabel = options.ylabel,
       textPadding = 13,
-      format = d3.format('.0f'),
-      number = d3.format('.2f');
+      format = d3.format('.0f');
 
   var svg, duration = 500;
   var dispatch      = d3.dispatch('customHover');
@@ -51,19 +51,19 @@ d3.custom.barChart = function module(options) {
         var chartGroup = container.append('g').classed('chart-group', 1);
         chartGroup.append('g').classed('x-axis-group axis', 1);
         chartGroup.append('g').classed('y-axis-group axis', 1);
-        svg.append('text')
-          .classed('chart-title', 1)
-          .style('font-size', '22px')
-          .text('Title');
+        // svg.append('text')
+        //   .classed('chart-title', 1)
+        //   .style('font-size', '22px')
+        //   .text('Title');
         svg.append('text')
           .classed('x-axis-title', 1)
           .attr('text-anchor', 'middle')
-          .text('Day of the Month');
+          .text('Month of ' + moment().utc().format("MMMM"));
         svg.append('text')
           .classed('y-axis-title', 1)
           .attr('text-anchor', 'end')
           .attr('transform', 'rotate(-90)')
-          .text('Revenue');
+          .text(ylabel);
       }
 
       svg.transition().duration(duration).attr({width: width, height: height});
@@ -91,8 +91,8 @@ d3.custom.barChart = function module(options) {
         .attr('y', 12)
         .attr('dy', '.8em');
 
-      var gapSize   = x1.rangeBand() / 100 * gap;
-      var barW      = x1.rangeBand() - gapSize;
+      var gapSize = x1.rangeBand() / 100 * gap;
+      var barW    = x1.rangeBand() - gapSize;
 
       var bars = svg.select('.chart-group')
         .selectAll('.bar')
@@ -132,7 +132,7 @@ d3.custom.barChart = function module(options) {
           'text-anchor': 'middle'
         })
         .text(function(d) {
-          if (chartH - y1(d.y) > 30) return '£' + number(d.y);
+          if (chartH - y1(d.y) > 30) return '£' + format(d.y);
         });
 
       barLabels.transition()
@@ -146,7 +146,7 @@ d3.custom.barChart = function module(options) {
         })
         .style('font-size', (barW / 6) + 'px')
         .text(function(d) {
-          if (chartH - y1(d.y) > 30) return '£' + number(d.y);
+          if (chartH - y1(d.y) > 30) return '£' + format(d.y);
         });
 
       bars.exit().transition().style({opacity: 0}).remove();

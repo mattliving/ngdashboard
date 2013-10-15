@@ -36,25 +36,25 @@ angular.module("luckyDashApp").controller("DashboardCtrl", function($window, $sc
       title: 'Total Revenue',
       action: 'total_revenue',
       value: 0
+    },
+    {
+      title: 'Total Ad Cost',
+      action: 'total_ad_cost',
+      value: 0
     }
-    // {
-    //   title: 'Total Ad Cost',
-    //   action: 'total_ad_cost',
-    //   value: 0
-    // }
   ];
 
   $scope.graphs = [
     {
-      title: 'Revenue For This Month',
+      ylabel: 'Revenue',
       action: 'monthly_revenue',
       data: []
+    },
+    {
+      ylabel: 'Ad Cost',
+      action: 'monthly_ad_cost',
+      data: []
     }
-    // {
-    //   title: 'Ad Costs for This Month',
-    //   action: 'monthly_ad_cost',
-    //   data: []
-    // }
   ];
 
   /* Loop through and request metric data */
@@ -98,6 +98,7 @@ angular.module("luckyDashApp").controller("DashboardCtrl", function($window, $sc
   $scope.account = {};
   $scope.account.email = $routeParams.email;
 
+  /* Find the acid for the current account by email */
   $http.get('/api/v1/customers/' + $scope.account.email + '/id')
   .success(function(obj) {
 

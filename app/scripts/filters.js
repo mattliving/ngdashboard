@@ -7,3 +7,11 @@ angular.module('luckyDashFilters').filter('join', function() {
     }
   };
 });
+
+angular.module('luckyDashFilters').filter('round', function() {
+  return function(number) {
+    if (number !== null && typeof number !== 'undefined') {
+      return Math.round(number)
+    }
+  };
+});

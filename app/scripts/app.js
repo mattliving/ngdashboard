@@ -1,6 +1,6 @@
 'use strict';
 
-var luckyDashApp = angular.module('luckyDashApp', ['luckyDashDirectives', 'luckyDashServices', 'luckyDashFilters', 'ui.bootstrap', 'ngResource', 'ngRoute'])
+var luckyDashApp = angular.module('luckyDashApp', ['luckyDashDirectives', 'luckyDashServices', 'luckyDashFilters', 'ui.bootstrap', 'ngResource', 'ngRoute', 'ngTouch'])
   .config(function($routeProvider, $locationProvider, $httpProvider) {
     $routeProvider.when('/', {
       redirectTo: '/login'

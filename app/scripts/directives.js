@@ -10,9 +10,7 @@ angular.module('luckyDashDirectives').directive('metricTile', function() {
       width: '@'
     },
     templateUrl: "/views/metric-tile.html",
-    link: function(scope, elem, attrs) {
-
-    }
+    link: function(scope, elem, attrs) {}
   };
 });
 
@@ -20,28 +18,17 @@ angular.module('luckyDashDirectives').directive('graphTile', function() {
   return {
     restrict: 'E',
     scope: {
-      title: '@',
+      ylabel: '=',
       data: '=',
       height: '=',
       width: '='
     },
     templateUrl: "/views/graph-tile.html",
     link: function(scope, elem, attrs) {
-
-    }
-  };
-});
-
-angular.module('luckyDashDirectives').directive('resize', function($window) {
-  return function (scope) {
-    scope.width  = $window.innerWidth;
-    scope.height = $window.innerHeight;
-    angular.element($window).bind('resize', function() {
-      scope.$apply(function() {
-        scope.width  = $window.innerWidth;
-        scope.height = $window.innerHeight;
+      scope.$watch('ylabel', function(newVal, oldVal) {
+        console.log(newVal, oldVal);
       });
-    });
+    }
   };
 });
 
@@ -53,14 +40,17 @@ angular.module('luckyDashDirectives').directive('barChart', function() {
     template: '<div class="barChart"></div>',
     scope: {
       data: '=',
+      ylabel: '=',
       hovered: '&hovered',
       height: '=',
       width: '='
     },
     link: function(scope, elem, attrs) {
 
-      scope.chart   = d3.custom.barChart(scope.options);
-      scope.chartEl = d3.select(elem[0]);
+      var options    = {};
+      options.ylabel = scope.ylabel;
+      scope.chart    = d3.custom.barChart(options);
+      scope.chartEl  = d3.select(elem[0]);
 
       // scope.chart.on('customHover', function(d, i) {
       //   scope.hovered({args: d});
@@ -79,4 +69,17 @@ angular.module('luckyDashDirectives').directive('barChart', function() {
       });
     }
   }
+});
+
+angular.module('luckyDashDirectives').directive('resize', function($window) {
+  return function (scope) {
+    scope.width  = $window.innerWidth;
+    scope.height = $window.innerHeight;
+    angular.element($window).bind('resize', function() {
+      scope.$apply(function() {
+        scope.width  = $window.innerWidth;
+        scope.height = $window.innerHeight;
+      });
+    });
+  };
 });
