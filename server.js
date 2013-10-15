@@ -1,4 +1,4 @@
-var app, adwords, connection, cons, crypto, dbErr, dbSuccess, LocalStrategy, express, fs, http, passport, q, customers, opportunities;
+var app, adwords, cons, crypto, dbErr, dbSuccess, LocalStrategy, express, fs, http, passport, q, customers, opportunities;
 
 cons          = require('consolidate');
 crypto        = require('crypto');
@@ -8,7 +8,6 @@ http          = require('http');
 q             = require('q');
 passport      = require('passport');
 LocalStrategy = require('passport-local').Strategy;
-connection    = require('./connection');
 adwords       = require('./routes/adwords');
 customers     = require('./routes/customers');
 opportunities = require('./routes/opportunities');

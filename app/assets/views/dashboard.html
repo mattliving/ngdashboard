@@ -1,8 +1,8 @@
 <div class="container">
   <div resize class="row tileWrapper">
-    <metric-tile title='{{metric.title}}' value='metric.value' width='{{12 / metrics.length}}' ng-repeat='metric in metrics'></metric-tile>
+    <metric-tile title='{{metric.title}}' value='metric.value | round' width='{{12 / metrics.length}}' ng-repeat='metric in metrics'></metric-tile>
   </div>
   <div resize class="row graphWrapper">
-    <graph-tile title='{{graph.title}}' data='graph.data' height='graphWrapperHeight / graphs.length' width='width' ng-repeat='graph in graphs'></graph-tile>
+    <graph-tile data='graph.data' ylabel='graph.ylabel' height='graphWrapperHeight / graphs.length' width='width' ng-repeat='graph in graphs'></graph-tile>
   </div>
 </div>

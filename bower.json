@@ -2,13 +2,13 @@
   "name": "luckyDashApp",
   "version": "0.0.1",
   "dependencies": {
-    "angular": "latest",
-    "jquery": "latest",
+    "angular": "1.2.0-rc.2",
     "angular-resource": "latest",
-    "lodash": "latest",
-    "angular-mocks": "latest",
+    "angular-touch": "latest",
     "angular-bootstrap": "latest",
     "angular-route": "*",
+    "jquery": "latest",
+    "lodash": "latest",
     "auto-reload-brunch": "latest",
     "momentjs": "~2.2.1",
     "d3": "~3.3.6"
