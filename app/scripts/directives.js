@@ -1,4 +1,3 @@
-
 angular.module('luckyDashDirectives', ['luckyDashServices']);
 
 angular.module('luckyDashDirectives').directive('metricTile', function() {
@@ -7,10 +6,39 @@ angular.module('luckyDashDirectives').directive('metricTile', function() {
     scope: {
       title: '@',
       value: '=',
-      width: '@'
+      columns: '@',
+      width: '=',
+      height: '='
     },
     templateUrl: "/views/metric-tile.html",
-    link: function(scope, elem, attrs) {}
+    link: function(scope, elem, attrs) {
+
+      scope.$watch('width', function(newVal, oldVal) {
+        var $elem = angular.element(elem);
+        $elem.find('h1').css({
+          'font-size': function() { return (newVal + scope.height) / 30.82; }
+          // left: function() { return newVal/2; },
+          // width: function() { return newVal/2; }
+        });
+        $elem.find('h2').css({
+          'font-size': function() { return (newVal + scope.height) / 39.625; }
+          // left: function() { return newVal/2; },
+          // width: function() { return newVal/2; }
+        });
+      });
+
+      scope.$watch('height', function(newVal, oldVal) {
+        var $elem = angular.element(elem);
+        $elem.find('h1').css({
+          'font-size': function() { return (newVal + scope.width) / 30.82; }
+          // top: function() { return newVal/2; }
+        });
+        $elem.find('h2').css({
+          'font-size': function() { return (newVal + scope.width) / 39.625; }
+          // top: function() { return newVal/3; }
+        });
+      });
+    }
   };
 });
 
@@ -24,11 +52,7 @@ angular.module('luckyDashDirectives').directive('graphTile', function() {
       width: '='
     },
     templateUrl: "/views/graph-tile.html",
-    link: function(scope, elem, attrs) {
-      scope.$watch('ylabel', function(newVal, oldVal) {
-        console.log(newVal, oldVal);
-      });
-    }
+    link: function(scope, elem, attrs) {}
   };
 });
 

@@ -4,7 +4,7 @@ npm-debug.log
 dist
 .tmp
 .sass-cache
-bds_2013-10-10.sql
+bds_2013-11-05.sql
 app/components
 bower_components
 _public

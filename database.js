@@ -17,7 +17,6 @@ module.exports = {
     pool.getConnection(function(err, connection) {
       if (err) {
         console.log(err);
-        callback(true);
         return;
       }
       deferred.resolve(connection);

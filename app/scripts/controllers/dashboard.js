@@ -49,12 +49,12 @@ angular.module("luckyDashApp").controller("DashboardCtrl", function($window, $sc
       ylabel: 'Revenue',
       action: 'monthly_revenue',
       data: []
-    },
-    {
-      ylabel: 'Ad Cost',
-      action: 'monthly_ad_cost',
-      data: []
     }
+    // {
+    //   ylabel: 'Ad Cost',
+    //   action: 'monthly_ad_cost',
+    //   data: []
+    // }
   ];
 
   /* Loop through and request metric data */
@@ -125,4 +125,8 @@ angular.module("luckyDashApp").controller("DashboardCtrl", function($window, $sc
     $scope.graphWrapperHeight = newVal*(2/3);
     $('.tileWrapper').height($scope.tileWrapperHeight);
   });
+
+  // $scope.$watch('width', function(newVal, oldVal) {
+  //   console.log(newVal);
+  // });
 });
