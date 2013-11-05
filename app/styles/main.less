@@ -63,7 +63,7 @@ h1, h2, h3 {
     background-size: cover;
 }
 
-.row [class*='col-sm-'] {
+.row [class*='col-xs-'] {
     // &:first-child {
     //     padding-left: 0px;
     // }
@@ -90,14 +90,19 @@ metric-tile {
     color: @midnightBlue;
     h1 {
         font-family: 'Roboto Slab', 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        font-size: 72px;
-        margin-top: 30px;
+        // font-size: 72px;
+        // margin-top: 30px;
         font-weight: 700;
+        // position: absolute;
+        z-index: 1;
     }
     h2 {
         font-family: 'Roboto Slab', 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        font-size: 56px;
+        // font-size: 56px;
         font-weight: 400;
+        margin-bottom: 0px;
+        // position: absolute;
+        z-index: 1;
     }
     text-align: center;
     .well {

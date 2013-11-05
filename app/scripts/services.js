@@ -56,7 +56,7 @@ angular.module('luckyDashServices').factory('MetricActions', function($q, Adword
   return metricActions;
 });
 
-angular.module('luckyDashServices').factory('GraphActions', function($q, Adwordsdaily, Opportunity) {
+angular.module('luckyDashServices').factory('GraphActions', function($window, $q, Adwordsdaily, Opportunity) {
 
   var graphActions = {};
 
