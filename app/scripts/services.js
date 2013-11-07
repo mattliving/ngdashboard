@@ -85,9 +85,7 @@ angular.module('luckyDashServices').factory('GraphActions', function($window, $q
       date_from: options.date_from,
       date_to: options.date_to
     }, function(data) {
-      console.log(data);
       var formatted = options.formatGraphData(graph.action, data);
-      console.log(formatted);
       deferred.resolve(formatted);
     });
 
