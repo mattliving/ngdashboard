@@ -45,11 +45,11 @@ angular.module("luckyDashApp").controller("DashboardCtrl", function($window, $sc
   ];
 
   $scope.graphs = [
-    // {
-    //   ylabel: 'Revenue',
-    //   action: 'monthly_revenue',
-    //   data: []
-    // }
+    {
+      ylabel: 'Revenue',
+      action: 'monthly_revenue',
+      data: []
+    },
     {
       ylabel: 'Ad Cost',
       action: 'monthly_ad_cost',

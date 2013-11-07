@@ -81,30 +81,45 @@ h1, h2, h3 {
         height: 100%;
         .well {
             margin-bottom: 0px;
-            height: 100%;
+            // height: 100%;
         }
     }
 }
 
 metric-tile {
     color: @midnightBlue;
-    h1 {
-        font-family: 'Roboto Slab', 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        // font-size: 72px;
-        // margin-top: 30px;
-        font-weight: 700;
-        // position: absolute;
-        z-index: 1;
-    }
-    h2 {
-        font-family: 'Roboto Slab', 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        // font-size: 56px;
-        font-weight: 400;
-        margin-bottom: 0px;
-        // position: absolute;
-        z-index: 1;
-    }
     text-align: center;
+    .row {
+        background: @clouds;
+        &.header {
+            height: 34%;
+            color: @clouds;
+            background: @midnightBlue;
+            // background: rgba(44, 62, 80, 0.8);
+            border-right: 1px solid @clouds;
+            h1 {
+                font-family: 'Roboto Slab', 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+                // margin-top: 0px;
+                margin-bottom: 0px;
+                font-weight: 700;
+                z-index: 1;
+                line-height: 0.8;
+            }
+        }
+        &.body {
+            height: 66%;
+            margin-bottom: 0px;
+            border-right: 1px solid @midnightBlue;
+            border-bottom: 1px solid @midnightBlue;
+            h2 {
+                font-family: 'Roboto Slab', 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+                font-weight: 400;
+                margin-bottom: 0px;
+                z-index: 1;
+                line-height: 0.8;
+            }
+        }
+    }
     .well {
         border-right: 1px solid @midnightBlue;
         border-bottom: 1px solid @midnightBlue;
