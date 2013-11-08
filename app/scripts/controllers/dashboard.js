@@ -35,11 +35,13 @@ angular.module("luckyDashApp").controller("DashboardCtrl", function($window, $sc
     {
       title: 'Total Revenue',
       action: 'total_revenue',
+      percentChange: 0,
       value: 0
     },
     {
       title: 'Total Ad Cost',
       action: 'total_ad_cost',
+      percentChange: 0,
       value: 0
     }
   ];
@@ -60,15 +62,32 @@ angular.module("luckyDashApp").controller("DashboardCtrl", function($window, $sc
   /* Loop through and request metric data */
   $scope.updateMetrics = function(metrics) {
 
-    var options = {};
-    options.acid      = $scope.account.acid;
-    options.email     = $scope.account.email;
-    options.date_from = $scope.date_from;
-    options.date_to   = $scope.date_to;
-
     _.each(metrics, function(metric) {
-      MetricActions[metric.action](metric, options).then(function(value) {
-        metric.value = value;
+
+      var options = {
+        acid: $scope.account.acid,
+        email: $scope.account.email,
+        date_from: $scope.date_from,
+        date_to: $scope.date_to
+      };
+      var date_from_moment = moment(options.date_from);
+      var date_to_moment   = moment(options.date_to);
+
+      MetricActions[metric.action](metric, options).then(function(thisMonthValue) {
+        metric.value = thisMonthValue;
+        /* Adjust dates to the same range for the previous month */
+        options.date_from = date_from_moment.subtract('months', 1).format('YYYY-MM-DD HH:mm:ss');
+        options.date_to   = date_to_moment.subtract('months', 1).format('YYYY-MM-DD HH:mm:ss');
+
+        MetricActions[metric.action](metric, options).then(function(lastMonthValue) {
+
+          // console.log(thisMonthValue);
+          // console.log(lastMonthValue);
+          // console.log(((thisMonthValue - lastMonthValue)/lastMonthValue * 100));
+          metric.percentChange = ((metric.value - lastMonthValue)/lastMonthValue * 100);
+          // options.date_from = date_from_moment.add('months', 1).format('YYYY-MM-DD HH:mm:ss');
+          // options.date_to   = date_to_moment.format('YYYY-MM-DD HH:mm:ss');
+        });
       });
     });
   }

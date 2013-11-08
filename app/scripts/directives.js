@@ -6,6 +6,7 @@ angular.module('luckyDashDirectives').directive('metricTile', function() {
         scope: {
             title: '@',
             value: '=',
+            percentChange: '=',
             columns: '@',
             width: '=',
             height: '='
@@ -94,7 +95,7 @@ angular.module('luckyDashDirectives').directive('barChart', function() {
     }
 });
 
-angular.module('luckyDashDirectives').directive('resize', function($window) {
+angular.module('luckyDashDirectives').directive('resize', function($window, $rootScope) {
     return function (scope) {
         scope.width  = $window.innerWidth;
         scope.height = $window.innerHeight;
@@ -102,27 +103,61 @@ angular.module('luckyDashDirectives').directive('resize', function($window) {
             scope.$apply(function() {
                 scope.width  = $window.innerWidth;
                 scope.height = $window.innerHeight;
+                $rootScope.$broadcast('windowResizeEventFired');
             });
         });
     };
 });
 
-/* Vertically center an element within its parent container */
-angular.module('luckyDashDirectives').directive('vCentered', function($window) {
+/* Vertically position an element within its parent container */
+angular.module('luckyDashDirectives').directive('vAnchor', function($window, $rootScope) {
     return {
         restrict: 'A',
         link: function(scope, elem, attrs) {
-            var parent = elem.parent();
-            angular.element($window).bind('resize', function() {
-                scope.$apply(function() {
-                    elem.css('margin-top', function() {
-                        var parentMid = parent.height()/2;
-                        var elemMid   = elem.height()/2;
-                        return (parentMid - elemMid - 2);
-                    });
+
+            var heightDivisor;
+            var operand = 'minus';
+            var offset  = 2;
+            switch (attrs.height) {
+                case 'centered':
+                    heightDivisor = 2;
+                    break;
+                case 'top-third':
+                    heightDivisor = 3;
+                    break;
+                case 'bottom-third':
+                    heightDivisor = 3;
+                    operand = 'plus';
+                    break;
+                case 'top-quarter':
+                    heightDivisor = 4;
+                    break;
+                case 'bottom-quarter':
+                    heightDivisor = 4;
+                    operand = 'plus';
+                    break;
+                case 'undefined':
+                    heightDivisor = 2;
+                    break;
+                default:
+                    break;
+            }
+            var parent    = elem.parent();
+            var parentMid = parent.height()/heightDivisor;
+            var elemMid   = elem.height()/heightDivisor;
+            elem.css('margin-top', function() {
+                if (operand === 'minus')
+                    return (parentMid - elemMid - offset);
+                else return (parentMid + elemMid + offset)
+            });
+
+            $rootScope.$on('windowResizeEventFired', function() {
+                elem.css('margin-top', function() {
+                    if (operand === 'minus')
+                        return (parentMid - elemMid - offset);
+                    else return (parentMid + elemMid + offset)
                 });
             });
-            angular.element($window).resize();
         }
     };
 });

@@ -9,9 +9,12 @@ angular.module('luckyDashFilters').filter('join', function() {
 });
 
 angular.module('luckyDashFilters').filter('round', function() {
-  return function(number) {
+  return function(number, places) {
     if (number !== null && typeof number !== 'undefined') {
-      return Math.round(number)
+      if (places !== null && typeof places !== 'undefined') {
+        return Math.round(number * Math.pow(10, places))/Math.pow(10, places);
+      }
+      else return Math.round(number);
     }
   };
 });
