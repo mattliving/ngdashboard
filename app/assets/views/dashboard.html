@@ -1,6 +1,6 @@
 <div class="container">
   <div resize class="row tileWrapper">
-    <metric-tile title='{{metric.title}}' value='metric.value | round' columns='{{12 / metrics.length}}' width='width' height='tileWrapperHeight' ng-repeat='metric in metrics'></metric-tile>
+    <metric-tile title='{{metric.title}}' value='metric.value | number:0' columns='{{12 / metrics.length}}' percent-change='metric.percentChange | round:1' width='width' height='tileWrapperHeight' ng-repeat='metric in metrics'></metric-tile>
   </div>
   <div resize class="row graphWrapper">
     <graph-tile data='graph.data' ylabel='graph.ylabel' height='graphWrapperHeight / graphs.length' width='width' ng-repeat='graph in graphs'></graph-tile>
