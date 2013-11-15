@@ -3,7 +3,13 @@
     <h1 v-anchor height="centered">{{title}}</h1>
   </div>
   <div class="row body">
-    <h2 v-anchor height="top-third">£{{value}}</h2>
-    <h3>{{percentChange}}% <span class="glyphicon" ng-class="{'glyphicon-chevron-up': percentChange > 0, 'glyphicon-chevron-down': percentChange < 0}"></span></h3>
+    <h2 v-anchor height="top-third">£{{value || 0 | number:0}}</h2>
+
+    <h3 ng-if="hasComparison()">
+      <span class="glyphicon" ng-class="{'glyphicon-chevron-up': comparison > 0, 'glyphicon-chevron-down': comparison < 0}"></span>
+      {{comparison}}% compared to last month
+    </h3>
+
+    <h3 ng-if="hasTarget()">{{percentToTarget() | number:0}}% of £{{target | number:0}} target</h3>
   </div>
 </div>

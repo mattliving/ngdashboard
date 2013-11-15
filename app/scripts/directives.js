@@ -6,13 +6,28 @@ angular.module('luckyDashDirectives').directive('metricTile', function() {
         scope: {
             title: '@',
             value: '=',
-            percentChange: '=',
+            comparison: '=',
+            target: '=',
             columns: '@',
             width: '=',
             height: '='
         },
         templateUrl: "/views/metric-tile.html",
         link: function(scope, elem, attrs) {
+
+            scope.hasComparison = function() {
+                return typeof scope.comparison === "undefined" ? false : true;
+            }
+
+            scope.hasTarget = function() {
+                return (typeof scope.target === "undefined")
+                        || (scope.value == 0)
+                        ? false : true;
+            }
+
+            scope.percentToTarget = function() {
+                return (scope.value/scope.target)*100;
+            }
 
             // scope.$watch('width', function(newVal, oldVal) {
             //     var $elem = angular.element(elem);

@@ -86,6 +86,29 @@ h1, h2, h3 {
     }
 }
 
+.row.header {
+    position: relative;
+}
+
+.absolute-center {
+    width: 50%;
+    height: 50%;
+    overflow: auto;
+    margin: auto;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+}
+
+.is-Transformed {
+    width: 50%;
+    margin: auto;
+    position: absolute;
+    top: 50%; left: 50%;
+    -webkit-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+}
+
 metric-tile {
     color: @midnightBlue;
     text-align: center;
@@ -120,11 +143,12 @@ metric-tile {
                 line-height: 0.8;
             }
             h3 {
-                font-size: 36px;
+                font-size: 24px;
+                color: @midnightBlue;
                 margin-top: 1%;
                 margin-bottom: 0px;
                 .glyphicon {
-                    top: 5px;
+                    top: 4px;
                     &.glyphicon-chevron-up {
                         color: @nephritis;
                     }

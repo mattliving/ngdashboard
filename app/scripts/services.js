@@ -19,41 +19,104 @@ angular.module('luckyDashServices').factory('ga-adcost', function($window) {
   return $resource('api/v1/adwordsdaily/:acid', {acid: '@acid'}, {update: {method: "PUT"}});
 });
 
-angular.module('luckyDashServices').factory('MetricActions', function($q, Adwordsdaily, Opportunity) {
+angular.module('luckyDashServices').factory('Metrics', function($q, Adwordsdaily, Opportunity) {
 
-  var metricActions = {};
+  function Metric(spec) {
+    var self = this instanceof Metric
+             ? this
+             : Object.create(Metric.prototype);
 
-  metricActions.total_revenue = function(metric, options) {
-    var deferred = $q.defer();
-
-    Opportunity.get({
-      email: options.email,
-      action: metric.action,
-      date_from: options.date_from,
-      date_to: options.date_to
-    }, function(opportunity) {
-      deferred.resolve(opportunity[metric.action]);
-    });
-
-    return deferred.promise;
+    if (typeof !(_.isEmpty(spec)) &&
+        typeof spec.title !== "undefined" &&
+        typeof spec.action !== "undefined") {
+      _.extend(self, spec);
+    }
   }
 
-  metricActions.total_ad_cost = function(metric, options) {
-    var deferred = $q.defer();
-
-    Adwordsdaily.get({
-      acid: options.acid,
-      action: metric.action,
-      date_from: options.date_from,
-      date_to: options.date_to
-    }, function(total) {
-      deferred.resolve(total[metric.action]);
-    });
-
-    return deferred.promise;
+  Metric.prototype.hasTarget = function() {
+    return typeof this.target === "undefined" ? false : true;
   }
 
-  return metricActions;
+  Metric.prototype.hasComparison = function() {
+    return typeof this.comparison === "undefined" ? false : true;
+  }
+
+  Metric.prototype.update = function(options) {
+    var that = this;
+
+    this.action(options).then(function(newValue) {
+      that.value = newValue;
+      if (that.hasComparison()) {
+        var date_from_moment = moment(options.date_from);
+        var date_to_moment   = moment(options.date_to);
+        options.date_from    = date_from_moment.subtract('months', 1).format('YYYY-MM-DD HH:mm:ss');
+        options.date_to      = date_to_moment.subtract('months', 1).format('YYYY-MM-DD HH:mm:ss');
+        that.action(options).then(function(oldValue) {
+          that.comparison = ((that.value - oldValue)/oldValue * 100);
+        });
+      }
+    });
+  }
+
+  var metrics = {};
+
+  metrics.revenue = function() {
+    return new Metric({
+      title: 'Total Revenue',
+      action: function(options) {
+        var deferred = $q.defer();
+
+        Opportunity.get({
+          email: options.email,
+          action: 'total_revenue',
+          date_from: options.date_from,
+          date_to: options.date_to
+        }, function(opportunity) {
+          deferred.resolve(opportunity['total_revenue']);
+        });
+
+        return deferred.promise;
+      },
+      target: 20000,
+      comparison: 0
+    });
+  }
+
+  metrics.ad_cost = function() {
+    return new Metric({
+      title: 'Total Ad Cost',
+      action: function(options) {
+        var deferred = $q.defer();
+
+        Adwordsdaily.get({
+          acid: options.acid,
+          action: 'total_ad_cost',
+          date_from: options.date_from,
+          date_to: options.date_to
+        }, function(total) {
+          deferred.resolve(total['total_ad_cost']);
+        });
+
+        return deferred.promise;
+      },
+      target: 500,
+      comparison: 0
+    });
+  }
+
+  metrics.profit = function(revenue, ad_cost) {
+    return new Metric({
+      title: 'Total Profit',
+      action: function() {
+        var deferred = $q.defer();
+        deferred.resolve(revenue.value - ad_cost.value);
+        return deferred.promise;
+      },
+      target: 10000
+    });
+  }
+
+  return metrics;
 });
 
 angular.module('luckyDashServices').factory('GraphActions', function($window, $q, Adwordsdaily, Opportunity) {
