@@ -1,4 +1,4 @@
-angular.module("luckyDashApp").controller("DashboardCtrl", function($window, $scope, $routeParams, $http, $q, $timeout, MetricActions, GraphActions) {
+angular.module("luckyDashApp").controller("DashboardCtrl", function($window, $scope, $routeParams, $http, $q, $timeout, Metrics, GraphActions) {
 
   $scope.formatGraphData = function(action, data) {
 
@@ -31,19 +31,11 @@ angular.module("luckyDashApp").controller("DashboardCtrl", function($window, $sc
     }
   }
 
+  var revenue = Metrics['revenue']();
+  var ad_cost = Metrics['ad_cost']();
+  var profit  = Metrics['profit'](revenue, ad_cost);
   $scope.metrics = [
-    {
-      title: 'Total Revenue',
-      action: 'total_revenue',
-      percentChange: 0,
-      value: 0
-    },
-    {
-      title: 'Total Ad Cost',
-      action: 'total_ad_cost',
-      percentChange: 0,
-      value: 0
-    }
+    revenue, ad_cost, profit
   ];
 
   $scope.graphs = [
@@ -63,32 +55,13 @@ angular.module("luckyDashApp").controller("DashboardCtrl", function($window, $sc
   $scope.updateMetrics = function(metrics) {
 
     _.each(metrics, function(metric) {
-
       var options = {
         acid: $scope.account.acid,
         email: $scope.account.email,
         date_from: $scope.date_from,
         date_to: $scope.date_to
       };
-      var date_from_moment = moment(options.date_from);
-      var date_to_moment   = moment(options.date_to);
-
-      MetricActions[metric.action](metric, options).then(function(thisMonthValue) {
-        metric.value = thisMonthValue;
-        /* Adjust dates to the same range for the previous month */
-        options.date_from = date_from_moment.subtract('months', 1).format('YYYY-MM-DD HH:mm:ss');
-        options.date_to   = date_to_moment.subtract('months', 1).format('YYYY-MM-DD HH:mm:ss');
-
-        MetricActions[metric.action](metric, options).then(function(lastMonthValue) {
-
-          // console.log(thisMonthValue);
-          // console.log(lastMonthValue);
-          // console.log(((thisMonthValue - lastMonthValue)/lastMonthValue * 100));
-          metric.percentChange = ((metric.value - lastMonthValue)/lastMonthValue * 100);
-          // options.date_from = date_from_moment.add('months', 1).format('YYYY-MM-DD HH:mm:ss');
-          // options.date_to   = date_to_moment.format('YYYY-MM-DD HH:mm:ss');
-        });
-      });
+      metric.update(options);
     });
   }
 
