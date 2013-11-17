@@ -23,6 +23,7 @@ exports.config = {
           'bower_components/angular/angular.js',
           'bower_components/d3/d3.js',
           'app/scripts/barChart.js',
+          'app/scripts/bullet.js',
           'app/scripts/directives.js']
       }
     },

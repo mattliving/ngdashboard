@@ -29,6 +29,10 @@ angular.module('luckyDashDirectives').directive('metricTile', function() {
                 return (scope.value/scope.target)*100;
             }
 
+            scope.averagePerDay = function() {
+                return ((scope.value / moment().utc().date()) * moment().utc().daysInMonth()) / scope.target * 100;
+            }
+
             // scope.$watch('width', function(newVal, oldVal) {
             //     var $elem = angular.element(elem);
             //     $elem.find('h1').css({
@@ -105,6 +109,67 @@ angular.module('luckyDashDirectives').directive('barChart', function() {
 
             scope.$watch('width', function(d, i) {
                 scope.chartEl.call(scope.chart.width(scope.width));
+            });
+        }
+    }
+});
+
+angular.module('luckyDashDirectives').directive('bulletChart', function() {
+    return {
+        restrict: 'EA',
+        replace: true,
+        template: '<div class="bulletChart"></div>',
+        scope: {
+            data: '=',
+            ylabel: '=',
+            hovered: '&hovered',
+            height: '=',
+            width: '='
+        },
+        link: function(scope, elem, attrs) {
+
+            var options   = {};
+            scope.chart   = d3.custom.bulletChart(options);
+            scope.chartEl = d3.select(elem[0]);
+
+            // scope.$watch('data', function(newVal, oldVal) {
+            //     scope.chartEl.datum(newVal).call(scope.chart);
+            // }, true);
+
+            // scope.$watch('height', function(d, i) {
+            //     scope.chartEl.call(scope.chart.height(scope.height));
+            // });
+
+            // scope.$watch('width', function(d, i) {
+            //     scope.chartEl.call(scope.chart.width(scope.width));
+            // });
+            d3.json("bullets.json", function(error, data) {
+                var svg = d3.select("body").selectAll("svg")
+                    .data(data)
+                    .enter().append("svg")
+                        .attr("class", "bullet")
+                        .attr("width", width + margin.left + margin.right)
+                        .attr("height", height + margin.top + margin.bottom)
+                    .append("g")
+                        .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+                    .call(chart);
+
+                var title = svg.append("g")
+                    .style("text-anchor", "end")
+                    .attr("transform", "translate(-6," + height / 2 + ")");
+
+                title.append("text")
+                    .attr("class", "title")
+                    .text(function(d) { return d.title; });
+
+                title.append("text")
+                    .attr("class", "subtitle")
+                    .attr("dy", "1em")
+                    .text(function(d) { return d.subtitle; });
+
+                d3.selectAll("button").on("click", function() {
+                    svg.datum(randomize).call(chart.duration(1000)); // TODO automatic transition
+                });
             });
         }
     }
