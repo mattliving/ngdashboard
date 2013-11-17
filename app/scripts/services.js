@@ -116,6 +116,28 @@ angular.module('luckyDashServices').factory('Metrics', function($q, Adwordsdaily
     });
   }
 
+  metrics.weighted_average_margin = function() {
+    return new Metric({
+      title: 'Average Margin',
+      action: function(options) {
+        var deferred = $q.defer();
+
+        Opportunity.get({
+          email: options.email,
+          action: 'weighted_average_margin',
+          date_from: options.date_from,
+          date_to: options.date_to
+        }, function(opportunity) {
+          deferred.resolve(opportunity['weighted_average_margin']);
+        });
+
+        return deferred.promise;
+      },
+      target: 60,
+      comparison: 0
+    });
+  }
+
   return metrics;
 });
 

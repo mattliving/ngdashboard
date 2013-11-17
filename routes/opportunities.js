@@ -30,6 +30,17 @@ module.exports = {
             "AND '" + params.date_to + "';"
           ].join(' ');
         }
+        else if (params.action === 'weighted_average_margin') {
+          query = [
+            "SELECT (SUM(revenue*margin_percent/100) / SUM(revenue)) * 100 AS weighted_average_margin",
+            "FROM opportunities",
+            "WHERE acid=(SELECT acid FROM accounts WHERE email='" + params.email + "')",
+            "AND margin_percent IS NOT NULL",
+            "AND margin_percent != 0",
+            "AND date BETWEEN '" + params.date_from + "'",
+            "AND '" + params.date_to + "';"
+          ].join(' ');
+        }
       }
       else console.log("ERROR"); /* TODO ERROR HANDLING */
       return db.execQuery(connection, query);

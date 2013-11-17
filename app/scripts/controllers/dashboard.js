@@ -31,25 +31,26 @@ angular.module("luckyDashApp").controller("DashboardCtrl", function($window, $sc
     }
   }
 
-  var revenue = Metrics['revenue']();
-  var ad_cost = Metrics['ad_cost']();
-  var profit  = Metrics['profit'](revenue, ad_cost);
+  var revenue        = Metrics['revenue']();
+  var ad_cost        = Metrics['ad_cost']();
+  var profit         = Metrics['profit'](revenue, ad_cost);
+  var average_margin = Metrics['weighted_average_margin']();
   $scope.metrics = [
-    revenue, ad_cost, profit
+    revenue, ad_cost, profit, average_margin
   ];
 
-  $scope.graphs = [
-    {
-      ylabel: 'Revenue',
-      action: 'monthly_revenue',
-      data: []
-    },
-    {
-      ylabel: 'Ad Cost',
-      action: 'monthly_ad_cost',
-      data: []
-    }
-  ];
+  // $scope.graphs = [
+  //   {
+  //     ylabel: 'Revenue',
+  //     action: 'monthly_revenue',
+  //     data: []
+  //   },
+  //   {
+  //     ylabel: 'Ad Cost',
+  //     action: 'monthly_ad_cost',
+  //     data: []
+  //   }
+  // ];
 
   /* Loop through and request metric data */
   $scope.updateMetrics = function(metrics) {
@@ -113,8 +114,8 @@ angular.module("luckyDashApp").controller("DashboardCtrl", function($window, $sc
 
   $scope.height = 0;
   $scope.$watch('height', function(newVal, oldVal) {
-    $scope.tileWrapperHeight  = newVal/3;
-    $scope.graphWrapperHeight = newVal*(2/3);
+    $scope.tileWrapperHeight  = newVal;//newVal/3;
+    // $scope.graphWrapperHeight = newVal*(2/3);
     $('.tileWrapper').height($scope.tileWrapperHeight);
   });
 
