@@ -41,6 +41,9 @@ module.exports = {
             "AND '" + params.date_to + "';"
           ].join(' ');
         }
+        else if (params.action === 'clv') {
+          //select sum(revenue) as CLV, tid from opportunities where pipeline=13 group by tid order by CLV
+        }
       }
       else console.log("ERROR"); /* TODO ERROR HANDLING */
       return db.execQuery(connection, query);
