@@ -1,3 +1,4 @@
+
 'use strict';
 
 var luckyDashApp = angular.module('luckyDashApp', ['luckyDashDirectives', 'luckyDashServices', 'luckyDashFilters', 'ui.bootstrap', 'ngResource', 'ngRoute', 'ngTouch'])

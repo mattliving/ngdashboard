@@ -19,7 +19,8 @@ exports.config = {
         before: [
           'bower_components/lodash/lodash.js',
           'bower_components/jquery/jquery.js',
-          'bower_components/angular-bootstrap/ui-bootstrap.js',
+          // 'bower_components/angular-bootstrap/ui-bootstrap.js',
+          'bower_components/angular-bs-ui/ui-bootstrap-custom-0.6.0.js',
           'bower_components/angular/angular.js',
           'bower_components/d3/d3.js',
           'app/scripts/barChart.js',

@@ -41,6 +41,20 @@ module.exports = {
             "AND '" + params.date_to + "';"
           ].join(' ');
         }
+        else if (params.action === 'margin_integrity') {
+          query = [
+            "SELECT (margin_count/total_count)*100 AS margin_integrity",
+            "FROM (SELECT COUNT(margin_percent) AS margin_count",
+            "FROM opportunities",
+            "WHERE acid=(SELECT acid FROM accounts WHERE email='" + params.email + "')",
+            "AND date BETWEEN '" + params.date_from + "' AND '" + params.date_to + "'",
+            "AND margin_percent != 0) AS t1,",
+            "(SELECT COUNT(margin_percent) AS total_count",
+            "FROM opportunities",
+            "WHERE acid=(SELECT acid FROM accounts WHERE email='" + params.email + "')",
+            "AND date BETWEEN '" + params.date_from + "' AND '" + params.date_to + "') AS t2;"
+          ].join(' ');
+        }
         else if (params.action === 'clv') {
           //select sum(revenue) as CLV, tid from opportunities where pipeline=13 group by tid order by CLV
         }

@@ -43,7 +43,7 @@ angular.module('luckyDashServices').factory('Metrics', function($q, Adwordsdaily
   }
 
   Metric.prototype.hasProgressBar = function() {
-    return typeof this.progressBar === "undefined" ? false : true;
+    return typeof this.progression === "undefined" ? false : true;
   }
 
   Metric.prototype.getType = function() {
@@ -56,17 +56,28 @@ angular.module('luckyDashServices').factory('Metrics', function($q, Adwordsdaily
     this.action(options).then(function(newValue) {
       that.value = newValue;
 
+      if (that.hasProgressBar()) {
+        that.getProgress(options).then(function(value) {
+          that.progression = value;
+        });
+      }
+
       if (that.hasComparison()) {
-        var date_from_moment = moment(options.date_from);
-        var date_to_moment   = moment(options.date_to);
-        options.date_from    = date_from_moment.subtract('months', 1).format('YYYY-MM-DD HH:mm:ss');
-        options.date_to      = date_to_moment.subtract('months', 1).format('YYYY-MM-DD HH:mm:ss');
+        var date_from_moment  = moment(options.date_from);
+        var date_to_moment    = moment(options.date_to);
+        options.date_from     = date_from_moment.subtract('months', 1).format('YYYY-MM-DD HH:mm:ss');
+        options.date_to       = date_to_moment.subtract('months', 1).format('YYYY-MM-DD HH:mm:ss');
+        options.previousMonth = true;
 
         that.action(options).then(function(oldValue) {
           if (oldValue !== null && oldValue !== 0) {
-            that.comparison = ((that.value - oldValue)/oldValue * 100);
+            that.previousValue = oldValue;
+            that.comparison    = ((that.value - oldValue)/oldValue * 100);
           }
-          else that.comparison = that.value;
+          else {
+            that.previousValue = that.value;
+            that.comparison = that.value;
+          }
         });
       }
     });
@@ -120,16 +131,26 @@ angular.module('luckyDashServices').factory('Metrics', function($q, Adwordsdaily
     });
   }
 
-  metrics.profit = function(revenue, ad_cost) {
+  metrics.profit = function(others) {
+    var revenue = others.revenue,
+        margin  = others.margin,
+        ad_cost = others.ad_cost;
+
     return new Metric({
       title: 'Profit',
-      action: function() {
+      action: function(options) {
         var deferred = $q.defer();
-        deferred.resolve(revenue.value - ad_cost.value);
+        if (options.previousMonth) {
+          deferred.resolve(revenue.previousValue * (margin.previousValue * 0.01) - ad_cost.previousValue);
+        }
+        else {
+          deferred.resolve(revenue.value * (margin.value * 0.01) - ad_cost.value);
+        }
         return deferred.promise;
       },
       target: 10000,
-      type: "number"
+      type: "number",
+      comparison: 0
     });
   }
 
@@ -150,10 +171,24 @@ angular.module('luckyDashServices').factory('Metrics', function($q, Adwordsdaily
 
         return deferred.promise;
       },
+      getProgress: function(options) {
+        var deferred = $q.defer();
+
+        Opportunity.get({
+          email: options.email,
+          action: 'margin_integrity',
+          date_from: options.date_from,
+          date_to: options.date_to
+        }, function(opportunity) {
+          deferred.resolve(opportunity['margin_integrity']);
+        });
+
+        return deferred.promise;
+      },
       target: 60,
       type: "percentage",
-      comparison: 0,
-      progressBar: true
+      progression: 0,
+      comparison: 0
     });
   }
 
