@@ -1,7 +1,10 @@
 <div class="container">
   <div resize class="row tileWrapper">
-    <metric-tile title='{{metric.title}}' value='metric.value' columns='{{12 / metrics.length}}' comparison='metric.comparison | round:1' target="metric.target" width='width' height='tileWrapperHeight' ng-repeat='metric in metrics'></metric-tile>
+    <metric-tile title='{{metric.title}}' type="{{metric.type}}" value='metric.value' columns='{{12 / metrics.length}}' comparison='metric.comparison | round:1' progress-bar='metric.progressBar' target="metric.target" width='width' height='tileWrapperHeight' ng-repeat='metric in metrics'></metric-tile>
   </div>
+  <!-- <multi-repeat resize collection="metrics" columns="2">
+    <metric-tile title='{{item.title}}' value='item.value' comparison='item.comparison | round:1' target="item.target"></metric-tile>
+  </multi-repeat> -->
   <div resize class="row graphWrapper">
     <graph-tile data='graph.data' ylabel='graph.ylabel' height='graphWrapperHeight / graphs.length' width='width' ng-repeat='graph in graphs'></graph-tile>
   </div>

@@ -114,7 +114,7 @@ angular.module("luckyDashApp").controller("DashboardCtrl", function($window, $sc
 
   $scope.height = 0;
   $scope.$watch('height', function(newVal, oldVal) {
-    $scope.tileWrapperHeight  = newVal;//newVal/3;
+    $scope.tileWrapperHeight  = newVal/3;
     // $scope.graphWrapperHeight = newVal*(2/3);
     $('.tileWrapper').height($scope.tileWrapperHeight);
   });

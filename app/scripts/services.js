@@ -28,7 +28,8 @@ angular.module('luckyDashServices').factory('Metrics', function($q, Adwordsdaily
 
     if (typeof !(_.isEmpty(spec)) &&
         typeof spec.title !== "undefined" &&
-        typeof spec.action !== "undefined") {
+        typeof spec.action !== "undefined" &&
+        typeof spec.type !== "undefined") {
       _.extend(self, spec);
     }
   }
@@ -41,18 +42,31 @@ angular.module('luckyDashServices').factory('Metrics', function($q, Adwordsdaily
     return typeof this.comparison === "undefined" ? false : true;
   }
 
+  Metric.prototype.hasProgressBar = function() {
+    return typeof this.progressBar === "undefined" ? false : true;
+  }
+
+  Metric.prototype.getType = function() {
+    return this.type;
+  }
+
   Metric.prototype.update = function(options) {
     var that = this;
 
     this.action(options).then(function(newValue) {
       that.value = newValue;
+
       if (that.hasComparison()) {
         var date_from_moment = moment(options.date_from);
         var date_to_moment   = moment(options.date_to);
         options.date_from    = date_from_moment.subtract('months', 1).format('YYYY-MM-DD HH:mm:ss');
         options.date_to      = date_to_moment.subtract('months', 1).format('YYYY-MM-DD HH:mm:ss');
+
         that.action(options).then(function(oldValue) {
-          that.comparison = ((that.value - oldValue)/oldValue * 100);
+          if (oldValue !== null && oldValue !== 0) {
+            that.comparison = ((that.value - oldValue)/oldValue * 100);
+          }
+          else that.comparison = that.value;
         });
       }
     });
@@ -62,7 +76,7 @@ angular.module('luckyDashServices').factory('Metrics', function($q, Adwordsdaily
 
   metrics.revenue = function() {
     return new Metric({
-      title: 'Total Revenue',
+      title: 'Revenue',
       action: function(options) {
         var deferred = $q.defer();
 
@@ -78,13 +92,14 @@ angular.module('luckyDashServices').factory('Metrics', function($q, Adwordsdaily
         return deferred.promise;
       },
       target: 20000,
+      type: "number",
       comparison: 0
     });
   }
 
   metrics.ad_cost = function() {
     return new Metric({
-      title: 'Total Ad Cost',
+      title: 'Ad Cost',
       action: function(options) {
         var deferred = $q.defer();
 
@@ -100,25 +115,27 @@ angular.module('luckyDashServices').factory('Metrics', function($q, Adwordsdaily
         return deferred.promise;
       },
       target: 500,
+      type: "number",
       comparison: 0
     });
   }
 
   metrics.profit = function(revenue, ad_cost) {
     return new Metric({
-      title: 'Total Profit',
+      title: 'Profit',
       action: function() {
         var deferred = $q.defer();
         deferred.resolve(revenue.value - ad_cost.value);
         return deferred.promise;
       },
-      target: 10000
+      target: 10000,
+      type: "number"
     });
   }
 
   metrics.weighted_average_margin = function() {
     return new Metric({
-      title: 'Average Margin',
+      title: 'Margin',
       action: function(options) {
         var deferred = $q.defer();
 
@@ -134,7 +151,9 @@ angular.module('luckyDashServices').factory('Metrics', function($q, Adwordsdaily
         return deferred.promise;
       },
       target: 60,
-      comparison: 0
+      type: "percentage",
+      comparison: 0,
+      progressBar: true
     });
   }
 

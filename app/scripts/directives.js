@@ -6,8 +6,10 @@ angular.module('luckyDashDirectives').directive('metricTile', function() {
         scope: {
             title: '@',
             value: '=',
-            comparison: '=',
             target: '=',
+            type: '@',
+            comparison: '=',
+            progressBar: '=',
             columns: '@',
             width: '=',
             height: '='
@@ -23,6 +25,10 @@ angular.module('luckyDashDirectives').directive('metricTile', function() {
                 return (typeof scope.target === "undefined")
                         || (scope.value == 0)
                         ? false : true;
+            }
+
+            scope.hasProgressBar = function() {
+                return typeof scope.progressBar === "undefined" ? false : true;
             }
 
             scope.percentToTarget = function() {
@@ -189,6 +195,114 @@ angular.module('luckyDashDirectives').directive('resize', function($window, $roo
     };
 });
 
+
+angular.module('luckyDashDirectives').directive('multiRepeat', function() {
+  return {
+    restrict: 'EA',
+    transclude: true,
+    scope: {
+      active: '=',
+      columns: '@',
+      collection: '=',
+      dragging: '&dragging'
+    },
+    template: ["<div class='row multi-items' ng-repeat='(index, items) in set'>",
+                "<div class='col-xs-{{12/columns}} multi-item' ng-repeat='item in items'>",
+                "<div ng-transclude></div>",
+                "</div>",
+                "</div>"].join(""),
+    link: function(scope, elem, attrs) {
+      scope.$multiParent = scope.$parent;
+      scope.$watchCollection('collection', function() {
+        return scope.set = _.groupBy(scope.collection, function(item) {
+          var index;
+          return index = Math.floor((_.indexOf(scope.collection, item)) / scope.columns);
+        });
+      });
+      scope.calcIndex = function(index, parent) {
+        return parseInt(parent.index) * scope.columns + index;
+      };
+    }
+  };
+});
+
+angular.module('luckyDashDirectives').directive('vCenter', function($window, $document, $rootScope) {
+    return {
+        restrict: 'A',
+        scope: true,
+        link: function(scope, elem, attrs) {
+
+            var $elem   = angular.element(elem);
+            var $parent = elem.parent();
+            scope.minFontSize = attrs.min || Number.NEGATIVE_INFINITY;
+            scope.maxFontSize = attrs.max || Number.POSITIVE_INFINITY;
+
+            function absoluteFix() {
+                // if (typeof attrs.top !== "undefined") {
+                //     elem.css('top', attrs.top);
+                // }
+                if (typeof attrs.top !== "undefined") {
+                    elem.css('margin-top', function() {
+                        return ((attrs.top/100) * $parent.height()) + 'px';
+                    });
+                }
+            }
+
+            function resizeText() {
+                elem.height($parent.height() * (attrs.height/100));
+                if (typeof attrs.height !== "undefined") {
+                    elem.css('font-size', function() {
+                        return elem.height() * 1;
+                    });
+                    elem.css('line-height', function() {
+                        return (elem.height() * 1) + 'px';
+                    });
+                }
+            }
+
+            $rootScope.$on('windowResizeEventFired', function() {
+                absoluteFix();
+                resizeText();
+            });
+
+            $document.ready(function() {
+                absoluteFix();
+                resizeText();
+            });
+        }
+    };
+});
+
+angular.module('luckyDashDirectives').directive('fitText', ['$document', '$rootScope', function($document, $rootScope) {
+    return {
+        restrict: 'A',
+        scope: true,
+        link: function($scope, $element, $attrs) {
+            $scope.compressor  = $attrs.compressor || 1;
+            $scope.minFontSize = $attrs.min || Number.NEGATIVE_INFINITY;
+            $scope.maxFontSize = $attrs.max || Number.POSITIVE_INFINITY;
+
+            function resizer() {
+                $scope.fontSize = Math.max(
+                    Math.min(
+                        $element[0].offsetWidth / ($scope.compressor * 10),
+                        parseFloat($scope.maxFontSize)
+                    ),
+                    parseFloat($scope.minFontSize)
+                ) + 'px';
+            };
+
+            $rootScope.$on('windowResizeEventFired', function() {
+                resizer();
+            });
+
+            $document.ready(function() {
+                resizer();
+            });
+        }
+    }
+}]);
+
 /* Vertically position an element within its parent container */
 angular.module('luckyDashDirectives').directive('vAnchor', function($window, $rootScope) {
     return {
@@ -223,8 +337,8 @@ angular.module('luckyDashDirectives').directive('vAnchor', function($window, $ro
                     break;
             }
             var parent    = elem.parent();
-            var parentMid = parent.height()/heightDivisor;
-            var elemMid   = elem.height()/heightDivisor;
+            var parentMid = parent.height() / heightDivisor;
+            var elemMid   = elem.height() / heightDivisor;
             elem.css('margin-top', function() {
                 if (operand === 'minus')
                     return (parentMid - elemMid - offset);
