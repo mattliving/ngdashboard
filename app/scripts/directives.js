@@ -9,7 +9,7 @@ angular.module('luckyDashDirectives').directive('metricTile', function() {
             target: '=',
             type: '@',
             comparison: '=',
-            progressBar: '=',
+            progression: '=',
             columns: '@',
             width: '=',
             height: '='
@@ -28,7 +28,7 @@ angular.module('luckyDashDirectives').directive('metricTile', function() {
             }
 
             scope.hasProgressBar = function() {
-                return typeof scope.progressBar === "undefined" ? false : true;
+                return typeof scope.progression === "undefined" ? false : true;
             }
 
             scope.percentToTarget = function() {

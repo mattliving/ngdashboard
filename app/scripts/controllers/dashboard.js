@@ -31,12 +31,16 @@ angular.module("luckyDashApp").controller("DashboardCtrl", function($window, $sc
     }
   }
 
-  var revenue        = Metrics['revenue']();
-  var ad_cost        = Metrics['ad_cost']();
-  var profit         = Metrics['profit'](revenue, ad_cost);
-  var average_margin = Metrics['weighted_average_margin']();
+  var revenue = Metrics['revenue']();
+  var ad_cost = Metrics['ad_cost']();
+  var margin  = Metrics['weighted_average_margin']();
+  var profit  = Metrics['profit']({
+    revenue: revenue,
+    margin: margin,
+    ad_cost: ad_cost
+  });
   $scope.metrics = [
-    revenue, ad_cost, profit, average_margin
+    revenue, ad_cost, profit, margin
   ];
 
   // $scope.graphs = [
