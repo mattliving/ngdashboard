@@ -7,29 +7,29 @@
       <div ng-switch-when="number">
         <h2>£{{value || 0 | number:0}}</h2>
         <small ng-if="hasComparison()">
-          <span class="glyphicon" ng-class="{'glyphicon-chevron-up': comparison > 0, 'glyphicon-chevron-down': comparison < 0}"></span>
-          {{comparison}}%
+          <span class="glyphicon" ng-class="{'glyphicon-chevron-up': options.comparison > 0, 'glyphicon-chevron-down': options.comparison < 0}"></span>
+          {{options.comparison | number:1}}%
         </small>
       </div>
       <div ng-switch-when="percentage">
         <h2>{{value || 0 | number:0}}%</h2>
         <small ng-if="hasComparison()">
-          <span class="glyphicon" ng-class="{'glyphicon-chevron-up': comparison > 0, 'glyphicon-chevron-down': comparison < 0}"></span>
-          {{comparison}}%
+          <span class="glyphicon" ng-class="{'glyphicon-chevron-up': options.comparison > 0, 'glyphicon-chevron-down': options.comparison < 0}"></span>
+          {{options.comparison | number:1}}%
         </small>
       </div>
     </div>
 
     <div class="absolute-center" v-center top="60">
-      <h3 ng-if="hasTarget()">{{percentToTarget() | number:0}}% <small>of £{{target | number:0}} target</small></h3>
+      <h3 ng-if="hasTarget()">{{percentToTarget() | number:0}}% <small>of £{{options.target.value | number:0}} target</small></h3>
 
-      <h3 ng-if="hasTarget()"><small>forecasted to hit</small> {{averagePerDay() | number:0}}% <small>of target</small></h3>
+      <h3 ng-if="hasTarget() && isForecasted()"><small>forecasted to hit</small> {{averagePerDay() | number:0}}% <small>of target</small></h3>
     </div>
 
     <!-- <progress percent="50" class="progress-success" ng-if="hasProgressBar()"></progress> -->
 
     <div class="progress" ng-if="hasProgressBar()">
-      <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" ng-style="{width: progression+'%'}">
+      <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" ng-class="{'progress-bar-warning': options.progression > 33 && options.progression < 66, 'progress-bar-danger': options.progression < 33}" ng-style="{width: options.progression+'%'}">
       </div>
     </div>
   </div>

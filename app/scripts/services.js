@@ -26,7 +26,7 @@ angular.module('luckyDashServices').factory('Metrics', function($q, Adwordsdaily
              ? this
              : Object.create(Metric.prototype);
 
-    if (typeof !(_.isEmpty(spec)) &&
+    if (!(_.isEmpty(spec)) &&
         typeof spec.title !== "undefined" &&
         typeof spec.action !== "undefined" &&
         typeof spec.type !== "undefined") {
@@ -35,15 +35,18 @@ angular.module('luckyDashServices').factory('Metrics', function($q, Adwordsdaily
   }
 
   Metric.prototype.hasTarget = function() {
-    return typeof this.target === "undefined" ? false : true;
+    if (_.isEmpty(this.options)) return false;
+    else return _.has(this.options, 'target');
   }
 
   Metric.prototype.hasComparison = function() {
-    return typeof this.comparison === "undefined" ? false : true;
+    if (_.isEmpty(this.options)) return false;
+    else return _.has(this.options, 'comparison');
   }
 
   Metric.prototype.hasProgressBar = function() {
-    return typeof this.progression === "undefined" ? false : true;
+    if (_.isEmpty(this.options)) return false;
+    else return _.has(this.options, 'progression');
   }
 
   Metric.prototype.getType = function() {
@@ -58,7 +61,7 @@ angular.module('luckyDashServices').factory('Metrics', function($q, Adwordsdaily
 
       if (that.hasProgressBar()) {
         that.getProgress(options).then(function(value) {
-          that.progression = value;
+          that.options.progression = value;
         });
       }
 
@@ -72,11 +75,11 @@ angular.module('luckyDashServices').factory('Metrics', function($q, Adwordsdaily
         that.action(options).then(function(oldValue) {
           if (oldValue !== null && oldValue !== 0) {
             that.previousValue = oldValue;
-            that.comparison    = ((that.value - oldValue)/oldValue * 100);
+            that.options.comparison = ((that.value - oldValue)/oldValue * 100);
           }
           else {
             that.previousValue = that.value;
-            that.comparison = that.value;
+            that.options.comparison = that.value;
           }
         });
       }
@@ -102,9 +105,14 @@ angular.module('luckyDashServices').factory('Metrics', function($q, Adwordsdaily
 
         return deferred.promise;
       },
-      target: 20000,
       type: "number",
-      comparison: 0
+      options: {
+        target: {
+          value: 20000,
+          forecasted: false
+        },
+        comparison: 0
+      }
     });
   }
 
@@ -125,9 +133,14 @@ angular.module('luckyDashServices').factory('Metrics', function($q, Adwordsdaily
 
         return deferred.promise;
       },
-      target: 500,
       type: "number",
-      comparison: 0
+      options: {
+        target: {
+          value: 500,
+          forecasted: true
+        },
+        comparison: 0
+      }
     });
   }
 
@@ -148,9 +161,14 @@ angular.module('luckyDashServices').factory('Metrics', function($q, Adwordsdaily
         }
         return deferred.promise;
       },
-      target: 10000,
       type: "number",
-      comparison: 0
+      options: {
+        target: {
+          value: 10000,
+          forecasted: false
+        },
+        comparison: 0
+      }
     });
   }
 
@@ -185,10 +203,15 @@ angular.module('luckyDashServices').factory('Metrics', function($q, Adwordsdaily
 
         return deferred.promise;
       },
-      target: 60,
       type: "percentage",
-      progression: 0,
-      comparison: 0
+      options: {
+        target: {
+          value: 60,
+          forecasted: true
+        },
+        progression: 0,
+        comparison: 0
+      }
     });
   }
 

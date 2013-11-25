@@ -5,11 +5,9 @@ angular.module('luckyDashDirectives').directive('metricTile', function() {
         restrict: 'E',
         scope: {
             title: '@',
-            value: '=',
-            target: '=',
             type: '@',
-            comparison: '=',
-            progression: '=',
+            value: '=',
+            options: '=',
             columns: '@',
             width: '=',
             height: '='
@@ -17,26 +15,28 @@ angular.module('luckyDashDirectives').directive('metricTile', function() {
         templateUrl: "/views/metric-tile.html",
         link: function(scope, elem, attrs) {
 
-            scope.hasComparison = function() {
-                return typeof scope.comparison === "undefined" ? false : true;
+            scope.has = function(attr) {
+                if (_.isEmpty(scope.options)) return false;
+                else return _.has(scope.options, attr);
             }
 
-            scope.hasTarget = function() {
-                return (typeof scope.target === "undefined")
-                        || (scope.value == 0)
-                        ? false : true;
-            }
+            /* Getters */
+            scope.hasTarget      = function() { return scope.has('target'); }// || scope.value == 0 ? false : true;
+            scope.hasComparison  = function() { return scope.has('comparison'); }
+            scope.hasProgressBar = function() { return scope.has('progression'); }
 
-            scope.hasProgressBar = function() {
-                return typeof scope.progression === "undefined" ? false : true;
+            /* Helpers */
+            scope.isForecasted = function() {
+                if (!scope.hasTarget()) return false;
+                else return scope.options.target.forecasted;
             }
 
             scope.percentToTarget = function() {
-                return (scope.value/scope.target)*100;
+                return (scope.value/scope.options.target.value)*100;
             }
 
             scope.averagePerDay = function() {
-                return ((scope.value / moment().utc().date()) * moment().utc().daysInMonth()) / scope.target * 100;
+                return ((scope.value / moment().utc().date()) * moment().utc().daysInMonth()) / scope.options.target.value * 100;
             }
 
             // scope.$watch('width', function(newVal, oldVal) {

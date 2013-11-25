@@ -1,6 +1,6 @@
 angular.module("luckyDashApp").controller("DashboardCtrl", function($window, $scope, $routeParams, $http, $q, $timeout, Metrics, GraphActions) {
 
-  $scope.formatGraphData = function(action, data) {
+  function formatGraphData(action, data) {
 
     var datetime, formattedData = [];
     _.each(data, function(d) {
@@ -78,7 +78,7 @@ angular.module("luckyDashApp").controller("DashboardCtrl", function($window, $sc
     options.email           = $scope.account.email;
     options.date_from       = $scope.date_from;
     options.date_to         = $scope.date_to;
-    options.formatGraphData = $scope.formatGraphData;
+    options.formatGraphData = formatGraphData;
 
     _.each(graphs, function(graph) {
       GraphActions[graph.action](graph, options).then(function(data) {
@@ -119,7 +119,7 @@ angular.module("luckyDashApp").controller("DashboardCtrl", function($window, $sc
   $scope.height = 0;
   $scope.$watch('height', function(newVal, oldVal) {
     $scope.tileWrapperHeight  = newVal/3;
-    // $scope.graphWrapperHeight = newVal*(2/3);
+    $scope.graphWrapperHeight = newVal*(2/3);
     $('.tileWrapper').height($scope.tileWrapperHeight);
   });
 
