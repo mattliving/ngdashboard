@@ -18,5 +18,3 @@ var luckyDashApp = angular.module('luckyDashApp', ['luckyDashDirectives', 'lucky
     });
     return $locationProvider.html5Mode(true);
   });
-
-

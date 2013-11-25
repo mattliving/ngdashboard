@@ -40,7 +40,6 @@ module.exports = {
         }
       }
       else console.log("ERROR"); /* TODO ERROR HANDLING */
-      console.log(query);
       return db.execQuery(connection, query);
     });
   }

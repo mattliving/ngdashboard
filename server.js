@@ -1,5 +1,6 @@
-var app, adwords, cons, crypto, dbErr, dbSuccess, LocalStrategy, express, fs, http, passport, q, customers, opportunities;
+var _, app, adwords, cons, crypto, LocalStrategy, express, fs, http, passport, q, customers, opportunities;
 
+_             = require('lodash')
 cons          = require('consolidate');
 crypto        = require('crypto');
 express       = require('express');
@@ -23,7 +24,10 @@ function verifyPassword(user, password) {
 
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
-  res.redirect('/login');
+  if (req.path.match("/api")) {
+    res.send(401, {error: "Invalid API Key."});
+  }
+  else res.redirect('/login');
 }
 
 passport.serializeUser(function(user, done) {
@@ -49,14 +53,20 @@ passport.use(new LocalStrategy({
       // set the user to `false` to indicate failure.  Otherwise, return the
       // user and user's password.
       customers.getByEmail(email).then(function(user) {
-        console.log(user);
+
         if (user.length === 1) user = user[0];
-        if (!user) { return done(null, false, { message: 'Incorrect username.' }); }
-        if (!verifyPassword(user, password)) { return done(null, false, { message: 'Incorrect password.' }); }
+        if (_.isEmpty(user)) {
+          console.log("Incorrect username.");
+          return done(null, false, { message: 'Incorrect username.' });
+        }
+        if (!verifyPassword(user, password)) {
+          console.log("Incorrect password.");
+          return done(null, false, { message: 'Incorrect password.' });
+        }
         console.log("user and password verified");
         return done(null, user);
       }), function(err) {
-        console.log(err);
+        console.log("user login err", err);
         return done(err, false, { message: 'Database error.'});
       }
     });
@@ -71,6 +81,7 @@ app.configure(function() {
   app.engine('html', cons.underscore);
   app.use(express.cookieParser());
   app.use(express.bodyParser());
+  app.use(express.session({secret: 'lucky888'}));
   app.use(express.methodOverride());
   app.use(passport.initialize());
   app.use(passport.session());
@@ -98,49 +109,51 @@ var dbErr = function(res) {
 
 /* Login */
 
-app.post('/login', passport.authenticate('local', { failureRedirect: '/login' }),
-  function(req, res) {
-    res.redirect(req.user.email + '/dashboard');
-  }
-);
+app.post('/login', passport.authenticate('local', {
+  failureRedirect: '/login'
+}), function(req, res) {
+  res.redirect(req.user.email + '/dashboard');
+});
+
+app.get('/logout', function(req, res) {
+  req.logout();
+  res.redirect('/');
+});
+
+app.get('/:email/dashboard', ensureAuthenticated);
 
 /* Customers */
 
-app.get('/api/v1/customers', function(req, res) {
+app.get('/api/v1/customers', ensureAuthenticated, function(req, res) {
   customers.all().then(dbSuccess(res), dbErr(res));
 });
 
-app.get('/api/v1/customers/:email', function(req, res) {
+app.get('/api/v1/customers/:email', ensureAuthenticated, function(req, res) {
   customers.getByEmail(req.params.email).then(dbSuccess(res), dbErr(res));
 });
 
-app.get('/api/v1/customers/:email/id', function(req, res) {
+app.get('/api/v1/customers/:email/id', ensureAuthenticated, function(req, res) {
   customers.getId(req.params.email).then(dbSuccess(res), dbErr(res));
 });
 
 /* Opportunities */
 
-app.get('/api/v1/opportunities', function(req, res) {
+app.get('/api/v1/opportunities', ensureAuthenticated, function(req, res) {
   opportunities.all(req.query).then(dbSuccess(res), dbErr(res));
 });
 
-app.get('/api/v1/opportunities/:oid', function(req, res) {
+app.get('/api/v1/opportunities/:oid', ensureAuthenticated, function(req, res) {
   opportunities.get(req.params.oid).then(dbSuccess(res), dbErr(res));
 });
 
 /* Adwords */
 
-app.get('/api/v1/adwordsdaily', function(req, res) {
+app.get('/api/v1/adwordsdaily', ensureAuthenticated, function(req, res) {
   adwords.all().then(dbSuccess(res), dbErr(res));
 });
 
-app.get('/api/v1/adwordsdaily/:acid', function(req, res) {
+app.get('/api/v1/adwordsdaily/:acid', ensureAuthenticated, function(req, res) {
   adwords.get(req.params.acid, req.query).then(dbSuccess(res), dbErr(res));
-});
-
-app.get('/logout', function(req, res){
-  req.logout();
-  res.redirect('/');
 });
 
 app.get('*', function(req, res, next) {

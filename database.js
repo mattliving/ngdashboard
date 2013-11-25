@@ -17,7 +17,7 @@ module.exports = {
     pool.getConnection(function(err, connection) {
       if (err) {
         console.log(err);
-        return;
+        deferred.reject(err);
       }
       deferred.resolve(connection);
     });
@@ -29,7 +29,7 @@ module.exports = {
     var deferred = q.defer();
     connection.query(query, function(err, results) {
       connection.release();
-      if (err) throw err;
+      if (err) deferred.reject(err);
       deferred.resolve(results);
     });
     return deferred.promise;
