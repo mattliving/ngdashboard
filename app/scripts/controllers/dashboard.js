@@ -1,35 +1,4 @@
-angular.module("luckyDashApp").controller("DashboardCtrl", function($window, $scope, $routeParams, $http, $q, $timeout, Metrics, GraphActions) {
-
-  function formatGraphData(action, data) {
-
-    var datetime, formattedData = [];
-    _.each(data, function(d) {
-      datetime = moment(d.date).utc();
-      d.date   = datetime.format('YYYY-MM-DD');
-      d.time   = datetime.format('HH:mm:ss');
-      d.x      = datetime.date();
-      if (action === 'monthly_revenue') d.y = d.revenue;
-      else if (action === 'monthly_ad_cost') d.y = d.ad_cost;
-      formattedData.push({
-        'x': d.x,
-        'y': d.y
-      });
-    });
-    switch (action) {
-      case "monthly_revenue":
-        formattedData = [];
-        _.map(_.groupBy(data, function(m) { return m.x; }),
-          function(array) {
-            formattedData.push({
-              'x': _.first(array).x,
-              'y': _.reduce(array, function(memo, obj) { return memo + obj.revenue; }, 0)
-            });
-          });
-        return formattedData;
-      case "monthly_ad_cost":
-        return formattedData;
-    }
-  }
+angular.module("luckyDashApp").controller("DashboardCtrl", function($window, $scope, $routeParams, $http, $q, $timeout, Metrics, Graphs) {
 
   var revenue = Metrics['revenue']();
   var ad_cost = Metrics['ad_cost']();
@@ -39,51 +8,32 @@ angular.module("luckyDashApp").controller("DashboardCtrl", function($window, $sc
     margin: margin,
     ad_cost: ad_cost
   });
+
   $scope.metrics = [
     revenue, ad_cost, profit, margin
   ];
 
-  // $scope.graphs = [
-  //   {
-  //     ylabel: 'Revenue',
-  //     action: 'monthly_revenue',
-  //     data: []
-  //   },
-  //   {
-  //     ylabel: 'Ad Cost',
-  //     action: 'monthly_ad_cost',
-  //     data: []
-  //   }
-  // ];
+  $scope.graphs = [
+    Graphs.revenue({metric: revenue, type: 'bullet'}),
+    Graphs.ad_cost({metric: ad_cost, type: 'bullet'}),
+    Graphs.profit({metric: profit, type: 'bullet'}),
+    Graphs.margin({metric: margin, type: 'bullet'})
+  ]
 
-  /* Loop through and request metric data */
-  $scope.updateMetrics = function(metrics) {
-
-    _.each(metrics, function(metric) {
-      var options = {
-        acid: $scope.account.acid,
-        email: $scope.account.email,
-        date_from: $scope.date_from,
-        date_to: $scope.date_to
-      };
-      metric.update(options);
-    });
-  }
-
-  /* Loop through and request graph data */
-  $scope.updateGraphs = function(graphs) {
-
-    var options = {};
-    options.acid            = $scope.account.acid;
-    options.email           = $scope.account.email;
-    options.date_from       = $scope.date_from;
-    options.date_to         = $scope.date_to;
-    options.formatGraphData = formatGraphData;
-
-    _.each(graphs, function(graph) {
-      GraphActions[graph.action](graph, options).then(function(data) {
-        graph.data = data;
-      });
+  /* Update a collection of metrics or graphs */
+  $scope.update = function(collection) {
+    _.each(collection, function(item) {
+      if (item.toString() === '[object Metric]'
+        || item.toString() === '[object Graph]') {
+        var options = {
+          acid: $scope.account.acid,
+          email: $scope.account.email,
+          date_from: $scope.date_from,
+          date_to: $scope.date_to
+        };
+        item.update(options);
+      }
+      else console.error('Requires a collection of type Metric or Graph.');
     });
   }
 
@@ -105,12 +55,12 @@ angular.module("luckyDashApp").controller("DashboardCtrl", function($window, $sc
      5 seconds thereafter */
     var updateInterval = 5000;
     $scope.updateTime();
-    $scope.updateMetrics($scope.metrics);
-    $scope.updateGraphs($scope.graphs);
+    $scope.update($scope.metrics);
+    $scope.update($scope.graphs);
     $timeout(function update() {
       $scope.updateTime();
-      $scope.updateMetrics($scope.metrics);
-      $scope.updateGraphs($scope.graphs);
+      $scope.update($scope.metrics);
+      $scope.update($scope.graphs);
       $timeout(update, updateInterval);
     }, updateInterval);
   })
@@ -121,6 +71,7 @@ angular.module("luckyDashApp").controller("DashboardCtrl", function($window, $sc
     $scope.tileWrapperHeight  = newVal/3;
     $scope.graphWrapperHeight = newVal*(2/3);
     $('.tileWrapper').height($scope.tileWrapperHeight);
+    // $('.graphWrapper').height($scope.graphWrapperHeight);
   });
 
   // $scope.$watch('width', function(newVal, oldVal) {

@@ -3,25 +3,16 @@
     <h1 class="absolute-center" v-center height="60" fit-text compressor="1" min="12" max="50" ng-style="{'font-size': fontSize}">{{title}}</h1>
   </div>
   <div class="row body">
-    <div ng-switch="type" class="absolute-center" v-center top="10">
-      <div ng-switch-when="number">
-        <h2>£{{value || 0 | number:0}}</h2>
-        <small ng-if="hasComparison()">
-          <span class="glyphicon" ng-class="{'glyphicon-chevron-up': options.comparison > 0, 'glyphicon-chevron-down': options.comparison < 0}"></span>
-          {{options.comparison | number:1}}%
-        </small>
-      </div>
-      <div ng-switch-when="percentage">
-        <h2>{{value || 0 | number:0}}%</h2>
-        <small ng-if="hasComparison()">
-          <span class="glyphicon" ng-class="{'glyphicon-chevron-up': options.comparison > 0, 'glyphicon-chevron-down': options.comparison < 0}"></span>
-          {{options.comparison | number:1}}%
-        </small>
-      </div>
+    <div class="absolute-center" v-center top="10">
+      <h2>{{value || 0 | number:0 | typeFormat:type}}</h2>
+      <small ng-if="hasComparison()">
+        <span class="glyphicon" ng-class="{'glyphicon-chevron-up': options.comparison > 0, 'glyphicon-chevron-down': options.comparison < 0}"></span>
+        {{options.comparison | number:1}}%
+      </small>
     </div>
 
     <div class="absolute-center" v-center top="60">
-      <h3 ng-if="hasTarget()">{{percentToTarget() | number:0}}% <small>of £{{options.target.value | number:0}} target</small></h3>
+      <h3 ng-if="hasTarget()">{{percentToTarget() | number:0}}% <small>of {{options.target.value | number:0 | typeFormat:type}} target</small></h3>
 
       <h3 ng-if="hasTarget() && isForecasted()"><small>forecasted to hit</small> {{averagePerDay() | number:0}}% <small>of target</small></h3>
     </div>

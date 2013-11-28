@@ -68,17 +68,29 @@ angular.module('luckyDashDirectives').directive('metricTile', function() {
     };
 });
 
-angular.module('luckyDashDirectives').directive('graphTile', function() {
+angular.module('luckyDashDirectives').directive('graphTile', function($compile) {
     return {
         restrict: 'E',
+        replace: true,
         scope: {
-            ylabel: '=',
             data: '=',
+            type: '=',
+            ylabel: '=',
             height: '=',
             width: '='
         },
         templateUrl: "/views/graph-tile.html",
-        link: function(scope, elem, attrs) {}
+        link: function(scope, elem, attrs) {
+            scope.$watch('type', function(newVal, oldVal) {
+                var html = elem.html();
+                html = html.replace('<div', function() {
+                    return '<div ' + newVal + '-chart';
+                });
+                elem.html(html);
+                $compile(elem.contents())(scope);
+            });
+        }
+
     };
 });
 
@@ -138,44 +150,16 @@ angular.module('luckyDashDirectives').directive('bulletChart', function() {
             scope.chart   = d3.custom.bulletChart(options);
             scope.chartEl = d3.select(elem[0]);
 
-            // scope.$watch('data', function(newVal, oldVal) {
-            //     scope.chartEl.datum(newVal).call(scope.chart);
-            // }, true);
+            scope.$watch('data', function(newVal, oldVal) {
+                scope.chartEl.datum(newVal).call(scope.chart);
+            }, true);
 
-            // scope.$watch('height', function(d, i) {
-            //     scope.chartEl.call(scope.chart.height(scope.height));
-            // });
+            scope.$watch('height', function(newVal, oldVal) {
+                scope.chartEl.call(scope.chart.height(newVal));
+            });
 
-            // scope.$watch('width', function(d, i) {
-            //     scope.chartEl.call(scope.chart.width(scope.width));
-            // });
-            d3.json("bullets.json", function(error, data) {
-                var svg = d3.select("body").selectAll("svg")
-                    .data(data)
-                    .enter().append("svg")
-                        .attr("class", "bullet")
-                        .attr("width", width + margin.left + margin.right)
-                        .attr("height", height + margin.top + margin.bottom)
-                    .append("g")
-                        .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-                    .call(chart);
-
-                var title = svg.append("g")
-                    .style("text-anchor", "end")
-                    .attr("transform", "translate(-6," + height / 2 + ")");
-
-                title.append("text")
-                    .attr("class", "title")
-                    .text(function(d) { return d.title; });
-
-                title.append("text")
-                    .attr("class", "subtitle")
-                    .attr("dy", "1em")
-                    .text(function(d) { return d.subtitle; });
-
-                d3.selectAll("button").on("click", function() {
-                    svg.datum(randomize).call(chart.duration(1000)); // TODO automatic transition
-                });
+            scope.$watch('width', function(newVal, oldVal) {
+                scope.chartEl.call(scope.chart.width(newVal));
             });
         }
     }
@@ -193,37 +177,6 @@ angular.module('luckyDashDirectives').directive('resize', function($window, $roo
             });
         });
     };
-});
-
-
-angular.module('luckyDashDirectives').directive('multiRepeat', function() {
-  return {
-    restrict: 'EA',
-    transclude: true,
-    scope: {
-      active: '=',
-      columns: '@',
-      collection: '=',
-      dragging: '&dragging'
-    },
-    template: ["<div class='row multi-items' ng-repeat='(index, items) in set'>",
-                "<div class='col-xs-{{12/columns}} multi-item' ng-repeat='item in items'>",
-                "<div ng-transclude></div>",
-                "</div>",
-                "</div>"].join(""),
-    link: function(scope, elem, attrs) {
-      scope.$multiParent = scope.$parent;
-      scope.$watchCollection('collection', function() {
-        return scope.set = _.groupBy(scope.collection, function(item) {
-          var index;
-          return index = Math.floor((_.indexOf(scope.collection, item)) / scope.columns);
-        });
-      });
-      scope.calcIndex = function(index, parent) {
-        return parseInt(parent.index) * scope.columns + index;
-      };
-    }
-  };
 });
 
 angular.module('luckyDashDirectives').directive('vCenter', function($window, $document, $rootScope) {

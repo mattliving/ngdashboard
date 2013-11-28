@@ -120,39 +120,39 @@ app.get('/logout', function(req, res) {
   res.redirect('/');
 });
 
-app.get('/:email/dashboard', ensureAuthenticated);
+app.get('/:email/dashboard');
 
 /* Customers */
 
-app.get('/api/v1/customers', ensureAuthenticated, function(req, res) {
+app.get('/api/v1/customers', function(req, res) {
   customers.all().then(dbSuccess(res), dbErr(res));
 });
 
-app.get('/api/v1/customers/:email', ensureAuthenticated, function(req, res) {
+app.get('/api/v1/customers/:email', function(req, res) {
   customers.getByEmail(req.params.email).then(dbSuccess(res), dbErr(res));
 });
 
-app.get('/api/v1/customers/:email/id', ensureAuthenticated, function(req, res) {
+app.get('/api/v1/customers/:email/id', function(req, res) {
   customers.getId(req.params.email).then(dbSuccess(res), dbErr(res));
 });
 
 /* Opportunities */
 
-app.get('/api/v1/opportunities', ensureAuthenticated, function(req, res) {
+app.get('/api/v1/opportunities', function(req, res) {
   opportunities.all(req.query).then(dbSuccess(res), dbErr(res));
 });
 
-app.get('/api/v1/opportunities/:oid', ensureAuthenticated, function(req, res) {
+app.get('/api/v1/opportunities/:oid', function(req, res) {
   opportunities.get(req.params.oid).then(dbSuccess(res), dbErr(res));
 });
 
 /* Adwords */
 
-app.get('/api/v1/adwordsdaily', ensureAuthenticated, function(req, res) {
+app.get('/api/v1/adwordsdaily', function(req, res) {
   adwords.all().then(dbSuccess(res), dbErr(res));
 });
 
-app.get('/api/v1/adwordsdaily/:acid', ensureAuthenticated, function(req, res) {
+app.get('/api/v1/adwordsdaily/:acid', function(req, res) {
   adwords.get(req.params.acid, req.query).then(dbSuccess(res), dbErr(res));
 });
 

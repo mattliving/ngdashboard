@@ -6,6 +6,6 @@
     <metric-tile title='{{item.title}}' value='item.value' comparison='item.comparison | round:1' target="item.target"></metric-tile>
   </multi-repeat> -->
   <div resize class="row graphWrapper">
-    <graph-tile data='graph.data' ylabel='graph.ylabel' height='graphWrapperHeight / graphs.length' width='width' ng-repeat='graph in graphs'></graph-tile>
+    <graph-tile data='graph.data' type='graph.type' ylabel='graph.ylabel' height='graphWrapperHeight / graphs.length' width='width' ng-repeat='graph in graphs'></graph-tile>
   </div>
 </div>
