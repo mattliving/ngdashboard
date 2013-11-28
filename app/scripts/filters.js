@@ -8,6 +8,23 @@ angular.module('luckyDashFilters').filter('join', function() {
   };
 });
 
+angular.module('luckyDashFilters').filter('typeFormat', function() {
+  return function(value, type) {
+    if (typeof type !== "undefined") {
+      switch (type) {
+        case "number":
+          return '£' + value;
+          break;
+        case "percentage":
+          return value + '%';
+          break;
+        default:
+          break;
+      }
+    }
+  };
+});
+
 angular.module('luckyDashFilters').filter('round', function() {
   return function(number, places) {
     if (number !== null && typeof number !== 'undefined') {

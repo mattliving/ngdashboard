@@ -5,14 +5,14 @@ d3.custom.barChart = function module(options) {
   options = options || {};
 
   var marginDefault = { top: 10, right: 40, bottom: 55, left: 80, padding: 10 };
-  var margin = options.margin || marginDefault,
-      width  = options.width || 960,
-      height = options.height || 500,
-      gap    = options.gap || 0,
-      ease   = options.ease || 'cubic-in-out',
-      ylabel = options.ylabel,
-      textPadding = 13,
-      format = d3.format('.0f');
+  var margin  = options.margin || marginDefault,
+  width       = options.width || 960,
+  height      = options.height || 500,
+  gap         = options.gap || 0,
+  ease        = options.ease || 'cubic-in-out',
+  ylabel      = options.ylabel,
+  textPadding = 13,
+  format      = d3.format('.0f');
 
   var svg, duration = 500;
   var dispatch      = d3.dispatch('customHover');

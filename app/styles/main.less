@@ -3,6 +3,7 @@ html, body {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #333;
     font-size: 18px;
+    overflow: hidden;
 }
 
 h1, h2, h3 {
@@ -14,6 +15,7 @@ h1, h2, h3 {
     border: none;
     border-radius: 0px;
     .transition-ease();
+    overflow: hidden;
 }
 
 .container {
@@ -272,7 +274,8 @@ metric-tile {
 }
 
 .bulletChart {
-    font: 10px sans-serif;
+    font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 12px;
     .title {
         font-size: 14px;
         font-weight: bold;
@@ -280,19 +283,17 @@ metric-tile {
     .subtitle { fill: #999; }
     .marker {
         stroke: #000;
-        stroke-width:
-        2px;
+        stroke-width: 2px;
     }
     .tick line {
         stroke: #666;
-        stroke-width:
-        .5px;
+        stroke-width: .5px;
     }
     .range.s0 { fill: #eee; }
     .range.s1 { fill: #ddd; }
     .range.s2 { fill: #ccc; }
-    .measure.s0 { fill: lightsteelblue; }
-    .measure.s1 { fill: steelblue; }
+    .measure.s0 { fill: @silver; }
+    .measure.s1 { fill: @midnightBlue; }
 }
 
 /* Colours */
