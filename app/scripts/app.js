@@ -11,6 +11,13 @@ var luckyDashApp = angular.module('luckyDashApp', ['luckyDashDirectives', 'lucky
     }).when('/:email/dashboard', {
       templateUrl: '/views/dashboard.html',
       controller: 'DashboardCtrl'
+    }).when('/:email/dashboard/verify', {
+      controller: function($routeParams, $http) {
+        console.log("in verify");
+        $http.get($routeParams.email + 'dashboard/verify');
+      }
+    }).when('/401', {
+      templateUrl: '/views/error.html'
     }).when('/404', {
       templateUrl: '/views/error.html'
     }).otherwise({

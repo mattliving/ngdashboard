@@ -26,7 +26,8 @@
     "clean-css-brunch": ">= 1.0 < 1.8",
     "auto-reload-brunch": "~1.6.5",
     "less-brunch": "~1.5.2",
-    "protractor": "~0.12.0"
+    "protractor": "~0.12.0",
+    "node-uuid": "~1.4.1"
   },
   "engines": {
     "node": ">=0.8.0"

@@ -1,4 +1,4 @@
-var _, app, adwords, cons, crypto, LocalStrategy, express, fs, http, passport, q, customers, opportunities;
+var _, app, adwords, cons, crypto, uuid, LocalStrategy, express, fs, http, passport, q, customers, opportunities;
 
 _             = require('lodash')
 cons          = require('consolidate');
@@ -7,6 +7,7 @@ express       = require('express');
 fs            = require('fs');
 http          = require('http');
 q             = require('q');
+uuid          = require('node-uuid');
 passport      = require('passport');
 LocalStrategy = require('passport-local').Strategy;
 adwords       = require('./routes/adwords');
@@ -32,16 +33,17 @@ function ensureAuthenticated(req, res, next) {
 
 passport.serializeUser(function(user, done) {
   console.log("serializing...");
-  console.log(user);
-  done(null, user.acid);
+  done(null, {acid: user.acid, email: user.email});
 });
 
-passport.deserializeUser(function(id, done) {
-  customers.getById(id).then(function(user) {
+passport.deserializeUser(function(serialized, done) {
+  customers.getById(serialized.acid).then(function(user) {
     console.log("deserializing...");
-    console.log(user);
     done(null, user);
-  }, function(err) { done(err, false); });
+  }, function(err) {
+    console.log("error deserializing.");
+    done(err, false);
+  });
 });
 
 passport.use(new LocalStrategy({
@@ -55,18 +57,25 @@ passport.use(new LocalStrategy({
       customers.getByEmail(email).then(function(user) {
 
         if (user.length === 1) user = user[0];
+
         if (_.isEmpty(user)) {
-          console.log("Incorrect username.");
+          console.error("Incorrect username.");
           return done(null, false, { message: 'Incorrect username.' });
         }
-        if (!verifyPassword(user, password)) {
-          console.log("Incorrect password.");
+        else if (!verifyPassword(user, password)) {
+          console.error("Incorrect password.");
           return done(null, false, { message: 'Incorrect password.' });
         }
-        console.log("user and password verified");
-        return done(null, user);
+        console.log("User and password verified.");
+
+        var returnUser = {
+          acid: user.acid,
+          email: user.email
+        }
+        console.log("returning user");
+        return done(null, returnUser);
       }), function(err) {
-        console.log("user login err", err);
+        console.error("User login error.", err);
         return done(err, false, { message: 'Database error.'});
       }
     });
@@ -79,13 +88,13 @@ app.configure(function() {
   app.set('view engine', 'html');
   app.enable('trust proxy');
   app.engine('html', cons.underscore);
-  app.use(express.cookieParser());
+  app.use(express["static"](__dirname + '/_public'));
   app.use(express.bodyParser());
+  app.use(express.cookieParser());
   app.use(express.session({secret: 'lucky888'}));
   app.use(express.methodOverride());
   app.use(passport.initialize());
   app.use(passport.session());
-  return app.use(express["static"](__dirname + '/_public'));
 });
 
 var dbSuccess = function(res, prop, log) {
@@ -112,6 +121,8 @@ var dbErr = function(res) {
 app.post('/login', passport.authenticate('local', {
   failureRedirect: '/login'
 }), function(req, res) {
+  req.session.previous = '/login';
+  console.log('redirect to ' + req.user.email + '/dashboard');
   res.redirect(req.user.email + '/dashboard');
 });
 
@@ -120,39 +131,64 @@ app.get('/logout', function(req, res) {
   res.redirect('/');
 });
 
-app.get('/:email/dashboard');
+// app.get("/*", function(req, res, next) {
+
+//     if(typeof req.cookies['connect.sid'] !== 'undefined') {
+//         console.log(req.cookies['connect.sid']);
+//     }
+
+//     next(); // call the next middleware
+// });
+
+app.get('/:email/dashboard/verify', function(req, res) {
+  console.log(req.params.email);
+  if (_.isUndefined(req.session.passport.user)) {
+    console.log("NEEDA LOGIN!");
+    res.send(401);
+  }
+  else if (req.session.passport.user.email !== req.params.email) {
+    console.log("NO AUTH!");
+    res.send(401);
+  }
+  else {
+    console.log("A OK!");
+    res.send(200);
+  }
+});
+
+// app.get('*', ensureAuthenticated);
 
 /* Customers */
 
-app.get('/api/v1/customers', function(req, res) {
+app.get('/api/v1/customers', ensureAuthenticated, function(req, res) {
   customers.all().then(dbSuccess(res), dbErr(res));
 });
 
-app.get('/api/v1/customers/:email', function(req, res) {
+app.get('/api/v1/customers/:email', ensureAuthenticated, function(req, res) {
   customers.getByEmail(req.params.email).then(dbSuccess(res), dbErr(res));
 });
 
-app.get('/api/v1/customers/:email/id', function(req, res) {
+app.get('/api/v1/customers/:email/id', ensureAuthenticated, function(req, res) {
   customers.getId(req.params.email).then(dbSuccess(res), dbErr(res));
 });
 
 /* Opportunities */
 
-app.get('/api/v1/opportunities', function(req, res) {
+app.get('/api/v1/opportunities', ensureAuthenticated, function(req, res) {
   opportunities.all(req.query).then(dbSuccess(res), dbErr(res));
 });
 
-app.get('/api/v1/opportunities/:oid', function(req, res) {
+app.get('/api/v1/opportunities/:oid', ensureAuthenticated, function(req, res) {
   opportunities.get(req.params.oid).then(dbSuccess(res), dbErr(res));
 });
 
 /* Adwords */
 
-app.get('/api/v1/adwordsdaily', function(req, res) {
+app.get('/api/v1/adwordsdaily', ensureAuthenticated, function(req, res) {
   adwords.all().then(dbSuccess(res), dbErr(res));
 });
 
-app.get('/api/v1/adwordsdaily/:acid', function(req, res) {
+app.get('/api/v1/adwordsdaily/:acid', ensureAuthenticated, function(req, res) {
   adwords.get(req.params.acid, req.query).then(dbSuccess(res), dbErr(res));
 });
 
