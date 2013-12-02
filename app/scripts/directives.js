@@ -39,19 +39,21 @@ angular.module('luckyDashDirectives').directive('metricTile', function() {
                 return ((scope.value / moment().utc().date()) * moment().utc().daysInMonth()) / scope.options.target.value * 100;
             }
 
-            // scope.$watch('width', function(newVal, oldVal) {
-            //     var $elem = angular.element(elem);
-            //     $elem.find('h1').css({
-            //     'font-size': function() { return (newVal + scope.height) / 30.82; }
-            //     // left: function() { return newVal/2; },
-            //     // width: function() { return newVal/2; }
-            //     });
-            //     $elem.find('h2').css({
-            //     'font-size': function() { return (newVal + scope.height) / 39.625; }
-            //     // left: function() { return newVal/2; },
-            //     // width: function() { return newVal/2; }
-            //     });
-            // });
+            var fontBench = {
+                width : 1440,
+                pixels: 21,
+                ratio: 0.01458
+            };
+
+            function resize(width) {
+                var diff = width - fontBench.width;
+                return diff * fontBench.ratio + fontBench.pixels;
+            }
+
+            scope.$watch('width', function(newVal, oldVal) {
+                var $elem = angular.element(elem);
+                $elem.find('.body').css('font-size', resize(newVal));
+            });
 
             // scope.$watch('height', function(newVal, oldVal) {
             //     var $elem = angular.element(elem);
@@ -191,9 +193,6 @@ angular.module('luckyDashDirectives').directive('vCenter', function($window, $do
             scope.maxFontSize = attrs.max || Number.POSITIVE_INFINITY;
 
             function absoluteFix() {
-                // if (typeof attrs.top !== "undefined") {
-                //     elem.css('top', attrs.top);
-                // }
                 if (typeof attrs.top !== "undefined") {
                     elem.css('margin-top', function() {
                         return ((attrs.top/100) * $parent.height()) + 'px';

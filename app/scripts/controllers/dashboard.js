@@ -1,80 +1,94 @@
-angular.module("luckyDashApp").controller("DashboardCtrl", function($window, $scope, $routeParams, $http, $q, $timeout, Metrics, Graphs) {
+angular.module("luckyDashApp").controller("DashboardCtrl", function($window, $location, $scope, $routeParams, $http, $q, $timeout, Metrics, Graphs) {
 
-  var revenue = Metrics['revenue']();
-  var ad_cost = Metrics['ad_cost']();
-  var margin  = Metrics['weighted_average_margin']();
-  var profit  = Metrics['profit']({
-    revenue: revenue,
-    margin: margin,
-    ad_cost: ad_cost
-  });
+  // if (typeof luckyDashApp.email === "undefined") {
+  //   luckyDashApp.email = $routeParams.email;
+  // }
+  // else if (luckyDashApp.email !== $routeParams.email) {
+  //   $http.get($routeParams.email)
+  // }
 
-  $scope.metrics = [
-    revenue, ad_cost, profit, margin
-  ];
-
-  $scope.graphs = [
-    Graphs.revenue({metric: revenue, type: 'bullet'}),
-    Graphs.ad_cost({metric: ad_cost, type: 'bullet'}),
-    Graphs.profit({metric: profit, type: 'bullet'}),
-    Graphs.margin({metric: margin, type: 'bullet'})
-  ]
-
-  /* Update a collection of metrics or graphs */
-  $scope.update = function(collection) {
-    _.each(collection, function(item) {
-      if (item.toString() === '[object Metric]'
-        || item.toString() === '[object Graph]') {
-        var options = {
-          acid: $scope.account.acid,
-          email: $scope.account.email,
-          date_from: $scope.date_from,
-          date_to: $scope.date_to
-        };
-        item.update(options);
-      }
-      else console.error('Requires a collection of type Metric or Graph.');
+  console.log($routeParams.email);
+  $http.get($routeParams.email + '/dashboard/verify').success(function(res) {
+    console.log(res);
+    var revenue = Metrics['revenue']();
+    var ad_cost = Metrics['ad_cost']();
+    var margin  = Metrics['weighted_average_margin']();
+    var profit  = Metrics['profit']({
+      revenue: revenue,
+      margin: margin,
+      ad_cost: ad_cost
     });
-  }
 
-  $scope.updateTime = function() {
-    $scope.date_from = moment().utc().date(1).hour(0).minute(0).second(0).format('YYYY-MM-DD HH:mm:ss');
-    $scope.date_to   = moment().utc().format('YYYY-MM-DD HH:mm:ss');
-  }
+    $scope.metrics = [
+      revenue, ad_cost, profit, margin
+    ];
 
-  $scope.account = {};
-  $scope.account.email = $routeParams.email;
+    $scope.graphs = [
+      Graphs.revenue({metric: revenue, type: 'bullet'}),
+      Graphs.ad_cost({metric: ad_cost, type: 'bullet'}),
+      Graphs.profit({metric: profit, type: 'bullet'}),
+      Graphs.margin({metric: margin, type: 'bullet'})
+    ]
 
-  /* Find the acid for the current account by email */
-  $http.get('/api/v1/customers/' + $scope.account.email + '/id')
-  .success(function(obj) {
+    /* Update a collection of metrics or graphs */
+    $scope.update = function(collection) {
+      _.each(collection, function(item) {
+        if (item.toString() === '[object Metric]'
+          || item.toString() === '[object Graph]') {
+          var options = {
+            acid: $scope.account.acid,
+            email: $scope.account.email,
+            date_from: $scope.date_from,
+            date_to: $scope.date_to
+          };
+          item.update(options);
+        }
+        else console.error('Requires a collection of type Metric or Graph.');
+      });
+    }
 
-    $scope.account.acid = obj.acid;
+    $scope.updateTime = function() {
+      $scope.date_from = '2013-11-01';//moment().utc().date(1).hour(0).minute(0).second(0).format('YYYY-MM-DD HH:mm:ss');
+      $scope.date_to   = '2013-11-30';//moment().utc().format('YYYY-MM-DD HH:mm:ss');
+    }
 
-    /* Load in the data on page load and periodically every
-     5 seconds thereafter */
-    var updateInterval = 5000;
-    $scope.updateTime();
-    $scope.update($scope.metrics);
-    $scope.update($scope.graphs);
-    $timeout(function update() {
+    $scope.account = {};
+    $scope.account.email = $routeParams.email;
+
+    /* Find the acid for the current account by email */
+    $http.get('/api/v1/customers/' + $scope.account.email + '/id')
+    .success(function(obj) {
+
+      $scope.account.acid = obj.acid;
+
+      /* Load in the data on page load and periodically every
+       5 seconds thereafter */
+      var updateInterval = 5000;
       $scope.updateTime();
       $scope.update($scope.metrics);
       $scope.update($scope.graphs);
-      $timeout(update, updateInterval);
-    }, updateInterval);
-  })
-  .error(function() { console.log("Unable to find account id for " + $scope.account.email + "."); });
+      $timeout(function update() {
+        $scope.updateTime();
+        $scope.update($scope.metrics);
+        $scope.update($scope.graphs);
+        $timeout(update, updateInterval);
+      }, updateInterval);
+    })
+    .error(function() { console.log("Unable to find account id for " + $scope.account.email + "."); });
 
-  $scope.height = 0;
-  $scope.$watch('height', function(newVal, oldVal) {
-    $scope.tileWrapperHeight  = newVal/3;
-    $scope.graphWrapperHeight = newVal*(2/3);
-    $('.tileWrapper').height($scope.tileWrapperHeight);
-    // $('.graphWrapper').height($scope.graphWrapperHeight);
+    $scope.height = 0;
+    $scope.$watch('height', function(newVal, oldVal) {
+      $scope.tileWrapperHeight  = newVal/3;
+      $scope.graphWrapperHeight = newVal*(2/3);
+      $('.tileWrapper').height($scope.tileWrapperHeight);
+      // $('.graphWrapper').height($scope.graphWrapperHeight);
+    });
+
+    // $scope.$watch('width', function(newVal, oldVal) {
+    //   console.log(newVal);
+    // });
+  }).error(function(res) {
+    console.log(res);
+    $location.path('/login');
   });
-
-  // $scope.$watch('width', function(newVal, oldVal) {
-  //   console.log(newVal);
-  // });
 });

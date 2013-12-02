@@ -19,7 +19,7 @@ h1, h2, h3 {
 }
 
 .container {
-    max-width: 1440px;
+    max-width: none;
 }
 
 .container, .row {
@@ -63,14 +63,6 @@ h1, h2, h3 {
 }
 
 .row [class*='col-xs-'] {
-    // &:first-child {
-    //     padding-left: 0px;
-    // }
-    // &:last-child {
-    //     padding-right: 0px;
-    // }
-    // padding-left: 5px;
-    // padding-right: 5px;
     padding-left: 0px;
     padding-right: 0px;
 }
@@ -80,62 +72,13 @@ h1, h2, h3 {
         height: 100%;
         .well {
             margin-bottom: 0px;
-            // height: 100%;
         }
     }
 }
-
-multi-repeat {
-    height: 100%;
-    text-align: center;
-    .row {
-        .multi-item:first-child .well {
-            padding-left: 0px;
-            margin-left: 0px;
-        }
-        .multi-item:last-child .well {
-            padding-right: 0px;
-            margin-right: 0px;
-        }
-        .multi-item:first-child:last-child .well {
-            margin-right: 0px;
-        }
-        &:last-child {
-            .multi-item {
-                margin-bottom: 30px;
-            }
-        }
-    }
-    .well {
-        margin-top: 30px;
-        margin-bottom: 0;
-        &:hover {
-            color: white;
-            background-color: #2980b9;
-        }
-        &.translucent:hover {
-            background-color: rgba(41, 128, 185, 0.85);
-        }
-    }
-}
-
-// .absolute-center {
-//     // display:table;
-//     // height:auto;
-//     height: 25%;
-//     margin: auto;
-//     position: absolute;
-//     top: 0; left: 0; bottom: 0; right: 0;
-// }
 
 .absolute-center {
-  // width: 50%;
   height: 50%;
-  // overflow: auto;
   margin: auto;
-  // margin-top: 0;
-  // margin-left: auto;
-  // margin-right: auto;
   position: absolute;
   top: 0; left: 0; bottom: 0; right: 0;
   h1, h2, h3 {
@@ -170,12 +113,9 @@ metric-tile {
             height: 25%;
             color: @clouds;
             background: @midnightBlue;
-            // background: rgba(44, 62, 80, 0.8);
             border-right: 1px solid @clouds;
             h1 {
                 font-family: 'Roboto Slab', 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-                // margin-top: 0px;
-                // margin-bottom: 0px;
                 font-weight: 700;
                 z-index: 1;
                 line-height: 1.2;
@@ -189,22 +129,21 @@ metric-tile {
             h2 {
                 font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
                 font-weight: 400;
-                font-size: 48px;
-                // margin-top: 0px;
-                // margin-bottom: 0px;
+                font-size: 2.4em;
                 z-index: 1;
                 line-height: 1.1;
             }
             h3 {
-                font-size: 24px;
+                font-size: 1.3em;
                 color: @midnightBlue;
-                // margin-top: 0px;
-                // margin-bottom: 0px;
                 line-height: 1.1;
+                small {
+                    font-size: 0.7em;
+                }
             }
             small {
                 color: @midnightBlue;
-                font-size: 20px;
+                font-size: 1em;
             }
             .glyphicon {
                 top: 4px;
