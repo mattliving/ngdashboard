@@ -15,9 +15,8 @@ customers     = require('./routes/customers');
 opportunities = require('./routes/opportunities');
 app           = express();
 
-var md5sum = crypto.createHash('md5');
-
 function verifyPassword(user, password) {
+  var md5sum = crypto.createHash('md5');
   md5sum.update(password);
   var d = md5sum.digest('hex');
   return (d === user.password) ? true : false;
@@ -35,7 +34,7 @@ function checkLoginStatus(req, res, next) {
   if (req.isAuthenticated()) {
     req.session.destroy();
   }
-  next();
+  return next();
 }
 
 passport.serializeUser(function(user, done) {
@@ -127,7 +126,7 @@ var dbErr = function(res) {
 app.post('/login', checkLoginStatus, passport.authenticate('local', {
   failureRedirect: '/login'
 }), function(req, res) {
-  req.session.previous = '/login';
+  // req.session.previous = '/login';
   console.log('redirect to ' + req.user.email + '/dashboard');
   res.redirect(req.user.email + '/dashboard');
 });

@@ -16,7 +16,7 @@
   },
   "live": {
     "host": "localhost",
-    "user": "luckydash",
+    "user": "root",
     "password": "jasminbar123",
     "database": "bds",
     "connectionlimit": 100,
