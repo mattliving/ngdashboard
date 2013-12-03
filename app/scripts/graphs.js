@@ -62,15 +62,17 @@ angular.module('luckyDashGraphs').factory('Graphs', function($q, Adwordsdaily, O
   var graphs = {};
 
   graphs.revenue = function(others) {
-    var metric = others.metric,
-        title  = metric.getTitle(),
-        type   = others.type;
+    var metric   = others.metric,
+        title    = metric.getTitle(),
+        subtitle = '£',
+        type     = others.type;
 
     if (_.contains(['bar', 'bullet'], type)) {
       return new Graph({
         data: [],
         metric: metric,
         ylabel: title,
+        subtitle: subtitle,
         type: type,
         action: {
           bar: function(options) {
@@ -95,6 +97,7 @@ angular.module('luckyDashGraphs').factory('Graphs', function($q, Adwordsdaily, O
                 data = {};
 
             data.title    = title;
+            data.subtitle = subtitle;
             data.ranges   = [previous*0.25, previous*0.5, previous*0.75];
             data.measures = [previous, metric.getValue()];
             data.markers  = [metric.getTarget()];
@@ -111,9 +114,10 @@ angular.module('luckyDashGraphs').factory('Graphs', function($q, Adwordsdaily, O
   }
 
   graphs.ad_cost = function(others) {
-    var metric = others.metric,
-        title  = metric.getTitle(),
-        type   = others.type;
+    var metric   = others.metric,
+        title    = metric.getTitle(),
+        subtitle = '£',
+        type     = others.type;
 
     if (_.contains(['bar', 'bullet'], type)) {
       return new Graph({
@@ -121,6 +125,7 @@ angular.module('luckyDashGraphs').factory('Graphs', function($q, Adwordsdaily, O
         metric: metric,
         type: type,
         ylabel: title,
+        subtitle: subtitle,
         action: {
           bar: function(options) {
             var deferred = $q.defer(),
@@ -144,6 +149,7 @@ angular.module('luckyDashGraphs').factory('Graphs', function($q, Adwordsdaily, O
                 data = {};
 
             data.title    = title;
+            data.subtitle = subtitle;
             data.ranges   = [previous*0.25, previous*0.5, previous*0.75];
             data.measures = [previous, metric.getValue()];
             data.markers  = [metric.getTarget()];
@@ -160,9 +166,10 @@ angular.module('luckyDashGraphs').factory('Graphs', function($q, Adwordsdaily, O
   }
 
   graphs.profit = function(others) {
-    var metric = others.metric,
-        title  = metric.getTitle(),
-        type   = others.type;
+    var metric   = others.metric,
+        title    = metric.getTitle(),
+        subtitle = '£',
+        type     = others.type;
 
     if (_.contains(['bar', 'bullet'], type)) {
       return new Graph({
@@ -170,6 +177,7 @@ angular.module('luckyDashGraphs').factory('Graphs', function($q, Adwordsdaily, O
         metric: metric,
         type: type,
         ylabel: title,
+        subtitle: subtitle,
         action: {
           bullet: function(options) {
             var deferred = $q.defer(),
@@ -177,6 +185,7 @@ angular.module('luckyDashGraphs').factory('Graphs', function($q, Adwordsdaily, O
                 data = {};
 
             data.title    = title;
+            data.subtitle = subtitle;
             data.ranges   = [previous*0.25, previous*0.5, previous*0.75];
             data.measures = [previous, metric.getValue()];
             data.markers  = [metric.getTarget()];
@@ -193,9 +202,10 @@ angular.module('luckyDashGraphs').factory('Graphs', function($q, Adwordsdaily, O
   }
 
   graphs.margin = function(others) {
-    var metric = others.metric,
-        title  = metric.getTitle(),
-        type   = others.type;
+    var metric   = others.metric,
+        title    = metric.getTitle(),
+        subtitle = '%',
+        type     = others.type;
 
     if (_.contains(['bar', 'bullet'], type)) {
       return new Graph({
@@ -203,6 +213,7 @@ angular.module('luckyDashGraphs').factory('Graphs', function($q, Adwordsdaily, O
         metric: metric,
         type: type,
         ylabel: title,
+        subtitle: subtitle,
         action: {
           bullet: function(options) {
             var deferred = $q.defer(),
@@ -210,6 +221,7 @@ angular.module('luckyDashGraphs').factory('Graphs', function($q, Adwordsdaily, O
                 data = {};
 
             data.title    = title;
+            data.subtitle = subtitle;
             data.ranges   = [previous*0.25, previous*0.5, previous*0.75];
             data.measures = [previous, metric.getValue()];
             data.markers  = [metric.getTarget()];
