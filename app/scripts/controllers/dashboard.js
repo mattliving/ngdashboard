@@ -1,4 +1,4 @@
-angular.module("luckyDashApp").controller("DashboardCtrl", function($window, $location, $scope, $routeParams, $http, $q, $timeout, Metrics, Graphs) {
+angular.module("luckyDashApp").controller("DashboardCtrl", function($window, $location, $scope, $rootScope, $routeParams, $http, $q, $timeout, Metrics, Graphs) {
 
   $http.get($routeParams.email + '/dashboard/verify').success(function(res) {
     var revenue = Metrics['revenue']();
@@ -67,11 +67,11 @@ angular.module("luckyDashApp").controller("DashboardCtrl", function($window, $lo
     })
     .error(function() { console.log("Unable to find account id for " + $scope.account.email + "."); });
 
-    $scope.height = 0;
     $scope.$watch('height', function(newVal, oldVal) {
       $scope.tileWrapperHeight  = newVal/3;
       $scope.graphWrapperHeight = newVal*(2/3);
       $('.tileWrapper').height($scope.tileWrapperHeight);
+      $rootScope.$broadcast('windowResizeEventFired');
       // $('.graphWrapper').height($scope.graphWrapperHeight);
     });
 

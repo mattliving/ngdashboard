@@ -47,10 +47,11 @@ d3.custom.bulletChart = function(options) {
                     .attr('transform', 'rotate(-90)')
                     .text(bulletTitle(d));
 
-                // titleContainer.append("text")
-                //     .classed("subtitle", 1)
-                //     .attr("dy", "1em")
-                //     .text(function(d) { return d.subtitle; });
+                titleContainer.append("text")
+                    .classed("subtitle", 1)
+                    .attr("text-anchor", "end")
+                    .attr('transform', 'rotate(-90)')
+                    .text(bulletSubTitle(d));
             }
 
             svg.transition().duration(duration).attr({width: width, height: height});
@@ -67,15 +68,16 @@ d3.custom.bulletChart = function(options) {
                 .duration(duration)
                 .ease(ease)
                 .attr('x', function() { return -(chartH) / 8; })
-                .attr('y', 15)
+                .attr('y', 16)
                 .attr('dy', '1em');
 
-            // titleContainer.select(".subtitle").transition()
-            //     .duration(duration)
-            //     .ease(ease)
-            //     .text(function(d) { return d.subtitle; })
-            //     .attr("y", chartH / 2)
-            //     .attr("dy", "1em");
+            titleContainer.select(".subtitle").transition()
+                .text(bulletSubTitle(d))
+                .duration(duration)
+                .ease(ease)
+                .attr('x', function() { return -(chartH) / 8 + 20; })
+                .attr('y', 16)
+                .attr('dy', '1.15em');
 
             var rangez   = ranges.call(this, d, i).slice().sort(d3.descending),
                 markerz  = markers.call(this, d, i).slice().sort(d3.descending),
@@ -274,6 +276,10 @@ d3.custom.bulletChart = function(options) {
 
 function bulletTitle(d) {
     return (!_.isNull(d) && !_.isUndefined(d.title)) ? d.title : "";
+}
+
+function bulletSubTitle(d) {
+    return (!_.isNull(d) && !_.isUndefined(d.subtitle)) ? ('(' + d.subtitle + ')') : "";
 }
 
 function bulletRanges(d) {
