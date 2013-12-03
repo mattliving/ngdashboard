@@ -50,10 +50,10 @@ angular.module('luckyDashDirectives').directive('metricTile', function() {
                 return diff * fontBench.ratio + fontBench.pixels;
             }
 
-            // scope.$watch('width', function(newVal, oldVal) {
-            //     var $elem = angular.element(elem);
-            //     $elem.find('.body').css('font-size', resize(newVal));
-            // });
+            scope.$watch('width', function(newVal, oldVal) {
+                var $elem = angular.element(elem);
+                $elem.find('.body').css('font-size', resize(newVal));
+            });
 
             // scope.$watch('height', function(newVal, oldVal) {
             //     var $elem = angular.element(elem);
