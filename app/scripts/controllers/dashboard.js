@@ -1,15 +1,6 @@
 angular.module("luckyDashApp").controller("DashboardCtrl", function($window, $location, $scope, $routeParams, $http, $q, $timeout, Metrics, Graphs) {
 
-  // if (typeof luckyDashApp.email === "undefined") {
-  //   luckyDashApp.email = $routeParams.email;
-  // }
-  // else if (luckyDashApp.email !== $routeParams.email) {
-  //   $http.get($routeParams.email)
-  // }
-
-  console.log($routeParams.email);
   $http.get($routeParams.email + '/dashboard/verify').success(function(res) {
-    console.log(res);
     var revenue = Metrics['revenue']();
     var ad_cost = Metrics['ad_cost']();
     var margin  = Metrics['weighted_average_margin']();
@@ -88,7 +79,6 @@ angular.module("luckyDashApp").controller("DashboardCtrl", function($window, $lo
     //   console.log(newVal);
     // });
   }).error(function(res) {
-    console.log(res);
     $location.path('/login');
   });
 });

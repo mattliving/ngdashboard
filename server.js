@@ -32,12 +32,8 @@ function ensureAuthenticated(req, res, next) {
 }
 
 function checkLoginStatus(req, res, next) {
-  console.log("checkLoginStatus");
   if (req.isAuthenticated()) {
-    console.log(req.session);
-    // req.logout();
     req.session.destroy();
-    console.log(req.session);
   }
   next();
 }
@@ -52,7 +48,7 @@ passport.deserializeUser(function(serialized, done) {
     console.log("deserializing...");
     done(null, user);
   }, function(err) {
-    console.log("error deserializing.");
+    console.err("error deserializing.");
     done(err, false);
   });
 });
@@ -131,7 +127,6 @@ var dbErr = function(res) {
 app.post('/login', checkLoginStatus, passport.authenticate('local', {
   failureRedirect: '/login'
 }), function(req, res) {
-  console.log(req, res);
   req.session.previous = '/login';
   console.log('redirect to ' + req.user.email + '/dashboard');
   res.redirect(req.user.email + '/dashboard');
@@ -142,32 +137,18 @@ app.get('/logout', function(req, res) {
   res.redirect('/');
 });
 
-// app.get("/*", function(req, res, next) {
-
-//     if(typeof req.cookies['connect.sid'] !== 'undefined') {
-//         console.log(req.cookies['connect.sid']);
-//     }
-
-//     next(); // call the next middleware
-// });
-
 app.get('/:email/dashboard/verify', function(req, res) {
 
   if (_.isUndefined(req.session.passport.user)) {
-    console.log("NEEDA LOGIN!");
     res.send(401);
   }
   else if (req.session.passport.user.email !== req.params.email) {
-    console.log("NO AUTH!");
     res.send(401);
   }
   else {
-    console.log("A OK!");
     res.send(200);
   }
 });
-
-// app.get('*', ensureAuthenticated);
 
 /* Customers */
 
