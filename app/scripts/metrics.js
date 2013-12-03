@@ -164,7 +164,7 @@ angular.module('luckyDashMetrics').factory('Metrics', function($q, Adwordsdaily,
       },
       options: {
         target: {
-          value: 10000,
+          value: 5850,
           forecasted: false
         },
         comparison: 0

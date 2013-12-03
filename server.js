@@ -31,6 +31,17 @@ function ensureAuthenticated(req, res, next) {
   else res.redirect('/login');
 }
 
+function checkLoginStatus(req, res, next) {
+  console.log("checkLoginStatus");
+  if (req.isAuthenticated()) {
+    console.log(req.session);
+    // req.logout();
+    req.session.destroy();
+    console.log(req.session);
+  }
+  next();
+}
+
 passport.serializeUser(function(user, done) {
   console.log("serializing...");
   done(null, {acid: user.acid, email: user.email});
@@ -72,7 +83,6 @@ passport.use(new LocalStrategy({
           acid: user.acid,
           email: user.email
         }
-        console.log("returning user");
         return done(null, returnUser);
       }), function(err) {
         console.error("User login error.", err);
@@ -118,9 +128,10 @@ var dbErr = function(res) {
 
 /* Login */
 
-app.post('/login', passport.authenticate('local', {
+app.post('/login', checkLoginStatus, passport.authenticate('local', {
   failureRedirect: '/login'
 }), function(req, res) {
+  console.log(req, res);
   req.session.previous = '/login';
   console.log('redirect to ' + req.user.email + '/dashboard');
   res.redirect(req.user.email + '/dashboard');
@@ -141,7 +152,7 @@ app.get('/logout', function(req, res) {
 // });
 
 app.get('/:email/dashboard/verify', function(req, res) {
-  console.log(req.params.email);
+
   if (_.isUndefined(req.session.passport.user)) {
     console.log("NEEDA LOGIN!");
     res.send(401);
