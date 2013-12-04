@@ -15,9 +15,11 @@ angular.module('luckyDashDirectives').directive('metricTile', function() {
         templateUrl: "/views/metric-tile.html",
         link: function(scope, elem, attrs) {
 
+            var opts = scope.options;
+
             scope.has = function(attr) {
-                if (_.isEmpty(scope.options)) return false;
-                else return _.has(scope.options, attr);
+                if (_.isEmpty(opts)) return false;
+                else return _.has(opts, attr);
             }
 
             /* Getters */
@@ -28,15 +30,16 @@ angular.module('luckyDashDirectives').directive('metricTile', function() {
             /* Helpers */
             scope.isForecasted = function() {
                 if (!scope.hasTarget()) return false;
-                else return scope.options.target.forecasted;
+                else return opts.target.forecasted;
             }
 
             scope.percentToTarget = function() {
-                return (scope.value/scope.options.target.value)*100;
+                return (scope.value/opts.target.value)*100;
             }
 
             scope.averagePerDay = function() {
-                return ((scope.value / moment().utc().date()) * moment().utc().daysInMonth()) / scope.options.target.value * 100;
+                // return ((scope.value / moment().utc().date()) * moment().utc().daysInMonth()) / opts.target.value * 100;
+                return ((scope.value / moment(opts.date_to).utc().date()) * moment(opts.date_to).utc().daysInMonth()) / opts.target.value * 100;
             }
 
             var fontBench = {
