@@ -32,6 +32,8 @@ angular.module("luckyDashApp").controller("DashboardCtrl", function($window, $lo
             date_from: $scope.date_from,
             date_to: $scope.date_to
           };
+          item.options.date_from = options.date_from;
+          item.options.date_to   = options.date_to;
           item.update(options);
         }
         else console.error('Requires a collection of type Metric or Graph.');
@@ -39,8 +41,8 @@ angular.module("luckyDashApp").controller("DashboardCtrl", function($window, $lo
     }
 
     $scope.updateTime = function() {
-      $scope.date_from = moment().utc().date(1).hour(0).minute(0).second(0).format('YYYY-MM-DD HH:mm:ss'); //'2013-11-01';
-      $scope.date_to   = moment().utc().format('YYYY-MM-DD HH:mm:ss'); //'2013-11-30';
+      $scope.date_from = moment().utc().date(1).hour(0).minute(0).second(0).format('YYYY-MM-DD HH:mm:ss'); //'2013-12-01';
+      $scope.date_to   = moment().utc().format('YYYY-MM-DD HH:mm:ss'); //'2013-12-04';
     }
 
     $scope.account = {};

@@ -137,7 +137,6 @@ app.get('/logout', function(req, res) {
 });
 
 app.get('/:email/dashboard/verify', function(req, res) {
-
   if (_.isUndefined(req.session.passport.user)) {
     res.send(401);
   }
