@@ -41,8 +41,8 @@ angular.module("luckyDashApp").controller("DashboardCtrl", function($window, $lo
     }
 
     $scope.updateTime = function() {
-      $scope.date_from = moment().utc().date(1).hour(0).minute(0).second(0).format('YYYY-MM-DD HH:mm:ss'); //'2013-12-01';
-      $scope.date_to   = moment().utc().format('YYYY-MM-DD HH:mm:ss'); //'2013-12-04';
+      $scope.date_from = '2013-11-01';//moment().utc().date(1).hour(0).minute(0).second(0).format('YYYY-MM-DD HH:mm:ss'); //
+      $scope.date_to   = '2013-11-30';//moment().utc().format('YYYY-MM-DD HH:mm:ss'); //
     }
 
     $scope.account = {};
@@ -73,8 +73,8 @@ angular.module("luckyDashApp").controller("DashboardCtrl", function($window, $lo
       $scope.tileWrapperHeight  = newVal/3;
       $scope.graphWrapperHeight = newVal*(2/3);
       $('.tileWrapper').height($scope.tileWrapperHeight);
+      $('.graphWrapper').height($scope.graphWrapperHeight);
       $rootScope.$broadcast('windowResizeEventFired');
-      // $('.graphWrapper').height($scope.graphWrapperHeight);
     });
 
     // $scope.$watch('width', function(newVal, oldVal) {

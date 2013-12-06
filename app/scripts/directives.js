@@ -94,6 +94,11 @@ angular.module('luckyDashDirectives').directive('graphTile', function($compile) 
                 elem.html(html);
                 $compile(elem.contents())(scope);
             });
+
+            scope.$watch('height', function(newVal, oldVal) {
+                // console.log(newVal, elem);
+                elem.height(newVal);
+            });
         }
 
     };
