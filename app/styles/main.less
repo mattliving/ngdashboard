@@ -213,8 +213,10 @@ metric-tile {
 }
 
 .bulletChart {
+    height: 100%;
     font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: 12px;
+    border-bottom: 1px solid @midnightBlue;
     .title {
         font-size: 14px;
         font-weight: bold;
@@ -222,7 +224,6 @@ metric-tile {
     .subtitle { fill: #999; }
     .marker {
         stroke: #B27000;
-        // stroke: #AD6400;
         stroke-width: 2px;
     }
     .tick line {
@@ -234,7 +235,6 @@ metric-tile {
     .range.s2 { fill: #ccc; }
     .measure.s0 { fill: @silver; }
     .measure.s1 { fill: @midnightBlue; }
-    border-bottom: 1px solid @midnightBlue;
 }
 
 /* Colours */
