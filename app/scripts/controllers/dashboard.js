@@ -41,8 +41,8 @@ angular.module("luckyDashApp").controller("DashboardCtrl", function($window, $lo
     }
 
     $scope.updateTime = function() {
-      $scope.date_from = '2013-11-01';//moment().utc().date(1).hour(0).minute(0).second(0).format('YYYY-MM-DD HH:mm:ss'); //
-      $scope.date_to   = '2013-11-30';//moment().utc().format('YYYY-MM-DD HH:mm:ss'); //
+      $scope.date_from = moment().utc().date(1).hour(0).minute(0).second(0).format('YYYY-MM-DD HH:mm:ss'); //'2013-11-01';
+      $scope.date_to   = moment().utc().format('YYYY-MM-DD HH:mm:ss'); //'2013-11-30';
     }
 
     $scope.account = {};
