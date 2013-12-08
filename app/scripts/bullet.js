@@ -68,15 +68,15 @@ d3.custom.bulletChart = function(options) {
                 .duration(duration)
                 .ease(ease)
                 .attr('x', function() { return -(chartH) / 8; })
-                .attr('y', 16)
+                .attr('y', 14)
                 .attr('dy', '1em');
 
             titleContainer.select(".subtitle").transition()
                 .text(bulletSubTitle(d))
                 .duration(duration)
                 .ease(ease)
-                .attr('x', function() { return -(chartH) / 8 + 20; })
-                .attr('y', 16)
+                .attr('x', function() { return -(chartH) / 8 + 24; })
+                .attr('y', 14)
                 .attr('dy', '1.15em');
 
             var rangez   = ranges.call(this, d, i).slice().sort(d3.descending),
