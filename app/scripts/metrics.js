@@ -38,11 +38,11 @@ angular.module('luckyDashMetrics').factory('Metrics', function($q, Adwordsdaily,
   }
 
   Metric.prototype.getValue = function() {
-    return typeof this.value !== "undefined" ? this.value : 0;
+    return typeof this.value !== "undefined" ? this.value : null;
   }
 
   Metric.prototype.getPreviousValue = function() {
-    return typeof this.previousValue !== "undefined" ? this.previousValue : 0;
+    return typeof this.previousValue !== "undefined" ? this.previousValue : null;
   }
 
   Metric.prototype.getType = function() {
@@ -50,7 +50,7 @@ angular.module('luckyDashMetrics').factory('Metrics', function($q, Adwordsdaily,
   }
 
   Metric.prototype.getTarget = function() {
-    return this.hasTarget() ? this.options.target.value : 0;
+    return this.hasTarget() ? this.options.target.value : null;
   }
 
   Metric.prototype.update = function(options) {

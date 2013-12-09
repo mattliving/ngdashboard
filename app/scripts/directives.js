@@ -1,5 +1,9 @@
 angular.module('luckyDashDirectives', ['luckyDashServices']);
 
+function isFalsy(d) {
+    return _.isNull(d) || _.isUndefined(d) || _.isNaN(d) || d === 0;
+};
+
 angular.module('luckyDashDirectives').directive('metricTile', function() {
     return {
         restrict: 'E',
@@ -161,7 +165,19 @@ angular.module('luckyDashDirectives').directive('bulletChart', function() {
             scope.chartEl = d3.select(elem[0]);
 
             scope.$watch('data', function(newVal, oldVal) {
-                scope.chartEl.datum(newVal).call(scope.chart);
+
+                if (_.chain(newVal)
+                    .has('ranges')
+                    .has('measures')
+                    .has('markers')) {
+
+                    if (!(_.some(newVal.ranges, isFalsy) ||
+                    _.some(newVal.measures, isFalsy) ||
+                    _.some(newVal.markers, isFalsy))) {
+                        console.log(newVal);
+                        scope.chartEl.datum(newVal).call(scope.chart);
+                    }
+                }
             }, true);
 
             scope.$watch('height', function(newVal, oldVal) {
