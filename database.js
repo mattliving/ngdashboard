@@ -5,7 +5,7 @@ var q     = require('q');
 /* Set configuration mode to development or production.
    Read the configuration data from file and create a
    new mysql connection pool */
-const mode = 'live';
+const mode = 'development';
 var file   = JSON.parse(fs.readFileSync('dbconfig.json'));
 var pool   = mysql.createPool(file[mode]);
 

@@ -125,7 +125,7 @@ d3.custom.bulletChart = function(options) {
                 .data(measurez);
 
             measure.enter().append("rect")
-                .attr("class", function(d, i) { return "measure s" + i; })
+                .attr("class", function(d, i) { console.log(d);return "measure s" + i; })
                 .attr("width", w0)
                 .attr("height", chartH / 3)
                 .attr("x", reverse ? x0 : 0)
