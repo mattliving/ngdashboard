@@ -79,6 +79,10 @@ d3.custom.bulletChart = function(options) {
                 .attr('y', 14)
                 .attr('dy', '1.15em');
 
+            var measureValues = {
+                previous: d.previous,
+                value: d.value
+            }
             var rangez   = ranges.call(this, d, i).slice().sort(d3.descending),
                 markerz  = markers.call(this, d, i).slice().sort(d3.descending),
                 measurez = measures.call(this, d, i).slice().sort(d3.descending);
@@ -125,7 +129,16 @@ d3.custom.bulletChart = function(options) {
                 .data(measurez);
 
             measure.enter().append("rect")
-                .attr("class", function(d, i) { console.log(d);return "measure s" + i; })
+                .attr("class", function(d, i) {
+                    if (d === measureValues.previous) {
+                        console.log(d, measureValues.previous);
+                        return "measure previous s" + i;
+                    }
+                    else {
+                        console.log(d, measureValues.value);
+                        return "measure value s" + i;
+                    }
+                })
                 .attr("width", w0)
                 .attr("height", chartH / 3)
                 .attr("x", reverse ? x0 : 0)
