@@ -100,7 +100,6 @@ angular.module('luckyDashDirectives').directive('graphTile', function($compile) 
             });
 
             scope.$watch('height', function(newVal, oldVal) {
-                // console.log(newVal, elem);
                 elem.height(newVal);
             });
         }
@@ -174,7 +173,6 @@ angular.module('luckyDashDirectives').directive('bulletChart', function() {
                     if (!(_.some(newVal.ranges, isFalsy) ||
                     _.some(newVal.measures, isFalsy) ||
                     _.some(newVal.markers, isFalsy))) {
-                        console.log(newVal);
                         scope.chartEl.datum(newVal).call(scope.chart);
                     }
                 }

@@ -8,6 +8,6 @@ dist
 app/components
 bower_components
 _public
-
+bds_2013*
 *.sublime-project
 *.sublime-workspace

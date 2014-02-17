@@ -98,6 +98,8 @@ angular.module('luckyDashGraphs').factory('Graphs', function($q, Adwordsdaily, O
 
             data.title    = title;
             data.subtitle = subtitle;
+            data.previous = previous;
+            data.value    = metric.getValue();
             data.ranges   = [previous*0.25, previous*0.5, previous*0.75];
             data.measures = [previous, metric.getValue()];
             data.markers  = [metric.getTarget()];

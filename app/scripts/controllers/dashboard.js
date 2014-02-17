@@ -21,6 +21,10 @@ angular.module("luckyDashApp").controller("DashboardCtrl", function($window, $lo
       Graphs.margin({metric: margin, type: 'bullet'})
     ]
 
+    // $scope.graphs = [
+    //   Graphs.revenue({metric: revenue, type: 'bar'})
+    // ]
+
     /* Update a collection of metrics or graphs */
     $scope.update = function(collection) {
       _.each(collection, function(item) {
