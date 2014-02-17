@@ -2,24 +2,16 @@
   "development": {
     "host": "localhost",
     "user": "root",
-    "database": "luckydb",
+    "database": "dashboard",
     "connectionlimit": 10,
     "supportBigNumbers": true
   },
   "production": {
-    "host": "luckymetrics.com",
+    "host": "mattliving.com",
     "user": "root",
-    "password": "jasminbar123",
-    "database": "bds",
+    "password": "",
+    "database": "dashboard",
     "connectionlimit": 10,
-    "supportBigNumbers": true
-  },
-  "live": {
-    "host": "localhost",
-    "user": "root",
-    "password": "jasminbar123",
-    "database": "bds",
-    "connectionlimit": 100,
     "supportBigNumbers": true
   }
 }
