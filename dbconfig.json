@@ -1,0 +1,15 @@
+{
+  "development": {
+    "host": "localhost",
+    "user": "root",
+    "password": "",
+    "database": "dashboard"
+  },
+  "production": {
+    "host": "mattliving.com",
+    "user": "root",
+    "password": "pass",
+    "database": "dashboard",
+    "supportBigNumbers": true
+  }
+}

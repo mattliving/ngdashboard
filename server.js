@@ -88,7 +88,7 @@ passport.use(new LocalStrategy({
 ));
 
 app.configure(function() {
-  app.set('port', 8080);
+  app.set('port', 8081);
   app.set('views', __dirname + '/static-pages');
   app.set('view engine', 'html');
   app.enable('trust proxy');

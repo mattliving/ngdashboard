@@ -42,8 +42,8 @@ angular.module('luckyDashDirectives').directive('metricTile', function() {
             }
 
             scope.averagePerDay = function() {
-                // return ((scope.value / moment().utc().date()) * moment().utc().daysInMonth()) / opts.target.value * 100;
-                return ((scope.value / moment(opts.date_to).utc().date()) * moment(opts.date_to).utc().daysInMonth()) / opts.target.value * 100;
+                return ((scope.value / moment().utc().date()) * moment().utc().daysInMonth()) / opts.target.value * 100;
+                // return ((scope.value / moment(opts.date_to).utc().date()) * moment(opts.date_to).utc().daysInMonth()) / opts.target.value * 100;
             }
 
             var fontBench = {

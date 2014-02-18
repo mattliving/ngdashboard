@@ -131,11 +131,11 @@ d3.custom.bulletChart = function(options) {
             measure.enter().append("rect")
                 .attr("class", function(d, i) {
                     if (d === measureValues.previous) {
-                        console.log(d, measureValues.previous);
+                        // console.log(d, measureValues.previous);
                         return "measure previous s" + i;
                     }
                     else {
-                        console.log(d, measureValues.value);
+                        // console.log(d, measureValues.value);
                         return "measure value s" + i;
                     }
                 })

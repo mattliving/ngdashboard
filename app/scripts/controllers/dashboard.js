@@ -80,10 +80,6 @@ angular.module("luckyDashApp").controller("DashboardCtrl", function($window, $lo
       $('.graphWrapper').height($scope.graphWrapperHeight);
       $rootScope.$broadcast('windowResizeEventFired');
     });
-
-    // $scope.$watch('width', function(newVal, oldVal) {
-    //   console.log(newVal);
-    // });
   }).error(function(res) {
     $location.path('/login');
   });
